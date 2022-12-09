@@ -23,9 +23,9 @@ const useHashmail = () => {
     }
   }
 
-  const hashmailSignout = () => {
+  const hashmailDisconnect = () => {
     try {
-      window.hashmail.signout()
+      window.hashmail.disconnect()
     } catch (e) {
       console.error(e)
     }
@@ -39,11 +39,11 @@ const useHashmail = () => {
     if (!!account) {
       hashmailIdentify(account)
     } else {
-      hashmailSignout()
+      hashmailDisconnect()
     }
   }, [account])
 
-  return { hashmailIdentify, hashmailLoad, hashmailSignout }
+  return { hashmailIdentify, hashmailLoad, hashmailDisconnect }
 }
 
 export default useHashmail
