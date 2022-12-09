@@ -41,6 +41,19 @@ class MyDocument extends Document {
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="apple-touch-icon" href="/logo.png" />
           <link rel="manifest" href="/manifest.json" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                let dapp_id="0767a54d-f2b8-4c86-b6b2-dc716e47ec35"; // replace with dapp_id provided by hashmail
+                let hashmail_settings={
+                  widgetMode: "light", //you can switch to light mode
+                  horizontalPadding: 10,
+                  verticalPadding: 10
+                };
+                !async function(){window.hashmail||(window.hashmail=[]),window.hashmail.queue=[];let t=["load","identify","track","auth","init","loadSettings"],e=function(t){return function(){a=Array.prototype.slice.call(arguments),a.unshift(t),window.hashmail.queue.push(a)}};for(var i=0;t.length>i;i++)window.hashmail[t[i]]=e(t[i]);hashmail.methods=t,window.hashmail.load=function(t,e){window.hashmail.dapp_id=t,window.hashmail.settings=e;var i=document,s=i.getElementsByTagName("script")[0],h=i.createElement("script");h.type="text/javascript",h.async=!0,h.src="https://widget.hashmail.dev/notifier_tracking_script.js",s.parentNode.insertBefore(h,s)},hashmail.load(dapp_id,hashmail_settings)}();
+              `,
+            }}
+          />
         </Head>
         <body>
           <noscript>
