@@ -15,7 +15,7 @@ const useHashmail = () => {
 
   const hashmailIdentify = (address: typeof account) => {
     try {
-      if (!!address) window.hashmail.identify(address)
+      if (address) window.hashmail.identify(address)
       else throw new Error('hashmail-error: address not found')
     } catch (e) {
       console.error(e)
@@ -36,7 +36,7 @@ const useHashmail = () => {
   }
 
   React.useEffect(() => {
-    if (!!account) {
+    if (account) {
       hashmailIdentify(account)
     } else {
       hashmailDisconnect()
