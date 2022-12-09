@@ -10,6 +10,7 @@ import useEagerConnectMP from 'hooks/useEagerConnect.bmp'
 import useSentryUser from 'hooks/useSentryUser'
 import useThemeCookie from 'hooks/useThemeCookie'
 import useUserAgent from 'hooks/useUserAgent'
+import useHashmail from 'hooks/useHashmail'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import dynamic from 'next/dynamic'
@@ -35,6 +36,7 @@ BigNumber.config({
 })
 
 function GlobalHooks() {
+  useHashmail()
   usePollBlockNumber()
   useEagerConnect()
   useUserAgent()
@@ -45,6 +47,7 @@ function GlobalHooks() {
 }
 
 function MPGlobalHooks() {
+  useHashmail()
   usePollBlockNumber()
   useEagerConnectMP()
   useUserAgent()
