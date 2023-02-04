@@ -2,24 +2,12 @@
 import { withAxiom } from 'next-axiom'
 import BundleAnalyzer from '@next/bundle-analyzer'
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin'
-import NextTranspileModules from 'next-transpile-modules'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import cssLoader from 'css-loader'
 
 const withBundleAnalyzer = BundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
-
-const withTM = NextTranspileModules([
-  '@pancakeswap/ui',
-  '@pancakeswap/uikit',
-  '@pancakeswap/swap-sdk-core',
-  '@pancakeswap/farms',
-  '@pancakeswap/localization',
-  '@pancakeswap/hooks',
-  '@pancakeswap/multicall',
-  '@pancakeswap/token-lists',
-  '@pancakeswap/utils',
-  '@pancakeswap/tokens',
-])
 
 const withVanillaExtract = createVanillaExtractPlugin()
 
@@ -46,11 +34,23 @@ const sentryWebpackPluginOptions =
 /** @type {import('next').NextConfig} */
 const config = {
   compiler: {
-    styledComponents: true,
+    styledComponents: true
   },
   experimental: {
     scrollRestoration: true,
   },
+  transpilePackages: [
+    '@pancakeswap/ui',
+    '@pancakeswap/uikit',
+    '@pancakeswap/swap-sdk-core',
+    '@pancakeswap/farms',
+    '@pancakeswap/localization',
+    '@pancakeswap/hooks',
+    '@pancakeswap/multicall',
+    '@pancakeswap/token-lists',
+    '@pancakeswap/utils',
+    '@pancakeswap/tokens',
+  ],
   reactStrictMode: true,
   swcMinify: true,
   images: {
@@ -164,18 +164,9 @@ const config = {
       },
     ]
   },
-  webpack: (webpackConfig, { webpack }) => {
-    // tree shake sentry tracing
-    webpackConfig.plugins.push(
-      new webpack.DefinePlugin({
-        __SENTRY_DEBUG__: false,
-        __SENTRY_TRACING__: false,
-      }),
-    )
-    return webpackConfig
-  },
+  webpack(config) {return  config},
 }
 
 export default withBundleAnalyzer(
-  withVanillaExtract(withTM(withAxiom(config))),
+  withVanillaExtract(withAxiom(config)),
 )

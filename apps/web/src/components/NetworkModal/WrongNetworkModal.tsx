@@ -5,7 +5,6 @@ import { ChainLogo } from 'components/Logo/ChainLogo'
 import useAuth from 'hooks/useAuth'
 import { useSessionChainId } from 'hooks/useSessionChainId'
 import { useSwitchNetwork } from 'hooks/useSwitchNetwork'
-import Image from 'next/future/image'
 import { Chain, useAccount, useNetwork } from 'wagmi'
 import Dots from '../Loader/Dots'
 

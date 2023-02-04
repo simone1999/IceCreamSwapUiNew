@@ -1,6 +1,6 @@
 import { Button, Modal, Text, Grid, Box, Message, MessageText } from '@pancakeswap/uikit'
 import { ChainId } from '@pancakeswap/sdk'
-import Image from 'next/future/image'
+import Image from 'next/image'
 import { useSwitchNetwork, useSwitchNetworkLocal } from 'hooks/useSwitchNetwork'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { chains } from 'utils/wagmi'
@@ -48,11 +48,7 @@ export function PageNetworkSupportModal() {
             <Image src={image} alt="feature" fill style={{ objectFit: 'contain' }} unoptimized />
           </Box>
         )}
-        <Text small>
-          {t(
-            'The chain you are on is not supporting this feature. Please switch your network.',
-          )}
-        </Text>
+        <Text small>{t('The chain you are on is not supporting this feature. Please switch your network.')}</Text>
         {canSwitch ? (
           <Button
             variant={foundChain && lastValidPath ? 'secondary' : 'primary'}

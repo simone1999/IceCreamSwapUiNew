@@ -55,7 +55,7 @@ const CollectionCard: React.FC<React.PropsWithChildren<HotCollectionCardProps>> 
 }) => {
   const renderBody = () => (
     <CardBody p="8px">
-      <StyledImage src={bgSrc} height={125} width={375} />
+      <StyledImage src={bgSrc} height={125} width={375} alt={collectionName} />
       <Flex
         position="relative"
         height="65px"
