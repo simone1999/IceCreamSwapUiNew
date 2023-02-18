@@ -952,14 +952,6 @@
       "logoURI": "https://raw.githubusercontent.com/simone1999/trustwallet-assets/master/blockchains/core/assets/0xA677940e2D7F696D3EC11F226a3FF7a06E5c8254/logo.png"
     },
     {
-      "name": "Corgi Inu",
-      "address": "0xCb6375D3bF479e7fD1355ac4138eDC8D13E13218",
-      "symbol": "CORGI",
-      "decimals": 9,
-      "chainId": 1116,
-      "logoURI": "https://raw.githubusercontent.com/simone1999/trustwallet-assets/master/blockchains/core/assets/0xCb6375D3bF479e7fD1355ac4138eDC8D13E13218/logo.png"
-    },
-    {
       "name": "SAFECORE",
       "address": "0x6cA82c13c1F42bC859f5f0E235E1ee7B7BfBbb8F",
       "symbol": "SAFECORE",
