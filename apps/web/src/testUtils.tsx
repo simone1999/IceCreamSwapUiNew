@@ -11,7 +11,7 @@ import { NextRouter } from 'next/router'
 import { SWRConfig } from 'swr'
 import { client } from './utils/wagmi'
 
-const mockRouter: NextRouter = {
+const mockRouter: any = {
   basePath: '',
   pathname: '/',
   route: '/',

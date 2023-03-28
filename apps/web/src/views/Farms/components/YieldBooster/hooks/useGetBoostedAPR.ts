@@ -6,9 +6,11 @@ import { getBCakeMultiplier } from 'views/Farms/components/YieldBooster/componen
 import { useUserLockedCakeStatus } from 'views/Farms/hooks/useUserLockedCakeStatus'
 import useAvgLockDuration from 'views/Pools/components/LockedPool/hooks/useAvgLockDuration'
 import { secondsToDays } from 'views/Pools/components/utils/formatSecondsToWeeks'
+import {useActiveChainId} from "../../../../../hooks/useActiveChainId";
 
 export const useGetBoostedMultiplier = (userBalanceInFarm: BigNumber, lpTotalSupply: BigNumber) => {
-  useCakeVaultPublicData()
+  const { chainId } = useActiveChainId()
+  useCakeVaultPublicData(chainId)
   useCakeVaultUserData()
   const { avgLockDurationsInSeconds } = useAvgLockDuration()
   const { isLoading, lockedAmount, totalLockedAmount, lockedStart, lockedEnd } = useUserLockedCakeStatus()
@@ -41,7 +43,8 @@ export const useGetCalculatorMultiplier = (
   lockedAmount: BigNumber,
   userLockDuration: number,
 ) => {
-  useCakeVaultPublicData()
+  const { chainId } = useActiveChainId()
+  useCakeVaultPublicData(chainId)
   useCakeVaultUserData()
   const { avgLockDurationsInSeconds } = useAvgLockDuration()
   const { isLoading, totalLockedAmount } = useUserLockedCakeStatus()

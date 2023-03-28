@@ -4,11 +4,12 @@ import cakeVaultAbi from 'config/abi/cakeVaultV2.json'
 import { getCakeVaultAddress, getCakeFlexibleSideVaultAddress } from 'utils/addressHelpers'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import { getIceContract } from 'utils/contractHelpers'
+import {ChainId} from "@pancakeswap/sdk";
 
 const cakeVaultV2 = getCakeVaultAddress()
 const cakeFlexibleSideVaultV2 = getCakeFlexibleSideVaultAddress()
 const cakeContract = getIceContract()
-export const fetchPublicVaultData = async (cakeVaultAddress = cakeVaultV2) => {
+export const fetchPublicVaultData = async (chainId: ChainId, cakeVaultAddress = cakeVaultV2) => {
   try {
     const calls = ['getPricePerFullShare', 'totalShares', 'totalLockedAmount'].map((method) => ({
       address: cakeVaultAddress,
@@ -20,6 +21,7 @@ export const fetchPublicVaultData = async (cakeVaultAddress = cakeVaultV2) => {
       multicallv2({
         abi: cakeVaultAbi,
         calls,
+        chainId,
         options: {
           requireSuccess: false,
         },
@@ -46,7 +48,7 @@ export const fetchPublicVaultData = async (cakeVaultAddress = cakeVaultV2) => {
   }
 }
 
-export const fetchPublicFlexibleSideVaultData = async (cakeVaultAddress = cakeFlexibleSideVaultV2) => {
+export const fetchPublicFlexibleSideVaultData = async (chainId: ChainId, cakeVaultAddress = cakeFlexibleSideVaultV2) => {
   try {
     const calls = ['getPricePerFullShare', 'totalShares'].map((method) => ({
       address: cakeVaultAddress,
@@ -58,6 +60,7 @@ export const fetchPublicFlexibleSideVaultData = async (cakeVaultAddress = cakeFl
       multicallv2({
         abi: cakeVaultAbi,
         calls,
+        chainId,
         options: { requireSuccess: false },
       }),
       cakeContract.balanceOf(cakeVaultAddress),
@@ -79,7 +82,7 @@ export const fetchPublicFlexibleSideVaultData = async (cakeVaultAddress = cakeFl
   }
 }
 
-export const fetchVaultFees = async (cakeVaultAddress = cakeVaultV2) => {
+export const fetchVaultFees = async (chainId: ChainId, cakeVaultAddress = cakeVaultV2) => {
   try {
     const calls = ['performanceFee', 'withdrawFee', 'withdrawFeePeriod'].map((method) => ({
       address: cakeVaultAddress,
@@ -87,7 +90,7 @@ export const fetchVaultFees = async (cakeVaultAddress = cakeVaultV2) => {
     }))
 
     // @ts-ignore fix chainId support
-    const [[performanceFee], [withdrawalFee], [withdrawalFeePeriod]] = await multicallv2({ abi: cakeVaultAbi, calls })
+    const [[performanceFee], [withdrawalFee], [withdrawalFeePeriod]] = await multicallv2({ abi: cakeVaultAbi, calls }, chainId)
 
     return {
       performanceFee: performanceFee.toNumber(),

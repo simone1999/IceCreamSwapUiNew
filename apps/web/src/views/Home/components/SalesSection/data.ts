@@ -39,7 +39,7 @@ export const bridgeSectionData = (t: TranslateFunction): SalesSectionProps => ({
       'A novel approach of a second (redundant) security layer will make the IceCream Bridge even more secure ' +
       'than the audited and battle tested code it is built on top of. ' +
       'All bridge reserves are transparent on chain and can be verified any time. ' +
-      'Due to its universal implementation even raw data and NFTs will be supported by the Bridge.',
+      'Due to its universal implementation even universal message parsing and NFTs will be supported by the Bridge.',
   ),
   reverse: true,
   primaryButton: {

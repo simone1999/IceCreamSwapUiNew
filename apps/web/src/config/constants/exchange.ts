@@ -1,77 +1,119 @@
 import { ChainId, JSBI, Percent, Token } from '@pancakeswap/sdk'
 import { BigNumber } from '@ethersproject/bignumber'
-import {bitgertTokens, dogechainTokens, dokenTokens, fuseTokens, xdcTokens} from '@pancakeswap/tokens'
-import { ChainMap, ChainTokenList } from './types'
+import { bitgertTokens, coreTokens, dogechainTokens, dokenTokens, fuseTokens, xdcTokens } from '@pancakeswap/tokens'
+import { ChainMap, ChainTokenList, RouterAddressTypes } from './types'
 
 export const ROUTER_ADDRESS_COMMON = '0xBb5e1777A331ED93E07cF043363e48d320eb96c4'
-export const ROUTER_ADDRESS: ChainMap<string> = {
-  [ChainId.BITGERT]: ROUTER_ADDRESS_COMMON,
-  [ChainId.DOGE]: ROUTER_ADDRESS_COMMON,
-  [ChainId.DOKEN]: ROUTER_ADDRESS_COMMON,
-  [ChainId.FUSE]: ROUTER_ADDRESS_COMMON,
-  [ChainId.XDC]: ROUTER_ADDRESS_COMMON,
+export const ROUTER_ADDRESS_COMMON_AKKA_BITGERT = '0x25507a7323b04FD2687E72875aC4456C95782915'
+export const ROUTER_ADDRESS_COMMON_AKKA_XDC = '0xD16bBa1fB50aC0e7A3A5B5fD9fe99dee0d323A06'
+export const ROUTER_ADDRESS_COMMON_AKKA_CORE = '0xCDd7E3E30daC65940CB3b448CEF32d3dd5BbD107'
+
+export const ROUTER_ADDRESS: Partial<ChainMap<RouterAddressTypes>> = {
+  [ChainId.BITGERT]: {
+    Icecream: ROUTER_ADDRESS_COMMON,
+    Akka: ROUTER_ADDRESS_COMMON_AKKA_BITGERT,
+  },
+  [ChainId.DOGE]: {
+    Icecream: ROUTER_ADDRESS_COMMON,
+  },
+  [ChainId.DOKEN]: {
+    Icecream: ROUTER_ADDRESS_COMMON,
+  },
+  [ChainId.FUSE]: {
+    Icecream: ROUTER_ADDRESS_COMMON,
+  },
+  [ChainId.XDC]: {
+    Icecream: ROUTER_ADDRESS_COMMON,
+    Akka: ROUTER_ADDRESS_COMMON_AKKA_XDC,
+  },
+  [ChainId.BSC]: {
+    Icecream: ROUTER_ADDRESS_COMMON,
+  },
+  [ChainId.CORE]: {
+    Icecream: ROUTER_ADDRESS_COMMON,
+    Akka: ROUTER_ADDRESS_COMMON_AKKA_CORE,
+  },
 }
 
 // used to construct intermediary pairs for trading
-export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  [ChainId.BITGERT]: [
-    bitgertTokens.wbrise,
-    bitgertTokens.ice,
-    bitgertTokens.usdci,
-    bitgertTokens.usdti,
-  ],
-  [ChainId.DOGE]: [
-    dogechainTokens.wdoge,
-    dogechainTokens.ice,
-    dogechainTokens.usdt
-  ],
-  [ChainId.DOKEN]: [
-    dokenTokens.wdkn,
-    dokenTokens.ice,
-    dokenTokens.usdt
-  ],
-  [ChainId.FUSE]: [
-    fuseTokens.wfuse,
-    fuseTokens.ice
-  ],
-  [ChainId.XDC]: [
-    xdcTokens.wxdc,
-    xdcTokens.ice,
-    xdcTokens.usdt
-  ],
+export const BASES_TO_CHECK_TRADES_AGAINST: Partial<ChainTokenList> = {
+  [ChainId.BITGERT]: [bitgertTokens.wbrise, bitgertTokens.ice, bitgertTokens.usdci, bitgertTokens.usdti],
+  [ChainId.DOGE]: [dogechainTokens.wdoge, dogechainTokens.ice],
+  [ChainId.DOKEN]: [dokenTokens.wdkn, dokenTokens.ice, dokenTokens.usdt],
+  [ChainId.FUSE]: [fuseTokens.wfuse, fuseTokens.ice],
+  [ChainId.XDC]: [xdcTokens.wxdc, xdcTokens.ice, xdcTokens.usdt],
+  [ChainId.CORE]: [coreTokens.wcore, coreTokens.score, coreTokens.ice, coreTokens.usdt],
 }
 
 /**
  * Additional bases for specific tokens
  * @example { [WBTC.address]: [renBTC], [renBTC.address]: [WBTC] }
  */
-export const ADDITIONAL_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
-}
+export const ADDITIONAL_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {}
 
 /**
  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
  * tokens.
  * @example [AMPL.address]: [DAI, WNATIVE[ChainId.BSC]]
  */
-export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
-}
+export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {}
 
 // used for display in the default list when adding liquidity
-export const SUGGESTED_BASES: ChainTokenList = {
+export const SUGGESTED_BASES: Partial<ChainTokenList> = {
   [ChainId.BITGERT]: [bitgertTokens.ice, bitgertTokens.usdti],
   [ChainId.DOGE]: [dogechainTokens.ice],
   [ChainId.DOKEN]: [dokenTokens.ice],
   [ChainId.FUSE]: [fuseTokens.ice],
-  [ChainId.XDC]: [xdcTokens.ice]
+  [ChainId.XDC]: [xdcTokens.ice, xdcTokens.usdt],
+  [ChainId.CORE]: [coreTokens.ice, coreTokens.score, coreTokens.usdt],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
-export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
-  [ChainId.BITGERT]: [bitgertTokens.wbrise, bitgertTokens.sphynx, bitgertTokens.bpad, bitgertTokens.broge, bitgertTokens.brzilla, bitgertTokens.btxt, bitgertTokens.eltg, bitgertTokens.evo, bitgertTokens.map, bitgertTokens.miidas, bitgertTokens.mir, bitgertTokens.numi, bitgertTokens.omnia, bitgertTokens.prds, bitgertTokens.rluna, bitgertTokens.vef, bitgertTokens.wmf, bitgertTokens.yogo, bitgertTokens.ypc, bitgertTokens.ice, bitgertTokens.tokyo, bitgertTokens.usdc, bitgertTokens.usdt, bitgertTokens.wolf, bitgertTokens.usdti, bitgertTokens.$3dc, bitgertTokens.darrival, bitgertTokens.ethi, bitgertTokens.dogei, bitgertTokens.bnbi, bitgertTokens.shibi, bitgertTokens.daii, bitgertTokens.usdc, bitgertTokens.busdi, bitgertTokens.baskom, bitgertTokens.abr, bitgertTokens.lung],
+export const BASES_TO_TRACK_LIQUIDITY_FOR: Partial<ChainTokenList> = {
+  [ChainId.BITGERT]: [
+    bitgertTokens.wbrise,
+    bitgertTokens.sphynx,
+    bitgertTokens.bpad,
+    bitgertTokens.broge,
+    bitgertTokens.brzilla,
+    bitgertTokens.btxt,
+    bitgertTokens.eltg,
+    bitgertTokens.evo,
+    bitgertTokens.map,
+    bitgertTokens.miidas,
+    bitgertTokens.mir,
+    bitgertTokens.numi,
+    bitgertTokens.omnia,
+    bitgertTokens.prds,
+    bitgertTokens.rluna,
+    bitgertTokens.vef,
+    bitgertTokens.wmf,
+    bitgertTokens.yogo,
+    bitgertTokens.ypc,
+    bitgertTokens.ice,
+    bitgertTokens.tokyo,
+    bitgertTokens.usdc,
+    bitgertTokens.usdt,
+    bitgertTokens.wolf,
+    bitgertTokens.usdti,
+    bitgertTokens.$3dc,
+    bitgertTokens.darrival,
+    bitgertTokens.ethi,
+    bitgertTokens.dogei,
+    bitgertTokens.bnbi,
+    bitgertTokens.shibi,
+    bitgertTokens.daii,
+    bitgertTokens.usdc,
+    bitgertTokens.busdi,
+    bitgertTokens.baskom,
+    bitgertTokens.abr,
+    bitgertTokens.lung,
+  ],
   [ChainId.DOGE]: [dogechainTokens.wdoge, dogechainTokens.ice],
   [ChainId.DOKEN]: [dokenTokens.wdkn, dokenTokens.ice, dokenTokens.usdt],
-  [ChainId.FUSE]: [fuseTokens.wfuse, fuseTokens.ice, fuseTokens.doge, fuseTokens.shiba],
+  [ChainId.FUSE]: [fuseTokens.wfuse, fuseTokens.ice],
   [ChainId.XDC]: [xdcTokens.wxdc, xdcTokens.ice, xdcTokens.usdt, xdcTokens.usdc],
+  [ChainId.CORE]: [coreTokens.wcore, coreTokens.score, coreTokens.ice, coreTokens.usdt],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -83,15 +125,16 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [dogechainTokens.wdoge, dogechainTokens.ice],
     [dogechainTokens.usdt, dogechainTokens.ice],
   ],
-  [ChainId.DOKEN]: [
-    [dokenTokens.wdkn, dokenTokens.ice],
-  ],
-  [ChainId.FUSE]: [
-    [fuseTokens.wfuse, fuseTokens.ice],
-  ],
+  [ChainId.DOKEN]: [[dokenTokens.wdkn, dokenTokens.ice]],
+  [ChainId.FUSE]: [[fuseTokens.wfuse, fuseTokens.ice]],
   [ChainId.XDC]: [
     [xdcTokens.wxdc, xdcTokens.ice],
     [xdcTokens.usdt, xdcTokens.ice],
+  ],
+  [ChainId.CORE]: [
+    [coreTokens.score, coreTokens.ice],
+    [coreTokens.score, coreTokens.wcore],
+    [coreTokens.usdt, coreTokens.ice],
   ],
 }
 
@@ -117,7 +160,7 @@ export const BETTER_TRADE_LESS_HOPS_THRESHOLD = new Percent(JSBI.BigInt(50), BIP
 export const ZERO_PERCENT = new Percent('0')
 export const ONE_HUNDRED_PERCENT = new Percent('1')
 
-export const BASE_FEE = new Percent(JSBI.BigInt(25), BIPS_BASE)
+export const BASE_FEE = new Percent(JSBI.BigInt(30), BIPS_BASE)
 export const INPUT_FRACTION_AFTER_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE)
 
 // BNB
@@ -129,6 +172,6 @@ export const DEFAULT_OUTPUT_CURRENCY = '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE
 export const GELATO_HANDLER = 'pancakeswap'
 export const GENERIC_GAS_LIMIT_ORDER_EXECUTION = BigNumber.from(500000)
 
-export const LIMIT_ORDERS_DOCS_URL = 'https://docs.pancakeswap.finance/products/pancakeswap-exchange/limit-orders'
+export const LIMIT_ORDERS_DOCS_URL = 'https://docs.icecreamswap.com/products/pancakeswap-exchange/limit-orders'
 
 export const EXCHANGE_PAGE_PATHS = ['/swap', '/limit-orders', 'liquidity', '/add', '/find', '/remove']

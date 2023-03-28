@@ -6,6 +6,7 @@ import { useTranslation } from '@pancakeswap/localization'
 import { getPoolBlockInfo } from 'views/Pools/helpers'
 import { Token } from '@pancakeswap/sdk'
 import BaseCell, { CellContent } from './BaseCell'
+import {useActiveChainId} from "../../../../../hooks/useActiveChainId";
 
 interface FinishCellProps {
   pool: Pool.DeserializedPool<Token>
@@ -17,6 +18,7 @@ const StyledCell = styled(BaseCell)`
 
 const EndsInCell: React.FC<React.PropsWithChildren<FinishCellProps>> = ({ pool }) => {
   const { sousId, totalStaked, startBlock, endBlock, isFinished } = pool
+  const { chainId } = useActiveChainId()
   const currentBlock = useCurrentBlock()
   const { t } = useTranslation()
 
@@ -36,7 +38,7 @@ const EndsInCell: React.FC<React.PropsWithChildren<FinishCellProps>> = ({ pool }
       <Flex flex="1">
         <Link
           external
-          href={getBlockExploreLink(hasPoolStarted ? endBlock : startBlock, 'countdown')}
+          href={getBlockExploreLink(hasPoolStarted ? endBlock : startBlock, 'countdown', chainId)}
           onClick={(e) => e.stopPropagation()}
         >
           <TimerIcon ml="4px" />

@@ -75,14 +75,12 @@ const fetchTokenData = async (
   tokenAddresses: string[],
 ) => {
   try {
-    const weeksQuery = chainName === 'BSC' ? `twoWeeksAgo: ${TOKEN_AT_BLOCK(chainName, block14d, tokenAddresses)}` : ''
     const query = gql`
       query tokens {
         now: ${TOKEN_AT_BLOCK(chainName, null, tokenAddresses)}
         oneDayAgo: ${TOKEN_AT_BLOCK(chainName, block24h, tokenAddresses)}
         twoDaysAgo: ${TOKEN_AT_BLOCK(chainName, block48h, tokenAddresses)}
         oneWeekAgo: ${TOKEN_AT_BLOCK(chainName, block7d, tokenAddresses)}
-        ${weeksQuery}
       }
     `
     const data = await getMultiChainQueryEndPointWithStableSwap(chainName).request<TokenQueryResponse>(query)
@@ -133,10 +131,10 @@ const useFetchedTokenDatas = (chainName: MultiChainName, tokenAddresses: string[
     const fetch = async () => {
       const { error, data } = await fetchTokenData(
         chainName,
-        block24h.number,
-        block48h.number,
-        block7d.number,
-        block14d.number,
+        block24h?.number,
+        block48h?.number,
+        block7d?.number,
+        block14d?.number,
         tokenAddresses,
       )
 
@@ -219,10 +217,10 @@ export const fetchAllTokenDataByAddresses = async (
 
   const { data } = await fetchTokenData(
     chainName,
-    block24h.number,
-    block48h.number,
-    block7d.number,
-    block14d.number,
+    block24h?.number,
+    block48h?.number,
+    block7d?.number,
+    block14d?.number,
     tokenAddresses,
   )
 

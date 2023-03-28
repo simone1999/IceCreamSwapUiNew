@@ -30,7 +30,7 @@ const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, 
       <Flex alignItems="center" width="100%" style={{ gap: '16px' }}>
         {backTo &&
           (typeof backTo === 'string' ? (
-            <Link passHref href={backTo}>
+            <Link passHref href={backTo} prefetch={false}>
               <IconButton as="a" scale="sm">
                 <ArrowBackIcon width="32px" />
               </IconButton>

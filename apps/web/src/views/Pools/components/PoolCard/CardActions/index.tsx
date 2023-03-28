@@ -5,12 +5,10 @@ import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import { Flex, Text, Box, Pool } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { PoolCategory } from 'config/constants/types'
-import { useProfileRequirement } from 'views/Pools/hooks/useProfileRequirement'
 import { Token } from '@pancakeswap/sdk'
 import ApprovalAction from './ApprovalAction'
 import StakeActions from './StakeActions'
 import HarvestActions from './HarvestActions'
-import { ProfileRequirementWarning } from '../../ProfileRequirementWarning'
 
 const InlineText = styled(Text)`
   display: inline;
@@ -22,7 +20,7 @@ interface CardActionsProps {
 }
 
 const CardActions: React.FC<React.PropsWithChildren<CardActionsProps>> = ({ pool, stakedBalance }) => {
-  const { sousId, stakingToken, earningToken, poolCategory, userData, earningTokenPrice, profileRequirement } = pool
+  const { sousId, stakingToken, earningToken, poolCategory, userData, earningTokenPrice } = pool
   // Pools using native BNB behave differently than pools using a token
   const isBnbPool = poolCategory === PoolCategory.BINANCE
   const { t } = useTranslation()
@@ -32,8 +30,6 @@ const CardActions: React.FC<React.PropsWithChildren<CardActionsProps>> = ({ pool
   const needsApproval = !allowance.gt(0) && !isBnbPool
   const isStaked = stakedBalance.gt(0)
   const isLoading = !userData
-
-  const { notMeetRequired, notMeetThreshold } = useProfileRequirement(profileRequirement)
 
   return (
     <Flex flexDirection="column">
@@ -65,9 +61,7 @@ const CardActions: React.FC<React.PropsWithChildren<CardActionsProps>> = ({ pool
             {isStaked ? t('Staked') : `${stakingToken.symbol}`}
           </InlineText>
         </Box>
-        {notMeetRequired || notMeetThreshold ? (
-          <ProfileRequirementWarning profileRequirement={profileRequirement} />
-        ) : needsApproval ? (
+        {needsApproval ? (
           <ApprovalAction pool={pool} isLoading={isLoading} />
         ) : (
           <StakeActions

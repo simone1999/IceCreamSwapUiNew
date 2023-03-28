@@ -34,7 +34,7 @@ const Container = styled.div`
 `;
 
 const IceImage = () => {
-  return <Image src={IceCream} width="180px" height="180px" />;
+  return <Image src={IceCream} width="180" height="180" alt="spinner" />;
 };
 
 const RotatingPancakeIcon = styled.div`

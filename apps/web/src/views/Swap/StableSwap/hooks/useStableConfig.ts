@@ -6,7 +6,7 @@ import { Currency, CurrencyAmount, ERC20Token } from '@pancakeswap/sdk'
 import { useTokenBalancesWithLoadingIndicator } from 'state/wallet/hooks'
 import { createContext, useMemo } from 'react'
 import useSWRImmutable from 'swr/immutable'
-import { getStableConfig } from '@pancakeswap/farms/constants'
+import { getStableConfig } from '@pancakeswap/farms'
 import { deserializeToken } from '@pancakeswap/token-lists'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 

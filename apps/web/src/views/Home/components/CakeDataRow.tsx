@@ -12,6 +12,7 @@ import useSWR from 'swr'
 import { SLOW_INTERVAL } from 'config/constants'
 import { BigNumber } from '@ethersproject/bignumber'
 import { getCakeVaultV2Contract } from 'utils/contractHelpers'
+import {useActiveChainId} from "../../../hooks/useActiveChainId";
 
 const StyledColumn = styled(Flex)<{ noMobileBorder?: boolean; noDesktopBorder?: boolean }>`
   flex-direction: column;
@@ -76,6 +77,7 @@ const cakeVault = getCakeVaultV2Contract()
 
 const CakeDataRow = () => {
   const { t } = useTranslation()
+  const { chainId } = useActiveChainId()
   const { observerRef, isIntersecting } = useIntersectionObserver()
   const [loadData, setLoadData] = useState(false)
   const {
@@ -98,6 +100,7 @@ const CakeDataRow = () => {
         multicallv2({
           abi: cakeAbi,
           calls: [totalSupplyCall, burnedTokenCall],
+          chainId,
           options: {
             requireSuccess: false,
           },

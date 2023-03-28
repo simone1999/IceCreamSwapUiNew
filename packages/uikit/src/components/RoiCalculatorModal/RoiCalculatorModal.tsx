@@ -106,6 +106,16 @@ const RoiCalculatorModal: React.FC<React.PropsWithChildren<RoiCalculatorModalPro
   const { t } = useTranslation();
   const balanceInputRef = useRef<HTMLInputElement | null>(null);
 
+  const lpRewardsAPR = useMemo(
+      () =>
+          isFarm && apr
+              ? Number.isFinite(Number(displayApr)) && Number.isFinite(apr)
+                  ? Math.max(Number(displayApr) - apr, 0)
+                  : null
+              : null,
+      [isFarm, displayApr, apr]
+  );
+
   const {
     state,
     setPrincipalFromUSDValue,
@@ -176,7 +186,7 @@ const RoiCalculatorModal: React.FC<React.PropsWithChildren<RoiCalculatorModalPro
         ) : (
           <DefaultCompoundStrategy
             state={state}
-            apr={apy ?? apr}
+            apr={apy ?? (apr || 0) + (lpRewardsAPR || 0)}
             dispatch={dispatch}
             earningTokenPrice={earningTokenPrice}
             performanceFee={performanceFee}
@@ -290,6 +300,7 @@ const RoiCalculatorModal: React.FC<React.PropsWithChildren<RoiCalculatorModalPro
       <RoiCalculatorFooter
         isFarm={isFarm}
         apr={apr}
+        lpRewardsAPR={lpRewardsAPR || undefined}
         apy={apy}
         displayApr={displayApr}
         autoCompoundFrequency={autoCompoundFrequency}

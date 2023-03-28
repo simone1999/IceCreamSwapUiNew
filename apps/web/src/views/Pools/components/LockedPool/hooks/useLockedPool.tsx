@@ -16,6 +16,7 @@ import { VaultKey } from 'state/types'
 import { ToastDescriptionWithTx } from 'components/Toast'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { PrepConfirmArg } from '../types'
+import {useActiveChainId} from "../../../../../hooks/useActiveChainId";
 
 interface HookArgs {
   lockedAmount: BigNumber
@@ -39,6 +40,7 @@ export default function useLockedPool(hookArgs: HookArgs): HookReturn {
   const dispatch = useAppDispatch()
 
   const { account } = useWeb3React()
+  const { chainId } = useActiveChainId()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const vaultPoolContract = useVaultPoolContract(VaultKey.CakeVault)
   const { callWithGasPrice } = useCallWithGasPrice()
@@ -69,10 +71,10 @@ export default function useLockedPool(hookArgs: HookArgs): HookReturn {
           </ToastDescriptionWithTx>,
         )
         onDismiss?.()
-        dispatch(fetchCakeVaultUserData({ account }))
+        dispatch(fetchCakeVaultUserData({ account, chainId }))
       }
     },
-    [fetchWithCatchTxError, toastSuccess, dispatch, onDismiss, account, vaultPoolContract, t, callWithGasPrice],
+    [fetchWithCatchTxError, toastSuccess, dispatch, onDismiss, account, vaultPoolContract, t, callWithGasPrice, chainId],
   )
 
   const handleConfirmClick = useCallback(async () => {

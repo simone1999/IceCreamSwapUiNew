@@ -122,7 +122,7 @@ export default function Pool() {
               <Text color="textSubtle" mb="8px">
                 {t("Don't see a pool you joined?")}
               </Text>
-              <Link href="/find" passHref>
+              <Link href="/find" passHref prefetch={false}>
                 <Button id="import-pool-link" variant="secondary" scale="sm" as="a">
                   {t('Find other LP tokens')}
                 </Button>
@@ -131,7 +131,7 @@ export default function Pool() {
           )}
         </Body>
         <CardFooter style={{ textAlign: 'center' }}>
-          <Link href="/add" passHref>
+          <Link href="/add" passHref prefetch={false}>
             <Button id="join-pool-button" width="100%" startIcon={<AddIcon color="invertedContrast" />}>
               {t('Add Liquidity')}
             </Button>

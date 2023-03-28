@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
-const Column = styled.div`
+const Column = styled.div<{ flexGrow?: number }>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  ${({ flexGrow }) => (flexGrow ? `flex-grow: ${flexGrow};` : '')}
 `
 export const ColumnCenter = styled(Column)`
   width: 100%;

@@ -138,7 +138,7 @@ const StakeAction: React.FC<React.PropsWithChildren<FarmCardActionsProps>> = ({
             {
               step: 2,
               tx: '',
-              chainId,  // chainId: ChainId.BSC,
+              chainId, // chainId: ChainId.BSC,
               status: FarmTransactionStatus.PENDING,
             },
           ],
@@ -151,10 +151,12 @@ const StakeAction: React.FC<React.PropsWithChildren<FarmCardActionsProps>> = ({
   }
 
   const handleUnstake = async (amount: string) => {
+    const [left, right] = amount.split('.')
+    const amountSafe = `${left}.${right ? right.slice(0, 18) : '0'}`
     if (vaultPid) {
-      await handleNonBscUnStake(amount)
+      await handleNonBscUnStake(amountSafe)
     } else {
-      const receipt = await fetchWithCatchTxError(() => onUnstake(amount))
+      const receipt = await fetchWithCatchTxError(() => onUnstake(amountSafe))
       if (receipt?.status) {
         toastSuccess(
           `${t('Unstaked')}!`,

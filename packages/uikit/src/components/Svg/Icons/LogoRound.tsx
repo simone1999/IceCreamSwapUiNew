@@ -3,7 +3,7 @@ import Svg from "../Svg";
 import { SvgProps } from "../types";
 
 const Icon: React.FC<React.PropsWithChildren<SvgProps>> = (props) => {
-    return <img src="https://app.icecreamswap.com/favicon.ico" alt="IceCream" width={24}/>
+    return <img src="https://icecreamswap.com/favicon.ico" alt="IceCream" width={24}/>
     /*
   return (
     <Svg viewBox="0 0 96 96" {...props}>

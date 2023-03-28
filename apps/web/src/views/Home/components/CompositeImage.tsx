@@ -38,6 +38,10 @@ const Wrapper = styled(Box)<{ maxHeight: string }>`
     animation: ${floatingAnim('4px', '12px')} 3s ease-in-out infinite;
     animation-delay: 0s;
   }
+
+  & > img {
+    position: absolute;
+  }
 `
 
 const DummyImg = styled.img<{ maxHeight: string }>`
@@ -88,8 +92,16 @@ const CompositeImage: React.FC<React.PropsWithChildren<ComponentProps>> = ({ att
   return (
     <Wrapper maxHeight={maxHeight}>
       {attributes.map((image, i) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Image key={i} src={image.src} alt={image.alt} loading="lazy" layout="fill" />
+        <Image
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          src={image.src}
+          alt={image.alt}
+          loading="lazy"
+          objectFit="fill"
+          fill
+          sizes="(max-width: 850px) 100vw, (max-width: 1024px) 50vw, 575px"
+        />
       ))}
     </Wrapper>
   )

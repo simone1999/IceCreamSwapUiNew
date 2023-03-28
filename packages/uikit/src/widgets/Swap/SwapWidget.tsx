@@ -9,7 +9,7 @@ import { SwapInfo, SwapInfoLabel } from "./SwapInfo";
 import { TradePrice } from "./TradePrice";
 
 const SwapSwitchButton = (props: ButtonProps) => (
-  <IconButton className={switchButtonClass} variant="light" scale="sm" {...props}>
+  <IconButton className={switchButtonClass} variant="light" scale="sm" {...props} aria-label="Switch currencies">
     <ArrowDownIcon className={iconDownClass} color="primary" />
     <ArrowUpDownIcon className={iconUpDownClass} color="primary" />
   </IconButton>

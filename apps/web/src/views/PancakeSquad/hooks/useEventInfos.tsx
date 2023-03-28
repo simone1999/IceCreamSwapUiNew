@@ -4,8 +4,10 @@ import { getPancakeSquadContract } from 'utils/contractHelpers'
 import { multicallv2 } from 'utils/multicall'
 import { BigNumber } from '@ethersproject/bignumber'
 import nftSaleAbi from 'config/abi/nftSale.json'
+import {useActiveChainId} from "../../../hooks/useActiveChainId";
 
 const useEventInfos = ({ refreshCounter, setCallback }) => {
+  const { chainId } = useActiveChainId()
   useEffect(() => {
     const fetchEventInfos = async () => {
       try {
@@ -34,7 +36,7 @@ const useEventInfos = ({ refreshCounter, setCallback }) => {
           [currentSaleStatus],
           [currentStartTimestamp],
           // @ts-ignore fix chainId support
-        ] = await multicallv2({ abi: nftSaleAbi, calls })
+        ] = await multicallv2({ abi: nftSaleAbi, calls, chainId })
 
         const currentTotalSupplyMinted = await pancakeSquadContract.totalSupply()
 

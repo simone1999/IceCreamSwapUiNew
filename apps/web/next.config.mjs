@@ -1,29 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { withAxiom } from 'next-axiom'
 import BundleAnalyzer from '@next/bundle-analyzer'
-import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin'
-import NextTranspileModules from 'next-transpile-modules'
+import { withSentryConfig } from '@sentry/nextjs'
 
 const withBundleAnalyzer = BundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const withTM = NextTranspileModules([
-  '@pancakeswap/ui',
-  '@pancakeswap/uikit',
-  '@pancakeswap/swap-sdk-core',
-  '@pancakeswap/farms',
-  '@pancakeswap/localization',
-  '@pancakeswap/hooks',
-  '@pancakeswap/multicall',
-  '@pancakeswap/token-lists',
-  '@pancakeswap/utils',
-  '@pancakeswap/tokens',
-])
-
-const withVanillaExtract = createVanillaExtractPlugin()
-
-/*
 const sentryWebpackPluginOptions =
   process.env.VERCEL_ENV === 'production'
     ? {
@@ -41,7 +23,6 @@ const sentryWebpackPluginOptions =
         silent: true, // Suppresses all logs
         dryRun: !process.env.SENTRY_AUTH_TOKEN,
       }
- */
 
 /** @type {import('next').NextConfig} */
 const config = {
@@ -49,17 +30,26 @@ const config = {
     styledComponents: true,
   },
   experimental: {
-    scrollRestoration: true,
+    swcPlugins: [["swc-plugin-vanilla-extract", {}]]
   },
+  transpilePackages: [
+    '@pancakeswap/ui',
+    '@pancakeswap/uikit',
+    '@pancakeswap/swap-sdk-core',
+    '@pancakeswap/farms',
+    '@pancakeswap/localization',
+    '@pancakeswap/hooks',
+    '@pancakeswap/multicall',
+    '@pancakeswap/token-lists',
+    '@pancakeswap/utils',
+    '@pancakeswap/tokens',
+    '@wagmi',
+    'wagmi',
+  ],
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'static-nft.pancakeswap.com',
-      },
-    ],
+    deviceSizes: [50, 150, 200, 300, 400, 640, 750, 828, 1080, 1200],
   },
   async rewrites() {
     return [
@@ -74,19 +64,7 @@ const config = {
       {
         source: '/info/pair/:address',
         destination: '/info/pools/:address',
-      },
-      {
-        source: "/bridge/:path*",
-        destination: "https://bridge.icecreamswap.com/:path*",
-      },
-      {
-        source: "/static/:path*",
-        destination: "https://bridge.icecreamswap.com/static/:path*",
-      },
-      {
-        source: "/chainbridge-runtime-config.js",
-        destination: "https://bridge.icecreamswap.com/chainbridge-runtime-config.js"
-     }
+      }
     ]
   },
   async headers() {
@@ -128,6 +106,16 @@ const config = {
         permanent: true,
       },
       {
+        source: '/discord',
+        destination: 'https://discord.gg/rx6WGBPTty',
+        permanent: false,
+      },
+      {
+        source: '/telegram',
+        destination: 'https://t.me/Icecreamswap_com',
+        permanent: false,
+      },
+      {
         source: '/swap/:outputCurrency',
         destination: '/swap?outputCurrency=:outputCurrency',
         permanent: true,
@@ -164,18 +152,6 @@ const config = {
       },
     ]
   },
-  webpack: (webpackConfig, { webpack }) => {
-    // tree shake sentry tracing
-    webpackConfig.plugins.push(
-      new webpack.DefinePlugin({
-        __SENTRY_DEBUG__: false,
-        __SENTRY_TRACING__: false,
-      }),
-    )
-    return webpackConfig
-  },
 }
 
-export default withBundleAnalyzer(
-  withVanillaExtract(withTM(withAxiom(config))),
-)
+export default withSentryConfig(withBundleAnalyzer(config), sentryWebpackPluginOptions)

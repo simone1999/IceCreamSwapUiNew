@@ -17,6 +17,13 @@ const farms: SerializedFarmConfig[] = [
     quoteToken: bitgertTokens.ice,
   },
   {
+    pid: 10,
+    lpSymbol: 'ICE-BUSDi LP',
+    lpAddress: '0x0255311aca863ee315e10228b3e34a9522f9c238',
+    token: bitgertTokens.busdi,
+    quoteToken: bitgertTokens.ice,
+  },
+  {
     pid: 0,
     lpSymbol: 'ICE-Brise LP',
     lpAddress: '0x558077e98aeceeb1d616d18c144c15909d4ab744',
@@ -38,18 +45,18 @@ const farms: SerializedFarmConfig[] = [
     quoteToken: bitgertTokens.ice,
   },
   {
+    pid: 8,
+    lpSymbol: 'ICE-DOGEi LP',
+    lpAddress: '0x730031c324283748ed14ecf0b962bce32f49e561',
+    token: bitgertTokens.dogei,
+    quoteToken: bitgertTokens.ice,
+  },
+  {
     pid: 28,
     lpSymbol: 'USDTi-USDCi LP',
     lpAddress: '0x57ad9889dc699b9188b98ebc9d3be585e8b7b3fb',
     token: bitgertTokens.usdci,
     quoteToken: bitgertTokens.usdti,
-  },
-  {
-    pid: 1,
-    lpSymbol: 'Brise-USDTi LP',
-    lpAddress: '0x8e7dd0d762f60942e0bd05b1114d6cedf4435a18',
-    token: bitgertTokens.usdti,
-    quoteToken: bitgertTokens.wbrise,
   },
   {
     pid: 29,
@@ -59,18 +66,11 @@ const farms: SerializedFarmConfig[] = [
     quoteToken: bitgertTokens.usdti,
   },
   {
-    pid: 8,
-    lpSymbol: 'ICE-DOGEi LP',
-    lpAddress: '0x730031c324283748ed14ecf0b962bce32f49e561',
-    token: bitgertTokens.dogei,
-    quoteToken: bitgertTokens.ice,
-  },
-  {
-    pid: 9,
-    lpSymbol: 'ICE-LUNG LP',
-    lpAddress: '0x0c33b96d6a2b52a29f5da6b7354f517310a47faa',
-    token: bitgertTokens.lung,
-    quoteToken: bitgertTokens.ice,
+    pid: 1,
+    lpSymbol: 'Brise-USDTi LP',
+    lpAddress: '0x8e7dd0d762f60942e0bd05b1114d6cedf4435a18',
+    token: bitgertTokens.usdti,
+    quoteToken: bitgertTokens.wbrise,
   },
   {
     pid: 16,
@@ -94,10 +94,10 @@ const farms: SerializedFarmConfig[] = [
     quoteToken: bitgertTokens.wbrise,
   },
   {
-    pid: 10,
-    lpSymbol: 'ICE-BUSDi LP',
-    lpAddress: '0x0255311aca863ee315e10228b3e34a9522f9c238',
-    token: bitgertTokens.busdi,
+    pid: 9,
+    lpSymbol: 'ICE-LUNG LP',
+    lpAddress: '0x0c33b96d6a2b52a29f5da6b7354f517310a47faa',
+    token: bitgertTokens.lung,
     quoteToken: bitgertTokens.ice,
   },
   {

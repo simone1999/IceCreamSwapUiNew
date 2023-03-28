@@ -1,8 +1,8 @@
 import React, {createContext, useEffect, useMemo, useState} from 'react'
 import {useMatchBreakpoints} from '@pancakeswap/uikit'
-import {ChainId} from '@pancakeswap/sdk'
 import {useExchangeChartManager} from 'state/user/hooks'
 import {useActiveChainId} from 'hooks/useActiveChainId'
+import {SUPPORT_INFO} from "../../config/constants/supportChains";
 
 export const SwapFeaturesContext = createContext<{
   isChartSupported: boolean
@@ -22,7 +22,6 @@ export const SwapFeaturesContext = createContext<{
   setIsChartDisplayed: null,
 })
 
-const CHART_SUPPORT_CHAIN_IDS = [ChainId.BITGERT]
 const ACCESS_TOKEN_SUPPORT_CHAIN_IDS = []
 const STABLE_SUPPORT_CHAIN_IDS = []
 
@@ -36,7 +35,7 @@ export const SwapFeaturesProvider: React.FC<React.PropsWithChildren> = ({ childr
   const isChartSupported = useMemo(
     () =>
       // avoid layout shift, by default showing
-      !chainId || CHART_SUPPORT_CHAIN_IDS.includes(chainId),
+      !chainId || SUPPORT_INFO.includes(chainId),
     [chainId],
   )
 

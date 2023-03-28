@@ -9,6 +9,7 @@ import { useFarmFromPid, useFarmUser } from 'state/farms/hooks'
 import { YieldBoosterStateContext } from '../YieldBooster/components/ProxyFarmContainer'
 import useBoostMultiplier from '../YieldBooster/hooks/useBoostMultiplier'
 import { useGetBoostedMultiplier } from '../YieldBooster/hooks/useGetBoostedAPR'
+import {getDisplayApy} from "../getDisplayApy";
 
 export interface ApyButtonProps {
   variant: 'text' | 'text-and-button'
@@ -47,6 +48,7 @@ const ApyButton: React.FC<React.PropsWithChildren<ApyButtonProps>> = ({
 }) => {
   const { t } = useTranslation()
   const { account } = useActiveWeb3React()
+  const displayApy = getDisplayApy(apr, lpRewardsApr)
   const [bCakeMultiplier, setBCakeMultiplier] = useState<number | null>(() => null)
   const { tokenBalance, stakedBalance, proxy } = useFarmUser(pid)
   const { lpTotalSupply } = useFarmFromPid(pid)
@@ -137,12 +139,12 @@ const ApyButton: React.FC<React.PropsWithChildren<ApyButtonProps>> = ({
       {useTooltipText ? (
         <>
           <TooltipText ref={targetRef} decorationColor="secondary">
-            {displayApr}%
+            {displayApy}%
           </TooltipText>
           {tooltipVisible && tooltip}
         </>
       ) : (
-        <>{displayApr}%</>
+        <>{displayApy}%</>
       )}
     </FarmUI.FarmApyButton>
   )

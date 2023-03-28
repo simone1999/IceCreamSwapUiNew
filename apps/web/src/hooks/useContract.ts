@@ -152,7 +152,8 @@ export const useMasterchefV1 = () => {
 
 export const useSousChef = (id) => {
   const { data: signer } = useSigner()
-  return useMemo(() => getSouschefContract(id, signer), [id, signer])
+  const { chainId } = useActiveChainId()
+  return useMemo(() => getSouschefContract(id, chainId, signer), [id, signer, chainId])
 }
 
 export const usePointCenterIfoContract = () => {
@@ -346,7 +347,8 @@ export const usePotterytDrawContract = () => {
 }
 
 export function useZapContract(withSignerIfPossible = true) {
-  return useContract<Zap>(getZapAddress(), zapAbi, withSignerIfPossible)
+  const { chainId } = useActiveChainId()
+  return useContract<Zap>(getZapAddress(chainId), zapAbi, withSignerIfPossible)
 }
 
 export function useBCakeFarmBoosterContract(withSignerIfPossible = true) {

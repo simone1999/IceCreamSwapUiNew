@@ -3,6 +3,7 @@ import { MenuContext } from "../../widgets/Menu/context";
 import StyledMenuItem, { StyledMenuItemContainer } from "./styles";
 import { MenuItemProps } from "./types";
 import { useMatchBreakpoints } from "../../contexts";
+import NextLink from "next/link";
 
 const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
   children,
@@ -16,11 +17,9 @@ const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
 }) => {
   const { isMobile } = useMatchBreakpoints();
   const menuItemRef = useRef<HTMLDivElement>(null);
-  const { linkComponent } = useContext(MenuContext);
   const itemLinkProps: any = href
     ? {
-        as: linkComponent,
-        href,
+        as: "a",
       }
     : {
         as: "div",
@@ -37,18 +36,36 @@ const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
       scrollLayer.scrollLeft = menuNode.offsetLeft;
     }
   }, [isActive, isMobile, scrollLayerRef]);
+
   return (
     <StyledMenuItemContainer $isActive={isActive} $variant={variant} ref={menuItemRef}>
-      <StyledMenuItem
-        {...itemLinkProps}
-        $isActive={isActive}
-        $isDisabled={isDisabled}
-        $variant={variant}
-        $statusColor={statusColor}
-        {...props}
-      >
-        {children}
-      </StyledMenuItem>
+      {href ? (
+        <NextLink href={href} legacyBehavior passHref prefetch={false}>
+          <StyledMenuItem
+            {...itemLinkProps}
+            $isActive={isActive}
+            $isDisabled={isDisabled}
+            $variant={variant}
+            $statusColor={statusColor}
+            {...props}
+          >
+            {children}
+          </StyledMenuItem>
+        </NextLink>
+      ) : (
+        <>
+          <StyledMenuItem
+            {...itemLinkProps}
+            $isActive={isActive}
+            $isDisabled={isDisabled}
+            $variant={variant}
+            $statusColor={statusColor}
+            {...props}
+          >
+            {children}
+          </StyledMenuItem>
+        </>
+      )}
     </StyledMenuItemContainer>
   );
 };

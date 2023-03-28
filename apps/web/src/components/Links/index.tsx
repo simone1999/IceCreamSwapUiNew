@@ -23,7 +23,7 @@ const StyledInternalLink = styled('a')`
 
 const InternalLink: React.FC<React.PropsWithChildren<LinkProps>> = ({ children, ...props }) => {
   return (
-    <Link {...props}>
+    <Link {...props} prefetch={false} passHref legacyBehavior>
       <StyledInternalLink>{children}</StyledInternalLink>
     </Link>
   )

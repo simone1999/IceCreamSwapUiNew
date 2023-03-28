@@ -1,14 +1,14 @@
 import { ChainId } from '@pancakeswap/sdk'
-import FarmsBscPriceHelper from './56'
+import FarmsBitgertPriceHelper from './32520'
+import FarmsCorePriceHelper from './1116'
 
 export const getFarmsPriceHelperLpFiles = (chainId: ChainId) => {
-  /*
   switch (chainId) {
-    case ChainId.BSC:
-      return FarmsBscPriceHelper
+    case ChainId.BITGERT:
+      return FarmsBitgertPriceHelper
+    case ChainId.CORE:
+      return FarmsCorePriceHelper
     default:
       return []
   }
-  */
-  return []
 }

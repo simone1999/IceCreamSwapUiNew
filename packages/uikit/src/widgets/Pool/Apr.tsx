@@ -28,6 +28,7 @@ interface AprProps<T> extends FlexProps {
   performanceFee?: number;
   fontSize?: string;
   shouldShowApr: boolean;
+  forceApy?: boolean;
   account: string;
   autoCompoundFrequency: number;
 }
@@ -39,6 +40,7 @@ export function Apr<T>({
   fontSize = "16px",
   performanceFee = 0,
   shouldShowApr,
+  forceApy = false,
   account,
   autoCompoundFrequency,
   ...props
@@ -82,6 +84,8 @@ export function Apr<T>({
   };
 
   const isValidate = apr !== undefined && !Number.isNaN(apr);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const apy = isValidate? ((1 + (apr!/100 / 365))**(365) - 1) * 100 : null
 
   return (
     <AprLabelContainer alignItems="center" justifyContent="flex-start" {...props}>
@@ -96,7 +100,7 @@ export function Apr<T>({
                 }}
                 fontSize={fontSize}
                 isDisabled={isFinished}
-                value={isFinished ? 0 : apr ?? 0}
+                value={isFinished ? 0 : (forceApy ? apy : apr) ?? 0}
                 decimals={2}
                 unit="%"
               />

@@ -17,7 +17,7 @@ import { FarmWithStakedValue } from '../../types'
 
 import BoostedAction from '../../YieldBooster/components/BoostedAction'
 import { YieldBoosterStateContext } from '../../YieldBooster/components/ProxyFarmContainer'
-import Apr, { AprProps } from '../Apr'
+import Apy, { ApyProps } from '../Apy'
 import { HarvestAction, HarvestActionContainer, ProxyHarvestActionContainer } from './HarvestAction'
 import StakedAction, { ProxyStakedContainer, StakedContainer } from './StakedAction'
 import { ActionContainer as ActionContainerSection, ActionContent, ActionTitles } from './styles'
@@ -25,7 +25,7 @@ import { ActionContainer as ActionContainerSection, ActionContent, ActionTitles 
 const { Multiplier, Liquidity } = FarmUI.FarmTable
 
 export interface ActionPanelProps {
-  apr: AprProps
+  apr: ApyProps
   multiplier: FarmTableMultiplierProps
   liquidity: FarmTableLiquidityProps
   details: FarmWithStakedValue
@@ -167,7 +167,7 @@ const ActionPanel: React.FunctionComponent<React.PropsWithChildren<ActionPanelPr
             <>
               <ValueWrapper>
                 <Text>{t('APR')}</Text>
-                <Apr {...apr} useTooltipText={false} boosted={farm.boosted} />
+                <Apy {...apr} useTooltipText={false} boosted={farm.boosted} />
               </ValueWrapper>
               <ValueWrapper>
                 <Text>{t('Multiplier')}</Text>

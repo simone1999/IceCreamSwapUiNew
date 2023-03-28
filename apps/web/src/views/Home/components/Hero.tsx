@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, NextLinkFromReactRouter } from '@pancakeswap/uikit'
+import { Button, Flex, Heading, Link, NextLinkFromReactRouter } from '@pancakeswap/uikit'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import { useTranslation } from '@pancakeswap/localization'
@@ -19,7 +19,6 @@ const flyingAnim = () => keyframes`
   }
 `
 
-
 const BgWrapper = styled.div`
   z-index: -1;
   overflow: hidden;
@@ -39,6 +38,7 @@ const InnerWrapper = styled.div`
 const BunnyWrapper = styled.div`
   width: 100%;
   animation: ${flyingAnim} 3.5s ease-in-out infinite;
+  position: relative;
   will-change: transform;
   > span {
     overflow: visible !important; // make sure the next-image pre-build blur image not be cropped
@@ -82,13 +82,15 @@ const Hero = () => {
         id="homepage-hero"
       >
         <Flex flex="1" flexDirection="column">
-          <Heading scale="xxl" color="secondary" mb="24px">
+          <Heading as="h1" scale="xxl" color="secondary" mb="24px">
             {t('IceCream brings people together')}
           </Heading>
-          <Heading scale="md" mb="24px">
-            {t(
-              'Trade, Earn, Bridge and Launch on Bitgert (Brise), Binance smart chain (BSC), XDC, Dogechain, Doken, Fuse and soon CORE blockchain.',
-            )}
+          <Heading as="p" scale="md" mb="24px">
+            Trade, Earn, Bridge and Launch on {" "}
+            <Link href="/core" display="inline-flex">
+              CORE
+            </Link>
+            , XDC, Binance smart chain (BSC), Bitgert (Brise), Shardeum, Dogechain, Doken and Fuse blockchain.
           </Heading>
           <Flex>
             {!account && <ConnectWalletButton mr="8px" />}
@@ -98,14 +100,21 @@ const Hero = () => {
           </Flex>
         </Flex>
         <Flex
-          height={['292px', null, null, '100%']}
-          width={['292px', null, null, '100%']}
+          minHeight={['292px', null, null, '100%']}
+          width={['auto', null, null, '100%']}
           flex={[null, null, null, '1']}
-          mb={['24px', null, null, '0']}
+          mb={['12px', null, null, '0']}
           position="relative"
         >
           <BunnyWrapper>
-            <Image src={hero} priority placeholder="blur" alt={t('IceCream Store')} />
+            <Image
+              sizes="(max-width: 768px) 95vw, 580px"
+              src={hero}
+              priority
+              objectFit="fill"
+              placeholder="blur"
+              alt={t('IceCream Store')}
+            />
           </BunnyWrapper>
         </Flex>
       </Flex>

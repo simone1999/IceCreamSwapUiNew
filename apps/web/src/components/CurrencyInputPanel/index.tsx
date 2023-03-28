@@ -1,4 +1,4 @@
-import { Currency, Pair } from '@pancakeswap/sdk'
+import { ChainId, Currency, ERC20Token, Pair } from '@pancakeswap/sdk'
 import { Button, ChevronDownIcon, Text, useModal, Flex, Box, NumericalInput, CopyButton } from '@pancakeswap/uikit'
 import styled, { css } from 'styled-components'
 import { isAddress } from 'utils'
@@ -15,6 +15,7 @@ import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import { CurrencyLogo, DoubleCurrencyLogo } from '../Logo'
 
 import AddToWalletButton from '../AddToWallet/AddToWalletButton'
+import { useActiveChainId } from 'hooks/useActiveChainId'
 
 const InputRow = styled.div<{ selected: boolean }>`
   display: flex;
@@ -23,7 +24,7 @@ const InputRow = styled.div<{ selected: boolean }>`
   justify-content: flex-end;
   padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
 `
-const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })<{ zapStyle?: ZapStyle }>`
+export const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })<{ zapStyle?: ZapStyle }>`
   padding: 0 0.5rem;
   ${({ zapStyle, theme }) =>
     zapStyle &&
@@ -94,6 +95,9 @@ interface CurrencyInputPanelProps {
   disabled?: boolean
   error?: boolean
   showBUSD?: boolean
+  tokens?: { [address: string]: ERC20Token }
+  hideManage?: boolean
+  showNative?: boolean
 }
 export default function CurrencyInputPanel({
   value,
@@ -117,9 +121,13 @@ export default function CurrencyInputPanel({
   commonBasesType,
   disabled,
   error,
-  showBUSD,
+  showBUSD = true,
+  tokens,
+  hideManage,
+  showNative,
 }: CurrencyInputPanelProps) {
-  const { account } = useWeb3React()
+  const { account, chainId } = useWeb3React()
+  const { chainId: appChainId } = useActiveChainId()
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
   const { t } = useTranslation()
 
@@ -138,6 +146,9 @@ export default function CurrencyInputPanel({
       otherSelectedCurrency={otherCurrency}
       showCommonBases={showCommonBases}
       commonBasesType={commonBasesType}
+      tokens={tokens}
+      hideManage={hideManage}
+      showNative={showNative}
     />,
   )
 
@@ -228,6 +239,9 @@ export default function CurrencyInputPanel({
               onUserInput={(val) => {
                 onUserInput(val)
               }}
+              autoFocus={
+                id === 'swap-currency-input' && (chainId === ChainId.BITGERT || appChainId === ChainId.BITGERT)
+              }
             />
           </LabelRow>
           <InputRow selected={disableCurrencySelect}>

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
+import Script from 'next/script'
 import { ServerStyleSheet } from 'styled-components'
 
 class MyDocument extends Document {
@@ -31,13 +32,12 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html translate="no">
+      <Html lang="en">
         <Head>
           {process.env.NEXT_PUBLIC_NODE_PRODUCTION && (
             <link rel="preconnect" href={process.env.NEXT_PUBLIC_NODE_PRODUCTION} />
           )}
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&amp;display=swap" rel="stylesheet" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="apple-touch-icon" href="/logo.png" />
           <link rel="manifest" href="/manifest.json" />
@@ -57,14 +57,20 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
-          <noscript>
-            <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTAG}`}
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            />
-          </noscript>
+          <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-ZER0X0YN79" />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-ZER0X0YN79', {
+            'storage': 'none'
+          });
+          gtag('set', 'allowAdFeatures', false);
+          `}
+          </Script>
+
           <Main />
           <NextScript />
           <div id="portal-root" />

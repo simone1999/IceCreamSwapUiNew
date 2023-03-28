@@ -80,7 +80,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   const { styles, attributes } = usePopper(targetRef, tooltipRef, {
     strategy: "fixed",
     placement,
-    modifiers: [{ name: "offset", options: { offset: [0, 0] } }],
+    // modifiers: [{ name: "offset", options: { offset: [0, 0] } }],
   });
 
   useEffect(() => {
@@ -108,6 +108,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   return (
     <Flex alignItems="center" height="100%" ref={setTargetRef} {...props}>
       <StyledUserMenu
+        width={props.width}
         onTouchStart={() => {
           setIsOpen((s) => !s);
         }}

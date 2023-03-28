@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { useHttpLocations } from '@pancakeswap/hooks'
 import getTokenLogoURL from '../../utils/getTokenLogoURL'
 import Logo from './Logo'
+import chainName from 'config/constants/chainName'
 
 const StyledLogo = styled(Logo)<{ size: string }>`
   width: ${({ size }) => size};
@@ -39,9 +40,19 @@ export default function CurrencyLogo({
     }
     return []
   }, [currency, uriLocations])
+  const chainId = currency?.chainId
+  const nativeName = chainName[chainId]
 
   if (currency?.isNative) {
-    return <StyledLogo size={size} srcs={[`/images/chains/${currency.chainId}.png`]} width={size} style={style} />
+    return (
+      <StyledLogo
+        size={size}
+        srcs={[`/images/chains/${currency.chainId}.png`]}
+        width={size}
+        style={style}
+        alt={`native ${nativeName} logo`}
+      />
+    )
   }
 
   return <StyledLogo size={size} srcs={srcs} alt={`${currency?.symbol ?? 'token'} logo`} style={style} />

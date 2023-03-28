@@ -87,7 +87,7 @@ const RoiCard: React.FC<React.PropsWithChildren<RoiCardProps>> = ({
 }) => {
   const [expectedRoi, setExpectedRoi] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const { roiUSD, roiTokens, roiPercentage } = calculatorState.data;
+  const { roiUSD, roiPercentage } = calculatorState.data;
   const { mode } = calculatorState.controls;
 
   const { t } = useTranslation();
@@ -164,7 +164,6 @@ const RoiCard: React.FC<React.PropsWithChildren<RoiCardProps>> = ({
           )}
         </Flex>
         <Text fontSize="12px" color="textSubtle">
-          ~ {roiTokens} {earningTokenSymbol}
           <Text
             fontSize="12px"
             color="textSubtle"

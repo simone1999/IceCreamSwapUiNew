@@ -11,6 +11,9 @@ export enum ConnectorNames {
   BSC = 'bsc',
   Blocto = 'blocto',
   WalletLink = 'coinbaseWallet',
+  BitKeep = 'bitKeep',
+  Nabox = 'nabox',
+  Okx = 'okx',
 }
 
 const delay = (t: number) => new Promise((resolve) => setTimeout(resolve, t))
@@ -40,9 +43,9 @@ const walletsConfig = ({
       icon: '/images/wallets/metamask.png',
       installed: typeof window !== 'undefined' && Boolean(window.ethereum?.isMetaMask) && metaMaskConnector.ready,
       connectorId: ConnectorNames.MetaMask,
-      deepLink: 'https://metamask.app.link/dapp/pancakeswap.finance/',
+      deepLink: 'https://metamask.app.link/dapp/icecreamswap.com/',
       qrCode,
-      downloadLink: 'https://metamask.app.link/dapp/pancakeswap.finance/',
+      downloadLink: 'https://metamask.app.link/dapp/icecreamswap.com/',
     },
     {
       id: 'binance',
@@ -76,7 +79,7 @@ const walletsConfig = ({
         (Boolean(window.ethereum?.isTrust) ||
           // @ts-ignore
           Boolean(window.ethereum?.isTrustWallet)),
-      deepLink: 'https://link.trustwallet.com/open_url?coin_id=20000714&url=https://pancakeswap.finance/',
+      deepLink: 'https://link.trustwallet.com/open_url?coin_id=20000714&url=https://icecreamswap.com/',
       downloadLink: {
         desktop: 'https://chrome.google.com/webstore/detail/trust-wallet/egjidjbpglichdcondbcbdnbeeppgdph/related',
       },
@@ -146,6 +149,39 @@ const walletsConfig = ({
       installed: typeof window !== 'undefined' && Boolean((window.ethereum as ExtendEthereum)?.isBlocto),
       qrCode,
     },
+    {
+      id: 'bitkeep',
+      title: 'BitKeep',
+      icon: '/images/wallets/bitkeep.png',
+      connectorId: ConnectorNames.BitKeep,
+      installed: typeof window !== 'undefined' && Boolean(window.bitkeep),
+      downloadLink: {
+        desktop: 'https://chrome.google.com/webstore/detail/bitkeep-crypto-nft-wallet/jiidiaalihmmhddjgbnbgdfflelocpak',
+      },
+      qrCode,
+    },
+    {
+      id: 'nabox',
+      title: 'Nabox',
+      icon: '/images/wallets/nabox.png',
+      connectorId: ConnectorNames.Nabox,
+      installed: typeof window !== 'undefined' && Boolean(window.NaboxWallet),
+      downloadLink: {
+        desktop: 'https://chrome.google.com/webstore/detail/nabox-wallet/nknhiehlklippafakaeklbeglecifhad',
+      },
+      qrCode,
+    },
+    {
+      id: 'okx',
+      title: 'Okx',
+      icon: '/images/wallets/okx.png',
+      connectorId: ConnectorNames.Okx,
+      installed: typeof window !== 'undefined' && Boolean(window.okxwallet),
+      downloadLink: {
+        desktop: 'https://chrome.google.com/webstore/detail/okx-wallet/mcohilncbfahbmgdjkbpemcciiolgcge',
+      },
+      qrCode,
+    },
   ]
 }
 
@@ -179,5 +215,5 @@ const docLangCodeMapping: Record<string, string> = {
 
 export const getDocLink = (code: string) =>
   docLangCodeMapping[code]
-    ? `https://docs.pancakeswap.finance/v/${docLangCodeMapping[code]}/get-started/connection-guide`
-    : `https://docs.pancakeswap.finance/get-started/connection-guide`
+    ? `https://docs.icecreamswap.com/v/${docLangCodeMapping[code]}/get-started/connection-guide`
+    : `https://docs.icecreamswap.com/get-started/connection-guide`

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { variant as systemVariant, space } from "styled-system";
-import { WarningIcon, ErrorIcon, CheckmarkCircleFillIcon } from "../Svg";
+import { WarningIcon, ErrorIcon, CheckmarkCircleFillIcon, InfoIcon } from "../Svg";
 import { Text, TextProps } from "../Text";
 import { Box } from "../Box";
 import { MessageProps } from "./types";
@@ -13,6 +13,7 @@ const Icons = {
   warning: WarningIcon,
   danger: ErrorIcon,
   success: CheckmarkCircleFillIcon,
+  info: InfoIcon,
 };
 
 const MessageContainer = styled.div<MessageProps>`
@@ -35,6 +36,7 @@ const colors = {
   // these color names should be place in the theme once the palette is finalized
   warning: "#D67E0A",
   success: "#129E7D",
+  info: "#0A7ED6",
   danger: "failure",
 };
 

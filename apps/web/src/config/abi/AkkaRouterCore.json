@@ -1,0 +1,243 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "WETH_",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "treasuryAddress_",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "getReceiverContract",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getTreasuryAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountOutMin",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "srcAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "dstMinAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "isFromNative",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "isToNative",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "srcToken",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "dstToken",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "pairAddr",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "fee",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "srcAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "dstMinAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "feeSrc",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "feeDst",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct IAkkaRouter.PathDescription[]",
+            "name": "paths",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct IAkkaRouter.SplitedPathDescription[]",
+        "name": "data",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "fee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "v",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "r",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "multiPathSwap",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_receiverContract",
+        "type": "address"
+      }
+    ],
+    "name": "setReceiverContract",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_treasuryAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setTreasuryAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]

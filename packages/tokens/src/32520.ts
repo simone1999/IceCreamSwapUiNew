@@ -2,6 +2,7 @@ import { ChainId, WETH9, ERC20Token } from '@pancakeswap/sdk'
 
 export const bitgertTokens = {
   wbrise: WETH9[ChainId.BITGERT],
+  ice: new ERC20Token(ChainId.BITGERT, '0xB999Ea90607a826A3E6E6646B404c3C7d11fa39D', 18, 'ICE', 'IceCream', 'https://icecreamswap.com'),
   sps: new ERC20Token(ChainId.BITGERT, '0x1633b7157e7638C4d6593436111Bf125Ee74703F', 18, 'SPS', 'Splinterlands Token', 'https://splinterlands.com'),
   sphynx: new ERC20Token(ChainId.BITGERT, '0x0e11DCE06eF2FeD6f78CEF5144F970E1184b4298', 18, 'SPHYNX', 'Sphynx BRISE'),
   bpad: new ERC20Token(ChainId.BITGERT, '0x71946a5C9dA7C95ee804a9BE561EC15A3F286A7D', 8, 'BPAD', 'Brisepad'),
@@ -11,7 +12,7 @@ export const bitgertTokens = {
   eltg: new ERC20Token(ChainId.BITGERT, '0xb860eCD8400600c13342a751408737235E177077', 9, 'ELTG', 'Graphen'),
   evo: new ERC20Token(ChainId.BITGERT, '0x267Ae4bA9CE5ef3c87629812596b0D89EcBD81dD', 18, 'EVO', 'EVO'),
   map: new ERC20Token(ChainId.BITGERT, '0x6D347fdCb302a5879545E01EceE7A176db23dCDa', 2, 'MAP', '4D Twin Maps'),
-  miidas: new ERC20Token(ChainId.BITGERT, '0x5B534A2Df329195Fd7e5c9AcA1D9ffbdA14A4963', 6, 'Miidas', 'Miidas NFT'),
+  miidas: new ERC20Token(ChainId.BITGERT, '0x5B534A2Df329195Fd7e5c9AcA1D9ffbdA14A4963', 6, 'Miidas', 'Miidas NFT', 'https://brise.miidas.com/'),
   mir: new ERC20Token(ChainId.BITGERT, '0x2468dad471fA7E03d8029F057cc41742F017D53d', 18, 'MIR', 'Mix Reality'),
   numi: new ERC20Token(ChainId.BITGERT, '0x6718e47e74497d1564EE76d832309144b83Ef8E8', 18, 'NUMI', 'Numitor'),
   omnia: new ERC20Token(ChainId.BITGERT, '0x5d4685c2C75581C67b9D6292A065a767bC214681', 8, 'OMNIA', 'OmniaVerse'),
@@ -21,7 +22,6 @@ export const bitgertTokens = {
   wmf: new ERC20Token(ChainId.BITGERT, '0xc89fcd3E1CF5A355fc41E160d18BAC5f624610D4', 18, 'WMF', 'Whale Maker Fund'),
   yogo: new ERC20Token(ChainId.BITGERT, '0xB361D5953e21Cfde5CD62B89FDf40bc21903A6bb', 18, 'YOGO', 'YOGO Token'),
   ypc: new ERC20Token(ChainId.BITGERT, '0x11203a00a9134Db8586381C4B2fca0816476b3FD', 18, 'YPC', 'Young Parrot'),
-  ice: new ERC20Token(ChainId.BITGERT, '0xB999Ea90607a826A3E6E6646B404c3C7d11fa39D', 18, 'ICE', 'IceCream'),
   tokyo: new ERC20Token(ChainId.BITGERT, '0x38EA4741d100cAe9700f66B194777F31919142Ee', 9, '$Tokyo', 'Metaverse City Tokyo'),
   usdc: new ERC20Token(ChainId.BITGERT, '0x765277EebeCA2e31912C9946eAe1021199B39C61', 6, 'USDCm', 'USD Coin Multichain'),
   usdt: new ERC20Token(ChainId.BITGERT, '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D', 6, 'USDTm', 'Tether USD Multichain'),

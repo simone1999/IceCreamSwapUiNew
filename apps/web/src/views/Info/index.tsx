@@ -23,22 +23,6 @@ export const InfoPageLayout = ({ children }) => {
   const isStableSwap = router.query.type === 'stableSwap'
   return (
     <>
-      {chainName === 'BSC' && (
-        <SubMenuItems
-          items={[
-            {
-              label: t('Swap'),
-              href: '/info',
-            },
-            {
-              label: t('StableSwap'),
-              href: '/info?type=stableSwap',
-            },
-          ]}
-          activeItem={isStableSwap ? '/info?type=stableSwap' : '/info'}
-        />
-      )}
-
       <InfoNav isStableSwap={isStableSwap} />
       {children}
     </>

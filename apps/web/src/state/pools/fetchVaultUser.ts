@@ -9,7 +9,7 @@ import {getCakeFlexibleSideVaultV2Contract} from '../../utils/contractHelpers'
 const cakeVaultAddress = getCakeVaultAddress()
 const flexibleSideVaultContract = getCakeFlexibleSideVaultV2Contract()
 
-export const fetchVaultUser = async (account: string): Promise<SerializedLockedVaultUser> => {
+export const fetchVaultUser = async (account: string, chainId: ChainId): Promise<SerializedLockedVaultUser> => {
   try {
     const calls = ['userInfo', 'calculatePerformanceFee', 'calculateOverdueFee'].map((method) => ({
       address: cakeVaultAddress,
@@ -21,7 +21,7 @@ export const fetchVaultUser = async (account: string): Promise<SerializedLockedV
       abi: cakeVaultAbi,
       calls,
       // @ts-ignore
-      chainId: ChainId.BSC,
+      chainId,
     })
     return {
       isLoading: false,

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Token, Currency, ChainId } from '@pancakeswap/sdk'
 import { Button, Text, ErrorIcon, Flex, Message, Checkbox, Link, Tag, Grid } from '@pancakeswap/uikit'
 import { AutoColumn } from 'components/Layout/Column'
@@ -18,6 +18,7 @@ interface ImportProps {
 
 const getStandard = (chainId: ChainId) => 'ERC20'
 
+const IMPORT_COUNTDOWN = 5
 function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
   const { chainId } = useActiveChainId()
 
@@ -29,6 +30,18 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
 
   // use for showing import source on inactive tokens
   const inactiveTokenList = useCombinedInactiveList()
+
+  const [importCountdown, setImportCountdown] = useState(IMPORT_COUNTDOWN)
+
+  useEffect(() => {
+    if (confirmed) {
+      const timer = setInterval(() => {
+        setImportCountdown((ic) => ic - 1)
+      }, 1000)
+      return () => clearInterval(timer)
+    }
+    return undefined
+  }, [confirmed])
 
   return (
     <AutoColumn gap="lg">
@@ -101,7 +114,7 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
         </Flex>
         <Button
           variant="danger"
-          disabled={!confirmed}
+          disabled={!confirmed || importCountdown > 0}
           onClick={() => {
             tokens.forEach((token) => addToken(token))
             if (handleCurrencySelect) {
@@ -111,6 +124,7 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
           className=".token-dismiss-button"
         >
           {t('Import')}
+          {confirmed && importCountdown > 0 ? ` (${importCountdown})` : ''}
         </Button>
       </Flex>
     </AutoColumn>

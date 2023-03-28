@@ -7,6 +7,7 @@ import { getChangeForPeriod } from 'utils/getChangeForPeriod'
 import { SLOW_INTERVAL } from 'config/constants'
 import { LP_HOLDERS_FEE, WEEKS_IN_YEAR } from 'config/constants/info'
 import { getMultiChainQueryEndPointWithStableSwap, MultiChainName, multiChainQueryMainToken } from '../info/constant'
+import {useGetChainName} from "../info/hooks";
 
 interface PoolReserveVolume {
   reserveUSD: string
@@ -22,6 +23,7 @@ interface PoolReserveVolumeResponse {
 }
 
 export const useLPApr = (pair?: Pair) => {
+  const chainName = useGetChainName()
   const { data: poolData } = useSWRImmutable(
     null, // pair && pair.chainId === ChainId.BSC ? ['LP7dApr', pair.liquidityToken.address] : null,
     async () => {
@@ -31,6 +33,7 @@ export const useLPApr = (pair?: Pair) => {
       const { error, data } = await fetchPoolVolumeAndReserveData(
         block7d.number,
         pair.liquidityToken.address.toLowerCase(),
+        chainName,
       )
       if (error) return null
       const current = parseFloat(data?.now[0]?.volumeUSD)
@@ -51,7 +54,7 @@ export const useLPApr = (pair?: Pair) => {
 const fetchPoolVolumeAndReserveData = async (
   block7d: number,
   poolAddress: string,
-  chainName: MultiChainName = 'BSC',
+  chainName: MultiChainName,
 ) => {
   try {
     const query = gql`

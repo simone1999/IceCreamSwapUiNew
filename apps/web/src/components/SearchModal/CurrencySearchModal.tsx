@@ -1,5 +1,5 @@
 import { useCallback, useState, useRef, useEffect } from 'react'
-import { Currency, Token } from '@pancakeswap/sdk'
+import { Currency, ERC20Token, Token } from '@pancakeswap/sdk'
 import {
   ModalContainer,
   ModalHeader,
@@ -54,6 +54,9 @@ export interface CurrencySearchModalProps extends InjectedModalProps {
   otherSelectedCurrency?: Currency | null
   showCommonBases?: boolean
   commonBasesType?: string
+  tokens?: { [address: string]: ERC20Token }
+  hideManage?: boolean
+  showNative?: boolean
 }
 
 export default function CurrencySearchModal({
@@ -63,6 +66,9 @@ export default function CurrencySearchModal({
   otherSelectedCurrency,
   showCommonBases = true,
   commonBasesType,
+  tokens,
+  hideManage,
+  showNative,
 }: CurrencySearchModalProps) {
   const [modalView, setModalView] = useState<CurrencyModalView>(CurrencyModalView.search)
 
@@ -114,7 +120,7 @@ export default function CurrencySearchModal({
         if (wrapperRef.current) wrapperRef.current.style.animation = 'none'
       }}
       // @ts-ignore
-      onDragEnd={(e, info) => {
+      onDragEnd={(_, info) => {
         if (info.velocity.y > MODAL_SWIPE_TO_CLOSE_VELOCITY && onDismiss) onDismiss()
       }}
       ref={wrapperRef}
@@ -137,6 +143,8 @@ export default function CurrencySearchModal({
             showImportView={() => setModalView(CurrencyModalView.importToken)}
             setImportToken={setImportToken}
             height={height}
+            tokens={tokens}
+            showNative={showNative}
           />
         ) : modalView === CurrencyModalView.importToken && importToken ? (
           <ImportToken tokens={[importToken]} handleCurrencySelect={handleCurrencySelect} />
@@ -152,7 +160,7 @@ export default function CurrencySearchModal({
         ) : (
           ''
         )}
-        {modalView === CurrencyModalView.search && (
+        {modalView === CurrencyModalView.search && !hideManage && (
           <Footer>
             <Button
               scale="sm"

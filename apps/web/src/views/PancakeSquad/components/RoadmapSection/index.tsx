@@ -43,7 +43,7 @@ const FaqSection = () => {
                 </div>
                 <Card marginY="8px" style={{ flexGrow: '1' }}>
                   <CardHeader>
-                    <Heading scale="lg" color="secondary">
+                    <Heading as="h3" scale="lg" color="secondary">
                       {roadblock.title}
                     </Heading>
                   </CardHeader>

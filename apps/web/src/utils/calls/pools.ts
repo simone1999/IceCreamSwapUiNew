@@ -5,26 +5,28 @@ import sousChefV2 from 'config/abi/sousChefV2.json'
 import multicall from '../multicall'
 import { bscRpcProvider } from '../providers'
 import { getAddress } from '../addressHelpers'
+import {ChainId} from "@pancakeswap/sdk";
 
 /**
  * Returns the total number of pools that were active at a given block
  */
-export const getActivePools = async (block?: number) => {
+export const getActivePools = async (chainId: ChainId, block: number) => {
   const eligiblePools = poolsConfig
+    .filter((pool) => chainId in pool.contractAddress)
     .filter((pool) => pool.sousId !== 0)
     .filter((pool) => pool.isFinished === false || pool.isFinished === undefined)
-  const blockNumber = block || (await bscRpcProvider.getBlockNumber())
+  const blockNumber = block
   const startBlockCalls = eligiblePools.map(({ contractAddress }) => ({
-    address: getAddress(contractAddress, 56),
+    address: getAddress(contractAddress, chainId),
     name: 'startBlock',
   }))
   const endBlockCalls = eligiblePools.map(({ contractAddress }) => ({
-    address: getAddress(contractAddress, 56),
+    address: getAddress(contractAddress, chainId),
     name: 'bonusEndBlock',
   }))
   const [startBlocks, endBlocks] = await Promise.all([
-    multicall(sousChefV2, startBlockCalls),
-    multicall(sousChefV2, endBlockCalls),
+    multicall(sousChefV2, startBlockCalls, chainId),
+    multicall(sousChefV2, endBlockCalls, chainId),
   ])
 
   return eligiblePools.reduce((accum, poolCheck, index) => {

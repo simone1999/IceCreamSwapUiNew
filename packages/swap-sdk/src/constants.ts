@@ -1,88 +1,56 @@
 import { ERC20Token } from './entities/token'
+import { ChainId, chains } from '@icecreamswap/constants'
 
-export enum ChainId {
-  BITGERT = 32520,
-  DOGE = 2000,
-  DOKEN = 61916,
-  FUSE = 122,
-  XDC = 50,
-}
+export { ChainId }
 
-export const FACTORY_ADDRESS = '0x9E6d21E759A7A288b80eef94E4737D313D31c13f'
-export const FACTORY_ADDRESS_MAP: Record<number, string> = {
-  [ChainId.BITGERT]: FACTORY_ADDRESS,
-  [ChainId.DOGE]: FACTORY_ADDRESS,
-  [ChainId.DOKEN]: FACTORY_ADDRESS,
-  [ChainId.FUSE]: FACTORY_ADDRESS,
-  [ChainId.XDC]: FACTORY_ADDRESS,
-}
+export const FACTORY_ADDRESS_MAP: Record<number, string> = chains
+  .filter((chain) => chain.swap)
+  .reduce((acc, chain) => {
+    const factoryAddresses = acc
+    if (chain.swap) factoryAddresses[chain.id] = chain.swap.factoryAddress
+    return factoryAddresses
+  }, {} as Record<number, string>)
 
-export const INIT_CODE_HASH = '0x58c1b429d0ffdb4407396ae8118c58fed54898473076d0394163ea2198f7c4a3'
-export const INIT_CODE_HASH_MAP: Record<number, string> = {
-  [ChainId.BITGERT]: INIT_CODE_HASH,
-  [ChainId.DOGE]: INIT_CODE_HASH,
-  [ChainId.DOKEN]: INIT_CODE_HASH,
-  [ChainId.FUSE]: INIT_CODE_HASH,
-  [ChainId.XDC]: INIT_CODE_HASH,
-}
+export const INIT_CODE_HASH_MAP: Record<number, string> = chains
+  .filter((chain) => chain.swap)
+  .reduce((acc, chain) => {
+    const initCodeHashes = acc
+    if (chain.swap) initCodeHashes[chain.id] = chain.swap.initCodeHash
+    return initCodeHashes
+  }, {} as Record<number, string>)
 
-export const WETH9 = {
-  [ChainId.BITGERT]: new ERC20Token(
-    ChainId.BITGERT,
-    '0x0eb9036cbE0f052386f36170c6b07eF0a0E3f710',
-    18,
-    'WBRISE',
-    'Wrapped Brise'
-  ),
-  [ChainId.DOGE]: new ERC20Token(
-    ChainId.DOGE,
-    '0xB7ddC6414bf4F5515b52D8BdD69973Ae205ff101',
-    18,
-    'WDOGE',
-    'Wrapped Doge'
-  ),
-  [ChainId.DOKEN]: new ERC20Token(
-    ChainId.DOKEN,
-    '0x27b45bCC26e01Ed50B4080A405D1c492FEe89d63',
-    18,
-    'WDKN',
-    'Wrapped DoKEN'
-  ),
-  [ChainId.FUSE]: new ERC20Token(
-    ChainId.FUSE,
-    '0x0BE9e53fd7EDaC9F859882AfdDa116645287C629',
-    18,
-    'WFUSE',
-    'Wrapped Fuse'
-  ),
-  [ChainId.XDC]: new ERC20Token(
-    ChainId.XDC,
-    '0x951857744785E80e2De051c32EE7b25f9c458C42',
-    18,
-    'WXDC',
-    'Wrapped XDC'
-  ),
-}
+export const WETH9 = chains.reduce((acc, chain) => {
+  const weth9s = acc
+  if (chain.wrappedNative)
+    weth9s[chain.id] = new ERC20Token(
+      chain.id,
+      chain.wrappedNative.address,
+      18,
+      chain.wrappedNative.symbol,
+      chain.wrappedNative.name
+    )
+  return weth9s
+}, {} as Record<number, ERC20Token>)
 
-export const WNATIVE: Record<number, ERC20Token> = {
-  [ChainId.BITGERT]: WETH9[ChainId.BITGERT],
-  [ChainId.DOGE]: WETH9[ChainId.DOGE],
-  [ChainId.DOKEN]: WETH9[ChainId.DOKEN],
-  [ChainId.FUSE]: WETH9[ChainId.FUSE],
-  [ChainId.XDC]: WETH9[ChainId.XDC],
-}
+export const WNATIVE = WETH9
 
-export const NATIVE: Record<
-  number,
-  {
-    name: string
-    symbol: string
-    decimals: number
-  }
-> = {
-  [ChainId.BITGERT]: { name: 'Brise', symbol: 'BRISE', decimals: 18 },
-  [ChainId.DOGE]: { name: 'Doge', symbol: 'DOGE', decimals: 18 },
-  [ChainId.DOKEN]: { name: 'DoKEN', symbol: 'DKN', decimals: 18 },
-  [ChainId.FUSE]: { name: 'Fuse', symbol: 'FUSE', decimals: 18 },
-  [ChainId.XDC]: { name: 'XDC', symbol: 'XDC', decimals: 18 },
-}
+export const NATIVE = chains.reduce(
+  (acc, chain) => {
+    const natives = acc
+    if (chain.nativeCurrency)
+      natives[chain.id] = {
+        symbol: chain.nativeCurrency.symbol,
+        decimals: chain.nativeCurrency.decimals,
+        name: chain.nativeCurrency.name,
+      }
+    return natives
+  },
+  {} as Record<
+    number,
+    {
+      symbol: string
+      decimals: number
+      name: string
+    }
+  >
+)

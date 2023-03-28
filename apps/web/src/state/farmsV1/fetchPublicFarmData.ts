@@ -4,6 +4,7 @@ import { getMasterChefV1Address } from 'utils/addressHelpers'
 import { multicallv2 } from 'utils/multicall'
 import { SerializedFarm } from '@pancakeswap/farms'
 import { SerializedFarmConfig } from '../../config/constants/types'
+import {ChainId} from "@pancakeswap/sdk";
 
 const fetchFarmCalls = (farm: SerializedFarm) => {
   const { lpAddress, token, quoteToken } = farm
@@ -44,10 +45,10 @@ const fetchFarmCalls = (farm: SerializedFarm) => {
   ]
 }
 
-export const fetchPublicFarmsData = async (farms: SerializedFarmConfig[]): Promise<any[]> => {
+export const fetchPublicFarmsData = async (farms: SerializedFarmConfig[], chainId: ChainId): Promise<any[]> => {
   const farmCalls = farms.flatMap((farm) => fetchFarmCalls(farm))
   const chunkSize = farmCalls.length / farms.length
   // @ts-ignore fix chainId support
-  const farmMultiCallResult = await multicallv2({ abi: erc20, calls: farmCalls })
+  const farmMultiCallResult = await multicallv2({ abi: erc20, calls: farmCalls, chainId })
   return chunk(farmMultiCallResult, chunkSize)
 }

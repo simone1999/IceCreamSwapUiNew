@@ -138,4 +138,8 @@ const ModalProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   );
 };
 
+export const useModalContext = () => {
+  return React.useContext(Context);
+};
+
 export default ModalProvider;

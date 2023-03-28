@@ -1,0 +1,135 @@
+diff --git a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.browser.cjs.js b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.browser.cjs.js
+index 9cb5982..1683594 100644
+--- a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.browser.cjs.js
++++ b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.browser.cjs.js
+@@ -289,14 +289,14 @@ function fallbackVar() {
+ }
+ function assignVars(varContract, tokens) {
+   var varSetters = {};
+-  var {
+-    valid,
+-    diffString
+-  } = validateContract(varContract, tokens);
+-
+-  if (!valid) {
+-    throw new Error("Tokens don't match contract.\n".concat(diffString));
+-  }
++  // var {
++  //   valid,
++  //   diffString
++  // } = validateContract(varContract, tokens);
++  //
++  // if (!valid) {
++  //   throw new Error("Tokens don't match contract.\n".concat(diffString));
++  // }
+ 
+   _private.walkObject(tokens, (value, path) => {
+     varSetters[_private.get(varContract, path)] = String(value);
+diff --git a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.browser.esm.js b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.browser.esm.js
+index 1ea7eb3..223d737 100644
+--- a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.browser.esm.js
++++ b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.browser.esm.js
+@@ -277,14 +277,14 @@ function fallbackVar() {
+ }
+ function assignVars(varContract, tokens) {
+   var varSetters = {};
+-  var {
+-    valid,
+-    diffString
+-  } = validateContract(varContract, tokens);
+-
+-  if (!valid) {
+-    throw new Error("Tokens don't match contract.\n".concat(diffString));
+-  }
++  // var {
++  //   valid,
++  //   diffString
++  // } = validateContract(varContract, tokens);
++  //
++  // if (!valid) {
++  //   throw new Error("Tokens don't match contract.\n".concat(diffString));
++  // }
+ 
+   walkObject(tokens, (value, path) => {
+     varSetters[get(varContract, path)] = String(value);
+diff --git a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.cjs.dev.js b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.cjs.dev.js
+index 20aaccd..386bce3 100644
+--- a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.cjs.dev.js
++++ b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.cjs.dev.js
+@@ -289,14 +289,14 @@ function fallbackVar() {
+ }
+ function assignVars(varContract, tokens) {
+   var varSetters = {};
+-  var {
+-    valid,
+-    diffString
+-  } = validateContract(varContract, tokens);
+-
+-  if (!valid) {
+-    throw new Error("Tokens don't match contract.\n".concat(diffString));
+-  }
++  // var {
++  //   valid,
++  //   diffString
++  // } = validateContract(varContract, tokens);
++  //
++  // if (!valid) {
++  //   throw new Error("Tokens don't match contract.\n".concat(diffString));
++  // }
+ 
+   _private.walkObject(tokens, (value, path) => {
+     varSetters[_private.get(varContract, path)] = String(value);
+diff --git a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.cjs.prod.js b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.cjs.prod.js
+index 427615f..a3e3fdd 100644
+--- a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.cjs.prod.js
++++ b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.cjs.prod.js
+@@ -289,14 +289,14 @@ function fallbackVar() {
+ }
+ function assignVars(varContract, tokens) {
+   var varSetters = {};
+-  var {
+-    valid,
+-    diffString
+-  } = validateContract(varContract, tokens);
+-
+-  if (!valid) {
+-    throw new Error("Tokens don't match contract.\n".concat(diffString));
+-  }
++  // var {
++  //   valid,
++  //   diffString
++  // } = validateContract(varContract, tokens);
++  //
++  // if (!valid) {
++  //   throw new Error("Tokens don't match contract.\n".concat(diffString));
++  // }
+ 
+   _private.walkObject(tokens, (value, path) => {
+     varSetters[_private.get(varContract, path)] = String(value);
+diff --git a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.esm.js b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.esm.js
+index 66c02c4..cb94559 100644
+--- a/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.esm.js
++++ b/node_modules/@vanilla-extract/css/dist/vanilla-extract-css.esm.js
+@@ -277,14 +277,14 @@ function fallbackVar() {
+ }
+ function assignVars(varContract, tokens) {
+   var varSetters = {};
+-  var {
+-    valid,
+-    diffString
+-  } = validateContract(varContract, tokens);
+-
+-  if (!valid) {
+-    throw new Error("Tokens don't match contract.\n".concat(diffString));
+-  }
++  // var {
++  //   valid,
++  //   diffString
++  // } = validateContract(varContract, tokens);
++  //
++  // if (!valid) {
++  //   throw new Error("Tokens don't match contract.\n".concat(diffString));
++  // }
+ 
+   walkObject(tokens, (value, path) => {
+     varSetters[get(varContract, path)] = String(value);

@@ -1,7 +1,7 @@
 import { BigNumber, FixedNumber } from '@ethersproject/bignumber'
 import { WeiPerEther } from '@ethersproject/constants'
 import _toString from 'lodash/toString'
-import { BLOCKS_PER_YEAR } from 'config'
+import { blocksPerYear } from 'config'
 import masterChefAbi from 'config/abi/masterchef.json'
 import { useCallback, useMemo } from 'react'
 import { useCakeVault } from 'state/pools/hooks'
@@ -10,8 +10,7 @@ import { getMasterChefAddress } from 'utils/addressHelpers'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import { BOOST_WEIGHT, DURATION_FACTOR, MAX_LOCK_DURATION } from 'config/constants/pools'
 import { multicallv2 } from '../utils/multicall'
-
-const masterChefAddress = getMasterChefAddress()
+import {useActiveChainId} from "./useActiveChainId";
 
 // default
 const DEFAULT_PERFORMANCE_FEE_DECIMALS = 2
@@ -42,6 +41,8 @@ const getLockedApy = (flexibleApy: string, boostFactor: FixedNumber) =>
 const cakePoolPID = 0
 
 export function useVaultApy({ duration = MAX_LOCK_DURATION }: { duration?: number } = {}) {
+  const { chainId } = useActiveChainId()
+
   const {
     totalShares = BIG_ZERO,
     pricePerFullShare = BIG_ZERO,
@@ -52,6 +53,7 @@ export function useVaultApy({ duration = MAX_LOCK_DURATION }: { duration?: numbe
   const pricePerFullShareAsEtherBN = useMemo(() => FixedNumber.from(pricePerFullShare.toString()), [pricePerFullShare])
 
   const { data: totalCakePoolEmissionPerYear } = useSWRImmutable('masterChef-total-cake-pool-emission', async () => {
+    const masterChefAddress = getMasterChefAddress(chainId)
     const calls = [
       {
         address: masterChefAddress,
@@ -72,6 +74,7 @@ export function useVaultApy({ duration = MAX_LOCK_DURATION }: { duration?: numbe
     // @ts-ignore fix chainId support
     const [[specialFarmsPerBlock], cakePoolInfo, [totalSpecialAllocPoint]] = await multicallv2({
       abi: masterChefAbi,
+      chainId,
       calls,
     })
 
@@ -79,7 +82,7 @@ export function useVaultApy({ duration = MAX_LOCK_DURATION }: { duration?: numbe
       FixedNumber.from(totalSpecialAllocPoint),
     )
     return FixedNumber.from(specialFarmsPerBlock)
-      .mulUnsafe(FixedNumber.from(BLOCKS_PER_YEAR))
+      .mulUnsafe(FixedNumber.from(blocksPerYear(chainId)))
       .mulUnsafe(cakePoolSharesInSpecialFarms)
   })
 

@@ -4,10 +4,11 @@ import { getFullDecimalMultiplier } from '@pancakeswap/utils/getFullDecimalMulti
 import { BIG_ZERO, BIG_TWO } from '@pancakeswap/utils/bigNumber'
 import { fetchPublicFarmsData } from './fetchPublicFarmData'
 import { fetchMasterChefData } from './fetchMasterChefData'
+import {ChainId} from "@pancakeswap/sdk";
 
-const fetchFarms = async (farmsToFetch: SerializedFarmConfig[]) => {
-  const farmResult = await fetchPublicFarmsData(farmsToFetch)
-  const masterChefResult = await fetchMasterChefData(farmsToFetch)
+const fetchFarms = async (farmsToFetch: SerializedFarmConfig[], chainId: ChainId) => {
+  const farmResult = await fetchPublicFarmsData(farmsToFetch, chainId)
+  const masterChefResult = await fetchMasterChefData(farmsToFetch, chainId)
 
   return farmsToFetch.map((farm, index) => {
     const [tokenBalanceLP, quoteTokenBalanceLP, lpTokenBalanceMC, lpTotalSupply, tokenDecimals, quoteTokenDecimals] =

@@ -11,11 +11,13 @@ import { useVaultPoolContract } from 'hooks/useContract'
 import { useAppDispatch } from 'state'
 import { fetchCakeVaultUserData } from 'state/pools'
 import { VaultKey } from 'state/types'
+import {useActiveChainId} from "../../../../../hooks/useActiveChainId";
 
 const ConvertToFlexibleButton: React.FC<React.PropsWithChildren<ButtonProps>> = (props) => {
   const dispatch = useAppDispatch()
 
   const { account } = useWeb3React()
+  const { chainId } = useActiveChainId()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const vaultPoolContract = useVaultPoolContract(VaultKey.CakeVault)
   const { callWithGasPrice } = useCallWithGasPrice()
@@ -39,9 +41,9 @@ const ConvertToFlexibleButton: React.FC<React.PropsWithChildren<ButtonProps>> = 
           {t('Your funds have been staked in the pool')}
         </ToastDescriptionWithTx>,
       )
-      dispatch(fetchCakeVaultUserData({ account }))
+      dispatch(fetchCakeVaultUserData({ account, chainId }))
     }
-  }, [t, toastSuccess, account, callWithGasPrice, dispatch, fetchWithCatchTxError, vaultPoolContract])
+  }, [t, toastSuccess, account, callWithGasPrice, dispatch, fetchWithCatchTxError, vaultPoolContract, chainId])
 
   return (
     <Button width="100%" disabled={pendingTx} onClick={handleUnlock} variant="secondary" {...props}>

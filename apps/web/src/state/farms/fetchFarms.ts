@@ -33,8 +33,8 @@ function getLpInfo({
     tokenAmountTotal: tokenAmountTotal.toJSON(),
     quoteTokenAmountTotal: quoteTokenAmountTotal.toJSON(),
     lpTotalSupply: lpTotalSupplyBN.toJSON(),
-    lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
-    tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
+    lpTotalInQuoteToken: lpTotalInQuoteToken.toFixed(18),
+    tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toFixed(18),
   }
 }
 

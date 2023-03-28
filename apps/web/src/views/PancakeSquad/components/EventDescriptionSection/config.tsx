@@ -25,7 +25,7 @@ const eventDescriptionConfigBuilder = ({ t }: EventDescriptionType) => ({
       content: (
         <>
           {t('and the remaining NFTs can be minted by anyone with a ')}
-          <Link href="/profile" passHref>
+          <Link href="/profile" passHref prefetch={false}>
             <Text as="a" display="inline-block" color="primary" bold>
               {t('Pancake Profile!')}
             </Text>
@@ -35,7 +35,7 @@ const eventDescriptionConfigBuilder = ({ t }: EventDescriptionType) => ({
     },
   ],
   primaryButton: {
-    to: 'https://docs.pancakeswap.finance/',
+    to: 'https://docs.icecreamswap.com/',
     text: t('View Documentation'),
     external: true,
     isDisplayed: false,

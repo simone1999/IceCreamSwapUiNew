@@ -29,12 +29,10 @@ export const PageMeta: React.FC<React.PropsWithChildren<{ symbol?: string }>> = 
     currentLanguage: { locale },
   } = useTranslation()
   const { pathname } = useRouter()
-  const cakePriceUsd = useCakeBusdPrice({ forceMainnet: true })
-  const cakePriceUsdDisplay = cakePriceUsd ? `$${cakePriceUsd.toFixed(3)}` : '...'
 
   const pageMeta = getCustomMeta(pathname, t, locale) || {}
   const { title, description, image } = { ...DEFAULT_META, ...pageMeta }
-  let pageTitle = cakePriceUsdDisplay ? [title, cakePriceUsdDisplay].join(' - ') : title
+  let pageTitle = title
   if (symbol) {
     pageTitle = [symbol, title].join(' - ')
   }

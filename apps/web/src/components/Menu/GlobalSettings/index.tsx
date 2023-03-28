@@ -18,6 +18,7 @@ const GlobalSettings = ({ color, mr = '8px', mode }: Props) => {
         scale="sm"
         mr={mr}
         id={`open-settings-dialog-button-${mode}`}
+        aria-label="Settings"
       >
         <CogIcon height={24} width={24} color={color || 'textSubtle'} />
       </IconButton>

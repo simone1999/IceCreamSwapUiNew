@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@pancakeswap/swap-sdk-core": "*",
+    "@icecreamswap/constants": "*",
     "big.js": "^5.2.2",
     "decimal.js-light": "^2.5.0",
     "jsbi": "^3.1.4",

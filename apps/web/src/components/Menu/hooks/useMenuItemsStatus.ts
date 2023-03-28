@@ -1,3 +1,4 @@
+/*
 import { useMemo } from 'react'
 import { ChainId } from '@pancakeswap/sdk'
 import { useActiveIfoWithBlocks } from 'hooks/useActiveIfoWithBlocks'
@@ -9,8 +10,11 @@ import { useCompetitionStatus } from './useCompetitionStatus'
 import { useVotingStatus } from './useVotingStatus'
 import { useChainId } from '@pancakeswap/awgmi/src'
 import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
+*/
 
 export const useMenuItemsStatus = (): Record<string, string> => {
+  return {}
+  /*
   const { chainId } = useActiveWeb3React()
   const currentBlock = useChainCurrentBlock(chainId)
   const activeIfo = useActiveIfoWithBlocks()
@@ -35,4 +39,5 @@ export const useMenuItemsStatus = (): Record<string, string> => {
       }),
     }
   }, [competitionStatus, ifoStatus, potteryStatus, votingStatus])
+  */
 }

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "@pancakeswap/localization";
 import { getApy } from "@pancakeswap/utils/compoundApyHelpers";
@@ -36,6 +36,7 @@ const BulletList = styled.ul`
 interface RoiCalculatorFooterProps {
   isFarm: boolean;
   apr?: number;
+  lpRewardsAPR?: number;
   apy?: number;
   displayApr?: string;
   autoCompoundFrequency: number;
@@ -48,6 +49,7 @@ interface RoiCalculatorFooterProps {
 const RoiCalculatorFooter: React.FC<React.PropsWithChildren<RoiCalculatorFooterProps>> = ({
   isFarm,
   apr = 0,
+  lpRewardsAPR = 0,
   apy = 0,
   displayApr,
   autoCompoundFrequency,
@@ -78,15 +80,6 @@ const RoiCalculatorFooter: React.FC<React.PropsWithChildren<RoiCalculatorFooterP
   );
 
   const gridRowCount = isFarm ? 4 : 2;
-  const lpRewardsAPR = useMemo(
-    () =>
-      isFarm
-        ? Number.isFinite(Number(displayApr)) && Number.isFinite(apr)
-          ? Math.max(Number(displayApr) - apr, 0).toFixed(2)
-          : null
-        : null,
-    [isFarm, displayApr, apr]
-  );
 
   return (
     <Footer p="16px" flexDirection="column">
@@ -124,7 +117,7 @@ const RoiCalculatorFooter: React.FC<React.PropsWithChildren<RoiCalculatorFooterP
                   *{t("LP Rewards APR")}
                 </Text>
                 <Text small textAlign="right">
-                  {lpRewardsAPR === "0" ? "-" : lpRewardsAPR}%
+                  {lpRewardsAPR?.toFixed(2) === "0" ? "-" : lpRewardsAPR?.toFixed(2)}%
                 </Text>
               </>
             )}

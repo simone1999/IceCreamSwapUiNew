@@ -31,7 +31,7 @@ export const useExtendEnable = () => {
 
   useEffect(() => {
     if (pendingEnableTx && transactionHash && !isTransactionPending) {
-      dispatch(updateUserBalance({ sousId: 0, account }))
+      dispatch(updateUserBalance({ sousId: 0, account, chainId }))
       setPendingEnableTx(isTransactionPending)
     }
   }, [account, dispatch, transactionHash, pendingEnableTx, isTransactionPending])

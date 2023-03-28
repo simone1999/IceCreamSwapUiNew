@@ -27,7 +27,7 @@ const LiquidityCardHeader: React.FC<React.PropsWithChildren<LiquidityCardHeaderP
       <AtomBox display="flex" alignItems="center" width="100%" style={{ gap: "16px" }}>
         {backTo &&
           (typeof backTo === "string" ? (
-            <Link passHref href={backTo}>
+            <Link passHref href={backTo} prefetch={false}>
               <IconButton as="a" scale="sm">
                 <ArrowBackIcon width="32px" />
               </IconButton>

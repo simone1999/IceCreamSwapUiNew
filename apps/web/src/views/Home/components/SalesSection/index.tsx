@@ -64,6 +64,7 @@ const SalesSection: React.FC<React.PropsWithChildren<SalesSectionProps>> = (prop
           </Flex>
         </Flex>
         <Flex
+          maxHeight={['192px', null, null, '400px']}
           height={['192px', null, null, '400px']}
           width={['192px', null, null, '400px']}
           flex={[null, null, null, '1']}

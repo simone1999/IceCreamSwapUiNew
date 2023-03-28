@@ -47,7 +47,7 @@ export const fetchFarmsPublicDataAsync = createAsyncThunk<
     const priceHelperLpsConfig = getFarmsPriceHelperLpFiles(chainId)
     const farmsWithPriceHelpers = farmsCanFetch.concat(priceHelperLpsConfig)
 
-    const farms = await fetchFarms(farmsWithPriceHelpers)
+    const farms = await fetchFarms(farmsWithPriceHelpers, chainId)
     const farmsWithPrices = getFarmsPrices(farms)
 
     // Filter out price helper LP config farms
@@ -90,10 +90,10 @@ export const fetchFarmUserDataAsync = createAsyncThunk<
     const poolLength = await fetchMasterChefFarmPoolLength()
     const farmsToFetch = farmsConfig.filter((farmConfig) => pids.includes(farmConfig.v1pid))
     const farmsCanFetch = farmsToFetch.filter((f) => poolLength.gt(f.v1pid))
-    const userFarmAllowances = await fetchFarmUserAllowances(account, farmsCanFetch)
-    const userFarmTokenBalances = await fetchFarmUserTokenBalances(account, farmsCanFetch)
-    const userStakedBalances = await fetchFarmUserStakedBalances(account, farmsCanFetch)
-    const userFarmEarnings = await fetchFarmUserEarnings(account, farmsCanFetch)
+    const userFarmAllowances = await fetchFarmUserAllowances(account, farmsCanFetch, chainId)
+    const userFarmTokenBalances = await fetchFarmUserTokenBalances(account, farmsCanFetch, chainId)
+    const userStakedBalances = await fetchFarmUserStakedBalances(account, farmsCanFetch, chainId)
+    const userFarmEarnings = await fetchFarmUserEarnings(account, farmsCanFetch, chainId)
 
     return userFarmAllowances.map((farmAllowance, index) => {
       return {

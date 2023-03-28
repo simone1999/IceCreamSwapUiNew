@@ -153,7 +153,7 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
   const [signatureData, setSignatureData] = useState<{ v: number; r: string; s: string; deadline: number } | null>(null)
   const [approval, approveCallback] = useApproveCallback(
     parsedAmounts[Field.LIQUIDITY],
-    isZap ? getZapAddress() : ROUTER_ADDRESS[chainId],
+    isZap ? getZapAddress(chainId) : ROUTER_ADDRESS[chainId].Icecream,
   )
 
   async function onAttemptToApprove() {
@@ -188,7 +188,7 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
     ]
     const message = {
       owner: account,
-      spender: ROUTER_ADDRESS[chainId],
+      spender: ROUTER_ADDRESS[chainId].Icecream,
       value: liquidityAmount.quotient.toString(),
       nonce: nonce.toHexString(),
       deadline: deadline.toNumber(),
@@ -585,7 +585,7 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
             </RowBetween>
             {!showDetailed && (
               <BorderCard>
-                <Text fontSize="40px" bold mb="16px" style={{ lineHeight: 1 }}>
+                <Text fontSize="32px" bold mb="16px" style={{ lineHeight: 1 }}>
                   {formattedAmounts[Field.LIQUIDITY_PERCENT]}%
                 </Text>
                 <Slider

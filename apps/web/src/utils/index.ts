@@ -5,10 +5,12 @@ import { AddressZero } from '@ethersproject/constants'
 import { Contract } from '@ethersproject/contracts'
 import type { Provider } from '@ethersproject/providers'
 import { ChainId, Currency } from '@pancakeswap/sdk'
-import { bsc } from '@pancakeswap/wagmi/chains'
 import memoize from 'lodash/memoize'
 import { TokenAddressMap } from '@pancakeswap/token-lists'
 import { chains } from './wagmi'
+import { chainMap } from '@icecreamswap/constants'
+
+const { bsc } = chainMap
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export const isAddress = memoize((value: any): string | false => {
@@ -22,9 +24,8 @@ export const isAddress = memoize((value: any): string | false => {
 export function getBlockExploreLink(
   data: string | number,
   type: 'transaction' | 'token' | 'address' | 'block' | 'countdown',
-  chainIdOverride?: number,
+  chainId: number,
 ): string {
-  const chainId = chainIdOverride || ChainId.BITGERT
   const chain = chains.find((c) => c.id === chainId)
   if (!chain) return bsc.blockExplorers.default.url
   switch (type) {
@@ -38,7 +39,7 @@ export function getBlockExploreLink(
       return `${chain.blockExplorers.default.url}/block/${data}`
     }
     case 'countdown': {
-      return `${chain.blockExplorers.default.url}/block/countdown/${data}`
+      return `${chain.blockExplorers.default.url}/blocks/countdown/${data}`
     }
     default: {
       return `${chain.blockExplorers.default.url}/address/${data}`

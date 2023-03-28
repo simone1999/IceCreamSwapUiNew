@@ -8,17 +8,13 @@ type FAQsType = {
 const config = ({ t }: FAQsType) => [
   {
     title: t('Is the Swap audited?'),
-    description: [
-      t(
-        'The Swap uses the Uniswap V2 smart contracts which makes it inherit all security and audits from it. This basically means you have the security of Uniswap on all our supported chains.',
-      ),
-    ],
+    description: [t('The Swap uses the unmodified, audited and battle tested Uniswap V2 smart contracts. One could argue that the UniswapV2 contracts are the most tested smart contracts in the whole DeFi space.')],
   },
   {
     title: t('How is the Bridge secured?'),
     description: [
       t(
-        'The IceCream bridge builds on top of an industry standard and commonly used bridge architecture. In addition we are currently implementing a second layer of security on top of this bridge architecture. Basically these two layers will validate each other and therefore might create the most secure Bridge currently in the Crypto space. To our knowledge no other Bridge uses a completely seperated second layer of security.',
+        'The IceCream bridge builds on top of the industry leading ChainBridge codebase. This codebase has multiple audits and is used in many huge bridges like the Dogechain bridge or Meter passport',
       ),
     ],
   },
@@ -26,7 +22,7 @@ const config = ({ t }: FAQsType) => [
     title: t('How much reward will I get for providing liquidity?'),
     description: [
       t(
-        'Many AirDrops and 5/6 of the trading fees will be distributed across all liquidity providers. The AirDrops started with 5% weekly, which is over 1200% APY. The amount of AirDrops slowly decreases over time, so be fast!',
+        '5/6 (83%) of the trading fees will be distributed across all liquidity providers. Also there are Farming pools to earn additional ICE rewards and some tokens like SCORE even generate rewards on their own',
       ),
     ],
   },
@@ -34,8 +30,8 @@ const config = ({ t }: FAQsType) => [
     title: t('Which Chains are supported?'),
     description: [
       <Text as="p" color="textSubtle" fontSize="16px">
-        Currently we are supporting Binance Smart chain (BSC), Bitgert (Brise), Dogechain, Doken chain and Fuse chain.
-        For an always up to date list please take a look at our{' '}
+        Currently we are supporting CORE, Binance smart chain (BSC), XDC, Bitgert (Brise), Dogechain, Doken, Fuse and
+        soon Shardeum blockchains. For an always up to date list please take a look at our{' '}
         <Link
           display="inline-flex"
           color="text"
@@ -51,37 +47,34 @@ const config = ({ t }: FAQsType) => [
   {
     title: t('What is the address of the IceCream token?'),
     description: [
-      t('The address for the IceCream token on Bitgert is: 0xB999Ea90607a826A3E6E6646B404c3C7d11fa39D'),
+      t('IceCream is a multi chain token and therefore available on and bridgable between multiple blockchains:'),
+      t('0xc0E49f8C615d3d4c245970F6Dc528E4A47d69a44 CORE'),
+      t('0xB999Ea90607a826A3E6E6646B404c3C7d11fa39D Bitgert'),
+      t('0xce6c9c70f91c6797873EFC80505f972290A88f5D BSC'),
+      t('0x54051D9DbE99687867090d95fe15C3D3E35512Ba XDC'),
+      t('0x81bCEa03678D1CEF4830942227720D542Aa15817 Dogechain'),
+      t('0x54051D9DbE99687867090d95fe15C3D3E35512Ba DoKEN'),
+      t('0x867f08A3ab824b42e8058a1B48e32E1dF205b092 Fuse'),
       <Text as="p" color="textSubtle" fontSize="16px">
         An up to date list of all IceCream addresses for all supported chains can be found on our{' '}
         <Link
           display="inline-flex"
           color="text"
           title="IceCreamSwap Wiki"
-          href="https://wiki.icecreamswap.com/introduction/ice"
+          external
+          href="https://wiki.icecreamswap.com/intro/ice"
         >
           Wiki
         </Link>
-        .
       </Text>,
     ],
   },
   {
-    title: t('Airdrops?'),
+    title: t('what are the Router and Factory addresses?'),
     description: [
-      t('Yes!'),
-      t(
-        'An Airdrop is a great way to reward liquidity providers, especially early ones, and distribute the token fairly. Currently we have weekly AirDrops for liquidity providers.',
-      ),
-    ],
-  },
-  {
-    title: t('Where can i verify the used contracts of the Swap?'),
-    description: [
-      t('Everyone can see the verified Smart Contracts on https://brisescan.com, addresses are:'),
+      t('The router and factory addresses are the same on every supported chain:'),
       t('Factory: 0x9E6d21E759A7A288b80eef94E4737D313D31c13f'),
       t('Router02: 0xBb5e1777A331ED93E07cF043363e48d320eb96c4'),
-      t('As you can verify yourself, the Contracts are the original UniswapV2 Contracts.'),
     ],
   },
 ]

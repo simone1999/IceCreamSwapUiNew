@@ -10,6 +10,7 @@ import { Token } from '@pancakeswap/sdk'
 
 import useStakePool from '../../hooks/useStakePool'
 import useUnstakePool from '../../hooks/useUnstakePool'
+import {useActiveChainId} from "../../../../hooks/useActiveChainId";
 
 const StakeModalContainer = ({
   isBnbPool,
@@ -31,6 +32,7 @@ const StakeModalContainer = ({
     stakingLimit,
     enableEmergencyWithdraw,
   } = pool
+  const { chainId } = useActiveChainId()
   const { account } = useWeb3React()
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
@@ -40,9 +42,9 @@ const StakeModalContainer = ({
   const dispatch = useAppDispatch()
 
   const onDone = useCallback(() => {
-    dispatch(updateUserStakedBalance({ sousId, account }))
-    dispatch(updateUserPendingReward({ sousId, account }))
-    dispatch(updateUserBalance({ sousId, account }))
+    dispatch(updateUserStakedBalance({ sousId, account, chainId }))
+    dispatch(updateUserPendingReward({ sousId, account, chainId }))
+    dispatch(updateUserBalance({ sousId, account, chainId }))
   }, [dispatch, sousId, account])
 
   const handleConfirmClick = useCallback(

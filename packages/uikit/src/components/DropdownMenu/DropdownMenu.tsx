@@ -13,6 +13,7 @@ import {
   StyledDropdownMenuItemContainer,
 } from "./styles";
 import { DropdownMenuItemType, DropdownMenuProps } from "./types";
+import NextLink from "next/link";
 
 const DropdownMenu: React.FC<React.PropsWithChildren<DropdownMenuProps>> = ({
   children,
@@ -118,36 +119,40 @@ const DropdownMenu: React.FC<React.PropsWithChildren<DropdownMenuProps>> = ({
                       </DropdownMenuItem>
                     )}
                     {type === DropdownMenuItemType.INTERNAL_LINK && (
-                      <DropdownMenuItem
-                        $isActive={isActive}
-                        disabled={disabled || isDisabled}
-                        as={linkComponent}
-                        href={href}
-                        onClick={() => {
-                          setIsOpen(false);
-                        }}
-                        {...itemProps}
-                      >
-                        {MenuItemContent}
-                      </DropdownMenuItem>
+                      <NextLink href={href} legacyBehavior passHref prefetch={false}>
+                        <DropdownMenuItem
+                          $isActive={isActive}
+                          disabled={disabled || isDisabled}
+                          as="a"
+                          href={href}
+                          onClick={() => {
+                            setIsOpen(false);
+                          }}
+                          {...itemProps}
+                        >
+                          {MenuItemContent}
+                        </DropdownMenuItem>
+                      </NextLink>
                     )}
                     {type === DropdownMenuItemType.EXTERNAL_LINK && (
-                      <DropdownMenuItem
-                        $isActive={isActive}
-                        disabled={disabled || isDisabled}
-                        as="a"
-                        href={href}
-                        target="_blank"
-                        onClick={() => {
-                          setIsOpen(false);
-                        }}
-                        {...itemProps}
-                      >
-                        <Flex alignItems="center" justifyContent="space-between" width="100%">
-                          {label}
-                          <LogoutIcon color={disabled ? "textDisabled" : "textSubtle"} />
-                        </Flex>
-                      </DropdownMenuItem>
+                      <NextLink href={href} legacyBehavior passHref target="_blank" prefetch={false}>
+                        <DropdownMenuItem
+                          $isActive={isActive}
+                          disabled={disabled || isDisabled}
+                          as="a"
+                          href={href}
+                          target="_blank"
+                          onClick={() => {
+                            setIsOpen(false);
+                          }}
+                          {...itemProps}
+                        >
+                          <Flex alignItems="center" justifyContent="space-between" width="100%">
+                            {label}
+                            <LogoutIcon color={disabled ? "textDisabled" : "textSubtle"} />
+                          </Flex>
+                        </DropdownMenuItem>
+                      </NextLink>
                     )}
                     {type === DropdownMenuItemType.DIVIDER && <DropdownMenuDivider />}
                   </StyledDropdownMenuItemContainer>

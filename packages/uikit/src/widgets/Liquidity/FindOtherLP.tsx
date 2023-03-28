@@ -11,7 +11,7 @@ export function FindOtherLP() {
       <Text color="textSubtle" mb="8px">
         {t("Don't see a pool you joined?")}
       </Text>
-      <Link href="/find" passHref>
+      <Link href="/find" passHref prefetch={false}>
         <Button id="import-pool-link" variant="secondary" scale="sm" as="a">
           {t("Find other LP tokens")}
         </Button>

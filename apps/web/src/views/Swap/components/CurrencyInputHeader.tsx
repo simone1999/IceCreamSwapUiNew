@@ -50,7 +50,7 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = ({
       title={
         <Flex width="100%" alignItems="center" justifyContent="space-between">
           {isChartSupported && setIsChartDisplayed && (
-            <ColoredIconButton onClick={toggleChartDisplayed} variant="text" scale="sm">
+            <ColoredIconButton onClick={toggleChartDisplayed} variant="text" scale="sm" aria-label="Toggle chart">
               {isChartDisplayed ? (
                 <ChartDisableIcon color="textSubtle" />
               ) : (
@@ -63,13 +63,13 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = ({
           </Flex>
           <Flex>
             <NotificationDot show={expertMode}>
-              <GlobalSettings color="textSubtle" mr="0" mode={SettingsMode.SWAP_LIQUIDITY} />
+              <GlobalSettings color="textSubtle" mr="0" mode={SettingsMode.SWAP_LIQUIDITY} aria-label="Settings" />
             </NotificationDot>
             <IconButton onClick={onPresentTransactionsModal} variant="text" scale="sm">
-              <HistoryIcon color="textSubtle" width="24px" />
+              <HistoryIcon color="textSubtle" width="24px" aria-label="Swap history" />
             </IconButton>
             <IconButton variant="text" scale="sm" onClick={handleOnClick}>
-              <RefreshIcon disabled={!hasAmount} color="textSubtle" width="27px" />
+              <RefreshIcon disabled={!hasAmount} color="textSubtle" width="27px" aria-label="Refresh price" />
             </IconButton>
           </Flex>
         </Flex>

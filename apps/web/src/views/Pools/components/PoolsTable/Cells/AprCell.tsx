@@ -21,9 +21,9 @@ const AprCell: React.FC<React.PropsWithChildren<AprCellProps>> = ({ pool }) => {
     <BaseCell role="cell" flex={['1 0 50px', '1 0 50px', '2 0 100px', '2 0 100px', '1 0 120px']}>
       <CellContent>
         <Text fontSize="12px" color="textSubtle" textAlign="left">
-          {t('APR')}
+          {t('APY')}
         </Text>
-        <Apr pool={pool} stakedBalance={stakedBalance} showIcon={!isMobile} />
+        <Apr pool={pool} stakedBalance={stakedBalance} showIcon={!isMobile} forceApy />
       </CellContent>
     </BaseCell>
   )

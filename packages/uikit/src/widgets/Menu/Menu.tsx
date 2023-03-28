@@ -66,6 +66,10 @@ const Inner = styled.div`
   transition: margin-top 0.2s, margin-left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translate3d(0, 0, 0);
   max-width: 100%;
+  padding-bottom: 50px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding-bottom: 0px;
+  }
 `;
 
 const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
@@ -86,6 +90,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   buyCakeLabel,
   children,
 }) => {
+  const hasSubLinks = subLinks && subLinks.length > 0;
   const { isMobile } = useMatchBreakpoints();
   const isMounted = useIsMounted();
   const [showMenu, setShowMenu] = useState(true);
@@ -153,16 +158,16 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
                 <AtomBox mr="12px" display={{ xs: "none", lg: "block" }}>
                   <CakePrice showSkeleton={false} cakePriceUsd={cakePriceUsd} />
                 </AtomBox>
-                {/* <Box mt="4px"> */}
-                {/*   <LangSelector */}
-                {/*     currentLang={currentLang} */}
-                {/*     langs={langs} */}
-                {/*     setLang={setLang} */}
-                {/*     buttonScale="xs" */}
-                {/*     color="textSubtle" */}
-                {/*     hideLanguage */}
-                {/*   /> */}
-                {/* </Box> */}
+                <Box mt="4px">
+                  <LangSelector
+                    currentLang={currentLang}
+                    langs={langs}
+                    setLang={setLang}
+                    buttonScale="xs"
+                    color="textSubtle"
+                    hideLanguage
+                  />
+                </Box>
                 {rightSide}
               </Flex>
             </StyledNav>
@@ -171,14 +176,14 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
             <Flex justifyContent="space-around" overflow="hidden">
               <SubMenuItems
                 items={subLinksWithoutMobile}
-                mt={`${totalTopMenuHeight + 1}px`}
+                style={{ marginTop: `${totalTopMenuHeight + 1}px`, display: "block" }}
                 activeItem={activeSubItem}
               />
 
               {subLinksMobileOnly && subLinksMobileOnly?.length > 0 && (
                 <SubMenuItems
                   items={subLinksMobileOnly}
-                  mt={`${totalTopMenuHeight + 1}px`}
+                  style={{ marginTop: `${totalTopMenuHeight + 1}px`, display: "block" }}
                   activeItem={activeSubItem}
                   isMobileOnly
                 />
@@ -187,7 +192,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
           ) : (
             <div />
           )}
-          <BodyWrapper mt={!subLinks ? `${totalTopMenuHeight + 1}px` : "0"}>
+          <BodyWrapper style={{ marginTop: !subLinks ? `${totalTopMenuHeight + 1}px` : "0" }}>
             <Inner>{children}</Inner>
           </BodyWrapper>
         </Wrapper>

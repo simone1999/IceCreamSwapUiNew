@@ -5,7 +5,6 @@ import { getBalanceAmount } from '@pancakeswap/utils/formatBalance'
 import isUndefinedOrNull from '@pancakeswap/utils/isUndefinedOrNull'
 import { deserializeToken } from '@pancakeswap/token-lists'
 import { createSelector } from '@reduxjs/toolkit'
-import _isEmpty from 'lodash/isEmpty'
 import { SerializedFarm, DeserializedFarm, DeserializedFarmUserData } from '@pancakeswap/farms'
 import { State } from '../types'
 import { FARM_AUCTION_HOSTING_IN_SECONDS } from '../../config/constants'
@@ -144,7 +143,6 @@ export const farmSelector = (chainId: number) =>
     (farms) => {
       const deserializedFarmsData = farms.data.map(deserializeFarm).filter((farm) => farm.token.chainId === chainId)
       const { loadArchivedFarmsData, userDataLoaded, poolLength, regularCakePerBlock } = farms
-
       return {
         loadArchivedFarmsData,
         userDataLoaded,

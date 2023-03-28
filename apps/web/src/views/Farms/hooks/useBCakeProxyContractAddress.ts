@@ -1,16 +1,13 @@
 import useSWR from 'swr'
 import { NO_PROXY_CONTRACT } from 'config/constants'
 import { useBCakeFarmBoosterContract } from 'hooks/useContract'
-import { FetchStatus } from 'config/constants/types'
-import { bCakeSupportedChainId } from '@pancakeswap/farms/src/index'
 
-export const useBCakeProxyContractAddress = (account?: string, chainId?: number) => {
+export const useBCakeProxyContractAddress = (account?: string, _chainId?: number) => {
   const bCakeFarmBoosterContract = useBCakeFarmBoosterContract()
-  const isSupportedChain = bCakeSupportedChainId.includes(chainId)
-  const { data, status, mutate } = useSWR(account && isSupportedChain && ['proxyAddress', account], async () =>
+  const { data, mutate } = useSWR(account && ['proxyAddress', account], async () =>
     bCakeFarmBoosterContract.proxyContract(account),
   )
-  const isLoading = isSupportedChain ? status !== FetchStatus.Fetched : false
+  const isLoading = false
 
   return {
     proxyAddress: data,

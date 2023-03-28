@@ -8,10 +8,11 @@ import useSWR from 'swr'
 import _toNumber from 'lodash/toNumber'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import { YieldBoosterState } from './useYieldBoosterState'
+import {useActiveChainId} from "../../../../../hooks/useActiveChainId";
 
 const PRECISION_FACTOR = FixedNumber.from('1000000000000') // 1e12
 
-async function getPublicMultiplier({ farmBoosterContract }): Promise<number> {
+async function getPublicMultiplier({ farmBoosterContract, chainId }): Promise<number> {
   const calls = [
     {
       address: farmBoosterContract.address,
@@ -28,7 +29,7 @@ async function getPublicMultiplier({ farmBoosterContract }): Promise<number> {
   ]
 
   // @ts-ignore fix chainId support
-  const data = await multicallv2({ abi: farmBoosterAbi, calls })
+  const data = await multicallv2({ abi: farmBoosterAbi, calls, chainId })
 
   if (!data) return 0
 
@@ -44,7 +45,7 @@ async function getPublicMultiplier({ farmBoosterContract }): Promise<number> {
   return _toNumber(boostPercent.round(3).toString())
 }
 
-async function getUserMultiplier({ farmBoosterContract, account, pid }): Promise<number> {
+async function getUserMultiplier({ farmBoosterContract, account, pid, chainId }): Promise<number> {
   const calls = [
     {
       address: farmBoosterContract.address,
@@ -57,8 +58,7 @@ async function getUserMultiplier({ farmBoosterContract, account, pid }): Promise
     },
   ]
 
-  // @ts-ignore fix chainId support
-  const data = await multicallv2({ abi: farmBoosterAbi, calls })
+  const data = await multicallv2({ abi: farmBoosterAbi, calls, chainId })
 
   if (!data) return 0
 
@@ -73,7 +73,7 @@ async function getUserMultiplier({ farmBoosterContract, account, pid }): Promise
   )
 }
 
-async function getMultiplierFromMC({ pid, proxyAddress, masterChefContract }): Promise<number> {
+async function getMultiplierFromMC({ pid, proxyAddress, masterChefContract, chainId }): Promise<number> {
   const calls = [
     {
       address: masterChefContract.address,
@@ -82,8 +82,7 @@ async function getMultiplierFromMC({ pid, proxyAddress, masterChefContract }): P
     },
   ]
 
-  // @ts-ignore fix chainId support
-  const data = await multicallv2({ abi: masterChefAbi, calls })
+  const data = await multicallv2({ abi: masterChefAbi, calls, chainId })
 
   if (!data?.length) return 0
 
@@ -96,6 +95,7 @@ export default function useBoostMultiplier({ pid, boosterState, proxyAddress }):
   const farmBoosterContract = useBCakeFarmBoosterContract()
   const masterChefContract = useMasterchef()
 
+  const { chainId } = useActiveChainId()
   const { account } = useWeb3React()
 
   const shouldGetFromSC = [YieldBoosterState.DEACTIVE, YieldBoosterState.ACTIVE, YieldBoosterState.MAX].includes(
@@ -105,15 +105,16 @@ export default function useBoostMultiplier({ pid, boosterState, proxyAddress }):
 
   const getMultiplier = useCallback(async () => {
     if (shouldGetFromSC) {
-      return getMultiplierFromMC({ pid, masterChefContract, proxyAddress })
+      return getMultiplierFromMC({ pid, masterChefContract, proxyAddress, chainId })
     }
 
     return should1X
-      ? getUserMultiplier({ farmBoosterContract, pid, account })
+      ? getUserMultiplier({ farmBoosterContract, pid, account, chainId })
       : getPublicMultiplier({
           farmBoosterContract,
+          chainId,
         })
-  }, [farmBoosterContract, masterChefContract, should1X, shouldGetFromSC, pid, account, proxyAddress])
+  }, [farmBoosterContract, masterChefContract, should1X, shouldGetFromSC, pid, account, proxyAddress, chainId])
 
   const cacheName = shouldGetFromSC ? `proxy${pid}` : should1X ? `user${pid}` : `public${pid}`
 

@@ -81,10 +81,9 @@ export const fetchPoolData = async (
   block7d: number,
   block14d: number,
   poolAddresses: string[],
-  chainName: MultiChainName = 'BSC',
+  chainName: MultiChainName,
 ) => {
   const pairTokenMap = await getPairTokenMap(poolAddresses, chainName)
-  const weeksQuery = chainName === 'BSC' ? `twoWeeksAgo: ${POOL_AT_BLOCK(chainName, block14d, poolAddresses)}` : ''
   try {
     const query = gql`
       query pools {
@@ -92,7 +91,6 @@ export const fetchPoolData = async (
         oneDayAgo: ${POOL_AT_BLOCK(chainName, block24h, poolAddresses)}
         twoDaysAgo: ${POOL_AT_BLOCK(chainName, block48h, poolAddresses)}
         oneWeekAgo: ${POOL_AT_BLOCK(chainName, block7d, poolAddresses)}
-        ${weeksQuery}
       }
     `
 
@@ -159,10 +157,10 @@ const usePoolDatas = (poolAddresses: string[]): PoolDatas => {
   useEffect(() => {
     const fetch = async () => {
       const { error, data } = await fetchPoolData(
-        block24h.number,
-        block48h.number,
-        block7d.number,
-        block14d.number,
+        block24h?.number,
+        block48h?.number,
+        block7d?.number,
+        block14d?.number,
         poolAddresses,
         chainName,
       )
@@ -262,10 +260,10 @@ export const fetchAllPoolDataWithAddress = async (
   const [block24h, block48h, block7d, block14d] = blocks ?? []
 
   const { data } = await fetchPoolData(
-    block24h.number,
-    block48h.number,
-    block7d.number,
-    block14d.number,
+    block24h?.number,
+    block48h?.number,
+    block7d?.number,
+    block14d?.number,
     poolAddresses,
     chainName,
   )

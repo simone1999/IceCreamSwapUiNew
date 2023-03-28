@@ -14,6 +14,7 @@ import { getBlockExploreLink } from 'utils'
 
 import { formatAmount } from 'utils/formatInfoNumbers'
 import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from './shared'
+import {useActiveChainId} from "../../../../hooks/useActiveChainId";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -97,13 +98,14 @@ const TableLoader: React.FC<React.PropsWithChildren> = () => {
 
 const DataRow: React.FC<React.PropsWithChildren<{ transaction: Transaction }>> = ({ transaction }) => {
   const { t } = useTranslation()
+  const { chainId } = useActiveChainId()
   const abs0 = Math.abs(transaction.amountToken0)
   const abs1 = Math.abs(transaction.amountToken1)
   const outputTokenSymbol = transaction.amountToken0 < 0 ? transaction.token0Symbol : transaction.token1Symbol
   const inputTokenSymbol = transaction.amountToken1 < 0 ? transaction.token0Symbol : transaction.token1Symbol
   return (
     <ResponsiveGrid>
-      <LinkExternal href={getBlockExploreLink(transaction.hash, 'transaction')}>
+      <LinkExternal href={getBlockExploreLink(transaction.hash, 'transaction', chainId)}>
         <Text>
           {transaction.type === TransactionType.MINT
             ? t('Add %token0% and %token1%', { token0: transaction.token0Symbol, token1: transaction.token1Symbol })
@@ -119,7 +121,7 @@ const DataRow: React.FC<React.PropsWithChildren<{ transaction: Transaction }>> =
       <Text>
         <Text>{`${formatAmount(abs1)} ${transaction.token1Symbol}`}</Text>
       </Text>
-      <LinkExternal href={getBlockExploreLink(transaction.sender, 'address')}>
+      <LinkExternal href={getBlockExploreLink(transaction.sender, 'address', chainId)}>
         {truncateHash(transaction.sender)}
       </LinkExternal>
       <Text>{formatDistanceToNowStrict(parseInt(transaction.timestamp, 10) * 1000)}</Text>

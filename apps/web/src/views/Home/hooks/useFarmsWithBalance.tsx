@@ -37,7 +37,7 @@ const useFarmsWithBalance = () => {
       params: [farm.pid, accountToCheck],
     }))
 
-    const rawResults = await multicall(masterChefABI, calls)
+    const rawResults = await multicall(masterChefABI, calls, chainId)
     const results = farms.map((farm, index) => ({ ...farm, balance: new BigNumber(rawResults[index]) }))
     const farmsWithBalances: FarmWithBalance[] = results
       .filter((balanceType) => balanceType.balance.gt(0))

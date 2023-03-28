@@ -8,12 +8,9 @@ import { MultiChainName, getMultiChainQueryEndPointWithStableSwap, checkIsStable
  * Data to display transaction table on Token page
  */
 const TOKEN_TRANSACTIONS = () => {
-  const isStableSwap = checkIsStableSwap()
-  const whereToken0 = isStableSwap ? 'pair_: {token0: $address}' : 'token0: $address'
-  const whereToken1 = isStableSwap ? 'pair_: {token1: $address}' : 'token1: $address'
   return gql`
     query tokenTransactions($address: Bytes!) {
-      mintsAs0: mints(first: 10, orderBy: timestamp, orderDirection: desc, where: { ${whereToken0} }) {
+      mintsAs0: mints(first: 10, orderBy: timestamp, orderDirection: desc, where: {pair_: {token0: $address}}) {
         id
         timestamp
         pair {
@@ -31,7 +28,7 @@ const TOKEN_TRANSACTIONS = () => {
         amount1
         amountUSD
       }
-      mintsAs1: mints(first: 10, orderBy: timestamp, orderDirection: desc, where: { ${whereToken1} }) {
+      mintsAs1: mints(first: 10, orderBy: timestamp, orderDirection: desc, where: { pair_: {token1: $address} }) {
         id
         timestamp
         pair {
@@ -49,7 +46,7 @@ const TOKEN_TRANSACTIONS = () => {
         amount1
         amountUSD
       }
-      swapsAs0: swaps(first: 10, orderBy: timestamp, orderDirection: desc, where: { ${whereToken0} }) {
+      swapsAs0: swaps(first: 10, orderBy: timestamp, orderDirection: desc, where: { pair_: {token0: $address} }) {
         id
         timestamp
         pair {
@@ -69,7 +66,7 @@ const TOKEN_TRANSACTIONS = () => {
         amount1Out
         amountUSD
       }
-      swapsAs1: swaps(first: 10, orderBy: timestamp, orderDirection: desc, where: { ${whereToken1} }) {
+      swapsAs1: swaps(first: 10, orderBy: timestamp, orderDirection: desc, where: { pair_: {token1: $address} }) {
         id
         timestamp
         pair {
@@ -89,7 +86,7 @@ const TOKEN_TRANSACTIONS = () => {
         amount1Out
         amountUSD
       }
-      burnsAs0: burns(first: 10, orderBy: timestamp, orderDirection: desc, where: { ${whereToken0} }) {
+      burnsAs0: burns(first: 10, orderBy: timestamp, orderDirection: desc, where: { pair_: {token1: $address} }) {
         id
         timestamp
         pair {
@@ -107,7 +104,7 @@ const TOKEN_TRANSACTIONS = () => {
         amount1
         amountUSD
       }
-      burnsAs1: burns(first: 10, orderBy: timestamp, orderDirection: desc, where: { ${whereToken1} }) {
+      burnsAs1: burns(first: 10, orderBy: timestamp, orderDirection: desc, where: { pair_: {token0: $address} }) {
         id
         timestamp
         pair {

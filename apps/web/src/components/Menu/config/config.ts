@@ -8,8 +8,18 @@ import {
   InfoIcon,
   BridgeIcon,
   DropdownMenuItemType,
+  RocketIcon,
+  MoreHorizontalIcon,
 } from '@pancakeswap/uikit'
 import { ContextApi } from '@pancakeswap/localization'
+import {
+  SUPPORT_FARMS,
+  SUPPORT_STAKING,
+  SUPPORT_INFO,
+  SUPPORT_SWAP,
+  SUPPORT_BRIDGE,
+  SUPPORT_LOCKS,
+} from '../../../config/constants/supportChains'
 
 export type ConfigMenuDropDownItemsType = DropdownMenuItems & { hideSubNav?: boolean }
 export type ConfigMenuItemsType = Omit<MenuItemsType, 'items'> & { hideSubNav?: boolean; image?: string } & {
@@ -41,6 +51,7 @@ const config: (
       icon: SwapIcon,
       fillIcon: SwapFillIcon,
       href: '/swap',
+      supportChainIds: SUPPORT_SWAP,
       showItemsOnMobile: false,
       items: [
         {
@@ -62,7 +73,7 @@ const config: (
         /*
         {
           label: t('Perpetual'),
-          href: `https://perp.pancakeswap.finance/${perpLangMap(languageCode)}/futures/BTCUSDT?theme=${perpTheme(
+          href: `https://perp.icecreamswap.com/${perpLangMap(languageCode)}/futures/BTCUSDT?theme=${perpTheme(
             isDark,
           )}`,
           supportChainIds: SUPPORT_ONLY_BSC,
@@ -70,7 +81,7 @@ const config: (
         },
         {
           label: t('Bridge'),
-          href: 'https://bridge.pancakeswap.finance/',
+          href: 'https://bridge.icecreamswap.com/',
           type: DropdownMenuItemType.EXTERNAL_LINK,
         },
            */
@@ -79,31 +90,31 @@ const config: (
     {
       label: t('Earn'),
       href: '/farms',
-      showItemsOnMobile: false,
       icon: EarnIcon,
       fillIcon: EarnFillIcon,
       image: '/images/decorations/pe2.png',
+      showItemsOnMobile: false,
+      supportChainIds: [...SUPPORT_FARMS, ...SUPPORT_STAKING],
       items: [
-        /*
         {
-          label: t('Farms'),
+          label: t('Liquidity Farms'),
           href: '/farms',
+          supportChainIds: SUPPORT_FARMS,
         },
-           */
-        /*
         {
-          label: t('Pools'),
+          label: t('Staking'),
           href: '/pools',
-          supportChainIds: SUPPORT_ONLY_BSC,
+          supportChainIds: SUPPORT_STAKING,
         },
-           */
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
     {
       label: t('Bridge'),
       href: '/bridge',
-      showItemsOnMobile: false,
+      hideSubNav: true,
       icon: BridgeIcon,
+      supportChainIds: SUPPORT_BRIDGE,
+      showItemsOnMobile: false,
       items: [],
     },
     /*
@@ -162,13 +173,52 @@ const config: (
       ],
     },
        */
+    /*
     {
       label: t('Info'),
       href: 'https://info.icecreamswap.com',
       type: DropdownMenuItemType.EXTERNAL_LINK,
       icon: InfoIcon,
+      hideSubNav: true,
+      items: [],
+    },
+    */
+    {
+      label: t('Launchpad'),
+      href: '/launchpad',
+      icon: RocketIcon,
+      hideSubNav: true,
       showItemsOnMobile: false,
       items: [],
+    },
+    {
+      label: t('More'),
+      icon: MoreHorizontalIcon,
+      showItemsOnMobile: true,
+      hideSubNav: true,
+      supportChainIds: [...SUPPORT_INFO, ...SUPPORT_LOCKS],
+      items: [
+        {
+          label: t('Info'),
+          href: '/info',
+          supportChainIds: SUPPORT_INFO,
+        },
+        {
+          label: t('Locks'),
+          href: '/locks',
+          supportChainIds: SUPPORT_LOCKS,
+        },
+        {
+          label: t('Wiki'),
+          href: 'https://wiki.icecreamswap.com',
+          type: DropdownMenuItemType.EXTERNAL_LINK,
+        },
+        // {
+        //   label: t('Create Token'),
+        //   href: '/create-token',
+        //   supportChainIds: SUPPORT_LOCKS,
+        // },
+      ].map((item) => addMenuItemSupported(item, chainId)),
     },
     /*
     {
@@ -212,7 +262,7 @@ const config: (
         },
         {
           label: t('Docs'),
-          href: 'https://docs.pancakeswap.finance',
+          href: 'https://docs.icecreamswap.com',
           type: DropdownMenuItemType.EXTERNAL_LINK,
         },
       ].map((item) => addMenuItemSupported(item, chainId)),

@@ -1,10 +1,10 @@
 import { useCurrency } from 'hooks/Tokens'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import { CHAIN_IDS } from 'utils/wagmi'
 import RemoveLiquidity from 'views/RemoveLiquidity'
 import RemoveStableLiquidity from 'views/RemoveLiquidity/RemoveStableLiquidity'
 import useStableConfig, { StableConfigContext } from 'views/Swap/StableSwap/hooks/useStableConfig'
+import {SUPPORT_SWAP} from "../../config/constants/supportChains";
 
 const RemoveLiquidityPage = () => {
   const router = useRouter()
@@ -34,7 +34,7 @@ const RemoveLiquidityPage = () => {
   )
 }
 
-RemoveLiquidityPage.chains = CHAIN_IDS
+RemoveLiquidityPage.chains = SUPPORT_SWAP
 
 export default RemoveLiquidityPage
 

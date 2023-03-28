@@ -5,6 +5,7 @@ import BigNumber from 'bignumber.js'
 import { useTranslation } from '@pancakeswap/localization'
 import { getFullDisplayBalance } from '@pancakeswap/utils/formatBalance'
 import { Token } from '@pancakeswap/sdk'
+import {useActiveChainId} from "../../../hooks/useActiveChainId";
 
 interface MaxStakeRowProps {
   small?: boolean
@@ -24,6 +25,7 @@ const MaxStakeRow: React.FC<React.PropsWithChildren<MaxStakeRowProps>> = ({
   hasPoolStarted,
 }) => {
   const { t } = useTranslation()
+  const { chainId } = useActiveChainId()
 
   return (
     <Flex flexDirection="column">
@@ -36,7 +38,7 @@ const MaxStakeRow: React.FC<React.PropsWithChildren<MaxStakeRowProps>> = ({
       {hasPoolStarted && (
         <Flex justifyContent="space-between" alignItems="center">
           <Text small={small}>{t('Max. stake limit ends in')}:</Text>
-          <Link external href={getBlockExploreLink(stakingLimitEndBlock, 'countdown')}>
+          <Link external href={getBlockExploreLink(stakingLimitEndBlock, 'countdown', chainId)}>
             <Balance
               small={small}
               value={Math.max(stakingLimitEndBlock - currentBlock, 0)}

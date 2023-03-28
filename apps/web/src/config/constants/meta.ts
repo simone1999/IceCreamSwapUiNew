@@ -5,7 +5,7 @@ import { PageMeta } from './types'
 export const DEFAULT_META: PageMeta = {
   title: 'IceCreamSwap Multi-chain DeFi ecosystem, Swap, Bridge, LaunchPad',
   description:
-    'Multi-chain DeFi ecosystem with Swap, Bridge and Launchpad. Trade, Bridge, Earn and Launch on Bitgert (Brise), Binance smart chain (BSC), XDC, Dogechain, Doken, Fuse and soon CORE blockchain',
+    'Multi-chain DeFi ecosystem with Swap, Bridge and Launchpad. Trade, Bridge, Earn and Launch on Bitgert (Brise), Binance smart chain (BSC), XDC, Dogechain, Doken, Fuse and CORE blockchain',
   image: 'https://icecreamswap.com/images/hero.png',
 }
 
@@ -24,26 +24,18 @@ const getPathList = (t: ContextApi['t']): PathList => {
       '/remove': { basePath: true, title: t('Remove Liquidity') },
       '/liquidity': { title: t('Liquidity') },
       '/find': { title: t('Import Pool') },
-      '/competition': { title: t('Trading Battle') },
-      '/prediction': { title: t('Prediction') },
-      '/prediction/leaderboard': { title: t('Leaderboard') },
       '/farms': { title: t('Farms') },
-      '/farms/auction': { title: t('Farm Auctions') },
       '/pools': { title: t('Pools') },
-      '/lottery': { title: t('Lottery') },
-      '/ifo': { title: t('Initial Farm Offering') },
-      '/teams': { basePath: true, title: t('Leaderboard') },
-      '/voting': { basePath: true, title: t('Voting') },
-      '/voting/proposal': { title: t('Proposals') },
-      '/voting/proposal/create': { title: t('Make a Proposal') },
       '/info': { title: t('Overview'), description: 'View statistics for IceCreamSwap exchanges.' },
       '/info/pools': { title: t('Pools'), description: 'View statistics for IceCreamSwap exchanges.' },
       '/info/tokens': { title: t('Tokens'), description: 'View statistics for IceCreamSwap exchanges.' },
-      '/nfts/collections': { basePath: true, title: t('Collections') },
-      '/nfts/activity': { title: t('Activity') },
-      '/profile': { basePath: true, title: t('Profile') },
-      '/pancake-squad': { basePath: true, title: t('Pancake Squad') },
-      '/pottery': { basePath: true, title: t('Pottery') },
+      '/core': { basePath: true, title: t('Get Ready for Core 🚀') },
+      '/bridge': {
+        basePath: true,
+        title: t('Bridge'),
+        description:
+          'Transfer tokens between multiple Chains including Core, Bitgert, Binance, XDC, Fuse and may more on IceCreamSwap DEX.',
+      },
     },
     defaultTitleSuffix: t('IceCreamSwap'),
   }

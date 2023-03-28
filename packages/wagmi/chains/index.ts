@@ -1,1 +1,3 @@
-export * from './chains'
+import { chainMap } from '@icecreamswap/constants'
+
+export default chainMap

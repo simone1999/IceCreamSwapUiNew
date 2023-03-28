@@ -43,7 +43,9 @@ const fetchFetchPublicDataOld = async ({ pids, chainId }): Promise<[SerializedFa
         name: 'icePerBlock',
         params: [true],
       },
-    ]),
+    ],
+    chainId
+    ),
   ])
 
   const poolLengthAsBigNumber = new BigNumber(poolLength)

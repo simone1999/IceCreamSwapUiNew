@@ -53,7 +53,7 @@ const Footer: React.FC<React.PropsWithChildren<{ variant?: FooterVariant; helpUr
           <>
             <ButtonMenu variant="subtle" scale="sm" activeIndex={0}>
               <ButtonMenuItem>V2</ButtonMenuItem>
-              <ButtonMenuItem as="a" href="https://v1exchange.pancakeswap.finance/#/">
+              <ButtonMenuItem as="a" href="https://v1exchange.icecreamswap.com/#/">
                 {t("V1 (old)")}
               </ButtonMenuItem>
             </ButtonMenu>

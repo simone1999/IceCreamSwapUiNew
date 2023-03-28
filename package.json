@@ -9,7 +9,6 @@
   ],
   "scripts": {
     "dev": "turbo run dev --filter=web...",
-    "dev:aptos": "yarn turbo run dev --filter=aptos-web...",
     "build": "turbo run build --filter=web...",
     "start": "turbo run start --filter=web",
     "test:config": "yarn workspace web run test:config",
@@ -18,8 +17,8 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json}\"",
     "format:check:staged": "lint-staged",
     "e2e:ci": "turbo run integration-test --filter=e2e...[HEAD^1]",
-    "updateLPsAPR": "yarn turbo run build --filter=@pancakeswap/sdk && NODE_PATH=./apps/web/src ts-node --project ./apps/web/tsconfig.json --compiler-options '{\"module\":\"commonjs\"}' scripts/updateLPsAPR.ts",
-    "postinstall": "turbo run --filter=web postinstall",
+    "updateLPsAPR": "yarn turbo run build --filter=@pancakeswap/sdk && ts-node --swc scripts/updateLPsAPR.ts",
+    "postinstall": "turbo run --filter=web postinstall && patch-package",
     "clean": "turbo run clean && rm -rf node_modules",
     "changeset": "changeset",
     "version-packages": "changeset version",
@@ -50,5 +49,9 @@
   },
   "volta": {
     "node": "16.18.0"
+  },
+  "dependencies": {
+    "patch-package": "^6.5.1",
+    "postinstall-postinstall": "^2.1.0"
   }
 }

@@ -4,7 +4,7 @@ import { ThemeContext as StyledThemeContext } from 'styled-components'
 import { useTheme as useNextTheme } from 'next-themes'
 
 export const COOKIE_THEME_KEY = 'theme'
-export const THEME_DOMAIN = '.pancakeswap.finance'
+export const THEME_DOMAIN = '.icecreamswap.com'
 
 const useTheme = () => {
   const { resolvedTheme, setTheme } = useNextTheme()

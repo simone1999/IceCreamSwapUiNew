@@ -11,6 +11,10 @@ const variants = {
     background: "rgba(49, 208, 170, 0.1)",
     borderColor: "success",
   },
+  info: {
+    background: "rgba(10, 126, 214, 0.1)",
+    borderColor: "#0A7ED6",
+  },
 };
 
 export default variants;

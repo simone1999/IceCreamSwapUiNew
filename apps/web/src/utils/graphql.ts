@@ -1,10 +1,10 @@
 import {
   BIT_QUERY,
   STABLESWAP_SUBGRAPH_CLIENT,
-  INFO_CLIENT_BITGERT
-} from 'config/constants/endpoints'
+  INFO_CLIENT_BITGERT,
+  INFO_CLIENT_WITH_CHAIN
+} from '../config/constants/endpoints'
 import { GraphQLClient } from 'graphql-request'
-import { INFO_CLIENT_WITH_CHAIN } from '../config/constants/endpoints'
 
 // Extra headers
 // Mostly for dev environment

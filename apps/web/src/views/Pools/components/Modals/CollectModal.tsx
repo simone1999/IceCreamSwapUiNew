@@ -7,6 +7,7 @@ import useCatchTxError from 'hooks/useCatchTxError'
 import { useAppDispatch } from 'state'
 import { updateUserBalance, updateUserPendingReward, updateUserStakedBalance } from 'state/pools'
 import useHarvestPool from '../../hooks/useHarvestPool'
+import {useActiveChainId} from "../../../../hooks/useActiveChainId";
 
 export const CollectModalContainer = ({
   earningTokenSymbol,
@@ -17,6 +18,7 @@ export const CollectModalContainer = ({
 }: React.PropsWithChildren<Pool.CollectModalProps>) => {
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
+  const { chainId } = useActiveChainId()
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
@@ -33,9 +35,9 @@ export const CollectModalContainer = ({
           {t('Your %symbol% earnings have been sent to your wallet!', { symbol: earningTokenSymbol })}
         </ToastDescriptionWithTx>,
       )
-      dispatch(updateUserStakedBalance({ sousId, account }))
-      dispatch(updateUserPendingReward({ sousId, account }))
-      dispatch(updateUserBalance({ sousId, account }))
+      dispatch(updateUserStakedBalance({ sousId, account, chainId }))
+      dispatch(updateUserPendingReward({ sousId, account, chainId }))
+      dispatch(updateUserBalance({ sousId, account, chainId }))
       onDismiss?.()
     }
   }, [account, dispatch, earningTokenSymbol, fetchWithCatchTxError, onDismiss, onReward, sousId, t, toastSuccess])

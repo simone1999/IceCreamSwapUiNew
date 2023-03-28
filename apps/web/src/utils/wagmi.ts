@@ -1,5 +1,4 @@
 import { BinanceWalletConnector } from '@pancakeswap/wagmi/connectors/binanceWallet'
-import {bitgert, bsc, dogechain, dokenchain, fuse, xdc, mainnet} from '@pancakeswap/wagmi/chains'
 import { configureChains, createClient } from 'wagmi'
 import memoize from 'lodash/memoize'
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
@@ -8,8 +7,7 @@ import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { SafeConnector } from '@gnosis.pm/safe-apps-wagmi'
-
-const CHAINS = [bitgert, dogechain, dokenchain, fuse, xdc]
+import { chains as CHAINS } from '@icecreamswap/constants'
 
 const getNodeRealUrl = (networkName: string) => {
   let host = null
@@ -48,12 +46,6 @@ const getNodeRealUrl = (networkName: string) => {
 export const { provider, chains } = configureChains(CHAINS, [
   jsonRpcProvider({
     rpc: (chain) => {
-      if (!!process.env.NEXT_PUBLIC_NODE_PRODUCTION && chain.id === bsc.id) {
-        return { http: process.env.NEXT_PUBLIC_NODE_PRODUCTION }
-      }
-      if (process.env.NODE_ENV === 'test' && chain.id === mainnet.id) {
-        return { http: 'https://cloudflare-eth.com' }
-      }
       return getNodeRealUrl(chain.network) || { http: chain.rpcUrls.default }
     },
   }),
@@ -99,6 +91,65 @@ export const metaMaskConnector = new MetaMaskConnector({
 
 export const bscConnector = new BinanceWalletConnector({ chains })
 
+class BitKeepConnector extends InjectedConnector {
+  provider?: Window['ethereum']
+
+  public id = 'bitKeep'
+
+  async getProvider() {
+    this.provider = (window as any).bitkeep?.ethereum
+    return this.provider
+  }
+}
+
+export const bitKeepConnector = new BitKeepConnector({
+  chains,
+  options: {
+    shimDisconnect: false,
+    shimChainChangedDisconnect: true,
+  },
+})
+
+class NaboxConnector extends InjectedConnector {
+  provider?: Window['ethereum']
+
+  public id = 'nabox'
+
+  async getProvider() {
+    if (!(window as any).NaboxWallet) throw new Error('Nabox not found')
+    this.provider = (window as any).ethereum
+    return this.provider
+  }
+}
+
+export const naboxConnector = new NaboxConnector({
+  chains,
+  options: {
+    shimDisconnect: false,
+    shimChainChangedDisconnect: true,
+  },
+})
+
+class OkxConnector extends InjectedConnector {
+  provider?: Window['ethereum']
+
+  public id = 'okx'
+
+  async getProvider() {
+    if (!(window as any).okxwallet) throw new Error('Okx Wallet not found')
+    this.provider = (window as any).okxwallet
+    return this.provider
+  }
+}
+
+export const okxConnector = new OkxConnector({
+  chains,
+  options: {
+    shimDisconnect: true,
+    shimChainChangedDisconnect: true,
+  },
+})
+
 export const client = createClient({
   autoConnect: false,
   provider,
@@ -109,6 +160,9 @@ export const client = createClient({
     coinbaseConnector,
     walletConnectConnector,
     bscConnector,
+    bitKeepConnector,
+    naboxConnector,
+    okxConnector,
   ],
 })
 

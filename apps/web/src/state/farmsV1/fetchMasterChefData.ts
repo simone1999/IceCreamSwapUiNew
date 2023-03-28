@@ -5,6 +5,7 @@ import { SerializedFarm } from '@pancakeswap/farms'
 import { SerializedFarmConfig } from '../../config/constants/types'
 import { getMasterChefV1Address } from '../../utils/addressHelpers'
 import { getMasterchefV1Contract } from '../../utils/contractHelpers'
+import {ChainId} from "@pancakeswap/sdk";
 
 const masterChefAddress = getMasterChefV1Address()
 const masterChefContract = getMasterchefV1Contract()
@@ -31,14 +32,14 @@ const masterChefFarmCalls = (farm: SerializedFarm) => {
     : [null, null]
 }
 
-export const fetchMasterChefData = async (farms: SerializedFarmConfig[]): Promise<any[]> => {
+export const fetchMasterChefData = async (farms: SerializedFarmConfig[], chainId: ChainId): Promise<any[]> => {
   const masterChefCalls = farms.map((farm) => masterChefFarmCalls(farm))
   const chunkSize = masterChefCalls.flat().length / farms.length
   const masterChefAggregatedCalls = masterChefCalls
     .filter((masterChefCall) => masterChefCall[0] !== null && masterChefCall[1] !== null)
     .flat()
   // @ts-ignore fix chainId support
-  const masterChefMultiCallResult = await multicallv2({ abi: masterchefABIV1, calls: masterChefAggregatedCalls })
+  const masterChefMultiCallResult = await multicallv2({ abi: masterchefABIV1, calls: masterChefAggregatedCalls, chainId })
   const masterChefChunkedResultRaw = chunk(masterChefMultiCallResult, chunkSize)
   let masterChefChunkedResultCounter = 0
   return masterChefCalls.map((masterChefCall) => {

@@ -1,4 +1,4 @@
-import { ChainId, Pair, ERC20Token } from '@pancakeswap/sdk'
+import { Pair, ERC20Token } from '@pancakeswap/sdk'
 import { deserializeToken } from '@pancakeswap/token-lists'
 import { differenceInDays } from 'date-fns'
 import flatMap from 'lodash/flatMap'
@@ -420,7 +420,7 @@ export function useGasPriceRaw(chainIdOverride?: number): string {
   const library = useWeb3LibraryContext()
   const chainId = chainIdOverride ?? chainId_
   const userGas = useSelector<AppState, AppState['user']['gasPrice']>((state) => state.user.gasPrice)
-  const { data: bscProviderGasPrice = GAS_PRICE_GWEI.default } = useSWR(
+  const { data: _bscProviderGasPrice = GAS_PRICE_GWEI.default } = useSWR(
     library &&
       library.provider &&
       false && // chainId === ChainId.BSC &&
@@ -484,8 +484,7 @@ export function usePairAdder(): (pair: Pair) => void {
 
 /**
  * Given two tokens return the liquidity token that represents its liquidity shares
- * @param tokenA one of the two tokens
- * @param tokenB the other token
+ * @param [tokenA, tokenB] of the two tokens
  */
 export function toV2LiquidityToken([tokenA, tokenB]: [ERC20Token, ERC20Token]): ERC20Token {
   return new ERC20Token(tokenA.chainId, Pair.getAddress(tokenA, tokenB), 18, 'ICELP', 'icecreamswap.com LP')
@@ -523,13 +522,13 @@ export function useTrackedTokenPairs(): [ERC20Token, ERC20Token][] {
               // loop through all bases on the current chain
               (BASES_TO_TRACK_LIQUIDITY_FOR[chainId] ?? [])
                 // to construct pairs of the given token with each base
-                .map((base) => {
+                .map((base: ERC20Token) => {
                   if (base.address === token.address) {
                     return null
                   }
                   return [base, token]
                 })
-                .filter((p): p is [ERC20Token, ERC20Token] => p !== null)
+                .filter((p: unknown): p is [ERC20Token, ERC20Token] => p !== null)
             )
           })
         : [],

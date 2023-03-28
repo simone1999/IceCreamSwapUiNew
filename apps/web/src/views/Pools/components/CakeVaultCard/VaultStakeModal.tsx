@@ -42,6 +42,7 @@ import { VaultRoiCalculatorModal } from '../Vault/VaultRoiCalculatorModal'
 import ConvertToLock from '../LockedPool/Common/ConvertToLock'
 import FeeSummary from './FeeSummary'
 import { MIN_LOCK_AMOUNT, convertCakeToShares } from '../../helpers'
+import {useActiveChainId} from "../../../../hooks/useActiveChainId";
 
 interface VaultStakeModalProps {
   pool: Pool.DeserializedPool<Token>
@@ -77,6 +78,7 @@ const VaultStakeModal: React.FC<React.PropsWithChildren<VaultStakeModalProps>> =
   const dispatch = useAppDispatch()
   const { stakingToken, earningTokenPrice, vaultKey } = pool
   const { account } = useWeb3React()
+  const { chainId } = useActiveChainId()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const vaultPoolContract = useVaultPoolContract(pool.vaultKey)
   const { callWithGasPrice } = useCallWithGasPrice()
@@ -176,7 +178,7 @@ const VaultStakeModal: React.FC<React.PropsWithChildren<VaultStakeModalProps>> =
         </ToastDescriptionWithTx>,
       )
       onDismiss?.()
-      dispatch(fetchCakeVaultUserData({ account }))
+      dispatch(fetchCakeVaultUserData({ account, chainId }))
     }
   }
 
@@ -197,7 +199,7 @@ const VaultStakeModal: React.FC<React.PropsWithChildren<VaultStakeModalProps>> =
         </ToastDescriptionWithTx>,
       )
       onDismiss?.()
-      dispatch(fetchCakeVaultUserData({ account }))
+      dispatch(fetchCakeVaultUserData({ account, chainId }))
     }
   }
 

@@ -1,0 +1,42 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Token {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name     String
+  symbol   String
+  decimals Int
+  address  String
+  logo    String
+  chainId Int
+}
+
+model Campaign {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  address String
+  chainId Int
+  website String
+  banner String?
+  twitter String?
+  telegram String?
+  discord String?
+  github String?
+  reddit String?
+  description String
+  tags String[]
+}
+
+model Flags {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  key String
+  value String
+}

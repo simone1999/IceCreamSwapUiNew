@@ -146,7 +146,7 @@ const CardContent: React.FC = () => {
         <Text color="textSubtle" fontSize={12} mb="16px">
           {t('An active fixed-term ICE staking position is required for activating farm yield boosters.')}
         </Text>
-        <NextLink href="/pools" passHref>
+        <NextLink href="/pools" passHref prefetch={false}>
           <Button as="a" width="100%" style={{ backgroundColor: theme.colors.textSubtle }}>
             {t('Go to Pool')}
           </Button>
@@ -162,7 +162,7 @@ const CardContent: React.FC = () => {
         <Text color="textSubtle" fontSize={12} mb="16px">
           {t('An active fixed-term ICE staking position is required for activating farm yield boosters.')}
         </Text>
-        <NextLink href="/pools" passHref>
+        <NextLink href="/pools" passHref prefetch={false}>
           <Button as="a" width="100%" style={{ backgroundColor: theme.colors.textSubtle }}>
             {t('Go to Pool')}
           </Button>

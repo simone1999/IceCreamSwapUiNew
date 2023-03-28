@@ -87,9 +87,9 @@ const useFormattedOrderData = (order: Order): FormattedOrderData => {
     isSubmissionPending,
     isCancellationPending,
     bscScanUrls: {
-      created: order.createdTxHash ? getBlockExploreLink(order.createdTxHash, 'transaction') : null,
-      executed: order.executedTxHash ? getBlockExploreLink(order.executedTxHash, 'transaction') : null,
-      cancelled: order.cancelledTxHash ? getBlockExploreLink(order.cancelledTxHash, 'transaction') : null,
+      created: order.createdTxHash ? getBlockExploreLink(order.createdTxHash, 'transaction', chainId) : null,
+      executed: order.executedTxHash ? getBlockExploreLink(order.executedTxHash, 'transaction', chainId) : null,
+      cancelled: order.cancelledTxHash ? getBlockExploreLink(order.cancelledTxHash, 'transaction', chainId) : null,
     },
   }
 }

@@ -78,11 +78,13 @@ const BasicChart = ({
         <Flex flexDirection="column" pt="12px">
           <PairPriceDisplay
             value={pairPrices?.length > 0 && valueToDisplay}
+            /*  // removed to not display e.g. eth/usd symbol as it's displayed above and is a bit confusing
             inputSymbol={inputCurrency?.symbol}
             outputSymbol={outputCurrency?.symbol}
+            */
           >
             <Text color={isChangePositive ? 'success' : 'failure'} fontSize="20px" ml="4px" bold>
-              {`${isChangePositive ? '+' : ''}${changeValue.toFixed(3)} (${changePercentage}%)`}
+              {`${changePercentage}%`}
             </Text>
           </PairPriceDisplay>
           <Text small color="secondary">

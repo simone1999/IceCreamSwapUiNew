@@ -1,11 +1,8 @@
 import { multicallAddresses } from '@pancakeswap/multicall'
+import { masterChefAddresses } from '@pancakeswap/farms'
 
 export default {
-  masterChef: {
-    97: '0xB4A466911556e39210a6bB2FaECBB59E4eB7E43d',
-    56: '0xa5f8C5Dbd5F286960b9d90548680aE5ebFf07652',
-    32520: "0x090B19ea55b93C969EC98E1D8E3db0695698efCa",
-  },
+  masterChef: masterChefAddresses,
   masterChefV1: {
     97: '0x1d32c2945C8FDCBc7156c553B7cEa4325a17f4f9',
     56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',

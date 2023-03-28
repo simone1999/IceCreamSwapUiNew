@@ -1,17 +1,19 @@
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useTranslation } from '@pancakeswap/localization'
-import { Currency, CurrencyAmount, Trade, TradeType } from '@pancakeswap/sdk'
+import { ChainId, Currency, CurrencyAmount, Trade, TradeType } from '@pancakeswap/sdk'
 import { useToast } from '@pancakeswap/uikit'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import { ROUTER_ADDRESS } from 'config/constants/exchange'
 import { useCallback, useMemo } from 'react'
+import { useIsAkkaSwap } from 'state/global/hooks'
 import { logError } from 'utils/sentry'
 import { Field } from '../state/swap/actions'
 import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks'
 import { calculateGasMargin } from '../utils'
 import { computeSlippageAdjustedAmounts } from '../utils/exchange'
 import useGelatoLimitOrdersLib from './limitOrders/useGelatoLimitOrdersLib'
+import { useActiveChainId } from './useActiveChainId'
 import { useCallWithGasPrice } from './useCallWithGasPrice'
 import { useTokenContract } from './useContract'
 import useTokenAllowance from './useTokenAllowance'
@@ -22,11 +24,11 @@ export enum ApprovalState {
   PENDING,
   APPROVED,
 }
-
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 export function useApproveCallback(
   amountToApprove?: CurrencyAmount<Currency>,
   spender?: string,
+  exactApproval = false,
 ): [ApprovalState, () => Promise<void>] {
   const { account } = useWeb3React()
   const { callWithGasPrice } = useCallWithGasPrice()
@@ -53,7 +55,7 @@ export function useApproveCallback(
 
   const tokenContract = useTokenContract(token?.address)
   const addTransaction = useTransactionAdder()
-
+  const { chainId } = useActiveChainId()
   const approve = useCallback(async (): Promise<void> => {
     if (approvalState !== ApprovalState.NOT_APPROVED) {
       toastError(t('Error'), t('Approve was called unnecessarily'))
@@ -84,7 +86,7 @@ export function useApproveCallback(
       return undefined
     }
 
-    let useExact = false
+    let useExact = exactApproval
 
     const estimatedGas = await tokenContract.estimateGas.approve(spender, MaxUint256).catch(() => {
       // general fallback for tokens who restrict approval amounts
@@ -131,8 +133,7 @@ export function useApproveCallbackFromTrade(
     () => (trade ? computeSlippageAdjustedAmounts(trade, allowedSlippage)[Field.INPUT] : undefined),
     [trade, allowedSlippage],
   )
-
-  return useApproveCallback(amountToApprove, ROUTER_ADDRESS[chainId])
+  return useApproveCallback(amountToApprove, ROUTER_ADDRESS[chainId].Icecream)
 }
 
 // Wraps useApproveCallback in the context of a Gelato Limit Orders

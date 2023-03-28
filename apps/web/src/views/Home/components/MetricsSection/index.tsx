@@ -35,17 +35,21 @@ const Stats = () => {
 
   return (
     <Flex justifyContent="center" alignItems="center" flexDirection="column">
-      <GradientLogo height="48px" width="48px" mb="24px" />
+      <GradientLogo height="48" width="48" style={{ marginBottom: '24px' }} />
       <Heading textAlign="center" scale="xl" mb="32px">
-        {t('Multi-chain DeFi ecosystem')}
+        {t('Multi-chain one stop DeFi ecosystem')}
       </Heading>
       {/* <Heading textAlign="center" scale="xl" mb="32px"> */}
       {/*   {t('Trusted with billions.')} */}
       {/* </Heading> */}
       <Text textAlign="center" color="textSubtle">
-        {t('Swap, Bridge, Farm and Launch')}<br/>
-        {t('all in one place available on multiple chains.')}<br/>
+        {t('Swap, Bridge, Earn and Launch')}
+        <br />
+        {t('all in one place available on multiple chains.')}
+        <br />
         {t('Main DEX of Bitgert chain.')}
+        <br />
+        {t('First DEX of Core DAO')}
       </Text>
       {/*
       <Flex flexWrap="wrap">

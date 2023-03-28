@@ -5,7 +5,6 @@ import BnbWbnbNotice from './BnbWbnbNotice'
 import { BNB_ADDRESS } from './constants'
 import PriceChart from './PriceChart'
 import { getTokenAddress } from './utils'
-import {useActiveChainId} from "../../../../hooks/useActiveChainId";
 import useActiveWeb3React from "../../../../hooks/useActiveWeb3React";
 
 type PriceChartContainerProps = {
@@ -38,7 +37,7 @@ const PriceChartContainer: React.FC<React.PropsWithChildren<PriceChartContainerP
   const { chainId } = useActiveWeb3React()
   const token0Address = getTokenAddress(inputCurrencyId, chainId)
   const token1Address = getTokenAddress(outputCurrencyId, chainId)
-  const [isPairReversed, setIsPairReversed] = useState(false)
+  const [isPairReversed, setIsPairReversed] = useState(true)
   const togglePairReversed = useCallback(() => setIsPairReversed((prePairReversed) => !prePairReversed), [])
 
   const { isDark } = useTheme()

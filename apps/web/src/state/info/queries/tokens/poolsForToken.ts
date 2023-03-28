@@ -1,5 +1,10 @@
 import { gql } from 'graphql-request'
-import { MultiChainName, multiChainQueryMainToken, getMultiChainQueryEndPointWithStableSwap } from '../../constant'
+import {
+  MultiChainName,
+  multiChainQueryMainToken,
+  getMultiChainQueryEndPointWithStableSwap,
+  multiChainTokenBlackList
+} from '../../constant'
 
 /**
  * Data for showing Pools table on the Token page
@@ -49,7 +54,7 @@ const fetchPoolsForToken = async (
       POOLS_FOR_TOKEN(chainName),
       {
         address,
-        blacklist: [],
+        blacklist: multiChainTokenBlackList[chainName],
       },
     )
     return {
