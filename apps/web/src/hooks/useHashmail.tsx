@@ -25,7 +25,7 @@ const useHashmail = () => {
 
   const hashmailDisconnect = () => {
     try {
-      window.hashmail.disconnect()
+      if (window.hashmail.disconnect) window.hashmail.disconnect()
     } catch (e) {
       console.error(e)
     }

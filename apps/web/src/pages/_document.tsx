@@ -44,16 +44,40 @@ class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-                let dapp_id="0767a54d-f2b8-4c86-b6b2-dc716e47ec35"; // replace with dapp_id provided by hashmail
-                let hashmail_settings={
-                  widgetMode: "other", //you can switch to light mode
-                  horizontalPadding: ['-10','10'],
-                  verticalPadding: ['38','10'],
-                  widgetTheme: "#F8567F"
-                };
-                !function(){window.hashmail||(window.hashmail=[]),window.hashmail.queue=[];let i=["load","identify","track"],t=function(i){return function(){a=Array.prototype.slice.call(arguments),a.unshift(i),window.hashmail.queue.push(a)}};for(var e=0;i.length>e;e++)window.hashmail[i[e]]=t(i[e]);hashmail.methods=i,window.hashmail.load=function(i,t){window.hashmail.dapp_id=i,window.hashmail.settings=t;var e=document,s=e.getElementsByTagName("script")[0],h=e.createElement("script");h.type="text/javascript",h.async=!0,h.src="https://widget.hashmail.dev/notifier_tracking_script.js",s.parentNode.insertBefore(h,s)},window.hashmail.identify=i=>{window.hashmail.wallet_address=i,localStorage.setItem("hashmail-wallet_address",i)},window.hashmail.load(dapp_id,hashmail_settings)}();
-              `,
+              const baseURL =
+				"https://hashmail-widget-ts-js.vercel.app/bundle/notifier_tracking_script.js";
+			let dapp_id = "3561612d-6bc3-4b61-881d-49bb5c8ac732"; // replace with dapp_id provided by hashmail
+			!(function () {
+				window.hashmail || (window.hashmail = []), (window.hashmail.queue = []);
+				let i = ["load", "identify", "track"],
+					t = function (i) {
+						return function () {
+							(a = Array.prototype.slice.call(arguments)),
+								a.unshift(i),
+								window.hashmail.queue.push(a);
+						};
+					};
+				for (var e = 0; i.length > e; e++) window.hashmail[i[e]] = t(i[e]);
+				(hashmail.methods = i),
+					(window.hashmail.load = function (i, t) {
+						(window.hashmail.dapp_id = i), (window.hashmail.settings = t);
+						var e = document,
+							s = e.getElementsByTagName("script")[0],
+							h = e.createElement("script");
+						(h.type = "text/javascript"),
+							(h.async = !0),
+							(h.src = baseURL),
+							s.parentNode.insertBefore(h, s);
+					}),
+					(window.hashmail.identify = (i) => {
+						(window.hashmail.wallet_address = i),
+							localStorage.setItem("hashmail-wallet_address", i);
+					}),
+					window.hashmail.load(dapp_id);
+			})();
+          `,
             }}
+            type="text/javascript"
           />
         </Head>
         <body>
