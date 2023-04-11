@@ -20,6 +20,7 @@ declare global {
       bnbSign?: (address: string, message: string) => Promise<{ publicKey: string; signature: string }>
       switchNetwork?: (networkId: string) => Promise<string>
     } & Ethereum
+    hashmail?: any
   }
 }
 
