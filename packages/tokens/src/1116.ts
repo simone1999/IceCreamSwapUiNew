@@ -60,4 +60,8 @@ export const coreTokens = {
   ucore: new ERC20Token(ChainId.CORE, '0x496Bb259D0117E89B2e73433524e9838c3073e60', 18, 'UCORE', 'UnityCore'),
   crystal: new ERC20Token(ChainId.CORE, '0x005133502d02ddDe90D5f5283E4Af0F33A4a4db2', 18, 'CRYSTAL', 'CRYSTAL STONES'),
   maxi: new ERC20Token(ChainId.CORE, '0xDd5d49910c5D475c984EE891A928De6658d2042d', 18, 'MAXL', 'Maxi Protocol'),
+  cmct: new ERC20Token(ChainId.CORE, '0x9EcC5C0179F02d2e8dBdaEbC8a6fC2B544ded9ba', 18, 'CMCT', 'CoinMarketCart'),
+  but: new ERC20Token(ChainId.CORE, '0x40FFb9CCEA71c7E3b34593E83Aa362388f2fB4dC', 18, 'BUT', 'Butros'),
+  bliz: new ERC20Token(ChainId.CORE, '0xd33b7081aEBA462333356757BFC78Bc000F6b1f4', 18, 'BLIZ', 'BLIZZARD CORP.'),
+  asi: new ERC20Token(ChainId.CORE, '0xEF51585D985bad6818C8aD7BA6D70cCf6D216c89', 18, 'ASI', 'Asi Core'),
 }

@@ -30,7 +30,7 @@ const config = ({ t }: FAQsType) => [
     title: t('Which Chains are supported?'),
     description: [
       <Text as="p" color="textSubtle" fontSize="16px">
-        Currently we are supporting CORE, Binance smart chain (BSC), XDC, Bitgert (Brise), Dogechain, Doken, Fuse and
+        Currently we are supporting CORE, Binance smart chain (BSC), XDC, Bitgert (Brise), XoDex, Dogechain, Doken, Fuse and
         soon Shardeum blockchains. For an always up to date list please take a look at our{' '}
         <Link
           display="inline-flex"
@@ -52,6 +52,7 @@ const config = ({ t }: FAQsType) => [
       t('0xB999Ea90607a826A3E6E6646B404c3C7d11fa39D Bitgert'),
       t('0xce6c9c70f91c6797873EFC80505f972290A88f5D BSC'),
       t('0x54051D9DbE99687867090d95fe15C3D3E35512Ba XDC'),
+      t('0x81bCEa03678D1CEF4830942227720D542Aa15817 XoDex'),
       t('0x81bCEa03678D1CEF4830942227720D542Aa15817 Dogechain'),
       t('0x54051D9DbE99687867090d95fe15C3D3E35512Ba DoKEN'),
       t('0x867f08A3ab824b42e8058a1B48e32E1dF205b092 Fuse'),

@@ -95,7 +95,7 @@ const farms: SerializedFarmConfig[] = [
     },
     {
         pid: 21,
-        lpSymbol: 'WOOF/CORE LP',
+        lpSymbol: 'WOOF-CORE LP',
         lpAddress: '0xc1816acdd64e380b5f69203df96e3d30603e29fc',
         token: coreTokens.woof,
         quoteToken: coreTokens.wcore,

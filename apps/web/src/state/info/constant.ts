@@ -11,7 +11,7 @@ import { ChainId } from '@pancakeswap/sdk'
 import { PCS_BITGERT_START, PCS_CORE_START, PCS_XDC_START } from '../../config/constants/info'
 import { GraphQLClient } from 'graphql-request'
 
-export type MultiChainName = 'BITGERT' | 'DOGECHAIN' | 'DOKEN' | 'FUSE' | 'XDC' | 'BSC' | 'CORE'
+export type MultiChainName = 'BITGERT' | 'DOGECHAIN' | 'DOKEN' | 'FUSE' | 'XDC' | 'BSC' | 'CORE' | 'XODEX'
 
 export const multiChainQueryMainToken = {
   BITGERT: 'BNB',
@@ -63,6 +63,7 @@ export const multiChainScan = {
   FUSE: 'FuseScan',
   XDC: 'XDCScan',
   CORE: 'CoreScan',
+  XODEX: 'XODEXScan',
 }
 
 export const multiChainTokenBlackList = {
@@ -72,6 +73,7 @@ export const multiChainTokenBlackList = {
   FUSE: [''],
   XDC: [''],
   CORE: [''],
+  XODEX: [''],
 }
 
 export const getMultiChainQueryEndPointWithStableSwap = (chainName: MultiChainName) => {

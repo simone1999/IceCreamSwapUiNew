@@ -1,6 +1,6 @@
 import { ChainId, JSBI, Percent, Token } from '@pancakeswap/sdk'
 import { BigNumber } from '@ethersproject/bignumber'
-import { bitgertTokens, coreTokens, dogechainTokens, dokenTokens, fuseTokens, xdcTokens } from '@pancakeswap/tokens'
+import { bitgertTokens, coreTokens, dogechainTokens, dokenTokens, fuseTokens, xdcTokens, xodexTokens } from '@pancakeswap/tokens'
 import { ChainMap, ChainTokenList, RouterAddressTypes } from './types'
 
 export const ROUTER_ADDRESS_COMMON = '0xBb5e1777A331ED93E07cF043363e48d320eb96c4'
@@ -33,6 +33,9 @@ export const ROUTER_ADDRESS: Partial<ChainMap<RouterAddressTypes>> = {
     Icecream: ROUTER_ADDRESS_COMMON,
     Akka: ROUTER_ADDRESS_COMMON_AKKA_CORE,
   },
+  [ChainId.XODEX]: {
+    Icecream: ROUTER_ADDRESS_COMMON,
+  },
 }
 
 // used to construct intermediary pairs for trading
@@ -43,6 +46,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: Partial<ChainTokenList> = {
   [ChainId.FUSE]: [fuseTokens.wfuse, fuseTokens.ice],
   [ChainId.XDC]: [xdcTokens.wxdc, xdcTokens.ice, xdcTokens.usdt],
   [ChainId.CORE]: [coreTokens.wcore, coreTokens.score, coreTokens.ice, coreTokens.usdt],
+  [ChainId.XODEX]: [xodexTokens.wxodex, xodexTokens.ice, xodexTokens.usdt],
 }
 
 /**
@@ -66,6 +70,7 @@ export const SUGGESTED_BASES: Partial<ChainTokenList> = {
   [ChainId.FUSE]: [fuseTokens.ice],
   [ChainId.XDC]: [xdcTokens.ice, xdcTokens.usdt],
   [ChainId.CORE]: [coreTokens.ice, coreTokens.score, coreTokens.usdt],
+  [ChainId.XODEX]: [xodexTokens.ice, xodexTokens.usdt],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -114,6 +119,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: Partial<ChainTokenList> = {
   [ChainId.FUSE]: [fuseTokens.wfuse, fuseTokens.ice],
   [ChainId.XDC]: [xdcTokens.wxdc, xdcTokens.ice, xdcTokens.usdt, xdcTokens.usdc],
   [ChainId.CORE]: [coreTokens.wcore, coreTokens.score, coreTokens.ice, coreTokens.usdt],
+  [ChainId.XODEX]: [xodexTokens.wxodex, xodexTokens.ice, xodexTokens.usdt],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -135,6 +141,10 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [coreTokens.score, coreTokens.ice],
     [coreTokens.score, coreTokens.wcore],
     [coreTokens.usdt, coreTokens.ice],
+  ],
+  [ChainId.XODEX]: [
+    [xodexTokens.wxodex, xodexTokens.ice],
+    [xodexTokens.usdt, xodexTokens.ice],
   ],
 }
 

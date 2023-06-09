@@ -124,20 +124,6 @@ export default function Swap() {
     toggleSetAkkaContractModeToTrue,
   ] = useIsAkkaContractSwapModeActive()
 
-  const [isAkkaAlternateActive, toggleSetAkkaAlternateActive, toggleSetAkkaAlternateActiveToFalse, toggleSetAkkaAlternateActiveToTrue] = useIsAkkaAlternateModeActive()
-
-  useEffect(() => {
-    console.log(isAkkaSwapMode);
-    console.log(isAkkaSwapActive);
-    console.log(isAkkaContractSwapMode);
-    console.log(isAkkaAlternateActive);
-  }, [isAkkaSwapMode, isAkkaSwapActive, isAkkaContractSwapMode, isAkkaAlternateActive, akkaRouterTrade])
-
-  useEffect(() => {
-    toggleSetAkkaAlternateActiveToFalse()
-    toggleSetAkkaModeToFalse()
-  }, [typedValue, inputCurrencyId, outputCurrencyId])
-
   const { chainId } = useActiveWeb3React()
 
   // Check Independent Field for AKKA
@@ -205,14 +191,7 @@ export default function Swap() {
                   }
                 })
                 .catch((error) => {
-                  if (isAkkaAlternateActive) {
-                    toggleSetAkkaContractModeToFalse()
-                    toggleSetAkkaAlternateActiveToFalse()
-                  }
-                  else {
-                    toggleSetAkkaContractModeToTrue()
-                    toggleSetAkkaAlternateActiveToTrue()
-                  }
+                  toggleSetAkkaContractModeToFalse()
                   captureMessage(`AKKA: EstimateGas Error -> ${error}`, {
                     tags: {
                       chain_id: chainId,

@@ -55,6 +55,16 @@ const iceUsdPairMap = {
     tokenA: ICE[ChainId.FUSE],
     tokenB: USD[ChainId.FUSE],
   },
+  [ChainId.CORE]: {
+    address: Pair.getAddress(ICE[ChainId.CORE], USD[ChainId.CORE]),
+    tokenA: ICE[ChainId.CORE],
+    tokenB: USD[ChainId.CORE],
+  },
+  [ChainId.XODEX]: {
+    address: Pair.getAddress(ICE[ChainId.XODEX], USD[ChainId.XODEX]),
+    tokenA: ICE[ChainId.XODEX],
+    tokenB: USD[ChainId.XODEX],
+  },
 }
 
 const getIcePrice = async () => {

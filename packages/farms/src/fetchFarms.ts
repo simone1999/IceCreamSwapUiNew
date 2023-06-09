@@ -9,6 +9,7 @@ import { fetchStableFarmData } from './fetchStableFarmData'
 import { isStableFarm, SerializedFarmConfig } from './types'
 import { getFullDecimalMultiplier } from './getFullDecimalMultiplier'
 
+// todo: do this automatically. wrapped token and usd token is available for all chains and liquidity address can be calculated with Pair.getAddress from @pancakeswap/sdk.
 const evmNativeStableLpMap = {
   [ChainId.BITGERT]: {
     address: '0x8e7dd0d762f60942e0bd05b1114d6cedf4435a18',
@@ -38,6 +39,11 @@ const evmNativeStableLpMap = {
   [ChainId.CORE]: {
     address: '0x5ebAE3A840fF34B107D637c8Ed07C3D1D2017178',
     wNative: 'WCORE',
+    stable: 'USDT',
+  },
+  [ChainId.XODEX]: {
+    address: '0x0000000000000000000000000000000000000000',  // todo: add XoDex stable LP
+    wNative: 'WXODEX',
     stable: 'USDT',
   },
 }

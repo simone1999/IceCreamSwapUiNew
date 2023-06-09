@@ -1318,6 +1318,15 @@
       "symbol": "UCORE",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/simone1999/trustwallet-assets/master/blockchains/core/assets/0x496Bb259D0117E89B2e73433524e9838c3073e60/logo.png"
+    },
+
+    {
+      "name": "IceCream",
+      "address": "0x81bCEa03678D1CEF4830942227720D542Aa15817",
+      "symbol": "ICE",
+      "decimals": 18,
+      "chainId": 2415,
+      "logoURI": "https://raw.githubusercontent.com/simone1999/trustwallet-assets/master/blockchains/bitgert/assets/0xB999Ea90607a826A3E6E6646B404c3C7d11fa39D/logo.png"
     }
   ]
 }

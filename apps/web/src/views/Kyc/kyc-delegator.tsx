@@ -143,11 +143,12 @@ export const KycDelegator: React.FC = () => {
         ) : (
           <Flex flexDirection="column" gap="0.75em">
             <Text>Enter the address of the contract you want to delegate your KYC status to.</Text>
+            <Text>E.g. your token address.</Text>
             <Flex alignItems="center" gap="1em" flexDirection="column" justifyContent="stretch" marginTop="1em">
               <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder="0x12345..." />
             </Flex>
             <Text>
-              Pay {fee.data?.feeAmountFormatted} {token?.symbol} to delegate your KYC status to this contract.
+              After verification, you pay {fee.data?.feeAmountFormatted} {token?.symbol} to delegate your KYC status to this contract.
             </Text>
             {action}
           </Flex>

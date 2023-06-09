@@ -54,9 +54,9 @@ const priceHelperLps: SerializedFarmConfig[] = [
     {
         pid: null,
         lpSymbol: '',
-        lpAddress: '0xd16aA6313adF04C02B64898EfD96ceDC59D2D167',
+        lpAddress: '0x4203434560d2d995278f71e1f5c165424c7febe5',
         token: coreTokens.hobo,
-        quoteToken: coreTokens.score,
+        quoteToken: coreTokens.wcore,
     },
     {
         pid: null,
@@ -155,7 +155,36 @@ const priceHelperLps: SerializedFarmConfig[] = [
         lpAddress: '0xC899dE5B1D2Fc5c14a55CA5601B7aF1FF73B6DeA',
         token: coreTokens.maxi,
         quoteToken: coreTokens.wcore,
+    },
+    {
+        pid: null,
+        lpSymbol: '',
+        lpAddress: '0x1870902226f4a5aa664ffbd0b96916ed380ecdab',
+        token: coreTokens.cmct,
+        quoteToken: coreTokens.wcore,
+    },
+    {
+        pid: null,
+        lpSymbol: '',
+        lpAddress: '0x8d899600218dc49ed196a5ddb2298a0c28155780',
+        token: coreTokens.but,
+        quoteToken: coreTokens.wcore,
+    },
+    {
+        pid: null,
+        lpSymbol: '',
+        lpAddress: '0x148921045bd2b38ab7260bf1c5cfb6d7b049963e',
+        token: coreTokens.bliz,
+        quoteToken: coreTokens.wcore,
+    },
+    {
+        pid: null,
+        lpSymbol: '',
+        lpAddress: '0x00d57cdbf480a8c1979e2a2393831d6409749b21',
+        token: coreTokens.asi,
+        quoteToken: coreTokens.wcore,
     }
+
 ].map((p) => ({ ...p, token: p.token.serialize, quoteToken: p.quoteToken.serialize }))
 
 export default priceHelperLps

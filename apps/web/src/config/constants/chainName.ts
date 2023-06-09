@@ -8,6 +8,7 @@ const chainName: Record<ChainId, string> = {
   [ChainId.XDC]: 'XDC',
   [ChainId.BSC]: 'Binance',
   [ChainId.CORE]: 'CORE',
+  [ChainId.XODEX]: 'XODEX',
 }
 
 export default chainName

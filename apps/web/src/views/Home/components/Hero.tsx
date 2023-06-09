@@ -90,7 +90,7 @@ const Hero = () => {
             <Link href="/core" display="inline-flex">
               CORE
             </Link>
-            , XDC, Binance smart chain (BSC), Bitgert (Brise), Shardeum, Dogechain, Doken and Fuse with our decentralized smart contracts.
+            , XDC, Binance smart chain (BSC), Bitgert (Brise), Shardeum, XoDex, Dogechain, Doken and Fuse with our decentralized smart contracts.
           </Heading>
           <Flex>
             {!account && <ConnectWalletButton mr="8px" />}

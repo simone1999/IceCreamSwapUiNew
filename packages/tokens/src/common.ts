@@ -4,7 +4,8 @@ import { dogechainTokens } from './2000'
 import { dokenTokens } from './61916'
 import { fuseTokens } from './122'
 import { xdcTokens } from './50'
-import {coreTokens} from "./1116";
+import { coreTokens } from "./1116";
+import { xodexTokens } from "./2415";
 
 export const USD: Record<ChainId, ERC20Token> = {
   [ChainId.BITGERT]: bitgertTokens.usdti,
@@ -14,6 +15,7 @@ export const USD: Record<ChainId, ERC20Token> = {
   [ChainId.XDC]: xdcTokens.usdt,
   [ChainId.BSC]: bitgertTokens.usdti,  // todo: add proper BSC USDT
   [ChainId.CORE]: coreTokens.usdt,
+  [ChainId.XODEX]: xodexTokens.usdt,
 }
 
 export const ICE: Record<ChainId, ERC20Token> = {
@@ -24,4 +26,5 @@ export const ICE: Record<ChainId, ERC20Token> = {
   [ChainId.XDC]: xdcTokens.ice,
   [ChainId.BSC]: bitgertTokens.ice,  // todo: add proper BSC ICE
   [ChainId.CORE]: coreTokens.ice,
+  [ChainId.XODEX]: xodexTokens.ice,
 }
