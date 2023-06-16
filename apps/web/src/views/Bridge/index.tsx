@@ -21,8 +21,10 @@ import { formatAmount } from './formatter'
 import chainName from 'config/constants/chainName'
 import { SUPPORT_BRIDGE } from 'config/constants/supportChains'
 import { useSupportedChainList } from 'hooks/useSupportedChains'
+import { useTranslation } from '@pancakeswap/localization'
 
 const Bridge = () => {
+  const { t } = useTranslation()
   const { account, chainId: accountChainId } = useWeb3React()
   const { switchNetworkAsync } = useSwitchNetwork()
   const { chainId: routerChainId } = useRouter().query
@@ -89,10 +91,10 @@ const Bridge = () => {
               <AppBody>
                 <AtomBox width="full" alignItems="center" flexDirection="column" padding="24px" borderBottom="1">
                   <AtomBox display="flex" width="full" alignItems="center" justifyContent="center">
-                    <Heading as="h2">Bridge</Heading>
+                    <Heading as="h2">{t('Bridge')}</Heading>
                   </AtomBox>
                   <Text color="textSubtle" fontSize="14px" textAlign="center">
-                    Transfer tokens between chains
+                    {t('Transfer tokens between chains')}
                   </Text>
                 </AtomBox>
                 <StyledBridgeBody>
