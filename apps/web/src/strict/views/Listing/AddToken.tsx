@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import FormError from '../../../views/Bridge/components/FormError'
 import FileInput from '../../../components/FileInput'
-import { FormValues, schema, toBase64 } from './add-token-schema'
+import { FormValues, useSchema, toBase64 } from './add-token-schema'
 import { useEffect, useMemo, useState } from 'react'
 import { useToken } from '../../../hooks/Tokens'
 import styled from 'styled-components'
@@ -21,6 +21,7 @@ const Logo = styled.img`
 
 export const AddToken: React.FC = () => {
   const { t } = useTranslation()
+  const schema = useSchema()
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
   })
