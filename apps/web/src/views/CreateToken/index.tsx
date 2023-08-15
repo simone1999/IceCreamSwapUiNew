@@ -5,7 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import FormError from 'views/Bridge/components/FormError'
 import FileInput from 'components/FileInput'
 import CreateModal from './components/CreateModal'
-import { FormValues, schema } from './create-schema'
+import { FormValues, useSchema } from './create-schema'
 import { useState } from 'react'
 import InfoTooltip from '@pancakeswap/uikit/src/components/Timeline/InfoTooltip'
 import { useTranslation } from '@pancakeswap/localization'
@@ -17,6 +17,7 @@ const StyledFlex = styled(Flex)`
 `
 
 export const CreateToken: React.FC = () => {
+  const schema = useSchema()
   const { t } = useTranslation()
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
