@@ -14,7 +14,7 @@ import { getDeploymentUrl } from '../getDeploymentUrl'
 import { solidityKeccak256 } from 'ethers/lib/utils'
 
 const core = getChain(1116)!
-const provider = new providers.JsonRpcProvider(core.rpcUrls.default)
+const provider = new providers.JsonRpcProvider(core.rpcUrls.default as any)
 export const kycRouter = router({
   delegate: publicProcedure
     .input(

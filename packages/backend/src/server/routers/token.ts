@@ -1,3 +1,4 @@
+// @ts-check
 import { z } from 'zod'
 import { isMod } from '../session'
 import { publicProcedure, router } from '../trpc'

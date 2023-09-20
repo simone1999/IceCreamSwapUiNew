@@ -7,8 +7,8 @@ import {
   dokenTokens,
   fuseTokens,
   xdcTokens,
-  xodexTokens
-} from "@pancakeswap/tokens";
+  xodexTokens,
+} from '@pancakeswap/tokens'
 
 export const SMART_ROUTER_ADDRESSES = {
   [ChainId.CORE]: '0xD56d8dC0F34509c5D60471fA664Bd163F3cE0166',
@@ -16,10 +16,10 @@ export const SMART_ROUTER_ADDRESSES = {
 } as const satisfies Record<ChainId, string>
 
 export const V2_ROUTER_ADDRESS: ChainMap<string> = {
-  [ChainId.ETHEREUM]: '0x3BC722f252C7bAE2f55647e49aDcB9d33Ff6eBcC',
-  [ChainId.GOERLI]: '0x3BC722f252C7bAE2f55647e49aDcB9d33Ff6eBcC',
+  // [ChainId.ETHEREUM]: '0x3BC722f252C7bAE2f55647e49aDcB9d33Ff6eBcC',
+  // [ChainId.GOERLI]: '0x3BC722f252C7bAE2f55647e49aDcB9d33Ff6eBcC',
   [ChainId.BSC]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-  [ChainId.BSC_TESTNET]: '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
+  // [ChainId.BSC_TESTNET]: '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
 }
 
 export const STABLE_SWAP_INFO_ADDRESS: ChainMap<string> = {}

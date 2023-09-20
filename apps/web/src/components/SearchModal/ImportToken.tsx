@@ -25,15 +25,16 @@ import { useTranslation } from '@pancakeswap/localization'
 import { chains } from 'utils/wagmi'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { WrappedTokenInfo } from '@pancakeswap/token-lists'
-import AccessRisk from 'components/AccessRisk'
-import { fetchRiskToken, TOKEN_RISK } from 'views/Swap/hooks/fetchTokenRisk'
+// import AccessRisk from 'components/AccessRisk'
+import { fetchRiskToken } from 'components/AccessRisk/utils/fetchTokenRisk'
+import { TOKEN_RISK } from 'components/AccessRisk'
 
 interface ImportProps {
   tokens: Token[]
   handleCurrencySelect?: (currency: Currency) => void
 }
 
-const getStandard = (chainId: ChainId) => 'ERC20'
+// const getStandard = (chainId: ChainId) => 'ERC20'
 
 const IMPORT_COUNTDOWN = 5
 function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {

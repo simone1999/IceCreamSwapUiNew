@@ -67,8 +67,7 @@ import { VaultKey } from 'state/types'
 import { erc721CollectionABI } from 'config/abi/erc721collection'
 import { infoStableSwapABI } from 'config/abi/infoStableSwap'
 import { wethABI } from 'config/abi/weth'
-import { useActiveChainId } from './useActiveChainId'
-import { SUPPORT_FARMS_V3 } from "config/constants/supportChains";
+import { SUPPORT_FARMS_V3 } from 'config/constants/supportChains'
 /**
  * Helper hooks to get specific contracts (by ABI)
  */
