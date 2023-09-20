@@ -1,10 +1,13 @@
 import { defineFarmV3Configs } from '../src/defineFarmV3Configs'
 import { SerializedFarmConfig } from '..'
 
-export const farmsV3 = defineFarmV3Configs([
-])
+export const farmsV3 = defineFarmV3Configs([])
 
-const farms: SerializedFarmConfig[] = [
-].map((p) => ({ ...p, token: p.token.serialize, quoteToken: p.quoteToken.serialize, lpAddress: getAddress(p.lpAddress), }))
+const farms: SerializedFarmConfig[] = [].map((p) => ({
+  ...p,
+  token: p.token.serialize,
+  quoteToken: p.quoteToken.serialize,
+  lpAddress: getAddress(p.lpAddress),
+}))
 
 export default farms

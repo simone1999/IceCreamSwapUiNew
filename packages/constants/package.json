@@ -9,7 +9,8 @@
   "scripts": {},
   "dependencies": {},
   "peerDependencies": {
-    "wagmi": "^0.12.12"
+    "wagmi": "^0.12.12",
+    "viem": "^1.10.14"
   },
   "devDependencies": {}
 }

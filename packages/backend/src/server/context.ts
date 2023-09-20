@@ -1,10 +1,10 @@
+// @ts-check
 import * as trpc from '@trpc/server'
-import * as trpcNext from '@trpc/server/adapters/next'
-import { getIronSession, IronSession } from 'iron-session'
-import { Session, sessionOptions } from './session'
+import { getIronSession } from 'iron-session'
+import { sessionOptions } from './session'
 
-export async function createContext(opts: trpcNext.CreateNextContextOptions) {
-  const session = (await getIronSession(opts.req, opts.res, sessionOptions)) as IronSession & Session
+export async function createContext(opts: any) {
+  const session = (await getIronSession(opts.req, opts.res, sessionOptions)) as any
 
   return { session, res: opts.res }
 }

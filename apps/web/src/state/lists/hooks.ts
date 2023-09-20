@@ -1,6 +1,6 @@
 import { ChainId } from '@pancakeswap/sdk'
 import { TokenAddressMap as TTokenAddressMap, WrappedTokenInfo, TokenList, TokenInfo } from '@pancakeswap/token-lists'
-import { enumValues } from '@pancakeswap/utils/enumValues'
+// import { enumValues } from '@pancakeswap/utils/enumValues'
 import { ListsState } from '@pancakeswap/token-lists/react'
 import {
   DEFAULT_LIST_OF_LISTS,
@@ -18,10 +18,10 @@ import { EMPTY_LIST } from '@pancakeswap/tokens'
 import uniqBy from 'lodash/uniqBy'
 import { useMemo } from 'react'
 import { useActiveChainId } from 'hooks/useActiveChainId'
-import DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/pancake-default.tokenlist.json'
-import UNSUPPORTED_TOKEN_LIST from '../../config/constants/tokenLists/pancake-unsupported.tokenlist.json'
-import WARNING_TOKEN_LIST from '../../config/constants/tokenLists/pancake-warning.tokenlist.json'
-import ONRAMP_TOKEN_LIST from '../../config/constants/tokenLists/pancake-supported-onramp-currency-list.json'
+import DEFAULT_TOKEN_LIST from '@pancakeswap/token-lists'
+import UNSUPPORTED_TOKEN_LIST from '@pancakeswap/token-lists'
+import WARNING_TOKEN_LIST from '@pancakeswap/token-lists'
+import ONRAMP_TOKEN_LIST from '@pancakeswap/token-lists'
 import { listsAtom } from './lists'
 import { isAddress } from '../../utils'
 

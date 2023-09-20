@@ -22,6 +22,6 @@ export const BATCH_MULTICALL_CONFIGS: ChainMap<BatchMulticallConfigs> = {
   [ChainId.BITGERT]: DEFAULT,
   [ChainId.XDC]: DEFAULT,
   [ChainId.FUSE]: DEFAULT,
-  [ChainId.DOGECHAIN]: DEFAULT,
+  // [ChainId.DOGECHAIN]: DEFAULT,
   [ChainId.BSC]: DEFAULT,
 }

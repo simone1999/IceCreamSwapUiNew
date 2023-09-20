@@ -1,8 +1,9 @@
+// @ts-nocheck
 import { createNextApiHandler } from '@trpc/server/adapters/next'
 import { createContext } from './context'
 import { appRouter } from './routers/_app'
 
-export const nextApiHandler = createNextApiHandler({
+export const nextApiHandler: any = createNextApiHandler({
   router: appRouter,
   createContext,
   onError: ({ error }) => {
