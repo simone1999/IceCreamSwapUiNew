@@ -13,8 +13,8 @@ const toBase64 = (file: File) =>
 export const useSchema = () => {
   const { t } = useTranslation()
   const schema = useMemo(
-    () => z
-      .object({
+    () =>
+      z.object({
         tokenAddress: z.string(),
         description: z.string().min(50, t('Description must be at least 50 character')),
         hardCap: z
@@ -46,13 +46,16 @@ export const useSchema = () => {
           .string()
           .transform(Number)
           .refine((value) => value > 0, t('Must be greater than 0')),
-        startDate: z.date(),
-        endDate: z.date(),
+        startDate: z.string(),
+        endDate: z.string(),
         banner: z
           .any()
           .refine(
             (value) =>
-              Array.isArray(value) && typeof value[0] === 'object' && value[0] instanceof File && value[0].size < 500000,
+              Array.isArray(value) &&
+              typeof value[0] === 'object' &&
+              value[0] instanceof File &&
+              value[0].size < 500000,
             t('Banner must be a file and less than 500kb'),
           )
           .transform(async (value) => ({ fileName: value[0].name, blob: await toBase64(value[0]) }))

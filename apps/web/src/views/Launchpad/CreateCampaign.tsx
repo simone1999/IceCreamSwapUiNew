@@ -1,4 +1,4 @@
-import { Button, Checkbox, Flex, Heading, Input, Text, useModal } from '@pancakeswap/uikit'
+import { Button, Flex, Input, Text, useModal } from '@pancakeswap/uikit'
 import AppWrapper from 'components/AppWrapper'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -35,62 +35,62 @@ export const CreateCampaign: React.FC = () => {
           style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}
         >
           <Flex flexDirection="column">
-            <Text>{t('Token Address')}</Text>
+            <Text marginBottom="7px">{t('Token Address')}</Text>
             <Input placeholder={t('Token Address')} {...register('tokenAddress')} />
             {errors.tokenAddress && <FormError>{errors.tokenAddress.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Description')}</Text>
+            <Text marginBottom="7px">{t('Description')}</Text>
             <Input placeholder="Description" {...register('description')} />
             {errors.description && <FormError>{errors.description.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Soft Cap')}</Text>
+            <Text marginBottom="7px">{t('Soft Cap')}</Text>
             <Input type="number" placeholder={t('Soft Cap')} {...register('softCap')} />
             {errors.softCap && <FormError>{errors.softCap.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Hard Cap')}</Text>
+            <Text marginBottom="7px">{t('Hard Cap')}</Text>
             <Input type="number" placeholder={t('Hard Cap')} {...register('hardCap')} />
             {errors.hardCap && <FormError>{errors.hardCap.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Minimum Allowed')}</Text>
+            <Text marginBottom="7px">{t('Minimum Allowed')}</Text>
             <Input type="number" placeholder={t('Minimum Allowed')} {...register('minAllowed')} />
             {errors.minAllowed && <FormError>{errors.minAllowed.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Maximum Allowed')}</Text>
+            <Text marginBottom="7px">{t('Maximum Allowed')}</Text>
             <Input type="number" placeholder={t('Maximum Allowed')} {...register('maxAllowed')} />
             {errors.maxAllowed && <FormError>{errors.maxAllowed.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Pool Rate')}</Text>
+            <Text marginBottom="7px">{t('Pool Rate')}</Text>
             <Input type="number" placeholder={t('Pool Rate')} {...register('poolRate')} />
             {errors.poolRate && <FormError>{errors.poolRate.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Rate')}</Text>
+            <Text marginBottom="7px">{t('Rate')}</Text>
             <Input type="number" placeholder={t('Rate')} {...register('rate')} />
             {errors.rate && <FormError>{errors.rate.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Liquidity Rate')}</Text>
+            <Text marginBottom="7px">{t('Liquidity Rate')}</Text>
             <Input type="number" placeholder={t('Liquidity Rate')} {...register('liquidityRate')} />
             {errors.liquidityRate && <FormError>{errors.liquidityRate.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Start Date')}</Text>
+            <Text marginBottom="7px">{t('Start Date')}</Text>
             <Input type="date" placeholder={t('Start Date')} {...register('startDate')} />
             {errors.startDate && <FormError>{errors.startDate.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('End Date')}</Text>
+            <Text marginBottom="7px">{t('End Date')}</Text>
             <Input type="date" placeholder={t('End Date')} {...register('endDate')} />
             {errors.endDate && <FormError>{errors.endDate.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
-            <Text>{t('Banner')}</Text>
+            <Text marginBottom="7px">{t('Banner')}</Text>
             <FileInput
               accept={{
                 'image/png': ['.png'],
@@ -100,7 +100,9 @@ export const CreateCampaign: React.FC = () => {
             />
             {errors.banner && <FormError>{errors.banner.message}</FormError>}
           </Flex>
-          <Button type="submit">{t('Create Token')}</Button>
+          <Button type="submit" variant="success">
+            {t('Create Token')}
+          </Button>
         </form>
       </FormProvider>
     </AppWrapper>
