@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { string, z } from 'zod'
 import { useMemo } from 'react'
 import { useTranslation } from '@pancakeswap/localization'
 
@@ -17,6 +17,12 @@ export const useSchema = () => {
       z.object({
         tokenAddress: z.string(),
         description: z.string().min(50, t('Description must be at least 50 character')),
+        twitter: z.string(),
+        telegram: z.string(),
+        discord: z.string(),
+        reddit: z.string(),
+        github: z.string(),
+        website: z.string(),
         hardCap: z
           .string()
           .transform(Number)

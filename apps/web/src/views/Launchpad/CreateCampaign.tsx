@@ -45,6 +45,36 @@ export const CreateCampaign: React.FC = () => {
             {errors.description && <FormError>{errors.description.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Twitter')}</Text>
+            <Input placeholder="Twitter" {...register('twitter')} />
+            {errors.twitter && <FormError>{errors.twitter.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Telegram')}</Text>
+            <Input placeholder="Telegram" {...register('telegram')} />
+            {errors.telegram && <FormError>{errors.telegram.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Discord')}</Text>
+            <Input placeholder="Discord" {...register('discord')} />
+            {errors.discord && <FormError>{errors.discord.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Reddit')}</Text>
+            <Input placeholder="Reddit" {...register('reddit')} />
+            {errors.reddit && <FormError>{errors.reddit.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('GitHub')}</Text>
+            <Input placeholder="GitHub" {...register('github')} />
+            {errors.github && <FormError>{errors.github.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Website')}</Text>
+            <Input placeholder="Website" {...register('website')} />
+            {errors.website && <FormError>{errors.website.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
             <Text marginBottom="7px">{t('Soft Cap')}</Text>
             <Input type="number" placeholder={t('Soft Cap')} {...register('softCap')} />
             {errors.softCap && <FormError>{errors.softCap.message}</FormError>}

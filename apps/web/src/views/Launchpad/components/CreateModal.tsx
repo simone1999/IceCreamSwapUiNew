@@ -43,6 +43,26 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
   const handleDeposit = async () => {
     // const initialSupply = utils.parseUnits(String(formValues?.initialSupply || '0'), 18)
     // const maxSupply = utils.parseUnits(String(formValues?.maxSupply || '0'), 18)
+
+    fetch('/api/add-campaign', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        address: formValues?.tokenAddress,
+        chainId: chainId as number,
+        website: formValues?.website,
+        banner: formValues?.banner,
+        github: formValues?.github,
+        reddit: formValues?.reddit,
+        discord: formValues?.discord,
+        telegram: formValues?.telegram,
+        twitter: formValues?.twitter,
+        description: formValues?.description,
+      }),
+    })
+
     await campaignFactory?.createCampaign(
       {
         rate: BigNumber.from(formValues?.rate || 0),
