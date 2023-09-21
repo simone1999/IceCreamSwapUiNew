@@ -100,7 +100,7 @@ export const CreateCampaign: React.FC = () => {
             />
             {errors.banner && <FormError>{errors.banner.message}</FormError>}
           </Flex>
-          <Button type="submit" variant="success">
+          <Button type="submit" variant="primary">
             {t('Create Token')}
           </Button>
         </form>
