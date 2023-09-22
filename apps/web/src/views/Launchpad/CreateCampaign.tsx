@@ -6,9 +6,8 @@ import FormError from 'views/Bridge/components/FormError'
 import FileInput from 'components/FileInput'
 import CreateModal from './components/CreateModal'
 import { FormValues, useSchema } from './create-schema'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from '@pancakeswap/localization'
-import useSWR from 'swr'
 import { useAccount } from 'wagmi'
 import Link from 'next/link'
 
@@ -45,6 +44,7 @@ export const CreateCampaign: React.FC = () => {
     if (!paid && address) {
       getPaid()
     }
+    // eslint-disable-next-line
   }, [paid, address])
 
   return (
