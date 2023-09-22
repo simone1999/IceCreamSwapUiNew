@@ -8,6 +8,9 @@ import CreateModal from './components/CreateModal'
 import { FormValues, useSchema } from './create-schema'
 import { useState } from 'react'
 import { useTranslation } from '@pancakeswap/localization'
+import useSWR from 'swr'
+import { useAccount } from 'wagmi'
+import Link from 'next/link'
 
 export const CreateCampaign: React.FC = () => {
   const schema = useSchema()
@@ -24,6 +27,17 @@ export const CreateCampaign: React.FC = () => {
 
   const [onPresentCreateModal] = useModal(<CreateModal formValues={formValues} />, true, true, 'tokenCreateModal')
 
+  const { address } = useAccount()
+  const paid = useSWR(
+    address ? `kyc/${address}` : null,
+    async () => {
+      const response = await fetch(`api/kyc-info/${address}`)
+      const data = await response.json()
+      return data.status
+    },
+    { refreshInterval: 2000 },
+  )
+
   return (
     <AppWrapper title={t('Create Campaign')} subtitle={t('Create your own campaign in seconds')}>
       <FormProvider {...form}>
@@ -34,6 +48,8 @@ export const CreateCampaign: React.FC = () => {
           })}
           style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}
         >
+          {paid.data !== 'verified' && <FormError>You must first become KYC verified.</FormError>}
+
           <Flex flexDirection="column">
             <Text marginBottom="7px">{t('Token Address')}</Text>
             <Input placeholder={t('Token Address')} {...register('tokenAddress')} />
@@ -130,9 +146,18 @@ export const CreateCampaign: React.FC = () => {
             />
             {errors.banner && <FormError>{errors.banner.message}</FormError>}
           </Flex>
-          <Button type="submit" variant="primary">
-            {t('Create Token')}
-          </Button>
+          {paid.data !== 'verified' && (
+            <Link href="/kyc">
+              <Button as="a" height="40px" width="100%">
+                {t('Proceed to KYC')}
+              </Button>
+            </Link>
+          )}
+          {paid.data === 'verified' && (
+            <Button type="submit" variant="primary">
+              {t('Create Token')}
+            </Button>
+          )}
         </form>
       </FormProvider>
     </AppWrapper>

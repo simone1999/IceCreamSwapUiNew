@@ -72,7 +72,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
       }),
     })
 
-    setStep('completed')
+    setStep('transfer')
 
     await campaignFactory?.createCampaign(
       {
@@ -93,11 +93,12 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
       '',
       '',
     )
-    setStep('transfer')
 
     campaignFactory.on(campaignFactory.filters.CampaignAdded(address), (creator, ta, _tokenName) => {
       if (creator !== address) console.log('not creator')
     })
+
+    setStep('completed')
   }
 
   const addToken = useAddUserToken()
