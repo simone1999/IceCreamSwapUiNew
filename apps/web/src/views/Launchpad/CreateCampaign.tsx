@@ -45,6 +45,56 @@ export const CreateCampaign: React.FC = () => {
             {errors.description && <FormError>{errors.description.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Soft Cap')}</Text>
+            <Input type="number" placeholder={t('Soft Cap')} {...register('softCap')} />
+            {errors.softCap && <FormError>{errors.softCap.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Hard Cap')}</Text>
+            <Input type="number" placeholder={t('Hard Cap')} {...register('hardCap')} />
+            {errors.hardCap && <FormError>{errors.hardCap.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Minimum Allowed')}</Text>
+            <Input type="number" placeholder={t('Minimum Allowed')} {...register('minAllowed')} />
+            {errors.minAllowed && <FormError>{errors.minAllowed.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Maximum Allowed')}</Text>
+            <Input type="number" placeholder={t('Maximum Allowed')} {...register('maxAllowed')} />
+            {errors.maxAllowed && <FormError>{errors.maxAllowed.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Rate')}</Text>
+            <Input type="number" placeholder={t('Rate')} {...register('rate')} />
+            {errors.rate && <FormError>{errors.rate.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Pool Rate')}</Text>
+            <Input type="number" placeholder={t('Pool Rate')} {...register('poolRate')} />
+            {errors.poolRate && <FormError>{errors.poolRate.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Liquidity Rate')}</Text>
+            <Input type="number" placeholder={t('Liquidity Rate')} {...register('liquidityRate')} />
+            {errors.liquidityRate && <FormError>{errors.liquidityRate.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Start Date')}</Text>
+            <Input type="date" placeholder={t('Start Date')} {...register('startDate')} />
+            {errors.startDate && <FormError>{errors.startDate.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('End Date')}</Text>
+            <Input type="date" placeholder={t('End Date')} {...register('endDate')} />
+            {errors.endDate && <FormError>{errors.endDate.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
+            <Text marginBottom="7px">{t('Website')}</Text>
+            <Input placeholder="Website" {...register('website')} />
+            {errors.website && <FormError>{errors.website.message}</FormError>}
+          </Flex>
+          <Flex flexDirection="column">
             <Text marginBottom="7px">{t('Twitter')}</Text>
             <Input placeholder="Twitter" {...register('twitter')} />
             {errors.twitter && <FormError>{errors.twitter.message}</FormError>}
@@ -68,56 +118,6 @@ export const CreateCampaign: React.FC = () => {
             <Text marginBottom="7px">{t('GitHub')}</Text>
             <Input placeholder="GitHub" {...register('github')} />
             {errors.github && <FormError>{errors.github.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('Website')}</Text>
-            <Input placeholder="Website" {...register('website')} />
-            {errors.website && <FormError>{errors.website.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('Soft Cap')}</Text>
-            <Input type="number" placeholder={t('Soft Cap')} {...register('softCap')} />
-            {errors.softCap && <FormError>{errors.softCap.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('Hard Cap')}</Text>
-            <Input type="number" placeholder={t('Hard Cap')} {...register('hardCap')} />
-            {errors.hardCap && <FormError>{errors.hardCap.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('Minimum Allowed')}</Text>
-            <Input type="number" placeholder={t('Minimum Allowed')} {...register('minAllowed')} />
-            {errors.minAllowed && <FormError>{errors.minAllowed.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('Maximum Allowed')}</Text>
-            <Input type="number" placeholder={t('Maximum Allowed')} {...register('maxAllowed')} />
-            {errors.maxAllowed && <FormError>{errors.maxAllowed.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('Pool Rate')}</Text>
-            <Input type="number" placeholder={t('Pool Rate')} {...register('poolRate')} />
-            {errors.poolRate && <FormError>{errors.poolRate.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('Rate')}</Text>
-            <Input type="number" placeholder={t('Rate')} {...register('rate')} />
-            {errors.rate && <FormError>{errors.rate.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('Liquidity Rate')}</Text>
-            <Input type="number" placeholder={t('Liquidity Rate')} {...register('liquidityRate')} />
-            {errors.liquidityRate && <FormError>{errors.liquidityRate.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('Start Date')}</Text>
-            <Input type="date" placeholder={t('Start Date')} {...register('startDate')} />
-            {errors.startDate && <FormError>{errors.startDate.message}</FormError>}
-          </Flex>
-          <Flex flexDirection="column">
-            <Text marginBottom="7px">{t('End Date')}</Text>
-            <Input type="date" placeholder={t('End Date')} {...register('endDate')} />
-            {errors.endDate && <FormError>{errors.endDate.message}</FormError>}
           </Flex>
           <Flex flexDirection="column">
             <Text marginBottom="7px">{t('Banner')}</Text>

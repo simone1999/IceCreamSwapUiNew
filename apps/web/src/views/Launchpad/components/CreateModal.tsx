@@ -51,17 +51,28 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
       },
       body: JSON.stringify({
         address: formValues?.tokenAddress,
-        chainId: chainId as number,
-        website: formValues?.website,
-        banner: formValues?.banner,
-        github: formValues?.github,
-        reddit: formValues?.reddit,
-        discord: formValues?.discord,
-        telegram: formValues?.telegram,
-        twitter: formValues?.twitter,
         description: formValues?.description,
+        chainId: chainId as number,
+        softCap: BigNumber.from(formValues?.softCap || 0),
+        hardCap: BigNumber.from(formValues?.hardCap || 0),
+        minAllowed: BigNumber.from(formValues?.minAllowed || 0),
+        maxAllowed: BigNumber.from(formValues?.maxAllowed || 0),
+        rate: BigNumber.from(formValues?.rate || 0),
+        poolRate: BigNumber.from(formValues?.poolRate || 0),
+        liquidityRate: BigNumber.from(formValues?.liquidityRate || 0),
+        startDate: Math.floor(new Date(formValues?.startDate).getTime()),
+        endDate: BigNumber.from(Math.floor(new Date(formValues?.endDate).getTime())),
+        website: formValues?.website,
+        twitter: formValues?.twitter,
+        telegram: formValues?.telegram,
+        discord: formValues?.discord,
+        reddit: formValues?.reddit,
+        github: formValues?.github,
+        banner: formValues?.banner,
       }),
     })
+
+    setStep('completed')
 
     await campaignFactory?.createCampaign(
       {
@@ -83,6 +94,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
       '',
     )
     setStep('transfer')
+
     campaignFactory.on(campaignFactory.filters.CampaignAdded(address), (creator, ta, _tokenName) => {
       if (creator !== address) console.log('not creator')
     })

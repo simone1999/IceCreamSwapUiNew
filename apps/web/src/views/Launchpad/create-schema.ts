@@ -15,14 +15,14 @@ export const useSchema = () => {
   const schema = useMemo(
     () =>
       z.object({
-        tokenAddress: z.string(),
+        tokenAddress: z.string().min(42),
         description: z.string().min(50, t('Description must be at least 50 character')),
         twitter: z.string(),
         telegram: z.string(),
         discord: z.string(),
         reddit: z.string(),
         github: z.string(),
-        website: z.string(),
+        website: z.string().nonempty(),
         hardCap: z
           .string()
           .transform(Number)

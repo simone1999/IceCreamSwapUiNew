@@ -3,20 +3,49 @@ import { PrismaClient } from '@icecreamswap/database'
 const client = new PrismaClient()
 
 export default async function handler(req, res) {
-  const { address, chainId, website, banner, github, reddit, discord, telegram, twitter, description } = req.body
+  const {
+    address,
+    description,
+    chainId,
+    // softCap,
+    // hardCap,
+    // minAllowed,
+    // maxAllowed,
+    // rate,
+    // poolRate,
+    // liquidityRate,
+    startDate,
+    // endDate,
+    website,
+    twitter,
+    telegram,
+    discord,
+    reddit,
+    github,
+    banner,
+  } = req.body
 
   await client.campaign.create({
     data: {
       address,
-      chainId,
-      website,
-      banner,
-      github,
-      reddit,
-      discord,
-      telegram,
-      twitter,
       description,
+      chainId,
+      // softCap,
+      // hardCap,
+      // minAllowed,
+      // maxAllowed,
+      // rate,
+      // poolRate,
+      // liquidityRate,
+      startDate,
+      // endDate,
+      website,
+      twitter,
+      telegram,
+      discord,
+      reddit,
+      github,
+      banner,
     },
   })
 
