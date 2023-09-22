@@ -48,7 +48,11 @@ export const CreateCampaign: React.FC = () => {
           })}
           style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}
         >
-          {paid.data !== 'verified' && <FormError>You must first become KYC verified.</FormError>}
+          {paid.data !== 'verified' && (
+            <span style={{ margin: 'auto' }}>
+              <FormError>You must first become KYC verified.</FormError>
+            </span>
+          )}
 
           <Flex flexDirection="column">
             <Text marginBottom="7px">{t('Token Address')}</Text>

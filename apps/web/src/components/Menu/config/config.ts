@@ -17,8 +17,10 @@ import {
   SUPPORT_INFO,
   SUPPORT_SWAP,
   SUPPORT_BRIDGE,
-  SUPPORT_LOCKS, SUPPORT_LAUNCHPAD, SUPPORT_TOKEN_DEPLOYER
-} from "../../../config/constants/supportChains";
+  SUPPORT_LOCKS,
+  SUPPORT_LAUNCHPAD,
+  SUPPORT_TOKEN_DEPLOYER,
+} from '../../../config/constants/supportChains'
 
 export type ConfigMenuDropDownItemsType = DropdownMenuItems & {
   hideSubNav?: boolean
@@ -192,7 +194,12 @@ const config: (
       hideSubNav: true,
       showItemsOnMobile: false,
       supportChainIds: SUPPORT_LAUNCHPAD,
-      items: [],
+      items: [
+        {
+          label: 'Create Campaign',
+          href: '/launchpad/create',
+        },
+      ],
     },
     {
       label: t('More'),
