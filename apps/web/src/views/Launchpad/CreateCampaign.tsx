@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Text, useModal } from '@pancakeswap/uikit'
+import { Button, Flex, Input, Spinner, Text, useModal } from '@pancakeswap/uikit'
 import AppWrapper from 'components/AppWrapper'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -27,7 +27,8 @@ export const CreateCampaign: React.FC = () => {
   const [onPresentCreateModal] = useModal(<CreateModal formValues={formValues} />, true, true, 'tokenCreateModal')
 
   const { address } = useAccount()
-  const [paid, setPaid] = useState(null)
+  const [paid, setPaid] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
 
   const getPaid = async () => {
     const response = await fetch(`/api/kyc-info/${address}`)
@@ -38,10 +39,12 @@ export const CreateCampaign: React.FC = () => {
     } else {
       setPaid('NOT MINTED')
     }
+
+    setLoading(false)
   }
 
   useEffect(() => {
-    if (!paid && address) {
+    if (!paid) {
       getPaid()
     }
     // eslint-disable-next-line
@@ -49,6 +52,12 @@ export const CreateCampaign: React.FC = () => {
 
   return (
     <AppWrapper title={t('Create Campaign')} subtitle={t('Create your own campaign in seconds')}>
+      {loading && (
+        <Flex justifyContent="center" marginY="14px">
+          <Spinner />
+        </Flex>
+      )}
+
       {paid && (
         <FormProvider {...form}>
           <form
