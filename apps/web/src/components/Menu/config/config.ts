@@ -189,12 +189,16 @@ const config: (
     */
     {
       label: t('Launchpad'),
-      href: '/launchpad',
       icon: RocketIcon,
+      href: '/launchpad',
       hideSubNav: true,
-      showItemsOnMobile: false,
+      showItemsOnMobile: true,
       supportChainIds: SUPPORT_LAUNCHPAD,
       items: [
+        {
+          label: 'Campaign List',
+          href: '/launchpad',
+        },
         {
           label: 'Create Campaign',
           href: '/launchpad/create',
@@ -204,6 +208,7 @@ const config: (
     {
       label: t('More'),
       icon: MoreHorizontalIcon,
+      href: '/info',
       showItemsOnMobile: true,
       hideSubNav: true,
       supportChainIds: [...SUPPORT_INFO, ...SUPPORT_LOCKS],

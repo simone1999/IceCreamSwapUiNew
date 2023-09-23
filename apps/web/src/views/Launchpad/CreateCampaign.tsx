@@ -79,7 +79,7 @@ export const CreateCampaign: React.FC = () => {
               </span>
 
               <Link href="/kyc">
-                <Button as="a" height="40px" width="100%" marginBottom="14px">
+                <Button as="a" height="40px" width="100%" marginBottom="7px">
                   {t('Proceed to KYC')}
                 </Button>
               </Link>
@@ -201,14 +201,14 @@ export const CreateCampaign: React.FC = () => {
                   fullWidth
                   scale="sm"
                   variant="subtle"
-                  marginY="14px"
+                  marginY="7px"
                 >
                   <ButtonMenuItem>Campaign Info</ButtonMenuItem>
                   <ButtonMenuItem>Social Details</ButtonMenuItem>
                 </ButtonMenu>
               </Row>
 
-              <Button type="submit" variant="primary" marginBottom="14px">
+              <Button type="submit" variant="primary" marginBottom="7px">
                 {t('Create Campaign')}
               </Button>
             </>
