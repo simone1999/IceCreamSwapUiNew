@@ -44,7 +44,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
     // const initialSupply = utils.parseUnits(String(formValues?.initialSupply || '0'), 18)
     // const maxSupply = utils.parseUnits(String(formValues?.maxSupply || '0'), 18)
 
-    fetch('/api/add-campaign', {
+    await fetch('/api/add-campaign', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
         poolRate: BigNumber.from(formValues?.poolRate || 0),
         liquidityRate: BigNumber.from(formValues?.liquidityRate || 0),
         startDate: Math.floor(new Date(formValues?.startDate).getTime()),
-        endDate: BigNumber.from(Math.floor(new Date(formValues?.endDate).getTime())),
+        endDate: Math.floor(new Date(formValues?.endDate).getTime()),
         website: formValues?.website,
         twitter: formValues?.twitter,
         telegram: formValues?.telegram,
