@@ -1,5 +1,3 @@
-/* eslint-disable object-shorthand */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Flex, Modal, useModalContext, Text, Button, Heading, Spinner } from '@pancakeswap/uikit'
 import { useCallback, useState } from 'react'
 import { FormValues } from '../create-schema'
