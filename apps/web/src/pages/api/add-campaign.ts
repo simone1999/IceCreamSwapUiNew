@@ -1,10 +1,12 @@
 import { PrismaClient } from '@icecreamswap/database'
+import { isKyc } from '@icecreamswap/backend/src/server/session'
 import getLpAddress from 'utils/getLpAddress'
 
 const client = new PrismaClient()
 
 export default async function handler(req, res) {
   const {
+    wallet,
     address,
     description,
     chainId,
@@ -26,11 +28,7 @@ export default async function handler(req, res) {
     banner,
   } = req.body
 
-  const kyc = await client.kyc.findFirst({
-    where: {
-      address: address.toLowerCase(),
-    },
-  })
+  const kyc = isKyc(wallet)
 
   if (!kyc) {
     res.status(403).json({ message: 'not kyc verified' })

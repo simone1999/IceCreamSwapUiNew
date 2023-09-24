@@ -50,6 +50,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        wallet: address,
         address: formValues?.tokenAddress,
         description: formValues?.description,
         chainId: chainId as number,
