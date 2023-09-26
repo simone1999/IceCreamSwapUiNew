@@ -15,14 +15,14 @@ export const useSchema = () => {
   const schema = useMemo(
     () =>
       z.object({
-        tokenAddress: z.string().min(42),
-        description: z.string().min(50, t('Description must be at least 50 character')),
+        tokenAddress: z.string().length(42, t('Address must be 42 characters')),
+        description: z.string().min(50, t('Description must be at least 50 characters')),
         twitter: z.string(),
         telegram: z.string(),
         discord: z.string(),
         reddit: z.string(),
         github: z.string(),
-        website: z.string().nonempty(),
+        website: z.string().url(t('Website must be a valid url')),
         hardCap: z
           .string()
           .transform(Number)
@@ -52,8 +52,8 @@ export const useSchema = () => {
           .string()
           .transform(Number)
           .refine((value) => value > 0, t('Must be greater than 0')),
-        startDate: z.string(),
-        endDate: z.string(),
+        startDate: z.string().nonempty(t('Date must exist')),
+        endDate: z.string().nonempty(t('Date must exist')),
         banner: z
           .any()
           .refine(

@@ -40,8 +40,8 @@ export const CreateCampaign: React.FC = () => {
     const response = await fetch(`/api/kyc-info/${address}`)
     const data = await response.json()
 
-    if (data?.status === 'MINTED') {
-      setPaid(data?.status)
+    if (data.status !== 'REJECTED') {
+      setPaid('MINTED')
     } else {
       setPaid('NOT MINTED')
     }

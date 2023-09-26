@@ -12,6 +12,8 @@ import { BigNumber, utils } from 'ethers'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useCampaignFactory } from '../hooks'
 import { useActiveChain } from 'hooks/useActiveChain'
+import { redirect } from 'next/dist/server/api-utils'
+import { useRouter } from 'next/router'
 
 interface DepositModalProps {
   formValues: FormValues
@@ -39,66 +41,62 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
   const { address, status } = useAccount()
   const campaignFactory = useCampaignFactory()
   const chain = useActiveChain()
+  const router = useRouter()
 
   const handleDeposit = async () => {
     // const initialSupply = utils.parseUnits(String(formValues?.initialSupply || '0'), 18)
     // const maxSupply = utils.parseUnits(String(formValues?.maxSupply || '0'), 18)
+    try {
+      await fetch('/api/add-campaign', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          wallet: address,
+          address: formValues?.tokenAddress,
+          chainId: chainId as number,
+          website: formValues?.website,
+          banner: formValues?.banner,
+          twitter: formValues?.twitter,
+          telegram: formValues?.telegram,
+          discord: formValues?.discord,
+          github: formValues?.github,
+          reddit: formValues?.reddit,
+          description: formValues?.description,
+          tags: [],
+          startDate: Math.floor(new Date(formValues?.startDate).getTime() / 1000),
+        }),
+      })
 
-    await fetch('/api/add-campaign', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        wallet: address,
-        address: formValues?.tokenAddress,
-        description: formValues?.description,
-        chainId: chainId as number,
-        softCap: BigNumber.from(formValues?.softCap || 0),
-        hardCap: BigNumber.from(formValues?.hardCap || 0),
-        minAllowed: BigNumber.from(formValues?.minAllowed || 0),
-        maxAllowed: BigNumber.from(formValues?.maxAllowed || 0),
-        rate: BigNumber.from(formValues?.rate || 0),
-        poolRate: BigNumber.from(formValues?.poolRate || 0),
-        liquidityRate: BigNumber.from(formValues?.liquidityRate || 0),
-        startDate: Math.floor(new Date(formValues?.startDate).getTime()),
-        endDate: Math.floor(new Date(formValues?.endDate).getTime()),
-        website: formValues?.website,
-        twitter: formValues?.twitter,
-        telegram: formValues?.telegram,
-        discord: formValues?.discord,
-        reddit: formValues?.reddit,
-        github: formValues?.github,
-        banner: formValues?.banner,
-      }),
-    })
+      setStep('transfer')
 
-    setStep('transfer')
+      await campaignFactory?.createCampaign(
+        {
+          rate: BigNumber.from(formValues?.rate || 0),
+          hardCap: BigNumber.from(formValues?.hardCap || 0),
+          softCap: BigNumber.from(formValues?.softCap || 0),
+          min_allowed: BigNumber.from(formValues?.minAllowed || 0),
+          max_allowed: BigNumber.from(formValues?.maxAllowed || 0),
+          start_date: BigNumber.from(Math.floor(new Date(formValues?.startDate).getTime() / 1000) || 0),
+          end_date: BigNumber.from(Math.floor(new Date(formValues?.startDate).getTime() / 1000) || 0),
+          pool_rate: BigNumber.from(formValues?.poolRate || 0),
+          liquidity_rate: BigNumber.from(formValues?.liquidityRate || 0),
+          lock_duration: 60 * 60 * 24 * 30,
+          whitelist_enabled: false,
+        },
+        formValues?.tokenAddress,
+        0,
+        '',
+        '',
+      )
 
-    await campaignFactory?.createCampaign(
-      {
-        rate: BigNumber.from(formValues?.rate || 0),
-        hardCap: BigNumber.from(formValues?.hardCap || 0),
-        softCap: BigNumber.from(formValues?.softCap || 0),
-        min_allowed: BigNumber.from(formValues?.minAllowed || 0),
-        max_allowed: BigNumber.from(formValues?.maxAllowed || 0),
-        start_date: BigNumber.from(Math.floor(new Date(formValues?.startDate).getTime())),
-        end_date: BigNumber.from(Math.floor(new Date(formValues?.endDate).getTime())),
-        pool_rate: BigNumber.from(formValues?.poolRate || 0),
-        liquidity_rate: BigNumber.from(formValues?.liquidityRate || 0),
-        lock_duration: 60 * 60 * 24 * 30,
-        whitelist_enabled: false,
-      },
-      formValues?.tokenAddress,
-      0,
-      '',
-      '',
-    )
-
-    campaignFactory.on(campaignFactory.filters.CampaignAdded(address), (creator, ta, _tokenName) => {
-      if (creator !== address) console.log('not creator')
-    })
-
+      campaignFactory.on(campaignFactory.filters.CampaignAdded(address), (creator, ta, _tokenName) => {
+        if (creator !== address) console.log('not creator')
+      })
+    } catch (err) {
+      console.log(err)
+    }
     setStep('completed')
   }
 
@@ -115,6 +113,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
 
   const handleDismiss = () => {
     onDismiss()
+    router.replace('/launchpad')
   }
 
   const preview = (

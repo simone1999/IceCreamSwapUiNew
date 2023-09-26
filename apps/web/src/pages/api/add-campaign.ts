@@ -8,27 +8,27 @@ export default async function handler(req, res) {
   const {
     wallet,
     address,
-    description,
     chainId,
-    // softCap,
-    // hardCap,
-    // minAllowed,
-    // maxAllowed,
-    // rate,
-    // poolRate,
-    // liquidityRate,
-    startDate,
-    // endDate,
     website,
+    banner,
     twitter,
     telegram,
     discord,
-    reddit,
     github,
-    banner,
+    reddit,
+    description,
+    tags,
+    deleted,
+    startDate,
   } = req.body
 
-  const kyc = isKyc(wallet)
+  const user = await client.user.findFirst({
+    where: {
+      wallet,
+    },
+  })
+
+  const kyc = isKyc(user)
 
   if (!kyc) {
     res.status(403).json({ message: 'not kyc verified' })
@@ -51,24 +51,18 @@ export default async function handler(req, res) {
   await client.campaign.create({
     data: {
       address,
-      description,
       chainId,
-      // softCap,
-      // hardCap,
-      // minAllowed,
-      // maxAllowed,
-      // rate,
-      // poolRate,
-      // liquidityRate,
-      startDate,
-      // endDate,
       website,
+      banner,
       twitter,
       telegram,
       discord,
-      reddit,
       github,
-      banner,
+      reddit,
+      description,
+      tags,
+      deleted,
+      startDate,
     },
   })
 
