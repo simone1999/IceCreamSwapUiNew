@@ -74,7 +74,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
             symbol: formValues?.tokenSymbol,
             logo: formValues?.logo?.blob,
             address: ta,
-            chainId: chainId,
+            chainId,
             decimals: 18,
           }),
         })
