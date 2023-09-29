@@ -53,8 +53,15 @@ export const CreateCampaign: React.FC = () => {
     if (!paid && address) {
       getPaid()
     }
+
+    setTimeout(() => {
+      if (!address && loading) {
+        setLoading(false)
+        setPaid('NOT MINTED')
+      }
+    }, 3500)
     // eslint-disable-next-line
-  }, [paid, address])
+  }, [paid, address, loading])
 
   return (
     <AppWrapper title={t('Create Campaign')} subtitle={t('Create your own campaign in seconds')}>

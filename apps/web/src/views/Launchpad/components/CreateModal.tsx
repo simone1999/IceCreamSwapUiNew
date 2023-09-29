@@ -1,5 +1,4 @@
 import { Flex, Modal, useModalContext, Text, Button, Heading, Spinner } from '@pancakeswap/uikit'
-import { formatAmount } from '../../Bridge/formatter'
 import { useCallback, useState } from 'react'
 import { FormValues } from '../create-schema'
 import styled from 'styled-components'
@@ -11,9 +10,8 @@ import ConnectWalletButton from 'components/ConnectWalletButton'
 import { BigNumber, utils } from 'ethers'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useCampaignFactory } from '../hooks'
-import { useActiveChain } from 'hooks/useActiveChain'
-import { redirect } from 'next/dist/server/api-utils'
 import { useRouter } from 'next/router'
+import { useUser } from 'strict/hooks/useUser'
 
 interface DepositModalProps {
   formValues: FormValues
@@ -40,9 +38,8 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
   const token = useToken(formValues?.tokenAddress)
   const { address, status } = useAccount()
   const campaignFactory = useCampaignFactory()
-  const chain = useActiveChain()
   const router = useRouter()
-
+  const user = useUser()
   const handleDeposit = async () => {
     // const initialSupply = utils.parseUnits(String(formValues?.initialSupply || '0'), 18)
     // const maxSupply = utils.parseUnits(String(formValues?.maxSupply || '0'), 18)
@@ -53,7 +50,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          wallet: address,
+          user: user.data?.wallet,
           address: formValues?.tokenAddress,
           chainId: chainId as number,
           website: formValues?.website,
@@ -64,7 +61,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
           github: formValues?.github,
           reddit: formValues?.reddit,
           description: formValues?.description,
-          tags: [],
+          tags: ['KYC'],
           startDate: Math.floor(new Date(formValues?.startDate).getTime() / 1000),
         }),
       })
@@ -113,7 +110,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
 
   const handleDismiss = () => {
     onDismiss()
-    router.replace('/launchpad')
+    router.push('/launchpad')
   }
 
   const preview = (

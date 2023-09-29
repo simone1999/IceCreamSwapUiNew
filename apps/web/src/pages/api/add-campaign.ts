@@ -1,6 +1,5 @@
 import { PrismaClient } from '@icecreamswap/database'
 import { isKyc } from '@icecreamswap/backend/src/server/session'
-import getLpAddress from 'utils/getLpAddress'
 
 const client = new PrismaClient()
 
@@ -39,7 +38,6 @@ export default async function handler(req, res) {
     where: {
       chainId,
       address,
-      startDate,
     },
   })
 
