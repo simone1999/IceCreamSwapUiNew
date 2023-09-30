@@ -30,8 +30,11 @@ export default async function handler(req, res) {
 
   const campaigns = await client.campaign.findMany({
     where: {
+      address: {
+        equals: address.toLowerCase(),
+        mode: 'insensitive',
+      },
       chainId,
-      address,
     },
   })
 
