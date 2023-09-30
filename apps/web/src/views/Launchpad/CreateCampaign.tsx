@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from '@pancakeswap/localization'
 import { useAccount } from 'wagmi'
 import Link from 'next/link'
+import { useUser } from 'strict/hooks/useUser'
 
 export const CreateCampaign: React.FC = () => {
   const schema = useSchema()
@@ -30,6 +31,8 @@ export const CreateCampaign: React.FC = () => {
   const [paid, setPaid] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [index, setIndex] = useState(0)
+  const user = useUser()
+
   const handleClick = (newIndex) => {
     setIndex(newIndex)
 
@@ -50,18 +53,18 @@ export const CreateCampaign: React.FC = () => {
   }
 
   useEffect(() => {
-    if (!paid && address) {
+    if (!paid && user.data?.isLoggedIn) {
       getPaid()
     }
 
     setTimeout(() => {
-      if (!address && loading) {
+      if (user.data?.isLoggedIn === false) {
         setLoading(false)
         setPaid('NOT MINTED')
       }
     }, 3500)
     // eslint-disable-next-line
-  }, [paid, address, loading])
+  }, [user, paid])
 
   return (
     <AppWrapper title={t('Create Campaign')} subtitle={t('Create your own campaign in seconds')}>

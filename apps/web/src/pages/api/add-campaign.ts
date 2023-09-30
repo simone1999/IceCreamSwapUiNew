@@ -5,7 +5,7 @@ const client = new PrismaClient()
 
 export default async function handler(req, res) {
   const {
-    wallet,
+    user,
     address,
     chainId,
     website,
@@ -20,12 +20,6 @@ export default async function handler(req, res) {
     deleted,
     startDate,
   } = req.body
-
-  const user = await client.user.findFirst({
-    where: {
-      wallet,
-    },
-  })
 
   const kyc = isKyc(user)
 
