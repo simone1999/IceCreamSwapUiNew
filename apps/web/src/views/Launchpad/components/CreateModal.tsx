@@ -54,7 +54,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
           address: formValues?.tokenAddress,
           chainId: chainId as number,
           website: formValues?.website,
-          banner: formValues?.banner,
+          banner: formValues?.banner?.blob,
           twitter: formValues?.twitter,
           telegram: formValues?.telegram,
           discord: formValues?.discord,
