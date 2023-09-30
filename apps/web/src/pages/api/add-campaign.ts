@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     return
   }
 
-  const campaigns = await client.campaign.findMany({
+  const campaign = await client.campaign.findFirst({
     where: {
       address: {
         equals: address.toLowerCase(),
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     },
   })
 
-  if (campaigns?.length > 0) {
+  if (campaign) {
     res.status(403).json({ message: 'campaign exists' })
     return
   }

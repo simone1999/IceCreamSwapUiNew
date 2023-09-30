@@ -44,6 +44,8 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
     // const initialSupply = utils.parseUnits(String(formValues?.initialSupply || '0'), 18)
     // const maxSupply = utils.parseUnits(String(formValues?.maxSupply || '0'), 18)
     try {
+      setStep('transfer')
+
       await fetch('/api/add-campaign', {
         method: 'POST',
         headers: {
@@ -65,8 +67,6 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
           startDate: Math.floor(new Date(formValues?.startDate).getTime() / 1000),
         }),
       })
-
-      setStep('transfer')
 
       await campaignFactory?.createCampaign(
         {
@@ -94,6 +94,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
     } catch (err) {
       console.log(err)
     }
+
     setStep('completed')
   }
 
@@ -145,7 +146,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
       <Flex justifyContent="center">
         <Spinner />
       </Flex>
-      <Text>Your Token is being created</Text>
+      <Text>Your Campaign is being created</Text>
     </>
   )
 
