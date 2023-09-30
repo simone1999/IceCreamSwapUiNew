@@ -84,8 +84,8 @@ export const CreateCampaign: React.FC = () => {
         >
           {paid === 'NOT MINTED' && (
             <>
-              <span style={{ margin: 'auto' }}>
-                <FormError>You must first become KYC verified.</FormError>
+              <span style={{ margin: 'auto', textAlign: 'center', width: '75%' }}>
+                <FormError>You must first become KYC verified or login to your KYC verified account.</FormError>
               </span>
 
               <Link href="/kyc">
