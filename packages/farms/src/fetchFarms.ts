@@ -56,6 +56,11 @@ const evmNativeStableLpMap = {
     wNative: 'WETH',
     stable: 'USDT',
   },
+  [ChainId.SHIMMER]: {
+    address: '0x82A7F6a7C2f54a552349A2C59Ecb3ceca7BF4a60',
+    wNative: 'WSMR',
+    stable: 'USDT',
+  },
 }
 
 export const getTokenAmount = (balance: FixedNumber, decimals: number) => {

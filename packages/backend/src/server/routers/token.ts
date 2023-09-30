@@ -33,7 +33,7 @@ export const tokenRouter = router({
         throw new Error('MissingLogin')
       } else if (!isKyc(ctx.session.user)) {
         throw new Error('MissingKYC')
-      } else if (await checkListed(tokenAddress)) {
+      } else if (await checkListed(tokenAddress, input.chainId)) {
         throw new Error('AlreadyListed')
       } else if (!mod && !checkDelegate(tokenAddress, ctx.session.user.wallet)) {
         throw new Error('MissingDelegation')
@@ -120,13 +120,16 @@ export const tokenRouter = router({
   }),
 })
 
-const checkListed = async (tokenAddress: string) => {
+const checkListed = async (tokenAddress: string, chainId: number) => {
   const token = await prisma.token.findFirst({
     where: {
       address: {
         equals: tokenAddress,
         mode: 'insensitive',
-      }
+      },
+      chainId: {
+        equals: chainId,
+      },
     }
   })
   return !!token
