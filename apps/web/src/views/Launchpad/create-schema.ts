@@ -17,11 +17,11 @@ export const useSchema = () => {
       z.object({
         tokenAddress: z.string().length(42, t('Address must be 42 characters')),
         description: z.string().min(50, t('Description must be at least 50 characters')),
-        twitter: z.string(),
-        telegram: z.string(),
-        discord: z.string(),
-        reddit: z.string(),
-        github: z.string(),
+        twitter: z.string().optional(),
+        telegram: z.string().optional(),
+        discord: z.string().optional(),
+        reddit: z.string().optional(),
+        github: z.string().optional(),
         website: z.string().url(t('Website must be a valid url')),
         hardCap: z
           .string()
