@@ -1,4 +1,4 @@
-import { Flex, Modal, useModalContext, Text, Button, Heading, Spinner } from '@pancakeswap/uikit'
+import { Flex, Modal, useModalContext, Text, Button, Spinner } from '@pancakeswap/uikit'
 import { useCallback, useState } from 'react'
 import { FormValues } from '../create-schema'
 import styled from 'styled-components'
@@ -7,11 +7,11 @@ import { useToken } from 'hooks/Tokens'
 import useUserAddedTokens from 'state/user/hooks/useUserAddedTokens'
 import { useAccount } from 'wagmi'
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import { BigNumber, utils } from 'ethers'
+import { BigNumber } from 'ethers'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useCampaignFactory } from '../hooks'
 import { useRouter } from 'next/router'
-import { useUser } from 'strict/hooks/useUser'
+import { trpc } from '@icecreamswap/backend'
 
 interface DepositModalProps {
   formValues: FormValues
@@ -39,37 +39,16 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
   const { address, status } = useAccount()
   const campaignFactory = useCampaignFactory()
   const router = useRouter()
-  const user = useUser()
+  const submit = trpc.campaign.add.useMutation()
+
   const handleDeposit = async () => {
     // const initialSupply = utils.parseUnits(String(formValues?.initialSupply || '0'), 18)
     // const maxSupply = utils.parseUnits(String(formValues?.maxSupply || '0'), 18)
-    try {
-      setStep('transfer')
 
-      await fetch('/api/add-campaign', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user: user.data,
-          address: formValues?.tokenAddress,
-          chainId: chainId as number,
-          website: formValues?.website,
-          banner: formValues?.banner?.blob,
-          twitter: formValues?.twitter,
-          telegram: formValues?.telegram,
-          discord: formValues?.discord,
-          github: formValues?.github,
-          reddit: formValues?.reddit,
-          description: formValues?.description,
-          tags: ['KYC'],
-          deleted: false,
-          startDate: Math.floor(new Date(formValues?.startDate).getTime() / 1000),
-        }),
-      })
+    setStep('transfer')
 
-      await campaignFactory?.createCampaign(
+    campaignFactory
+      .createCampaign(
         {
           rate: BigNumber.from(formValues?.rate || 0),
           hardCap: BigNumber.from(formValues?.hardCap || 0),
@@ -88,15 +67,32 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
         '',
         '',
       )
+      .catch((err) => console.error(err))
 
-      campaignFactory.on(campaignFactory.filters.CampaignAdded(address), (creator, ta, _tokenName) => {
-        if (creator !== address) console.log('not creator')
-      })
-    } catch (err) {
-      console.log(err)
-    }
+    campaignFactory.on(campaignFactory.filters.CampaignAdded(address), async (campaign, ta, owner) => {
+      if (owner !== address) console.log('not creator')
 
-    setStep('completed')
+      const data = {
+        address: campaign,
+        chainId: chainId as number,
+        website: formValues?.website,
+        banner: formValues?.banner?.blob,
+        twitter: formValues?.twitter,
+        telegram: formValues?.telegram,
+        discord: formValues?.discord,
+        github: formValues?.github,
+        reddit: formValues?.reddit,
+        description: formValues?.description,
+        tags: ['KYC'],
+        deleted: false,
+        startDate: Math.floor(new Date(formValues?.startDate).getTime() / 1000),
+      }
+
+      await submit
+        .mutateAsync(data)
+        .then(() => setStep('completed'))
+        .catch((err) => console.error(err))
+    })
   }
 
   const addToken = useAddUserToken()
@@ -112,7 +108,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
 
   const handleDismiss = () => {
     onDismiss()
-    router.push('/launchpad')
+    // router.push('/launchpad')
   }
 
   const preview = (
