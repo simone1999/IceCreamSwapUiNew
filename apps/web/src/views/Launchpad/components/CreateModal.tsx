@@ -64,6 +64,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
           reddit: formValues?.reddit,
           description: formValues?.description,
           tags: ['KYC'],
+          deleted: false,
           startDate: Math.floor(new Date(formValues?.startDate).getTime() / 1000),
         }),
       })

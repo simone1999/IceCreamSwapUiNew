@@ -1,4 +1,4 @@
-import { string, z } from 'zod'
+import { z } from 'zod'
 import { useMemo } from 'react'
 import { useTranslation } from '@pancakeswap/localization'
 
