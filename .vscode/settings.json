@@ -1,12 +1,6 @@
 {
   "deno.enablePaths": ["./cli/aptos-codegen"],
   "deno.config": "./cli/aptos-codegen/deno.jsonc",
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#AF4562",
-    "activityBar.foreground": "#F7FBF0",
-    "activityBar.inactiveForeground": "#F7FBF0",
-    "activityBarBadge.background": "#F7FBF0",
-    "activityBarBadge.foreground": "#AF4562"
-  }
+  "workbench.colorCustomizations": {}
 }
 

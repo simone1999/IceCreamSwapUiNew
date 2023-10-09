@@ -1,12 +1,12 @@
-import { Flex } from '@pancakeswap/uikit'
+import { Card, Flex } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 
-export const AppWrapperContainer = styled(Flex)`
+export const AppWrapperContainer = styled(Card)`
   flex-shrink: 0;
   height: fit-content;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    padding: 0 40px;
+    padding: 20px;
     min-width: 620px;
   }
 `

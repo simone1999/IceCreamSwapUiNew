@@ -1,5 +1,4 @@
-import { Flex, Modal, useModalContext, Text, Button, Heading, Spinner } from '@pancakeswap/uikit'
-import { formatAmount } from '../../Bridge/formatter'
+import { Flex, Modal, useModalContext, Text, Button, Spinner } from '@pancakeswap/uikit'
 import { useCallback, useState } from 'react'
 import { FormValues } from '../create-schema'
 import styled from 'styled-components'
@@ -8,9 +7,12 @@ import { useToken } from 'hooks/Tokens'
 import useUserAddedTokens from 'state/user/hooks/useUserAddedTokens'
 import { useAccount } from 'wagmi'
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import { BigNumber, utils } from 'ethers'
+import { BigNumber } from 'ethers'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useCampaignFactory } from '../hooks'
+import { useRouter } from 'next/router'
+import { trpc } from '@icecreamswap/backend'
+import { getChain } from '@icecreamswap/constants/src/chains'
 import { useActiveChain } from 'hooks/useActiveChain'
 
 interface DepositModalProps {
@@ -38,33 +40,62 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
   const token = useToken(formValues?.tokenAddress)
   const { address, status } = useAccount()
   const campaignFactory = useCampaignFactory()
+  const router = useRouter()
+  const submit = trpc.campaign.add.useMutation()
   const chain = useActiveChain()
 
   const handleDeposit = async () => {
     // const initialSupply = utils.parseUnits(String(formValues?.initialSupply || '0'), 18)
     // const maxSupply = utils.parseUnits(String(formValues?.maxSupply || '0'), 18)
-    await campaignFactory?.createCampaign(
-      {
-        rate: BigNumber.from(formValues?.rate || 0),
-        hardCap: BigNumber.from(formValues?.hardCap || 0),
-        softCap: BigNumber.from(formValues?.softCap || 0),
-        min_allowed: BigNumber.from(formValues?.minAllowed || 0),
-        max_allowed: BigNumber.from(formValues?.maxAllowed || 0),
-        start_date: BigNumber.from(Math.floor(formValues?.startDate.valueOf() / 1000)),
-        end_date: BigNumber.from(Math.floor(formValues?.endDate.valueOf() / 1000)),
-        pool_rate: BigNumber.from(formValues?.poolRate || 0),
-        liquidity_rate: BigNumber.from(formValues?.liquidityRate || 0),
-        lock_duration: 60 * 60 * 24 * 30,
-        whitelist_enabled: false,
-      },
-      formValues?.tokenAddress,
-      0,
-      '',
-      '',
-    )
+
     setStep('transfer')
-    campaignFactory.on(campaignFactory.filters.CampaignAdded(address), (creator, ta, _tokenName) => {
-      if (creator !== address) console.log('not creator')
+
+    campaignFactory
+      .createCampaign(
+        {
+          rate: BigNumber.from(formValues?.rate || 0),
+          hardCap: BigNumber.from(formValues?.hardCap || 0),
+          softCap: BigNumber.from(formValues?.softCap || 0),
+          min_allowed: BigNumber.from(formValues?.minAllowed || 0),
+          max_allowed: BigNumber.from(formValues?.maxAllowed || 0),
+          start_date: BigNumber.from(Math.floor(new Date(formValues?.startDate).getTime() / 1000) || 0),
+          end_date: BigNumber.from(Math.floor(new Date(formValues?.endDate).getTime() / 1000) || 0),
+          pool_rate: BigNumber.from(formValues?.poolRate || 0),
+          liquidity_rate: BigNumber.from(formValues?.liquidityRate || 0),
+          lock_duration: 60 * 60 * 24 * 30,
+          whitelist_enabled: false,
+        },
+        formValues?.tokenAddress,
+        BigNumber.from(0),
+        chain.campaignFactory,
+        '0x0000000000000000000000000000000000000000',
+        { gasLimit: BigNumber.from(1000000) },
+      )
+      .catch((err) => console.error(err))
+
+    campaignFactory.on(campaignFactory.filters.CampaignAdded(address), async (campaign, ta, owner) => {
+      if (owner !== address) console.log('not creator')
+
+      const data = {
+        address: campaign,
+        chainId: chainId as number,
+        website: formValues?.website,
+        banner: formValues?.banner?.blob,
+        twitter: formValues?.twitter,
+        telegram: formValues?.telegram,
+        discord: formValues?.discord,
+        github: formValues?.github,
+        reddit: formValues?.reddit,
+        description: formValues?.description,
+        tags: ['KYC'],
+        deleted: false,
+        startDate: Math.floor(new Date(formValues?.startDate).getTime() / 1000),
+      }
+
+      await submit
+        .mutateAsync(data)
+        .then(() => setStep('completed'))
+        .catch((err) => console.error(err))
     })
   }
 
@@ -81,6 +112,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
 
   const handleDismiss = () => {
     onDismiss()
+    // router.push('/launchpad')
   }
 
   const preview = (
@@ -115,7 +147,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
       <Flex justifyContent="center">
         <Spinner />
       </Flex>
-      <Text>Your Token is being created</Text>
+      <Text>Your Campaign is being created</Text>
     </>
   )
 

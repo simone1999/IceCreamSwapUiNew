@@ -6,11 +6,11 @@ import { prisma } from '../prisma'
 import { Listed, Token } from '@icecreamswap/database'
 import v2factoryAbi from '../../abi/v2factory.json'
 import v2pairAbi from '../../abi/v2pair.json'
-import { BigNumber, Contract, providers, utils } from "ethers";
-import { ChainId, getChain } from "@icecreamswap/constants";
+import { BigNumber, Contract, providers, utils } from 'ethers'
+import { ChainId, getChain } from '@icecreamswap/constants'
 import { ICE, USD } from '@pancakeswap/tokens'
-import { getAddress } from "ethers/lib/utils";
-import { WETH9 } from "@pancakeswap/sdk";
+import { getAddress } from 'ethers/lib/utils'
+import { WETH9 } from '@pancakeswap/sdk'
 
 export const tokenRouter = router({
   add: publicProcedure
@@ -92,8 +92,8 @@ export const tokenRouter = router({
         token.tags.push('KYCed')
       }
     })
-    const kycedTokens = tokens.filter(token => token.tags?.includes('KYCed'))
-    const nonKycedTokens = tokens.filter(token => !(token.tags?.includes('KYCed')))
+    const kycedTokens = tokens.filter((token) => token.tags?.includes('KYCed'))
+    const nonKycedTokens = tokens.filter((token) => !token.tags?.includes('KYCed'))
     const tokensSorted = kycedTokens.concat(nonKycedTokens)
 
     return {
@@ -130,7 +130,7 @@ const checkListed = async (tokenAddress: string, chainId: number) => {
       chainId: {
         equals: chainId,
       },
-    }
+    },
   })
   return !!token
 }
@@ -176,7 +176,12 @@ const checkLiquidity = async (tokenAddress: string, chainId: number) => {
   return summedLiquidity >= usdThreshold
 }
 
-const getPairLiquidity = async (provider: providers.JsonRpcProvider, baseAddress: string, quoteAddress: string, chainId: ChainId) => {
+const getPairLiquidity = async (
+  provider: providers.JsonRpcProvider,
+  baseAddress: string,
+  quoteAddress: string,
+  chainId: ChainId,
+) => {
   const usdAddress = USD[chainId].address
 
   const baseQuoteAddress = await getPairAddress(quoteAddress, baseAddress, chainId)
@@ -215,7 +220,7 @@ const getPairLiquidity = async (provider: providers.JsonRpcProvider, baseAddress
   return liquidity
 }
 
-const getPairAddress = async (tokenA: string, tokenB: string, chainId: number): Promise<string|undefined> => {
+const getPairAddress = async (tokenA: string, tokenB: string, chainId: number): Promise<string | undefined> => {
   const chain = getChain(chainId)
   if (!chain || !chain.swap?.factoryAddress) {
     throw new Error('Invalid chainId')
@@ -224,7 +229,7 @@ const getPairAddress = async (tokenA: string, tokenB: string, chainId: number): 
   const factory = new Contract(chain.swap?.factoryAddress, v2factoryAbi, provider)
   try {
     const pairAddress = await factory.getPair(tokenA, tokenB)
-    if (pairAddress === "0x0000000000000000000000000000000000000000") {
+    if (pairAddress === '0x0000000000000000000000000000000000000000') {
       return undefined
     }
     return pairAddress
@@ -233,7 +238,7 @@ const getPairAddress = async (tokenA: string, tokenB: string, chainId: number): 
   }
 }
 
-const getPairPrice = async (pair: Contract, baseToken: string): Promise<BigNumber|undefined> => {
+const getPairPrice = async (pair: Contract, baseToken: string): Promise<BigNumber | undefined> => {
   const reserves = await pair.getReserves()
   const token0: string = await pair.token0()
   const token1: string = await pair.token1()

@@ -10,7 +10,7 @@
     "test": "LC_ALL=\"en_US.UTF-8\" jest",
     "test:watch": "LC_ALL=\"en_US.UTF-8\" jest --watch",
     "test:config": "jest src/config/__tests__/ --testPathIgnorePatterns",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:style": "npx stylelint '**/*.{ts,tsx}'",
     "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\"",
     "postinstall": "yarn run typechain",

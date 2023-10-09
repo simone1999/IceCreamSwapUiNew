@@ -14,6 +14,7 @@ import useTokenDeployerDividend, { useDeploymentFee } from '../useTokenDeployer'
 import { CurrencyAmount } from '@pancakeswap/sdk'
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import Divider from 'views/Farms/components/Divider'
+import { useActiveChainId } from 'hooks/useActiveChainId'
 
 interface DepositModalProps {
   formValues: FormValues
@@ -35,13 +36,13 @@ type Steps = 'preview' | 'transfer' | 'completed'
 const CreateModal: React.FC<DepositModalProps> = (props) => {
   const { t } = useTranslation()
   const { formValues } = props
+  const { chainId } = useActiveChainId()
   const [step, setStep] = useState<Steps>('preview')
   const { onDismiss } = useModalContext()
   const [tokenAddress, setTokenAddress] = useState<string | null>(null)
   const token = useToken(tokenAddress)
   const tokenDeployer = useTokenDeployerDividend()
   const { address, status } = useAccount()
-
   const handleDeposit = async () => {
     const initialSupply = utils.parseUnits(String(formValues?.initialSupply || '0'), 18)
     await tokenDeployer.deploy(
@@ -55,6 +56,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
       formValues?.liquidityDistribution * 100,
       { gasLimit: 10_000_000 },
     )
+
     setStep('transfer')
     tokenDeployer.on(
       tokenDeployer.filters.TokenDeployed(),
@@ -62,20 +64,20 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
         if (creator !== address) return
         setTokenAddress(ta)
         setStep('completed')
-        // fetch('/api/add-token', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify({
-        //     name: formValues?.tokenName,
-        //     symbol: formValues?.tokenSymbol,
-        //     logo: formValues?.logo?.blob,
-        //     address: ta,
-        //     chainId,
-        //     decimals: 18,
-        //   }),
-        // })
+        fetch('/api/add-token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formValues?.tokenName,
+            symbol: formValues?.tokenSymbol,
+            logo: formValues?.logo?.blob,
+            address: ta,
+            chainId,
+            decimals: 18,
+          }),
+        })
       },
     )
   }
