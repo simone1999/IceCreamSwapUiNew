@@ -12,6 +12,8 @@ import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useCampaignFactory } from '../hooks'
 import { useRouter } from 'next/router'
 import { trpc } from '@icecreamswap/backend'
+import { getChain } from '@icecreamswap/constants/src/chains'
+import { useActiveChain } from 'hooks/useActiveChain'
 
 interface DepositModalProps {
   formValues: FormValues
@@ -40,6 +42,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
   const campaignFactory = useCampaignFactory()
   const router = useRouter()
   const submit = trpc.campaign.add.useMutation()
+  const chain = useActiveChain()
 
   const handleDeposit = async () => {
     // const initialSupply = utils.parseUnits(String(formValues?.initialSupply || '0'), 18)
@@ -56,16 +59,17 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
           min_allowed: BigNumber.from(formValues?.minAllowed || 0),
           max_allowed: BigNumber.from(formValues?.maxAllowed || 0),
           start_date: BigNumber.from(Math.floor(new Date(formValues?.startDate).getTime() / 1000) || 0),
-          end_date: BigNumber.from(Math.floor(new Date(formValues?.startDate).getTime() / 1000) || 0),
+          end_date: BigNumber.from(Math.floor(new Date(formValues?.endDate).getTime() / 1000) || 0),
           pool_rate: BigNumber.from(formValues?.poolRate || 0),
           liquidity_rate: BigNumber.from(formValues?.liquidityRate || 0),
           lock_duration: 60 * 60 * 24 * 30,
           whitelist_enabled: false,
         },
         formValues?.tokenAddress,
-        0,
-        '',
-        '',
+        BigNumber.from(0),
+        chain.campaignFactory,
+        '0x0000000000000000000000000000000000000000',
+        { gasLimit: BigNumber.from(1000000) },
       )
       .catch((err) => console.error(err))
 
