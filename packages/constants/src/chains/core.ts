@@ -7,8 +7,8 @@ export const core: IceChain = {
   features: ['swap', 'akkaRouter', 'bridge', 'farms', 'info', 'locks', 'staking', 'launchpad'],
   network: 'core',
   rpcUrls: {
-    public: 'https://rpc.coredao.org/',
-    default: 'https://rpc.coredao.org/',
+    public: 'https://rpc-core.icecreamswap.com',
+    default: 'https://rpc-core.icecreamswap.com',
   },
   blockExplorers: {
     default: { name: 'CORE Explorer', url: 'https://scan.coredao.org' },
