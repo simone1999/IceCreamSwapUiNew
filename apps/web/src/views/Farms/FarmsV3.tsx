@@ -473,7 +473,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
               <FarmH2 scale="lg" color="text">
                 {t('Stake LP tokens to earn.')}
               </FarmH2>
-              { /*
+              {/*
               <NextLinkFromReactRouter to="/farms/auction" prefetch={false}>
                 <Button p="0" variant="text">
                   <Text color="primary" bold fontSize="16px" mr="4px">
@@ -482,14 +482,14 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
                   <ArrowForwardIcon color="primary" />
                 </Button>
               </NextLinkFromReactRouter>
-              */ }
+              */}
             </Box>
 
-            { /* (chainId === ChainId.BSC || chainId === ChainId.BSC_TESTNET) && (
+            {/* (chainId === ChainId.BSC || chainId === ChainId.BSC_TESTNET) && (
               <Box>
                 <BCakeBoosterCard />
               </Box>
-            ) */ }
+            ) */}
           </FarmFlexWrapper>
         </Flex>
       </PageHeader>
@@ -577,7 +577,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
                 external
                 color="failure"
                 fontSize={['16px', null, '20px']}
-                href="https://v1-farms.pancakeswap.finance/farms/history"
+                href="https://icecreamswap.com/farms/history"
               >
                 {t('check out v1 farms')}.
               </FinishedTextLink>
@@ -597,7 +597,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
           </Flex>
         )}
         {chosenFarms.length > 0 && <div ref={observerRef} />}
-        <StyledImage src="/images/decorations/3dpan.png" alt="Pancake illustration" width={120} height={103} />
+        <StyledImage src="/images/icecream.png" alt="IceCream illustration" width={120} height={120} />
         <V3SubgraphHealthIndicator />
       </Page>
     </FarmsV3Context.Provider>

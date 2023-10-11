@@ -81,21 +81,15 @@ export const PancakeStack = styled.div<HandleProps>`
   }
 
   .pancake {
-    background: #e27c31;
+    background-color: transparent;
     border-radius: 50%;
-    width: ${getScale("pancakeSize")};
-    height: ${getScale("pancakeSize")};
-    position: absolute;
     transition: 0.4s ease;
-    top: 2px;
-    left: 4px;
-    box-shadow: 0 ${getScale("pancakeThickness")} 0 ${getScale("pancakeThickness")} #fbbe7c;
+    top: -12px;
+    left: -2px;
   }
 
   .pancake:nth-child(1) {
-    background: ${({ theme }) => theme.pancakeToggle.handleBackground};
-    box-shadow: 0 ${getScale("pancakeThickness")} 0 ${getScale("pancakeThickness")}
-      ${({ theme }) => theme.pancakeToggle.handleShadow};
+    background-color: transparent;
   }
 
   .pancake:nth-child(2) {
@@ -115,7 +109,6 @@ export const PancakeStack = styled.div<HandleProps>`
   .pancake:nth-child(3):after {
     content: "";
     position: absolute;
-    background: #ef8927;
     border-radius: 20px;
     width: 50%;
     height: 20%;
@@ -162,8 +155,7 @@ export const PancakeInput = styled.input<InputProps>`
   }
 
   &:checked + label .pancake:nth-child(1) {
-    background: #e27c31;
-    box-shadow: 0 ${getScale("pancakeThickness")} 0 ${getScale("pancakeThickness")} #fbbe7c;
+    background-color: transparent;
     transition-delay: 0.2s;
   }
 
