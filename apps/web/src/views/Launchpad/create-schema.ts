@@ -13,10 +13,16 @@ const toBase64 = (file: File) =>
 export const useSchema = () => {
   const { t } = useTranslation()
   const schema = useMemo(
-    () => z
-      .object({
-        tokenAddress: z.string(),
-        description: z.string().min(50, t('Description must be at least 50 character')),
+    () =>
+      z.object({
+        tokenAddress: z.string().length(42, t('Address must be 42 characters')),
+        description: z.string().min(50, t('Description must be at least 50 characters')),
+        twitter: z.string().optional(),
+        telegram: z.string().optional(),
+        discord: z.string().optional(),
+        reddit: z.string().optional(),
+        github: z.string().optional(),
+        website: z.string().url(t('Website must be a valid url')),
         hardCap: z
           .string()
           .transform(Number)
@@ -46,13 +52,16 @@ export const useSchema = () => {
           .string()
           .transform(Number)
           .refine((value) => value > 0, t('Must be greater than 0')),
-        startDate: z.date(),
-        endDate: z.date(),
+        startDate: z.string().nonempty(t('Date must exist')),
+        endDate: z.string().nonempty(t('Date must exist')),
         banner: z
           .any()
           .refine(
             (value) =>
-              Array.isArray(value) && typeof value[0] === 'object' && value[0] instanceof File && value[0].size < 500000,
+              Array.isArray(value) &&
+              typeof value[0] === 'object' &&
+              value[0] instanceof File &&
+              value[0].size < 500000,
             t('Banner must be a file and less than 500kb'),
           )
           .transform(async (value) => ({ fileName: value[0].name, blob: await toBase64(value[0]) }))
