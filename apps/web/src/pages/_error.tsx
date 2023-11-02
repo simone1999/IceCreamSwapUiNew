@@ -15,8 +15,13 @@ import { captureUnderscoreErrorException } from '@sentry/nextjs'
 import NextErrorComponent, { ErrorProps } from 'next/error'
 import { NotFound } from '@pancakeswap/uikit'
 import { SUPPORT_ANY } from "config/constants/supportChains";
+import { NextSeo } from 'next-seo'
 
-const CustomErrorComponent = (props: ErrorProps) => <NotFound statusCode={props.statusCode} />
+const CustomErrorComponent = (props: ErrorProps) => (
+  <NotFound statusCode={props.statusCode}>
+    <NextSeo title="404" />
+  </NotFound>
+)
 
 CustomErrorComponent.getInitialProps = async (contextData) => {
   // In case this is running in a serverless function, await this in order to give Sentry

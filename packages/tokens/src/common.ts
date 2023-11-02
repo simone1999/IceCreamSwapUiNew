@@ -1,4 +1,5 @@
-import { ChainId, ERC20Token } from '@pancakeswap/sdk'
+import { ERC20Token } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { bitgertTokens } from './32520'
 import { dogechainTokens } from './2000'
 import { dokenTokens } from './61916'

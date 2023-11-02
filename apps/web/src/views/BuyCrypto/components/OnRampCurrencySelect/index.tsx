@@ -1,26 +1,13 @@
-import { styled } from 'styled-components'
-import {
-  ArrowDropDownIcon,
-  Box,
-  Button,
-  Text,
-  useModal,
-  Flex,
-  BoxProps,
-  Skeleton,
-  NumericalInput,
-  CurrencyLogo,
-} from '@pancakeswap/uikit'
-import CurrencySearchModal, { CurrencySearchModalProps } from 'components/SearchModal/CurrencySearchModal'
-import { ChainId, Currency } from '@pancakeswap/sdk'
-import { FiatLogo } from 'components/Logo/CurrencyLogo'
-import { ReactNode } from 'react'
 import { useTranslation } from '@pancakeswap/localization'
+import { Currency } from '@pancakeswap/sdk'
+import { ArrowDropDownIcon, Box, BoxProps, Button, Flex, Skeleton, Text, useModal } from '@pancakeswap/uikit'
+import { NumericalInput, CurrencyLogo } from '@pancakeswap/widgets-internal'
+import { FiatLogo } from 'components/Logo/CurrencyLogo'
+import CurrencySearchModal, { CurrencySearchModalProps } from 'components/SearchModal/CurrencySearchModal'
 import { useAllOnRampTokens } from 'hooks/Tokens'
-import { fiatCurrencyMap } from 'views/BuyCrypto/constants'
-
-const networkDisplay: { [id: number]: string } = {
-}
+import { ReactNode } from 'react'
+import { styled } from 'styled-components'
+import { fiatCurrencyMap, getNetworkDisplay } from 'views/BuyCrypto/constants'
 
 const DropDownContainer = styled.div<{ error: boolean }>`
   width: 100%;
@@ -66,7 +53,7 @@ const ButtonAsset = ({
 }) => {
   const { t } = useTranslation()
   return (
-    <Flex pl="8px">
+    <Flex>
       {id === 'onramp-input' ? (
         <FiatLogo currency={selectedCurrency} size="24px" style={{ marginRight: '8px' }} />
       ) : (
@@ -88,10 +75,10 @@ const ButtonAsset = ({
 
 interface CurrencySelectProps extends CurrencySearchModalProps, BoxProps {
   id: 'onramp-input' | 'onramp-output'
+  currencyLoading: boolean
+  value: string
   onUserInput?: (value: string) => void
-  value?: string
   disableCurrencySelect?: boolean
-  currencyLoading?: boolean
   error?: boolean
   errorText?: string
   onInputBlur?: () => void
@@ -119,6 +106,7 @@ export const CurrencySelect = ({
 }: CurrencySelectProps) => {
   const onRampTokens = useAllOnRampTokens()
   const tokensToShow = id === 'onramp-input' ? fiatCurrencyMap : (onRampTokens as any)
+  const networkDisplay = getNetworkDisplay(selectedCurrency?.chainId)
 
   const [onPresentCurrencyModal] = useModal(
     <CurrencySearchModal
@@ -137,8 +125,8 @@ export const CurrencySelect = ({
       <Flex justifyContent="space-between" py="4px" width="100%" alignItems="center">
         {topElement}
       </Flex>
-      <DropDownContainer error={error}>
-        {id === 'onramp-input' ? (
+      <DropDownContainer error={error as any}>
+        {id === 'onramp-input' && onUserInput ? (
           <NumericalInput
             error={error}
             disabled={!selectedCurrency}
@@ -146,11 +134,13 @@ export const CurrencySelect = ({
             className="token-amount-input"
             value={value}
             onBlur={onInputBlur}
-            onUserInput={onUserInput}
+            onUserInput={(val) => {
+              onUserInput(val)
+            }}
             align="left"
           />
         ) : (
-          <Text>{networkDisplay[selectedCurrency?.chainId]}</Text>
+          <Text>{networkDisplay}</Text>
         )}
         <CurrencySelectButton
           className="open-currency-select-button"

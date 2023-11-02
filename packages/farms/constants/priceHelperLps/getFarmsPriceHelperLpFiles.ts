@@ -1,4 +1,4 @@
-import {ChainId} from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import FarmsBitgertPriceHelper from './32520'
 import FarmsCorePriceHelper from './1116'
 import FarmsXodexPriceHelper from './2415'

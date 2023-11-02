@@ -12,50 +12,49 @@ import {
 } from './actions'
 
 export interface BuyCryptoState {
-  readonly typedValue: string
-  readonly recipient: string | null
+  readonly typedValue: string | undefined
+  readonly recipient: string | undefined
   readonly [Field.INPUT]: {
     readonly currencyId: string | undefined
   }
   readonly [Field.OUTPUT]: {
     readonly currencyId: string | undefined
   }
-  readonly minAmount: number
-  readonly minBaseAmount: number
-  readonly maxAmount: number
-  readonly maxBaseAmount: number
-  readonly userIpAddress: string | null
+  readonly minAmount: number | undefined
+  readonly minBaseAmount: number | undefined
+  readonly maxAmount: number | undefined
+  readonly maxBaseAmount: number | undefined
+  readonly userIpAddress: string | undefined
 }
 
 const initialState: BuyCryptoState = {
   typedValue: '',
-  recipient: null,
+  recipient: undefined,
   [Field.INPUT]: {
     currencyId: '',
   },
   [Field.OUTPUT]: {
     currencyId: '',
   },
-  minAmount: null,
-  minBaseAmount: null,
-  maxAmount: null,
-  maxBaseAmount: null,
-  userIpAddress: null,
+  minAmount: undefined,
+  minBaseAmount: undefined,
+  maxAmount: undefined,
+  maxBaseAmount: undefined,
+  userIpAddress: undefined,
 }
 
-export const reducer = createReducer<BuyCryptoState>(initialState, (builder) =>
+/// casting builder as any as its causing a 'no overload match call' ts error
+export const reducer = createReducer<BuyCryptoState>(initialState, (builder: any) => {
   builder
     .addCase(resetBuyCryptoState, () => initialState)
     .addCase(typeInput, (state, { payload: { typedValue } }) => {
-      return {
-        ...state,
-        typedValue,
-      }
+      state.typedValue = typedValue
     })
     .addCase(selectCurrency, (state, { payload: { currencyId, field } }) => {
-      return {
-        ...state,
-        [field]: { currencyId },
+      if (field === Field.INPUT) {
+        state[Field.INPUT].currencyId = currencyId
+      } else if (field === Field.OUTPUT) {
+        state[Field.OUTPUT].currencyId = currencyId
       }
     })
     .addCase(setMinAmount, (state, { payload: { minAmount, minBaseAmount, maxAmount, maxBaseAmount } }) => {
@@ -87,23 +86,16 @@ export const reducer = createReducer<BuyCryptoState>(initialState, (builder) =>
           },
         },
       ) => {
-        return {
-          [Field.INPUT]: {
-            currencyId: inputCurrencyId,
-          },
-          [Field.OUTPUT]: {
-            currencyId: outputCurrencyId,
-          },
-          typedValue,
-          recipient,
-          minAmount,
-          minBaseAmount,
-          maxAmount,
-          maxBaseAmount,
-          userIpAddress: state.userIpAddress,
-        }
+        state[Field.INPUT].currencyId = inputCurrencyId
+        state[Field.OUTPUT].currencyId = outputCurrencyId
+        state.typedValue = typedValue
+        state.recipient = recipient
+        state.minAmount = minAmount
+        state.minBaseAmount = minBaseAmount
+        state.maxAmount = maxAmount
+        state.maxBaseAmount = maxBaseAmount
       },
-    ),
-)
+    )
+})
 
 export const buyCryptoReducerAtom = atomWithReducer(initialState, reducer)

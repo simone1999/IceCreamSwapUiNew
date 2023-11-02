@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, V3_SUBGRAPHS, V2_SUBGRAPHS } from '@pancakeswap/chains'
 
 export const STABLESWAP_SUBGRAPH_CLIENT = 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-stableswap'
 
@@ -10,15 +10,7 @@ export const ACCESS_RISK_API = '/api/risk'
 export const ONRAMP_API_BASE_URL = 'https://pcs-on-ramp-api.com'
 export const CELER_API = 'https://api.celerscan.com/scan'
 
-export const INFO_CLIENT_WITH_CHAIN = {
-  [ChainId.BITGERT]: 'https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/exchange-v2-bitgert',
-  [ChainId.XDC]: 'https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/exchange-v2-xdc',
-  [ChainId.CORE]: 'https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/exchange-v2-core',
-  [ChainId.SCROLL]: 'https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/exchange-v2-scroll',
-  [ChainId.TELOS]: 'https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/exchange-v2-telos',
-  [ChainId.BASE]: 'https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/exchange-v2-base',
-  [ChainId.SHIMMER]: 'https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/exchange-v2-shimmer',
-}
+export const INFO_CLIENT_WITH_CHAIN = V2_SUBGRAPHS
 
 export const BLOCKS_CLIENT_WITH_CHAIN = {
   [ChainId.BITGERT]: 'https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/blocks-bitgert',
@@ -30,9 +22,7 @@ export const BLOCKS_CLIENT_WITH_CHAIN = {
   [ChainId.SHIMMER]: 'https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/blocks-shimmer',
 }
 
-export const V3_SUBGRAPH_URLS = {
-  [ChainId.CORE]: `https://the-graph.icecreamswap.com/subgraphs/name/icecreamswap/exchange-v3-core`,
-} satisfies Record<ChainId, string>
+export const V3_SUBGRAPH_URLS = V3_SUBGRAPHS
 
 export const ASSET_CDN = 'https://assets.pancakeswap.finance'
 

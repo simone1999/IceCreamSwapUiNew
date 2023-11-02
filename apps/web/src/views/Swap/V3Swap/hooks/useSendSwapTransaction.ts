@@ -1,5 +1,6 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { ChainId, TradeType } from '@pancakeswap/sdk'
+import { TradeType } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { SmartRouter, SmartRouterTrade } from '@pancakeswap/smart-router/evm'
 import { formatAmount } from '@pancakeswap/utils/formatFractions'
 import truncateHash from '@pancakeswap/utils/truncateHash'
@@ -9,7 +10,7 @@ import { INITIAL_ALLOWED_SLIPPAGE } from 'config/constants'
 import { useMemo } from 'react'
 import { useSwapState } from 'state/swap/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
-import { calculateGasMargin, isAddress } from 'utils'
+import { calculateGasMargin, safeGetAddress } from 'utils'
 import { basisPointsToPercent } from 'utils/exchange'
 import { logSwap, logTx } from 'utils/log'
 import { isUserRejected } from 'utils/sentry'
@@ -26,17 +27,21 @@ interface SwapCall {
   value: Hex
 }
 
+interface WallchainSwapCall {
+  getCall: () => Promise<SwapCall & { gas: string }>
+}
+
 interface SwapCallEstimate {
-  call: SwapCall
+  call: SwapCall | WallchainSwapCall
 }
 
 interface SuccessfulCall extends SwapCallEstimate {
-  call: SwapCall
+  call: SwapCall | WallchainSwapCall
   gasEstimate: bigint
 }
 
 interface FailedCall extends SwapCallEstimate {
-  call: SwapCall
+  call: SwapCall | WallchainSwapCall
   error: Error
 }
 
@@ -46,8 +51,8 @@ export class TransactionRejectedError extends Error {}
 export default function useSendSwapTransaction(
   account?: Address,
   chainId?: number,
-  trade?: SmartRouterTrade<TradeType> | null | undefined,
-  swapCalls: SwapCall[] = [],
+  trade?: SmartRouterTrade<TradeType>, // trade to execute, required
+  swapCalls: SwapCall[] | WallchainSwapCall[] = [],
 ): { callback: null | (() => Promise<SendTransactionResult>) } {
   const { t } = useTranslation()
   const addTransaction = useTransactionAdder()
@@ -66,7 +71,13 @@ export default function useSendSwapTransaction(
         const estimatedCalls: SwapCallEstimate[] = await Promise.all(
           swapCalls.map((call) => {
             const { address, calldata, value } = call
-
+            if ('getCall' in call) {
+              // Only WallchainSwapCall, don't use rest of pipeline
+              return {
+                call,
+                gasEstimate: undefined,
+              }
+            }
             const tx =
               !value || isZero(value)
                 ? { account, to: address, data: calldata, value: 0n }
@@ -109,17 +120,32 @@ export default function useSendSwapTransaction(
           bestCallOption = firstNoErrorCall
         }
 
-        const {
-          call: { address, calldata, value },
-        } = bestCallOption
+        const call =
+          'getCall' in bestCallOption.call
+            ? await bestCallOption.call.getCall()
+            : (bestCallOption.call as SwapCall & { gas?: string | bigint })
+
+        if ('error' in call) {
+          throw new Error('Route lost. Need to restart.')
+        }
+
+        if ('gas' in call && call.gas) {
+          // prepared Wallchain's call have gas estimate inside
+          call.gas = BigInt(call.gas)
+        } else {
+          call.gas =
+            'gasEstimate' in bestCallOption && bestCallOption.gasEstimate
+              ? calculateGasMargin(bestCallOption.gasEstimate)
+              : undefined
+        }
 
         return sendTransactionAsync({
           account,
           chainId,
-          to: address,
-          data: calldata,
-          value: value && !isZero(value) ? hexToBigInt(value) : 0n,
-          ...('gasEstimate' in bestCallOption ? { gas: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
+          to: call.address,
+          data: call.calldata,
+          value: call.value && !isZero(call.value) ? hexToBigInt(call.value) : 0n,
+          gas: call.gas,
         })
           .then((response) => {
             const inputSymbol = trade.inputAmount.currency.symbol
@@ -141,7 +167,7 @@ export default function useSendSwapTransaction(
             } ${outputAmount} ${outputSymbol}`
 
             const recipientAddressText =
-              recipientAddress && isAddress(recipientAddress) ? truncateHash(recipientAddress) : recipientAddress
+              recipientAddress && safeGetAddress(recipientAddress) ? truncateHash(recipientAddress) : recipientAddress
 
             const withRecipient = recipient === account ? base : `${base} to ${recipientAddressText}`
 
@@ -186,7 +212,7 @@ export default function useSendSwapTransaction(
               throw new TransactionRejectedError(t('Transaction rejected'))
             } else {
               // otherwise, the error was unexpected and we need to convey that
-              console.error(`Swap failed`, error, address, calldata, value)
+              console.error(`Swap failed`, error, call.address, call.calldata, call.value)
 
               throw new Error(`Swap failed: ${transactionErrorToUserReadableMessage(error, t)}`)
             }

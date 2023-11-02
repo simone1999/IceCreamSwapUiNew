@@ -1,4 +1,6 @@
-import { Balance, Flex, Link, LinkExternal, Pool, Skeleton, Text, ScanLink } from '@pancakeswap/uikit'
+import { Balance, Flex, Link, LinkExternal, Skeleton, Text, ScanLink } from '@pancakeswap/uikit'
+import { Pool } from '@pancakeswap/widgets-internal'
+
 import AddToWalletButton, { AddToWalletTextOptions } from 'components/AddToWallet/AddToWalletButton'
 import { useTranslation } from '@pancakeswap/localization'
 import { ChainId, Token } from '@pancakeswap/sdk'

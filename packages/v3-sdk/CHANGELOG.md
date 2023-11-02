@@ -1,5 +1,68 @@
 # @pancakeswap/v3-sdk
 
+## 3.5.4
+
+### Patch Changes
+
+- Updated dependencies [c236a3ee4]
+  - @pancakeswap/chains@0.3.0
+  - @pancakeswap/sdk@5.7.2
+  - @pancakeswap/tokens@0.5.4
+
+## 3.5.3
+
+### Patch Changes
+
+- @pancakeswap/tokens@0.5.3
+
+## 3.5.2
+
+### Patch Changes
+
+- Updated dependencies [ed3146c93]
+  - @pancakeswap/chains@0.2.0
+  - @pancakeswap/sdk@5.7.1
+  - @pancakeswap/tokens@0.5.2
+
+## 3.5.1
+
+### Patch Changes
+
+- Updated dependencies [8e3ac5427]
+  - @pancakeswap/sdk@5.7.0
+  - @pancakeswap/tokens@0.5.1
+
+## 3.5.0
+
+### Minor Changes
+
+- 435a90ac2: Add support for opBNB mainnet
+
+### Patch Changes
+
+- Updated dependencies [435a90ac2]
+  - @pancakeswap/sdk@5.6.0
+  - @pancakeswap/chains@0.1.0
+  - @pancakeswap/tokens@0.5.0
+
+## 3.4.4
+
+### Patch Changes
+
+- 1831356d9: refactor: Move ChainsId usage from Sdk to Chains package
+- Updated dependencies [1831356d9]
+  - @pancakeswap/sdk@5.5.0
+  - @pancakeswap/tokens@0.4.4
+
+## 3.4.3
+
+### Patch Changes
+
+- 2d7e1b3e2: Upgraded viem
+- Updated dependencies [2d7e1b3e2]
+  - @pancakeswap/sdk@5.4.2
+  - @pancakeswap/tokens@0.4.3
+
 ## 3.4.2
 
 ### Patch Changes

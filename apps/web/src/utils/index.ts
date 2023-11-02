@@ -1,5 +1,6 @@
-import { getAddress } from 'viem'
-import { ChainId, Currency } from '@pancakeswap/sdk'
+import { Address, getAddress } from 'viem'
+import { Currency } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import memoize from 'lodash/memoize'
 import { TokenAddressMap } from '@pancakeswap/token-lists'
 import { chains } from './wagmi'
@@ -7,8 +8,8 @@ import { chainMap } from '@icecreamswap/constants'
 
 const { bsc } = chainMap
 
-// returns the checksummed address if the address is valid, otherwise returns false
-export const isAddress = memoize((value: any): `0x${string}` | false => {
+// returns the checksummed address if the address is valid, otherwise returns undefined
+export const safeGetAddress = memoize((value: any): Address | undefined => {
   try {
     let value_ = value
     if (typeof value === 'string' && !value.startsWith('0x')) {
@@ -16,7 +17,7 @@ export const isAddress = memoize((value: any): `0x${string}` | false => {
     }
     return getAddress(value_)
   } catch {
-    return false
+    return undefined
   }
 })
 

@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { TokenAddressMap as TTokenAddressMap, WrappedTokenInfo, TokenList, TokenInfo } from '@pancakeswap/token-lists'
 import { enumValues } from '@pancakeswap/utils/enumValues'
 import { ListsState } from '@pancakeswap/token-lists/react'
@@ -23,7 +23,7 @@ import UNSUPPORTED_TOKEN_LIST from '../../config/constants/tokenLists/pancake-un
 import WARNING_TOKEN_LIST from '../../config/constants/tokenLists/pancake-warning.tokenlist.json'
 import ONRAMP_TOKEN_LIST from '../../config/constants/tokenLists/pancake-supported-onramp-currency-list.json'
 import { listsAtom } from './lists'
-import { isAddress } from '../../utils'
+import { safeGetAddress } from '../../utils'
 import { loadable } from 'jotai/utils'
 
 type TokenAddressMap = TTokenAddressMap<ChainId>
@@ -163,7 +163,7 @@ export function listToTokenMap(list: TokenList, key?: string): TokenAddressMap {
     (tokenInfo: TokenInfo) => `${tokenInfo.chainId}#${tokenInfo.address}`,
   )
     .map((tokenInfo) => {
-      const checksummedAddress = isAddress(tokenInfo.address)
+      const checksummedAddress = safeGetAddress(tokenInfo.address)
       if (checksummedAddress) {
         return new WrappedTokenInfo({ ...tokenInfo, address: checksummedAddress })
       }

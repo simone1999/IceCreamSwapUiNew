@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
-import { ChainId } from '@pancakeswap/sdk'
-import { blocksPerYear } from '../config'
+import { ChainId } from '@pancakeswap/chains'
+import { blocksPerYear } from 'config'
 import lpAprs32520 from '../config/constants/lpAprs/32520.json'
 import lpAprs1116 from '../config/constants/lpAprs/1116.json'
 
@@ -24,17 +24,23 @@ const getLpApr = (chainId: number) => {
  * @returns Null if the APR is NaN or infinite.
  */
 export const getPoolApr = (
-  stakingTokenPrice: number,
-  rewardTokenPrice: number,
-  totalStaked: number,
-  tokenPerBlock: number,
-  chainId: number,
+  stakingTokenPrice: number | null,
+  rewardTokenPrice: number | null,
+  totalStaked: number | null,
+  tokenPerBlock: number | null,
+  chainId: number | null,
 ): number => {
+  if (stakingTokenPrice === null || rewardTokenPrice === null || totalStaked === null || tokenPerBlock === null || chainId === null) {
+    return null
+  }
+
   const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerBlock).times(blocksPerYear(chainId))
   const totalStakingTokenInPool = new BigNumber(stakingTokenPrice).times(totalStaked)
   const apr = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
+
+const BIG_NUMBER_NAN = new BigNumber(NaN)
 
 /**
  * Get farm APR value in %
@@ -46,16 +52,19 @@ export const getPoolApr = (
  */
 export const getFarmApr = (
   chainId: number,
-  poolWeight: BigNumber,
-  cakePriceUsd: BigNumber,
-  poolLiquidityUsd: BigNumber,
-  farmAddress: string,
+  poolWeight: BigNumber | null,
+  cakePriceUsd: BigNumber | null,
+  poolLiquidityUsd: BigNumber | null,
+  farmAddress: string | null,
   regularCakePerBlock: number,
 ): { cakeRewardsApr: number; lpRewardsApr: number } => {
   const yearlyCakeRewardAllocation = poolWeight
     ? poolWeight.times(blocksPerYear(chainId) * regularCakePerBlock)
     : new BigNumber(NaN)
-  const cakeRewardsApr = yearlyCakeRewardAllocation.times(cakePriceUsd).div(poolLiquidityUsd).times(100)
+  const cakeRewardsApr = yearlyCakeRewardAllocation
+    .times(cakePriceUsd || BIG_NUMBER_NAN)
+    .div(poolLiquidityUsd || BIG_NUMBER_NAN)
+    .times(100)
   let cakeRewardsAprAsNumber = null
   if (!cakeRewardsApr.isNaN() && cakeRewardsApr.isFinite()) {
     cakeRewardsAprAsNumber = cakeRewardsApr.toNumber()

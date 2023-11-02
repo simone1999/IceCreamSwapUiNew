@@ -1,4 +1,5 @@
-import { ChainId, CurrencyAmount, Pair, pancakePairV2ABI } from "@pancakeswap/sdk";
+import { ChainId } from '@pancakeswap/chains'
+import { CurrencyAmount, Pair, pancakePairV2ABI } from "@pancakeswap/sdk";
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import BigNumber from 'bignumber.js'
 import { chainlinkOracleABI } from 'config/abi/chainlinkOracle'
@@ -11,12 +12,13 @@ import { usePublicClient } from "wagmi";
 import { ICE, USD } from "@pancakeswap/tokens";
 
 // for migration to bignumber.js to avoid breaking changes
-export const useCakePrice = () => {
+export const useCakePrice = ({ enabled = true } = {}) => {
   const { data } = useQuery<BigNumber, Error>({
     queryKey: ['cakePrice'],
     queryFn: async () => new BigNumber(await getIcePriceFromV2Pair()),
     staleTime: FAST_INTERVAL,
     refetchInterval: FAST_INTERVAL,
+    enabled,
   })
   return data ?? BIG_ZERO
 }

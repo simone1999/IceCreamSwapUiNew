@@ -1,8 +1,9 @@
 import { createPublicClient, PublicClient, http, getContract, Address } from 'viem'
 import { CurrencyAmount, Token } from '@pancakeswap/swap-sdk-core'
+import { ChainId } from '@pancakeswap/chains'
 import invariant from 'tiny-invariant'
 import { Pair } from './entities/pair'
-import { ChainId, getChain } from '@icecreamswap/constants'
+import { getChain } from '@icecreamswap/constants'
 import { erc20ABI } from './abis/ERC20'
 import { pancakePairV2ABI } from './abis/IPancakePair'
 

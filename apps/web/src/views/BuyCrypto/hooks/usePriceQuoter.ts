@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react'
 import { useActiveChainId } from 'hooks/useActiveChainId'
+import { useCallback, useState } from 'react'
 import { Field } from 'state/buyCrypto/actions'
 import { useBuyCryptoState } from 'state/buyCrypto/hooks'
-import { fetchProviderQuotes } from './useProviderQuotes'
-import { fetchProviderAvailabilities } from './useProviderAvailability'
 import { ProviderQuote } from '../types'
+import { fetchProviderAvailabilities } from './useProviderAvailability'
+import { fetchProviderQuotes } from './useProviderQuotes'
 
 const usePriceQuotes = () => {
   const [quotes, setQuotes] = useState<ProviderQuote[]>([])
@@ -43,7 +43,7 @@ const usePriceQuotes = () => {
   )
 
   const fetchQuotes = useCallback(async () => {
-    if (!chainId) return
+    if (!chainId || !outputCurrency || !inputCurrency) return
     try {
       const providerQuotes = await fetchProviderQuotes({
         fiatCurrency: outputCurrency.toUpperCase(),
@@ -51,7 +51,7 @@ const usePriceQuotes = () => {
         fiatAmount: Number(amount).toString(),
         network: chainId,
       })
-      const sortedFilteredQuotes = await sortProviderQuotes(providerQuotes, ['Transak'])
+      const sortedFilteredQuotes = await sortProviderQuotes(providerQuotes, [])
       setQuotes(sortedFilteredQuotes)
     } catch (error) {
       console.error('Error fetching price quotes:', error)

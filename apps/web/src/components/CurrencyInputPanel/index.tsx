@@ -1,19 +1,9 @@
-import { useMemo, useState, memo, useCallback } from 'react'
+import { useMemo, memo, useCallback } from 'react'
 import { Currency, Pair, Token, Percent, CurrencyAmount } from '@pancakeswap/sdk'
-import {
-  Button,
-  Text,
-  useModal,
-  Flex,
-  Box,
-  CopyButton,
-  Loading,
-  Skeleton,
-  Swap as SwapUI,
-  ArrowDropDownIcon,
-} from '@pancakeswap/uikit'
+import { Button, Text, useModal, Flex, Box, CopyButton, Loading, Skeleton, ArrowDropDownIcon } from '@pancakeswap/uikit'
+import { Swap as SwapUI } from '@pancakeswap/widgets-internal'
 import { styled } from 'styled-components'
-import { isAddress } from 'utils'
+import { safeGetAddress } from 'utils'
 import { useTranslation } from '@pancakeswap/localization'
 import { WrappedTokenInfo } from '@pancakeswap/token-lists'
 import { formatAmount } from '@pancakeswap/utils/formatFractions'
@@ -120,7 +110,7 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
 
   const mode = id
   const token = pair ? pair.liquidityToken : currency?.isToken ? currency : null
-  const tokenAddress = token ? isAddress(token.address) : null
+  const tokenAddress = token ? safeGetAddress(token.address) : null
 
   const amountInDollar = useStablecoinPriceAmount(
     showUSDPrice ? currency : undefined,
@@ -166,7 +156,6 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
   const handleUserInput = useCallback(
     (val: string) => {
       onUserInput(val)
-      setCurrentClickedPercent('')
     },
     [onUserInput],
   )
@@ -177,11 +166,9 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
     }
   }, [onPresentCurrencyModal, disableCurrencySelect])
 
-  const [currentClickedPercent, setCurrentClickedPercent] = useState('')
-
   const isAtPercentMax = (maxAmount && value === maxAmount.toExact()) || (lpPercent && lpPercent === '100')
 
-  const balance = !hideBalance && !!currency && formatAmount(selectedCurrencyBalance, 6)
+  const balance = !hideBalance && !!currency ? formatAmount(selectedCurrencyBalance, 6) : undefined
   return (
     <SwapUI.CurrencyInputPanel
       id={id}
@@ -253,7 +240,7 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
           </Flex>
           {account && !hideBalanceComp && (
             <Text
-              onClick={!disabled && onMax}
+              onClick={!disabled ? onMax : undefined}
               color="textSubtle"
               fontSize="12px"
               ellipsis
@@ -261,7 +248,7 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
               style={{ display: 'inline', cursor: 'pointer' }}
             >
               {!hideBalance && !!currency
-                ? balance?.replace('.', '')?.length > 12
+                ? (balance?.replace('.', '')?.length || 0) > 12
                   ? balance
                   : t('Balance: %balance%', { balance: balance ?? t('Loading') })
                 : ' -'}
@@ -278,7 +265,7 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                   <Loading width="14px" height="14px" />
                 ) : showUSDPrice && Number.isFinite(amountInDollar) ? (
                   <Text fontSize="12px" color="textSubtle" ellipsis>
-                    {`~${formatNumber(amountInDollar)} USD`}
+                    {`~${amountInDollar ? formatNumber(amountInDollar) : 0} USD`}
                   </Text>
                 ) : (
                   <Box height="18px" />
@@ -293,7 +280,6 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                   showQuickInputButton &&
                   onPercentInput &&
                   [25, 50, 75].map((percent) => {
-                    const isAtClickedPercent = currentClickedPercent === percent.toString()
                     const isAtCurrentPercent =
                       (maxAmount && value !== '0' && value === percentAmount[percent]) ||
                       (lpPercent && lpPercent === percent.toString())
@@ -303,11 +289,10 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                         key={`btn_quickCurrency${percent}`}
                         onClick={() => {
                           onPercentInput(percent)
-                          setCurrentClickedPercent(percent.toString())
                         }}
                         scale="xs"
                         mr="5px"
-                        variant={isAtClickedPercent || isAtCurrentPercent ? 'primary' : 'secondary'}
+                        variant={isAtCurrentPercent ? 'primary' : 'secondary'}
                         style={{ textTransform: 'uppercase' }}
                       >
                         {percent}%
@@ -320,7 +305,6 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                       e.stopPropagation()
                       e.preventDefault()
                       onMax?.()
-                      setCurrentClickedPercent('MAX')
                     }}
                     scale="xs"
                     variant={isAtPercentMax ? 'primary' : 'secondary'}

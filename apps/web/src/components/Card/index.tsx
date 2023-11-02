@@ -30,8 +30,8 @@ export const LightGreyCard = styled(Card)`
 
 export const CryptoCard = styled(Card)<{ isClicked: boolean; isDisabled: boolean }>`
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
-  background-color: ${({ theme, isClicked }) => (isClicked ? theme.colors.input : 'transparent')};
-  transition: height 0.4s ease-in-out, background-color 0.1s ease-in-out;
+  background-color: ${({ theme, isClicked }) => (isClicked ? theme.colors.input : theme.colors.background)};
+  transition: max-height 0.4s ease-in-out, background-color 0.1s ease-in-out;
   overflow: hidden;
   &:hover {
     cursor: ${({ isDisabled }) => (isDisabled ? 'not-allowed' : 'pointer')};

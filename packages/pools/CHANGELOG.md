@@ -1,5 +1,80 @@
 # @pancakeswap/pools
 
+## 4.0.20
+
+### Patch Changes
+
+- 533f14d78: Move some pools to finished pools.
+
+## 4.0.19
+
+### Patch Changes
+
+- Updated dependencies [c236a3ee4]
+  - @pancakeswap/chains@0.3.0
+  - @pancakeswap/tokens@0.5.4
+
+## 4.0.18
+
+### Patch Changes
+
+- Updated dependencies [d994c3335]
+  - @pancakeswap/token-lists@0.0.9
+  - @pancakeswap/tokens@0.5.3
+
+## 4.0.17
+
+### Patch Changes
+
+- 4dd27c7a7: Move Eth and Bsc Pool to finished pools'
+
+## 4.0.16
+
+### Patch Changes
+
+- 7eb8e5849: Add new ALP arbitrum pool
+
+## 4.0.15
+
+### Patch Changes
+
+- Updated dependencies [ed3146c93]
+  - @pancakeswap/chains@0.2.0
+  - @pancakeswap/tokens@0.5.2
+
+## 4.0.14
+
+### Patch Changes
+
+- @pancakeswap/tokens@0.5.1
+
+## 4.0.13
+
+### Patch Changes
+
+- Updated dependencies [435a90ac2]
+  - @pancakeswap/chains@0.1.0
+  - @pancakeswap/tokens@0.5.0
+
+## 4.0.12
+
+### Patch Changes
+
+- 1831356d9: refactor: Move ChainsId usage from Sdk to Chains package
+- Updated dependencies [1831356d9]
+  - @pancakeswap/tokens@0.4.4
+
+## 4.0.11
+
+### Patch Changes
+
+- 2d7e1b3e2: Upgraded viem
+- 67d0780d1: Add wstETH pool
+- Updated dependencies [2d7e1b3e2]
+  - @pancakeswap/sdk@5.4.2
+  - @pancakeswap/tokens@0.4.3
+  - @pancakeswap/token-lists@0.0.8
+
 ## 4.0.10
 
 ### Patch Changes

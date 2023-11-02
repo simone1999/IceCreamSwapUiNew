@@ -26,7 +26,7 @@ import { useActiveChainId } from 'hooks/useActiveChainId'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { useCallback, useMemo } from 'react'
-import { usePriceCakeUSD } from 'state/farms/hooks'
+import { useCakePrice } from 'hooks/useCakePrice'
 import { styled, useTheme } from 'styled-components'
 import { logGTMClickStakeFarmEvent } from 'utils/customGTMEventTracking'
 import { V3Farm } from 'views/Farms/FarmsV3'
@@ -44,7 +44,7 @@ import FarmV3StakeAndUnStake, { FarmV3LPPosition, FarmV3LPPositionDetail, FarmV3
 
 const { FarmV3HarvestAction } = FarmWidget.FarmV3Table
 
-const ActionContainer = styled(Flex)`
+export const ActionContainer = styled(Flex)`
   width: 100%;
   border: 2px solid ${({ theme }) => theme.colors.input};
   border-radius: 16px;
@@ -111,7 +111,7 @@ const SingleFarmV3Card: React.FunctionComponent<
 }) => {
   const { chainId } = useActiveChainId()
   const { t } = useTranslation()
-  const cakePrice = usePriceCakeUSD()
+  const cakePrice = useCakePrice()
   const { tokenId } = position
   const { isDark, colors } = useTheme()
 

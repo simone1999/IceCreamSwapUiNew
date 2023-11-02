@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { masterChefAddresses , masterChefV3Addresses } from '@pancakeswap/farms'
 import { DEPLOYER_ADDRESSES } from '@pancakeswap/v3-sdk'
 import { V3_QUOTER_ADDRESSES } from '@pancakeswap/smart-router/evm'
@@ -66,4 +66,6 @@ export default {
   tradingRewardTopTrades: {},
   vCake: {},
   revenueSharingPool: {},
+  anniversaryAchievement: {},
+  fixedStaking: {},
 } as const satisfies Record<string, Record<number, `0x${string}`>>

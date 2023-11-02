@@ -1,4 +1,5 @@
-import {ChainId, Token, WETH9} from '@pancakeswap/sdk'
+import { Token, WETH9 } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { USD } from "@pancakeswap/tokens";
 import { chains } from '@icecreamswap/constants'
 

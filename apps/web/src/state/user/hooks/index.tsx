@@ -1,4 +1,5 @@
-import { ChainId, Pair, ERC20Token } from '@pancakeswap/sdk'
+import { Pair, ERC20Token } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { deserializeToken } from '@pancakeswap/token-lists'
 import flatMap from 'lodash/flatMap'
 import { getFarmConfig } from '@pancakeswap/farms/constants'
@@ -9,7 +10,7 @@ import useSWRImmutable from 'swr/immutable'
 import { useOfficialsAndUserAddedTokens } from 'hooks/Tokens'
 import useSWR from 'swr'
 import { useActiveChainId } from 'hooks/useActiveChainId'
-import { isAddress } from 'utils'
+import { safeGetAddress } from 'utils'
 import { useFeeData, useWalletClient } from 'wagmi'
 import { Hex, hexToBigInt } from 'viem'
 import { AppState, useAppDispatch } from 'state'
@@ -390,7 +391,7 @@ export function useTrackedTokenPairs(): [ERC20Token, ERC20Token][] {
               (BASES_TO_TRACK_LIQUIDITY_FOR[chainId] ?? [])
                 // to construct pairs of the given token with each base
                 .map((base: ERC20Token) => {
-                  const baseAddress = isAddress(base.address)
+                  const baseAddress = safeGetAddress(base.address)
 
                   if (baseAddress && baseAddress === tokenAddress) {
                     return null
@@ -427,8 +428,8 @@ export function useTrackedTokenPairs(): [ERC20Token, ERC20Token][] {
     const keyed = combinedList.reduce<{ [key: string]: [ERC20Token, ERC20Token] }>((memo, [tokenA, tokenB]) => {
       const sorted = tokenA.sortsBefore(tokenB)
       const key = sorted
-        ? `${isAddress(tokenA.address)}:${isAddress(tokenB.address)}`
-        : `${isAddress(tokenB.address)}:${isAddress(tokenA.address)}`
+        ? `${safeGetAddress(tokenA.address)}:${safeGetAddress(tokenB.address)}`
+        : `${safeGetAddress(tokenB.address)}:${safeGetAddress(tokenA.address)}`
       if (memo[key]) return memo
       memo[key] = sorted ? [tokenA, tokenB] : [tokenB, tokenA]
       return memo

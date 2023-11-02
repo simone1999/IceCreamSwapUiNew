@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { chains } from '@icecreamswap/constants'
 
 export const DEFAULT_GAS_LIMIT = 150000000n

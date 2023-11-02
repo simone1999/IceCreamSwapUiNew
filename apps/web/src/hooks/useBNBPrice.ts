@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import BigNumber from 'bignumber.js'
 import { chainlinkOracleABI } from 'config/abi/chainlinkOracle'
@@ -9,12 +9,13 @@ import { FAST_INTERVAL } from 'config/constants'
 import { useQuery } from '@tanstack/react-query'
 
 // for migration to bignumber.js to avoid breaking changes
-export const useBNBPrice = () => {
+export const useBNBPrice = ({ enabled = true } = {}) => {
   const { data } = useQuery<BigNumber, Error>({
     queryKey: ['bnbPrice'],
     queryFn: async () => new BigNumber(await getBNBPriceFromOracle()),
     staleTime: FAST_INTERVAL,
     refetchInterval: FAST_INTERVAL,
+    enabled,
   })
   return data ?? BIG_ZERO
 }

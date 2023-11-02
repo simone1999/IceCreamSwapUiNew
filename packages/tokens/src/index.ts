@@ -13,4 +13,3 @@ export * from './1072'
 export * from './8453'
 export * from './148'
 export * from './534352'
-export const bscTokens = {} as any

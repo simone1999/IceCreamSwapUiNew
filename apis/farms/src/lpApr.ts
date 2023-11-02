@@ -1,10 +1,9 @@
 /* eslint-disable no-restricted-syntax */
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import chunk from 'lodash/chunk'
 import BigNumber from 'bignumber.js'
 import { gql, GraphQLClient } from 'graphql-request'
-import getUnixTime from 'date-fns/getUnixTime'
-import sub from 'date-fns/sub'
+import dayjs from 'dayjs'
 import { AprMap } from '@pancakeswap/farms'
 import _toLower from 'lodash/toLower'
 
@@ -50,8 +49,7 @@ const stableSwapClient = new GraphQLClient(STABLESWAP_SUBGRAPH_ENDPOINT, {
 })
 
 const getWeekAgoTimestamp = () => {
-  const weekAgo = sub(new Date(), { weeks: 1 })
-  return getUnixTime(weekAgo)
+  return dayjs().subtract(1, 'weeks').unix()
 }
 
 const getBlockAtTimestamp = async (timestamp: number, chainId = ChainId.BITGERT) => {
@@ -153,9 +151,9 @@ const getAprsForStableFarm = async (stableFarm: any): Promise<BigNumber> => {
   const stableSwapAddress = stableFarm?.stableSwapAddress
 
   try {
-    const day7Ago = sub(new Date(), { days: 7 })
+    const day7Ago = dayjs().subtract(7, 'days')
 
-    const day7AgoTimestamp = getUnixTime(day7Ago)
+    const day7AgoTimestamp = day7Ago.unix()
 
     const blockDay7Ago = await getBlockAtTimestamp(day7AgoTimestamp)
 

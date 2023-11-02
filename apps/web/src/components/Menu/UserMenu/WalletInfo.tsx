@@ -14,7 +14,8 @@ import {
   InfoFilledIcon,
   ScanLink,
 } from '@pancakeswap/uikit'
-import { ChainId, WNATIVE } from '@pancakeswap/sdk'
+import { WNATIVE } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { FetchStatus } from 'config/constants/types'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useTranslation } from '@pancakeswap/localization'
@@ -177,6 +178,7 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ hasLowNativeBalance, onDismiss 
           )}
         </Box>
       )}
+
       <Box mb="24px">
         <Flex alignItems="center" justifyContent="space-between">
           <Text color="textSubtle">{t('ICE Balance')}</Text>

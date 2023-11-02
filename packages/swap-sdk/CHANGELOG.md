@@ -1,5 +1,50 @@
 # @pancakeswap/sdk
 
+## 5.7.2
+
+### Patch Changes
+
+- Updated dependencies [c236a3ee4]
+  - @pancakeswap/chains@0.3.0
+
+## 5.7.1
+
+### Patch Changes
+
+- Updated dependencies [ed3146c93]
+  - @pancakeswap/chains@0.2.0
+
+## 5.7.0
+
+### Minor Changes
+
+- 8e3ac5427: Add back ChainId export
+
+## 5.6.0
+
+### Minor Changes
+
+- 435a90ac2: Add support for opBNB mainnet
+
+### Patch Changes
+
+- Updated dependencies [435a90ac2]
+  - @pancakeswap/chains@0.1.0
+
+## 5.5.0
+
+### Minor Changes
+
+- 1831356d9: refactor: Move ChainsId usage from Sdk to Chains package
+
+## 5.4.2
+
+### Patch Changes
+
+- 2d7e1b3e2: Upgraded viem
+- Updated dependencies [2d7e1b3e2]
+  - @pancakeswap/chains@0.0.1
+
 ## 5.4.1
 
 ### Patch Changes

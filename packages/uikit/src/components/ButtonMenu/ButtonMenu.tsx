@@ -1,4 +1,3 @@
-import shouldForwardProp from "@styled-system/should-forward-prop";
 import React, { cloneElement, Children, ReactElement } from "react";
 import { styled, DefaultTheme } from "styled-components";
 import { space } from "styled-system";
@@ -47,7 +46,6 @@ const StyledButtonMenu = styled.div.withConfig({
         opacity: 0.5;
 
         & > button:disabled {
-          background-color: transparent;
           color: ${variant === variants.PRIMARY ? theme.colors.primary : theme.colors.textSubtle};
         }
     `;
@@ -72,7 +70,7 @@ const ButtonMenu: React.FC<React.PropsWithChildren<ButtonMenuProps>> = ({
       {Children.map(children, (child: ReactElement, index) => {
         return cloneElement(child, {
           isActive: activeIndex === index,
-          onClick: onItemClick ? () => onItemClick(index) : undefined,
+          onClick: onItemClick ? (e: React.MouseEvent<HTMLElement>) => onItemClick(index, e) : undefined,
           scale,
           variant,
           disabled,

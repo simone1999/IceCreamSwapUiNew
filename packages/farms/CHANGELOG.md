@@ -1,5 +1,83 @@
 # @pancakeswap/farms
 
+## 1.0.23
+
+### Patch Changes
+
+- Updated dependencies [c236a3ee4]
+  - @pancakeswap/chains@0.3.0
+  - @pancakeswap/sdk@5.7.2
+  - @pancakeswap/tokens@0.5.4
+  - @pancakeswap/v3-sdk@3.5.4
+
+## 1.0.22
+
+### Patch Changes
+
+- Updated dependencies [d994c3335]
+  - @pancakeswap/token-lists@0.0.9
+  - @pancakeswap/utils@5.0.6
+  - @pancakeswap/tokens@0.5.3
+  - @pancakeswap/v3-sdk@3.5.3
+
+## 1.0.21
+
+### Patch Changes
+
+- 2ceb8e9ff: Dependencies update
+
+## 1.0.20
+
+### Patch Changes
+
+- ed3146c93: Add chain names
+- Updated dependencies [ed3146c93]
+  - @pancakeswap/chains@0.2.0
+  - @pancakeswap/sdk@5.7.1
+  - @pancakeswap/tokens@0.5.2
+  - @pancakeswap/v3-sdk@3.5.2
+
+## 1.0.19
+
+### Patch Changes
+
+- Updated dependencies [8e3ac5427]
+  - @pancakeswap/sdk@5.7.0
+  - @pancakeswap/tokens@0.5.1
+  - @pancakeswap/v3-sdk@3.5.1
+
+## 1.0.18
+
+### Patch Changes
+
+- Updated dependencies [435a90ac2]
+  - @pancakeswap/sdk@5.6.0
+  - @pancakeswap/chains@0.1.0
+  - @pancakeswap/tokens@0.5.0
+  - @pancakeswap/v3-sdk@3.5.0
+
+## 1.0.17
+
+### Patch Changes
+
+- 1831356d9: refactor: Move ChainsId usage from Sdk to Chains package
+- Updated dependencies [1831356d9]
+  - @pancakeswap/sdk@5.5.0
+  - @pancakeswap/tokens@0.4.4
+  - @pancakeswap/v3-sdk@3.4.4
+
+## 1.0.16
+
+### Patch Changes
+
+- 2d7e1b3e2: Upgraded viem
+- Updated dependencies [2d7e1b3e2]
+  - @pancakeswap/sdk@5.4.2
+  - @pancakeswap/v3-sdk@3.4.3
+  - @pancakeswap/utils@5.0.5
+  - @pancakeswap/tokens@0.4.3
+  - @pancakeswap/token-lists@0.0.8
+
 ## 1.0.15
 
 ### Patch Changes

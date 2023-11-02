@@ -1,7 +1,8 @@
 import { Percent } from '@pancakeswap/swap-sdk-core'
+import { ChainId } from '@pancakeswap/chains'
 import { Address, Hash } from 'viem'
 import { ERC20Token } from './entities/token'
-import { ChainId, chains } from '@icecreamswap/constants'
+import { chains } from '@icecreamswap/constants'
 
 export const ZERO_PERCENT = new Percent('0')
 export const ONE_HUNDRED_PERCENT = new Percent('1')

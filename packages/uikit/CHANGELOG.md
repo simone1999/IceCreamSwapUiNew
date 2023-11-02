@@ -1,5 +1,63 @@
 # Change Log
 
+## 0.64.2
+
+### Patch Changes
+
+- @pancakeswap/hooks@0.0.19
+- @pancakeswap/localization@5.0.6
+
+## 0.64.1
+
+### Patch Changes
+
+- 2ceb8e9ff: Dependencies update
+
+## 0.64.0
+
+### Minor Changes
+
+- 435a90ac2: Add support for opBNB mainnet
+
+### Patch Changes
+
+- Updated dependencies [435a90ac2]
+  - @pancakeswap/sdk@5.6.0
+  - @pancakeswap/v3-sdk@3.5.0
+  - @pancakeswap/farms@1.0.18
+
+## 0.63.7
+
+### Patch Changes
+
+- 1831356d9: refactor: Move ChainsId usage from Sdk to Chains package
+- Updated dependencies [1831356d9]
+  - @pancakeswap/sdk@5.5.0
+  - @pancakeswap/v3-sdk@3.4.4
+  - @pancakeswap/farms@1.0.17
+
+## 0.63.6
+
+### Patch Changes
+
+- 5e3efdfe9: Resolved props from styled-component and DOM
+
+## 0.63.5
+
+### Patch Changes
+
+- 2d7e1b3e2: Upgraded viem
+- Updated dependencies [2d7e1b3e2]
+- Updated dependencies [67d0780d1]
+  - @pancakeswap/sdk@5.4.2
+  - @pancakeswap/v3-sdk@3.4.3
+  - @pancakeswap/farms@1.0.16
+  - @pancakeswap/pools@4.0.11
+  - @pancakeswap/tokens@0.4.3
+  - @pancakeswap/hooks@0.0.18
+  - @pancakeswap/localization@5.0.5
+  - @pancakeswap/token-lists@0.0.8
+
 ## 0.63.4
 
 ### Patch Changes

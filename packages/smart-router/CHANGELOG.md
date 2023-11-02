@@ -1,5 +1,109 @@
 # @pancakeswap/smart-router
 
+## 4.9.6
+
+### Patch Changes
+
+- 0f8e92425: Add usdc as base token to check against on polygon zkevm
+
+## 4.9.5
+
+### Patch Changes
+
+- Updated dependencies [c236a3ee4]
+  - @pancakeswap/chains@0.3.0
+  - @pancakeswap/multicall@3.2.3
+  - @pancakeswap/sdk@5.7.2
+  - @pancakeswap/tokens@0.5.4
+  - @pancakeswap/v3-sdk@3.5.4
+
+## 4.9.4
+
+### Patch Changes
+
+- Updated dependencies [d994c3335]
+  - @pancakeswap/token-lists@0.0.9
+  - @pancakeswap/tokens@0.5.3
+  - @pancakeswap/multicall@3.2.2
+  - @pancakeswap/v3-sdk@3.5.3
+
+## 4.9.3
+
+### Patch Changes
+
+- 70a787a25: Upgrade zod
+
+## 4.9.2
+
+### Patch Changes
+
+- Updated dependencies [ed3146c93]
+  - @pancakeswap/chains@0.2.0
+  - @pancakeswap/multicall@3.2.2
+  - @pancakeswap/sdk@5.7.1
+  - @pancakeswap/tokens@0.5.2
+  - @pancakeswap/v3-sdk@3.5.2
+
+## 4.9.1
+
+### Patch Changes
+
+- Updated dependencies [8e3ac5427]
+  - @pancakeswap/sdk@5.7.0
+  - @pancakeswap/multicall@3.2.1
+  - @pancakeswap/tokens@0.5.1
+  - @pancakeswap/v3-sdk@3.5.1
+
+## 4.9.0
+
+### Minor Changes
+
+- 5b1c68cb6: Default to subgraph cache fallback for v3 candidate pools fetcher
+- 435a90ac2: Add support for opBNB mainnet
+
+### Patch Changes
+
+- Updated dependencies [435a90ac2]
+  - @pancakeswap/multicall@3.2.0
+  - @pancakeswap/sdk@5.6.0
+  - @pancakeswap/chains@0.1.0
+  - @pancakeswap/tokens@0.5.0
+  - @pancakeswap/v3-sdk@3.5.0
+
+## 4.8.8
+
+### Patch Changes
+
+- 1577caa6f: Add default import path for evm
+
+## 4.8.7
+
+### Patch Changes
+
+- 1831356d9: refactor: Move ChainsId usage from Sdk to Chains package
+- Updated dependencies [1831356d9]
+  - @pancakeswap/sdk@5.5.0
+  - @pancakeswap/multicall@3.1.2
+  - @pancakeswap/tokens@0.4.4
+  - @pancakeswap/v3-sdk@3.4.4
+
+## 4.8.6
+
+### Patch Changes
+
+- e491ed2ba: Fix module not found under nodejs esm resolution
+
+## 4.8.5
+
+### Patch Changes
+
+- 2d7e1b3e2: Upgraded viem
+- Updated dependencies [2d7e1b3e2]
+  - @pancakeswap/multicall@3.1.1
+  - @pancakeswap/sdk@5.4.2
+  - @pancakeswap/v3-sdk@3.4.3
+  - @pancakeswap/tokens@0.4.3
+
 ## 4.8.4
 
 ### Patch Changes

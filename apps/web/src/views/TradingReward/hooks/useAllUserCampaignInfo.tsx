@@ -1,4 +1,3 @@
-import useSWR from 'swr'
 import BigNumber from 'bignumber.js'
 import { useAccount } from 'wagmi'
 import { SLOW_INTERVAL } from 'config/constants'
@@ -6,10 +5,11 @@ import { TRADING_REWARD_API } from 'config/constants/endpoints'
 import { tradingRewardABI } from 'config/abi/tradingReward'
 import { getTradingRewardAddress, getTradingRewardTopTradesAddress } from 'utils/addressHelpers'
 import { CampaignIdInfoResponse, CampaignIdInfoDetail } from 'views/TradingReward/hooks/useCampaignIdInfo'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { publicClient } from 'utils/wagmi'
 import { Address } from 'viem'
 import { RewardType } from 'views/TradingReward/hooks/useAllTradingRewardPair'
+import { useQuery } from '@tanstack/react-query'
 
 interface UserCampaignInfoResponse {
   id: string
@@ -49,8 +49,8 @@ const useAllUserCampaignInfo = ({ campaignIds, type }: UseAllUserCampaignInfoPro
       ? getTradingRewardAddress(ChainId.BSC)
       : getTradingRewardTopTradesAddress(ChainId.BSC)
 
-  const { data: allUserCampaignInfoData, isLoading } = useSWR(
-    campaignIds.length > 0 && account && type && ['/all-campaign-id-info', account, campaignIds, type],
+  const { data: allUserCampaignInfoData, isLoading } = useQuery(
+    ['tradingReward', 'all-campaign-id-info', account, campaignIds, type],
     async () => {
       try {
         const allUserCampaignInfo = await Promise.all(
@@ -136,8 +136,9 @@ const useAllUserCampaignInfo = ({ campaignIds, type }: UseAllUserCampaignInfoPro
       }
     },
     {
-      refreshInterval: SLOW_INTERVAL,
-      fallbackData: [],
+      refetchInterval: SLOW_INTERVAL,
+      initialData: [],
+      enabled: Boolean(campaignIds.length > 0 && account && type),
     },
   )
 

@@ -1,4 +1,5 @@
-import { BigintIsh, ChainId, Currency, CurrencyAmount } from '@pancakeswap/sdk'
+import { BigintIsh, Currency, CurrencyAmount } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { Abi, Address } from 'viem'
 import retry, { Options as RetryOptions } from 'async-retry'
 // import uniq from 'lodash/uniq.js'
@@ -21,9 +22,6 @@ const SUCCESS_RATE_CONFIG: Record<ChainId, number> = chains.reduce((acc, chain) 
   return {...acc, [chain.id]: 0.1}
 }, {})
 
-const BLOCK_CONFLICT_TOLERANCE: Record<ChainId, number> = chains.reduce((acc, chain) => {
-  return {...acc, [chain.id]: 5}
-}, {})
 
 type V3Inputs = [string, string]
 type MixedInputs = [string, number[], string]

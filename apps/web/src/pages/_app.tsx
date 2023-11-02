@@ -17,13 +17,13 @@ import Head from 'next/head'
 import { Fragment, useEffect } from 'react'
 import { DefaultSeo } from 'next-seo'
 import { PageMeta } from 'components/Layout/Page'
+import { SentryErrorBoundary } from 'components/ErrorBoundary'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, useStore } from '../state'
 import { usePollBlockNumber } from '../state/block/hooks'
 import TransactionsDetailModal from '../components/TransactionDetailModal'
 import { Blocklist, Updaters } from '..'
 import { SEO } from '../../next-seo.config'
-import { SentryErrorBoundary } from '../components/ErrorBoundary'
 import Menu from '../components/Menu'
 import Providers from '../Providers'
 import GlobalStyle from '../style/Global'
@@ -63,7 +63,7 @@ function MPGlobalHooks() {
   return null
 }
 
-function MyApp(props: AppProps<{ initialReduxState: any }>) {
+function MyApp(props: AppProps<{ initialReduxState: any; dehydratedState: any }>) {
   const { pageProps, Component } = props
   const store = useStore(pageProps.initialReduxState)
   useEffect(() => {
@@ -94,8 +94,7 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
         <title>IceCreamSwap</title>
       </Head>
       <DefaultSeo {...SEO} />
-
-      <Providers store={store}>
+      <Providers store={store} dehydratedState={pageProps.dehydratedState}>
         <PageMeta />
         {(Component as NextPageWithLayout).Meta && (
           // @ts-ignore

@@ -3,7 +3,7 @@ import { TokenLogo } from '@pancakeswap/uikit'
 import { useMemo } from 'react'
 import { multiChainId, MultiChainName } from 'state/info/constant'
 import { styled } from 'styled-components'
-import { isAddress } from 'utils'
+import { safeGetAddress } from 'utils'
 import { Address } from 'viem'
 import getTokenLogoURL from '../../../../utils/getTokenLogoURL'
 
@@ -28,7 +28,7 @@ export const CurrencyLogo: React.FC<
     return getTokenLogoURL(new Token(multiChainId[chainName], address as Address, 18, ''))
   }, [address, chainName])
 
-  const checkedSumAddress = isAddress(address)
+  const checkedSumAddress = safeGetAddress(address)
   const srcFromICS = checkedSumAddress
     ? `https://icecreamswap-assets.s3.amazonaws.com/token/${multiChainId[chainName]}/${checkedSumAddress}.png`
     : ''

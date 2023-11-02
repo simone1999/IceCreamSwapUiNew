@@ -1,4 +1,5 @@
-import { ChainId, Percent, Token } from '@pancakeswap/sdk'
+import { Percent, Token } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import {
   bitgertTokens,
   coreTokens,

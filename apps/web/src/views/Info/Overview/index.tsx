@@ -8,6 +8,7 @@ import {
   useProtocolDataSWR,
   useProtocolTransactionsSWR,
 } from 'state/info/hooks'
+import { TokenData } from 'state/info/types'
 import { styled } from 'styled-components'
 import BarChart from 'views/Info/components/InfoCharts/BarChart'
 import LineChart from 'views/Info/components/InfoCharts/LineChart'
@@ -15,7 +16,7 @@ import PoolTable from 'views/Info/components/InfoTables/PoolsTable'
 import TokenTable from 'views/Info/components/InfoTables/TokensTable'
 import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable'
 import HoverableChart from '../components/InfoCharts/HoverableChart'
-import { usePoolsData } from '../hooks/usePoolsData'
+import { useNonSpamPoolsData } from '../hooks/usePoolsData'
 
 export const ChartCardsContainer = styled(Flex)`
   justify-content: space-between;
@@ -53,10 +54,10 @@ const Overview: React.FC<React.PropsWithChildren> = () => {
   const formattedTokens = useMemo(() => {
     return Object.values(allTokens)
       .map((token) => token.data)
-      .filter((token) => token.name !== 'unknown')
+      .filter<TokenData>((token): token is TokenData => token?.name !== 'unknown')
   }, [allTokens])
 
-  const { poolsData } = usePoolsData()
+  const { poolsData } = useNonSpamPoolsData()
 
   const somePoolsAreLoading = useMemo(() => {
     return poolsData.some((pool) => !pool?.token0Price)

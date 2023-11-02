@@ -1,19 +1,6 @@
 {
-  "extends": "@pancakeswap/tsconfig/nextjs.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "src",
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "noFallthroughCasesInSwitch": true,
-    "downlevelIteration": true,
-    "target": "es5",
-    "skipLibCheck": true
-  },
-  "exclude": ["node_modules", "./src/strict/**/*.ts", "./src/strict/**/*.tsx"],
-  "include": ["next-env.d.ts", "./src/**/*.ts", "./src/**/*.tsx"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
+    "strictNullChecks": false
   }
 }

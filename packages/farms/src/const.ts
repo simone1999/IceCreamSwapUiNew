@@ -1,11 +1,15 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
+import uniq from 'lodash/uniq'
 import { chains } from '@icecreamswap/constants'
 
 export const supportedChainIdV2 = chains.filter((chain) => chain.features.includes('farms')).map((chain) => chain.id)
 export const supportedChainIdV3 = chains.filter((chain) => chain.features.includes('farmsV3')).map((chain) => chain.id)
+export const supportedChainId = uniq([...supportedChainIdV2, ...supportedChainIdV3])
 export const bCakeSupportedChainId: ChainId[] = []
 
 export const FARM_AUCTION_HOSTING_IN_SECONDS = 691200
+
+export type FarmSupportedChainId = (typeof supportedChainId)[number]
 
 export type FarmV2SupportedChainId = (typeof supportedChainIdV2)[number]
 

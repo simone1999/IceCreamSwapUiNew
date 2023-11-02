@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import { useTranslation } from '@pancakeswap/localization'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { useToast } from '@pancakeswap/uikit'
 import { useCallback, useMemo } from 'react'
 import replaceBrowserHistory from '@pancakeswap/utils/replaceBrowserHistory'
@@ -79,7 +79,7 @@ export function useSwitchNetwork() {
           !(
             typeof window !== 'undefined' &&
             // @ts-ignore // TODO: add type later
-            (window.ethereum?.isSafePal || window.ethereum?.isMathWallet)
+            window.ethereum?.isMathWallet
           )
         : true,
     [_switchNetworkAsync, isConnected],

@@ -9,9 +9,10 @@ import { FixedSizeList } from 'react-window'
 import { useAllLists, useInactiveListUrls } from 'state/lists/hooks'
 import { WrappedTokenInfo, createFilterToken } from '@pancakeswap/token-lists'
 import { useAudioPlay } from '@pancakeswap/utils/user'
-import { isAddress } from 'utils'
+import { safeGetAddress } from 'utils'
 import { useActiveChainId } from 'hooks/useActiveChainId'
-import { whiteListedFiatCurrencies } from 'views/BuyCrypto/constants'
+import { whiteListedFiatCurrenciesMap } from 'views/BuyCrypto/constants'
+import { isAddress } from 'viem'
 import { useAllTokens, useIsUserAddedToken, useToken } from '../../hooks/Tokens'
 import Row from '../Layout/Row'
 import CommonBases from './CommonBases'
@@ -45,7 +46,7 @@ function useSearchInactiveTokenLists(search: string | undefined, minResults = 10
   const activeTokens = useAllTokens()
   return useMemo(() => {
     if (!search || search.trim().length === 0) return []
-    const filterToken = createFilterToken(search, (address) => Boolean(isAddress(address)))
+    const filterToken = createFilterToken(search, (address) => isAddress(address))
     const exactMatches: WrappedTokenInfo[] = []
     const rest: WrappedTokenInfo[] = []
     const addressSet: { [address: string]: true } = {}
@@ -63,7 +64,7 @@ function useSearchInactiveTokenLists(search: string | undefined, minResults = 10
         ) {
           const wrapped: WrappedTokenInfo = new WrappedTokenInfo({
             ...tokenInfo,
-            address: isAddress(tokenInfo.address) || tokenInfo.address,
+            address: safeGetAddress(tokenInfo.address) || tokenInfo.address,
           })
           addressSet[wrapped.address] = true
           if (
@@ -128,16 +129,17 @@ function CurrencySearch({
     (props.showNative || typeof props.showNative === 'undefined')
 
   const filteredTokens: Token[] = useMemo(() => {
-    const filterToken = createFilterToken(debouncedQuery, (address) => Boolean(isAddress(address)))
+    const filterToken = createFilterToken(debouncedQuery, (address) => isAddress(address))
     return Object.values(tokensToShow || allTokens).filter(filterToken)
   }, [tokensToShow, allTokens, debouncedQuery])
 
   const queryTokens = useSortedTokensByQuery(filteredTokens, debouncedQuery)
   const filteredQueryTokens = useMemo(() => {
+    if (!chainId) return queryTokens
     return mode === 'onramp-input'
-      ? queryTokens.filter((curr) => whiteListedFiatCurrencies.includes(curr.symbol))
+      ? queryTokens.filter((curr) => whiteListedFiatCurrenciesMap[chainId].includes(curr.symbol))
       : queryTokens
-  }, [mode, queryTokens])
+  }, [mode, queryTokens, chainId])
 
   const tokenComparator = useTokenComparator(invertSearchOrder)
 
@@ -164,7 +166,7 @@ function CurrencySearch({
 
   const handleInput = useCallback((event) => {
     const input = event.target.value
-    const checksummedInput = isAddress(input)
+    const checksummedInput = safeGetAddress(input)
     setSearchQuery(checksummedInput || input)
     fixedList.current?.scrollTo(0)
   }, [])
@@ -207,7 +209,7 @@ function CurrencySearch({
       )
     }
 
-    return Boolean(filteredSortedTokens?.length) || hasFilteredInactiveTokens ? (
+    return Boolean(filteredSortedTokens?.length) || hasFilteredInactiveTokens || mode === 'onramp-output' ? (
       <Box mx="-24px" my="24px">
         <CurrencyList
           height={isMobile ? (showCommonBases ? height || 250 : height ? height + 80 : 350) : 390}
@@ -223,7 +225,7 @@ function CurrencySearch({
           fixedListRef={fixedList}
           showImportView={showImportView}
           setImportToken={setImportToken}
-          mode={mode}
+          mode={mode as string}
         />
       </Box>
     ) : (

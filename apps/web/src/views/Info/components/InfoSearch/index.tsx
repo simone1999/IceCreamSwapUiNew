@@ -21,6 +21,7 @@ import { styled } from 'styled-components'
 import { formatAmount } from 'utils/formatInfoNumbers'
 import { CurrencyLogo, DoubleCurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import SaveIcon from 'views/Info/components/SaveIcon'
+import { safeGetAddress } from 'utils'
 
 const Container = styled.div`
   position: relative;

@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { Address } from 'viem'
 
 // these are pancakeswap multicall contracts, they differ from the multicall contracts used in the rest of the project

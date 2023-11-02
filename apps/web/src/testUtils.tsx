@@ -13,7 +13,8 @@ import { SWRConfig } from 'swr'
 import { vi } from 'vitest'
 import { WagmiConfig } from 'wagmi'
 import { useHydrateAtoms } from 'jotai/utils'
-import { wagmiConfig } from './utils/wagmi'
+import { wagmiConfig } from 'utils/wagmi'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const mockRouter: any = {
   basePath: '',
@@ -46,7 +47,9 @@ export function renderWithProvider(
   function Wrapper({ children }) {
     return (
       <RouterContext.Provider value={{ ...mockRouter, ...router }}>
-        <Provider store={store}>{children}</Provider>
+        <Provider store={store} dehydratedState={{}}>
+          {children}
+        </Provider>
       </RouterContext.Provider>
     )
   }
@@ -63,7 +66,7 @@ export const createJotaiWrapper =
   (reduxState = undefined, testAtom, initState = undefined) =>
   ({ children }) =>
     (
-      <Provider store={makeStore(reduxState)}>
+      <Provider store={makeStore(reduxState)} dehydratedState={{}}>
         <JotaiProvider>
           {initState ? <HydrateAtoms initialValues={[[testAtom, initState]]}>{children}</HydrateAtoms> : children}
         </JotaiProvider>
@@ -73,7 +76,11 @@ export const createJotaiWrapper =
 export const createReduxWrapper =
   (initState = undefined) =>
   ({ children }) =>
-    <Provider store={makeStore(initState)}>{children}</Provider>
+    (
+      <Provider store={makeStore(initState)} dehydratedState={{}}>
+        {children}
+      </Provider>
+    )
 
 export const createSWRWrapper =
   (fallbackData = undefined) =>
@@ -86,8 +93,15 @@ export const createSWRWrapper =
 
 export const createWagmiWrapper =
   () =>
-  ({ children }) =>
-    <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
+  ({ children }) => {
+    const queryClient = new QueryClient()
+
+    return (
+      <QueryClientProvider client={queryClient}>
+        <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
+      </QueryClientProvider>
+    )
+  }
 
 // re-export everything
 export * from '@testing-library/react'

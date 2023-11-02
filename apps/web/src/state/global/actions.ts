@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { BoxProps } from '@pancakeswap/uikit'
 
 // fired once when the app reloads but before the app renders

@@ -1,6 +1,5 @@
 /*
-import { useMemo } from 'react'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { useActiveIfoWithBlocks } from 'hooks/useActiveIfoWithBlocks'
 import { useUserCakeLockStatus } from 'hooks/useUserCakeLockStatus'
 import { useMemo } from 'react'
@@ -10,8 +9,7 @@ import { getStatus } from 'views/Ifos/hooks/helpers'
 import { useCompetitionStatus } from './useCompetitionStatus'
 import { usePotteryStatus } from './usePotteryStatus'
 import { useVotingStatus } from './useVotingStatus'
-import { useChainId } from '@pancakeswap/awgmi/src'
-import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
+import { useTradingRewardStatus } from './useTradingRewardStatus'
 */
 
 export const useMenuItemsStatus = (): Record<string, string> => {
@@ -48,6 +46,6 @@ export const useMenuItemsStatus = (): Record<string, string> => {
         '/trading-reward': tradingRewardStatus,
       }),
     }
-  }, [competitionStatus, ifoStatus, potteryStatus, votingStatus])
+  }, [competitionStatus, ifoStatus, potteryStatus, votingStatus, isUserLocked, tradingRewardStatus])
   */
 }

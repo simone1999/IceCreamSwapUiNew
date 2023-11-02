@@ -30,7 +30,7 @@ export const getActiveSubMenuItem = ({ pathname, menuItem }: { pathname: string;
   }
 
   // Pathname includes multiple sub menu item hrefs - find the most specific match
-  const mostSpecificMatch = orderBy(activeSubMenuItems, (subMenuItem) => subMenuItem.href.length, 'desc')[0]
+  const mostSpecificMatch = orderBy(activeSubMenuItems, (subMenuItem) => subMenuItem?.href?.length, 'desc')[0]
 
   return mostSpecificMatch
 }

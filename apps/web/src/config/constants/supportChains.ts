@@ -21,3 +21,5 @@ export const SUPPORT_TOKEN_DEPLOYER = chains.filter((chain) => chain.features.in
 export const SUPPORT_ZAP = []
 export const SUPPORT_BUY_CRYPTO = []
 export const LIQUID_STAKING_SUPPORTED_CHAINS = []
+export const FIXED_STAKING_SUPPORTED_CHAINS = []
+export const V3_MIGRATION_SUPPORTED_CHAINS = []

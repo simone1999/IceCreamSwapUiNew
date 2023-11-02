@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 
 import { ICE_FLEXIBLE_SIDE_VAULT, ICE_VAULT } from '../constants/contracts'
 import { getContractAddress } from '../utils'

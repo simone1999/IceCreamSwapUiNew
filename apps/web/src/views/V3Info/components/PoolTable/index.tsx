@@ -8,6 +8,7 @@ import { styled } from 'styled-components'
 import { subgraphTokenSymbol } from 'state/info/constant'
 import { DoubleCurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from 'views/Info/components/InfoTables/shared'
+import { safeGetAddress } from 'utils'
 import { POOL_HIDE, v3InfoPath } from '../../constants'
 import { PoolData } from '../../types'
 import { feeTierPercent } from '../../utils'
@@ -75,8 +76,8 @@ const DataRow = ({ poolData, index, chainPath }: { poolData: PoolData; index: nu
               chainName={chainName}
             />
             <Text ml="8px">
-              {subgraphTokenSymbol[poolData.token0.address] ?? poolData.token0.symbol}/
-              {subgraphTokenSymbol[poolData.token1.address] ?? poolData.token1.symbol}
+              {subgraphTokenSymbol[safeGetAddress(poolData.token0.address)] ?? poolData.token0.symbol}/
+              {subgraphTokenSymbol[safeGetAddress(poolData.token1.address)] ?? poolData.token1.symbol}
             </Text>
             <GreyBadge ml="10px" style={{ fontSize: 14 }}>
               {feeTierPercent(poolData.feeTier)}

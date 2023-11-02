@@ -4,17 +4,20 @@ import { useTranslation } from '@pancakeswap/localization'
 import truncateHash from '@pancakeswap/utils/truncateHash'
 import { ArrowBackIcon, ArrowForwardIcon, Box, Flex, Radio, ScanLink, Skeleton, Text } from '@pancakeswap/uikit'
 import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
-import { formatDistanceToNowStrict } from 'date-fns'
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 import { useChainNameByQuery } from 'state/info/hooks'
 import { Transaction, TransactionType } from 'state/info/types'
 import { styled } from 'styled-components'
-import { getBlockExploreLink } from 'utils'
-import { multiChainId, subgraphTokenSymbol } from 'state/info/constant'
+import { getBlockExploreLink, safeGetAddress } from 'utils'
+import { multiChainId, subgraphTokenSymbol, ChainLinkSupportChains } from 'state/info/constant'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
 import { formatAmount } from 'utils/formatInfoNumbers'
 import { useDomainNameForAddress } from 'hooks/useDomain'
 import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from './shared'
+
+dayjs.extend(relativeTime)
 
 const Wrapper = styled.div`
   width: 100%;
@@ -102,15 +105,19 @@ const DataRow: React.FC<React.PropsWithChildren<{ transaction: Transaction }>> =
   const abs1 = Math.abs(transaction.amountToken1)
   const chainName = useChainNameByQuery()
   const { domainName } = useDomainNameForAddress(transaction.sender)
-  const token0Symbol = subgraphTokenSymbol[transaction.token0Address.toLowerCase()] ?? transaction.token0Symbol
-  const token1Symbol = subgraphTokenSymbol[transaction.token1Address.toLowerCase()] ?? transaction.token1Symbol
+  const [token0Address, token1Address] = [transaction.token0Address, transaction.token1Address].map(safeGetAddress)
+  const [token0Symbol = transaction.token0Symbol, token1Symbol = transaction.token1Symbol] = [
+    token0Address,
+    token1Address,
+  ].map((address) => (address ? subgraphTokenSymbol[address] : undefined))
+
   const outputTokenSymbol = transaction.amountToken0 < 0 ? token0Symbol : token1Symbol
   const inputTokenSymbol = transaction.amountToken1 < 0 ? token0Symbol : token1Symbol
 
   return (
     <ResponsiveGrid>
       <ScanLink
-        chainId={multiChainId[chainName]}
+        useBscCoinFallback={ChainLinkSupportChains.includes(multiChainId[chainName])}
         href={getBlockExploreLink(transaction.hash, 'transaction', multiChainId[chainName])}
       >
         <Text>
@@ -138,19 +145,19 @@ const DataRow: React.FC<React.PropsWithChildren<{ transaction: Transaction }>> =
         <Text>{`${formatAmount(abs1)} ${transaction.token1Symbol}`}</Text>
       </Text>
       <ScanLink
-        chainId={multiChainId[chainName]}
+        useBscCoinFallback={ChainLinkSupportChains.includes(multiChainId[chainName])}
         href={getBlockExploreLink(transaction.sender, 'address', multiChainId[chainName])}
       >
         {domainName || truncateHash(transaction.sender)}
       </ScanLink>
-      <Text>{formatDistanceToNowStrict(parseInt(transaction.timestamp, 10) * 1000)}</Text>
+      <Text>{dayjs.unix(parseInt(transaction.timestamp, 10)).toNow(true)}</Text>
     </ResponsiveGrid>
   )
 }
 
 const TransactionTable: React.FC<
   React.PropsWithChildren<{
-    transactions: Transaction[]
+    transactions: Transaction[] | undefined
   }>
 > = ({ transactions }) => {
   const [sortField, setSortField] = useState(SORT_FIELD.timestamp)
@@ -200,7 +207,7 @@ const TransactionTable: React.FC<
   }, [transactions, txFilter])
 
   const handleFilter = useCallback(
-    (newFilter: TransactionType) => {
+    (newFilter: TransactionType | undefined) => {
       if (newFilter !== txFilter) {
         setTxFilter(newFilter)
         setPage(1)
