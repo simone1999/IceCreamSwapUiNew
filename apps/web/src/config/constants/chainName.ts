@@ -15,6 +15,7 @@ const chainName: Record<ChainId, string> = {
   [ChainId.SHIMMER_TEST]: 'Shimmer (Testnet)',
   [ChainId.BASE]: 'Base',
   [ChainId.SCROLL]: 'Scroll',
+  [ChainId.QUAI_TEST]: 'Quai (Testnet)',
 }
 
 export default chainName

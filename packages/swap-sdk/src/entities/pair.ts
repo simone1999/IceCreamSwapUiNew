@@ -18,8 +18,9 @@ import { keccak256, pack } from '@ethersproject/solidity'
 import JSBI from 'jsbi'
 import invariant from 'tiny-invariant'
 
-import { FACTORY_ADDRESS_MAP, INIT_CODE_HASH_MAP } from '../constants'
+import { ChainId, FACTORY_ADDRESS_MAP, INIT_CODE_HASH_MAP } from "../constants";
 import { ERC20Token } from './token'
+import { BytesLike } from "@ethersproject/bytes";
 
 let PAIR_ADDRESS_CACHE: { [key: string]: string } = {}
 
@@ -38,17 +39,33 @@ export const computePairAddress = ({
   const key = composeKey(token0, token1)
 
   if (PAIR_ADDRESS_CACHE?.[key] === undefined) {
+    const address = token0.chainId != ChainId.QUAI_TEST? getCreate2Address(
+      factoryAddress,
+      keccak256(['bytes'], [pack(['address', 'address'], [token0.address, token1.address])]),
+      INIT_CODE_HASH_MAP[token0.chainId]
+    ) : getCreate2AddressQuai(factoryAddress, token0.address, token1.address, INIT_CODE_HASH_MAP[token0.chainId])
+
     PAIR_ADDRESS_CACHE = {
       ...PAIR_ADDRESS_CACHE,
-      [key]: getCreate2Address(
-        factoryAddress,
-        keccak256(['bytes'], [pack(['address', 'address'], [token0.address, token1.address])]),
-        INIT_CODE_HASH_MAP[token0.chainId]
-      ),
+      [key]: address,
     }
   }
   return PAIR_ADDRESS_CACHE[key]
 }
+
+const getCreate2AddressQuai = (from: string, token0Address: string, token1Address: string, initCodeHash: BytesLike): string => {
+  let i = 0
+  while (i < 100_000) {
+    const salt = keccak256(['bytes'], [pack(['address', 'address', 'uint256'], [token0Address, token1Address, i])])
+    const address = getCreate2Address(from, salt, initCodeHash)
+    if (address.startsWith("0x00")) {
+      return address
+    }
+    i++
+  }
+  throw Error("could not find quai address")
+}
+
 
 export class Pair {
   public readonly liquidityToken: ERC20Token

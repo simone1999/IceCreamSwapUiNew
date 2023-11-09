@@ -12,6 +12,7 @@ import { shimmerTestnet } from "./shimmerTestnet";
 import { base } from "./base";
 import { shimmer } from "./shimmer"
 import { scroll } from "./scroll"
+import { quaiTestnet } from "./quaiTestnet";
 
 export const chainMap = {
   core,
@@ -27,6 +28,7 @@ export const chainMap = {
   xodex,
   dokenchain,
   shardeumTestnet,
+  quaiTestnet
   // shimmerTestnet,
 }
 export const chains = Object.values(chainMap)
@@ -50,4 +52,5 @@ export enum ChainId {
   DOKEN = dokenchain.id,
   SHARDEUM_TEST = shardeumTestnet.id,
   SHIMMER_TEST = shimmerTestnet.id,
+  QUAI_TEST = quaiTestnet.id,
 }

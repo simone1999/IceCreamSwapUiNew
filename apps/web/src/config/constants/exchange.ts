@@ -13,7 +13,8 @@ import {
   shimmerTestnetTokens,
   baseTokens,
   shimmerTokens,
-  scrollTokens
+  scrollTokens,
+  quaiTestnetTokens
 } from '@pancakeswap/tokens';
 import { ChainMap, ChainTokenList, RouterAddressTypes } from './types'
 
@@ -72,6 +73,9 @@ export const ROUTER_ADDRESS: Partial<ChainMap<RouterAddressTypes>> = {
   [ChainId.SCROLL]: {
     Icecream: ROUTER_ADDRESS_COMMON,
   },
+  [ChainId.QUAI_TEST]: {
+    Icecream: "0x007eAE4be339BF18e8C41E039AB6E59C07e5fA25",
+  },
 }
 
 // used to construct intermediary pairs for trading
@@ -89,6 +93,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: Partial<ChainTokenList> = {
   [ChainId.BASE]: [baseTokens.weth, baseTokens.ice, baseTokens.usdt],
   [ChainId.SHIMMER]: [shimmerTokens.wsmr, shimmerTokens.ice, shimmerTokens.usdt],
   [ChainId.SCROLL]: [scrollTokens.weth, scrollTokens.ice, scrollTokens.usdt],
+  [ChainId.QUAI_TEST]: [quaiTestnetTokens.wquai, quaiTestnetTokens.ice, quaiTestnetTokens.usdt],
 }
 
 /**
@@ -119,6 +124,7 @@ export const SUGGESTED_BASES: Partial<ChainTokenList> = {
   [ChainId.BASE]: [baseTokens.ice, baseTokens.usdt],
   [ChainId.SHIMMER]: [shimmerTokens.ice, shimmerTokens.usdt, shimmerTokens.wsmr],
   [ChainId.SCROLL]: [scrollTokens.ice, scrollTokens.usdt, scrollTokens.weth],
+  [ChainId.QUAI_TEST]: [quaiTestnetTokens.wquai, quaiTestnetTokens.ice, quaiTestnetTokens.usdt],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -174,6 +180,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: Partial<ChainTokenList> = {
   [ChainId.BASE]: [baseTokens.weth, baseTokens.ice, baseTokens.usdt],
   [ChainId.SHIMMER]: [shimmerTokens.wsmr, shimmerTokens.ice, shimmerTokens.usdt],
   [ChainId.SCROLL]: [scrollTokens.weth, scrollTokens.ice, scrollTokens.usdt],
+  [ChainId.QUAI_TEST]: [quaiTestnetTokens.wquai, quaiTestnetTokens.ice, quaiTestnetTokens.usdt],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -225,6 +232,11 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [scrollTokens.usdt, scrollTokens.ice],
     [scrollTokens.weth, scrollTokens.ice],
     [scrollTokens.weth, scrollTokens.usdt],
+  ],
+  [ChainId.QUAI_TEST]: [
+    [quaiTestnetTokens.usdt, quaiTestnetTokens.ice],
+    [quaiTestnetTokens.wquai, quaiTestnetTokens.ice],
+    [quaiTestnetTokens.wquai, quaiTestnetTokens.usdt],
   ],
 }
 
