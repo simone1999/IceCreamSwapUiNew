@@ -8,7 +8,7 @@ interface GlobalCheckClaimStatusProps {
 }
 
 // change it to true if we have events to check claim status
-const enable = true
+const enable = false
 
 const GlobalCheckClaimStatus: React.FC<React.PropsWithChildren<GlobalCheckClaimStatusProps>> = (props) => {
   const { account } = useAccountActiveChain()

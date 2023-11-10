@@ -2,7 +2,6 @@ import { useTranslation } from '@pancakeswap/localization'
 import { ApprovalState } from 'hooks/useApproveCallback'
 import { Field } from 'state/mint/actions'
 import { styled } from 'styled-components'
-import { ethereumTokens } from '@pancakeswap/tokens'
 import { Link, RowBetween, Message, MessageText, Button, Dots } from '@pancakeswap/uikit'
 import { Currency, CurrencyAmount } from '@pancakeswap/swap-sdk-core'
 import { SendTransactionResult } from 'wagmi/actions'
@@ -52,16 +51,14 @@ export default function ApproveLiquidityTokens({
     return (
       showFieldAApproval &&
       currentAllowanceA?.greaterThan(0) &&
-      currencies[Field.CURRENCY_A]?.chainId === ethereumTokens.usdt.chainId &&
-      currencies[Field.CURRENCY_A]?.wrapped.address.toLowerCase() === ethereumTokens.usdt.address.toLowerCase()
+      false
     )
   }, [showFieldAApproval, currentAllowanceA, currencies])
   const revokeBNeeded = useMemo(() => {
     return (
       showFieldBApproval &&
       currentAllowanceB?.greaterThan(0) &&
-      currencies[Field.CURRENCY_B]?.chainId === ethereumTokens.usdt.chainId &&
-      currencies[Field.CURRENCY_B]?.wrapped.address.toLowerCase() === ethereumTokens.usdt.address.toLowerCase()
+      false
     )
   }, [showFieldBApproval, currentAllowanceB, currencies])
   const anyRevokeNeeded = revokeANeeded || revokeBNeeded

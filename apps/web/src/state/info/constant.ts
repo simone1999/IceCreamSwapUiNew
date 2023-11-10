@@ -3,7 +3,7 @@ import {
   BLOCKS_CLIENT_WITH_CHAIN,
   INFO_CLIENT_WITH_CHAIN
 } from "config/constants/endpoints";
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import {
   PCS_BITGERT_START,
   PCS_CORE_START,
@@ -73,5 +73,7 @@ export const checkIsStableSwap = () => window.location.href.includes('stableSwap
 export const multiChainName: Record<number | string, MultiChainNameExtend> = chains.reduce((acc, chain) => {
   return {...acc, [chain.id]: chain.network.toUpperCase() as MultiChainName}
 }, {})
+
+export const ChainLinkSupportChains = []
 
 export const subgraphTokenSymbol = {}

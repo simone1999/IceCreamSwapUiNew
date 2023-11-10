@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import BigNumber from 'bignumber.js'
 
 import { blocksPerYear, SECONDS_IN_YEAR } from "../constants";

@@ -5,11 +5,19 @@ import { Address } from 'wagmi'
 import { useQuery } from '@tanstack/react-query'
 
 export const useFarmCProxyAddress = (account?: string, chainId?: number) => {
-  const { data } = useSWR(account && chainId && ['cProxyAddress', account, chainId], async () =>
-    fetchCProxyAddress(account as Address, chainId),
+  return {cProxyAddress: undefined}
+  /*
+  const multiCallChainId = farmFetcher.isTestnet(chainId) ? ChainId.BSC_TESTNET : ChainId.BSC
+  const { data } = useQuery(
+    ['cProxyAddress', account, chainId],
+    async () => fetchCProxyAddress(account as Address, multiCallChainId),
+    {
+      enabled: Boolean(account && chainId),
+    },
   )
 
   return {
     cProxyAddress: data,
   }
+  */
 }

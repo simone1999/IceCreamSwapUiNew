@@ -8,7 +8,7 @@ import hero from '../../../../public/images/home/hero-home.png'
 import { SlideSvgDark, SlideSvgLight } from '../Home/components/SlideSvg'
 import Countdown from 'react-countdown'
 import { SUPPORT_BRIDGE } from 'config/constants/supportChains'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 
 const flyingAnim = () => keyframes`
   from {

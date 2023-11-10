@@ -1,5 +1,6 @@
 import { useTranslation } from '@pancakeswap/localization'
 import { Currency, CurrencyAmount, Percent, Token, Trade, TradeType } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { BottomDrawer, Box, Button, Flex, Link, useMatchBreakpoints, useModal, AutoColumn } from '@pancakeswap/uikit'
 import { Swap as SwapUI } from '@pancakeswap/widgets-internal'
 

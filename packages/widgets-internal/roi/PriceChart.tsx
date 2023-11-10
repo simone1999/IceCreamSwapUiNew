@@ -10,7 +10,6 @@ import {
   PairDataTimeWindowEnum,
   Box,
   Text,
-  BunnyKnownPlaceholder,
 } from "@pancakeswap/uikit";
 import { PriceData } from "./types";
 import { FullWidthButtonMenu } from "./FullWidthButtonMenu";

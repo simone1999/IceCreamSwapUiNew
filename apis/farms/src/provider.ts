@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 import { createPublicClient, http, PublicClient } from 'viem'
 import { getChain } from '@icecreamswap/constants'
 

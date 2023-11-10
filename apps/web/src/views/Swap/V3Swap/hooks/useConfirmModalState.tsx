@@ -2,7 +2,6 @@ import { usePublicClient } from 'wagmi'
 import { useCallback, useEffect, useState } from 'react'
 import { ConfirmModalState, PendingConfirmModalState } from 'views/Swap/V3Swap/types'
 import { ApprovalState } from 'hooks/useApproveCallback'
-import { ethereumTokens } from '@pancakeswap/tokens'
 import { Currency, CurrencyAmount } from '@pancakeswap/swap-sdk-core'
 import { SendTransactionResult } from 'wagmi/actions'
 import { ChainId } from '@pancakeswap/chains'
@@ -50,8 +49,7 @@ export const useConfirmModalState = ({
     if (
       approval === ApprovalState.NOT_APPROVED &&
       currentAllowance?.greaterThan(0) &&
-      approvalToken.chainId === ethereumTokens.usdt.chainId &&
-      approvalToken.wrapped.address.toLowerCase() === ethereumTokens.usdt.address.toLowerCase()
+      false
     ) {
       steps.push(ConfirmModalState.RESETTING_APPROVAL)
     }

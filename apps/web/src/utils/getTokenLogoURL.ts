@@ -3,6 +3,8 @@ import memoize from 'lodash/memoize'
 import { Token } from '@pancakeswap/sdk'
 import chainName from "../config/constants/chainName";
 import { TOKEN_LOGO_S3_BUCKET_NAME } from '@icecreamswap/constants';
+import { safeGetAddress } from 'utils'
+import { isAddress } from 'viem'
 
 
 const getTokenLogoURL = memoize(

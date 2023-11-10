@@ -1,4 +1,5 @@
-import { ChainId, WETH9, ERC20Token } from '@pancakeswap/sdk'
+import { WETH9, ERC20Token } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 
 export const fuseTokens = {
   wfuse: WETH9[ChainId.FUSE],

@@ -35,7 +35,7 @@ interface Props extends SpaceProps, FlexProps {
   }
 }
 
-const LinkSupportChains = [ChainId.BSC, ChainId.BSC_TESTNET]
+const LinkSupportChains = []
 
 export const VaultLinks = memo(function VaultLinks({
   layout = 'column',

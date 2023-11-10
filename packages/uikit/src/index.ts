@@ -8,8 +8,6 @@ export * from "./css/atoms";
 export * as SwapCSS from "./css/swap.css";
 
 // Components
-import {PoolCategory} from "./widgets/Pool";
-
 export * from "./components";
 // Hooks
 export * from "./hooks";

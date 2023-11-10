@@ -1,6 +1,6 @@
 import { useCallback, memo } from 'react'
 import { Trade, Currency, TradeType, CurrencyAmount } from '@pancakeswap/sdk'
-import { InjectedModalProps, LinkExternal, Text, TransactionErrorContent } from "@pancakeswap/uikit";
+import { InjectedModalProps, LinkExternal, Text } from "@pancakeswap/uikit";
 import { TransactionSubmittedContent } from 'components/TransactionConfirmationModal'
 import { useTranslation } from '@pancakeswap/localization'
 import { Field } from 'state/swap/actions'
@@ -11,6 +11,7 @@ import AkkaTransactionConfirmSwapContent from './AkkaTransactionConfirmSwapConte
 import { AkkaRouterTrade } from '../hooks/types'
 import { useSwapState } from 'state/swap/hooks'
 import { useCurrency } from 'hooks/Tokens'
+import {TransactionErrorContent} from "@pancakeswap/widgets-internal";
 
 const PancakeRouterSlippageErrorMsg =
   'This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance.'

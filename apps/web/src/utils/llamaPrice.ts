@@ -1,5 +1,5 @@
 import { ChainId } from '@pancakeswap/chains'
-import { CAKE } from '@pancakeswap/tokens'
+import { ICE } from '@pancakeswap/tokens'
 import { getCakePriceFromOracle } from 'hooks/useCakePrice'
 
 const CHAIN_MAPPING = {
@@ -29,7 +29,7 @@ export const fetchTokenUSDValue = async (chainId: number, tokenAddresses: string
 
   const cakeAddress = tokenAddresses
     .map((address) =>
-      address.toLowerCase() === CAKE?.[chainId]?.address?.toLowerCase() ? `${CHAIN_MAPPING[chainId]}:${address}` : '',
+      address.toLowerCase() === ICE?.[chainId]?.address?.toLowerCase() ? `${CHAIN_MAPPING[chainId]}:${address}` : '',
     )
     .filter(Boolean)
 

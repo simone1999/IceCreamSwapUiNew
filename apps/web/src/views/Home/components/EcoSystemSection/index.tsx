@@ -372,7 +372,7 @@ const EcoSystemSection: React.FC = () => {
 
   return (
     <Flex justifyContent="center" alignItems="center" flexDirection="column" pt={isMobile ? '24px' : '60px'}>
-      <GradientLogo height="48px" width="48px" mb="24px" />
+      <GradientLogo height="48" width="48" />
       <Text textAlign="center" p="0px 20px">
         <Text
           fontSize={['32px', null, null, '40px']}

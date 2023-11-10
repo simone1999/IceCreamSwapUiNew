@@ -48,13 +48,6 @@ export const supportedTokenMap: {
 export const whiteListedFiatCurrenciesMap: {
   [chainId: number]: string[]
 } = {
-  [ChainId.BSC]: DEFAULT_FIAT_CURRENCIES,
-  [ChainId.ETHEREUM]: DEFAULT_FIAT_CURRENCIES,
-  [ChainId.ARBITRUM_ONE]: DEFAULT_FIAT_CURRENCIES,
-  [ChainId.ZKSYNC]: DEFAULT_FIAT_CURRENCIES,
-  [ChainId.LINEA]: WHITELISTED_FIAT_CURRENCIES_LINEA,
-  [ChainId.POLYGON_ZKEVM]: DEFAULT_FIAT_CURRENCIES,
-  [ChainId.BASE]: WHITELISTED_FIAT_CURRENCIES_BASE,
 }
 
 export function isBuyCryptoSupported(chain: ChainId) {
@@ -67,10 +60,37 @@ export const providerFeeTypes: { [provider in ONRAMP_PROVIDERS]: string[] } = {
   [ONRAMP_PROVIDERS.Transak]: MOONPAY_FEE_TYPES,
 }
 
-export const chainIdToNetwork: { [id: number]: string } = {
+export const getNetworkDisplay = (chainId: number | undefined): string => {
+  switch (chainId as ChainId) {
+    default:
+      return ''
+  }
 }
 
-export const moonpayCurrencyChainIdentifier: { [id: number]: string } = {
+export const chainIdToMercuryoNetworkId: { [id: number]: string } = {
+}
+
+export const chainIdToMoonPayNetworkId: { [id: number]: string } = {
+}
+
+export const chainIdToTransakNetworkId: { [id: number]: string } = {
+}
+
+export const combinedNetworkIdMap: {
+  [provider in keyof typeof ONRAMP_PROVIDERS]: { [id: number]: string }
+} = {
+  [ONRAMP_PROVIDERS.MoonPay]: chainIdToMoonPayNetworkId,
+  [ONRAMP_PROVIDERS.Mercuryo]: chainIdToMercuryoNetworkId,
+  [ONRAMP_PROVIDERS.Transak]: chainIdToTransakNetworkId,
+}
+
+export const getChainCurrencyWarningMessages = (
+    t: (key: TranslationKey, data?: ContextData) => string,
+    chainId: number,
+) => {
+  const networkDisplay = getNetworkDisplay(chainId)
+  return {
+  }
 }
 
 export const fiatCurrencyMap: Record<string, { symbol: string; name: string }> = {

@@ -5,7 +5,7 @@ import { Field } from 'state/swap/actions'
 import { computeSlippageAdjustedAmounts } from 'utils/exchange'
 import AkkaSwapModalFooter from './AkkaSwapModalFooter'
 import AkkaSwapModalHeader from './AkkaSwapModalHeader'
-import { ConfirmationModalContent } from "@pancakeswap/uikit";
+import {ConfirmationModalContent} from "@pancakeswap/widgets-internal";
 
 const AkkaTransactionConfirmSwapContent = ({
   trade,

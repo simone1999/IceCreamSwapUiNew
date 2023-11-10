@@ -16,7 +16,7 @@ import logo1072 from '../../../public/images/chains/1072.png'
 import logo8453 from '../../../public/images/chains/8453.png'
 import logo148 from '../../../public/images/chains/148.png'
 import logo534352 from '../../../public/images/chains/534352.png'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 
 const logoMap: Record<ChainId, StaticImageData> = {
   32520: logo32520,

@@ -6,7 +6,7 @@ import { useCallback, useMemo } from "react";
 import { format } from "d3";
 import * as Sentry from "@sentry/nextjs";
 import { saturate } from "polished";
-import { AutoColumn, BunnyKnownPlaceholder, ChartDisableIcon, LineGraphIcon } from "@pancakeswap/uikit";
+import { AutoColumn, ChartDisableIcon, LineGraphIcon } from "@pancakeswap/uikit";
 
 import { Bound, ChartEntry, TickDataRaw, ZOOM_LEVELS, ZoomLevels } from "./types";
 import { InfoBox } from "./InfoBox";
@@ -143,7 +143,7 @@ export function LiquidityChartRangeInput({
   return (
     <AutoColumn gap="md" style={{ minHeight: "200px", width: "100%", marginBottom: "16px" }}>
       {isUninitialized ? (
-        <InfoBox message={t("Your position will appear here.")} icon={<BunnyKnownPlaceholder />} />
+        <InfoBox message={t("Your position will appear here.")} icon={<Loader size="40px" stroke={theme.colors.text} />} />
       ) : isLoading ? (
         <InfoBox icon={<Loader size="40px" stroke={theme.colors.text} />} />
       ) : error ? (

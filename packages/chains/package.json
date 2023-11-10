@@ -38,5 +38,8 @@
   },
   "devDependencies": {
     "tsup": "^6.7.0"
+  },
+  "dependencies": {
+    "@icecreamswap/constants": "workspace:*"
   }
 }

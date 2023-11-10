@@ -1,4 +1,5 @@
-import {ChainId, ERC20Token, WETH9} from '@pancakeswap/sdk'
+import { ERC20Token, WETH9 } from '@pancakeswap/sdk'
+import { ChainId } from '@pancakeswap/chains'
 
 export const telosTokens = {
   wtlos: WETH9[ChainId.TELOS],

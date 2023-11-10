@@ -18,8 +18,6 @@ export const SUPPORT_KYC_DELEGATION = chains.filter((chain) => chain.features.in
 export const SUPPORT_LOCKS = chains.filter((chain) => chain.features.includes('locks')).map((chain) => chain.id)
 export const SUPPORT_LAUNCHPAD = chains.filter((chain) => chain.features.includes('launchpad')).map((chain) => chain.id)
 export const SUPPORT_TOKEN_DEPLOYER = chains.filter((chain) => chain.features.includes('tokenDeployer')).map((chain) => chain.id)
-export const SUPPORT_ZAP = []
-export const SUPPORT_BUY_CRYPTO = []
-export const LIQUID_STAKING_SUPPORTED_CHAINS = []
-export const FIXED_STAKING_SUPPORTED_CHAINS = []
-export const V3_MIGRATION_SUPPORTED_CHAINS = []
+export const SUPPORT_BUY_CRYPTO: number[] = []
+export const LIQUID_STAKING_SUPPORTED_CHAINS: number[] = []
+export const V3_MIGRATION_SUPPORTED_CHAINS: number[] = []

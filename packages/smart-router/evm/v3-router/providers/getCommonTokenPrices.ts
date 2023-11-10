@@ -157,6 +157,8 @@ export const getCommonTokenPricesByWalletApi = createCommonTokenPriceProvider<By
 )
 
 export const getCommonTokenPrices = withFallback([
+    // todo: reenable once chain names and api token are set up for llama endpoint
+  /*
   {
     asyncFn: ({ currencyA, currencyB }: ParamsWithFallback) => getCommonTokenPricesByLlma({ currencyA, currencyB }),
     timeout: 3000,
@@ -166,6 +168,7 @@ export const getCommonTokenPrices = withFallback([
       getCommonTokenPricesByWalletApi({ currencyA, currencyB }),
     timeout: 3000,
   },
+  */
   {
     asyncFn: ({ currencyA, currencyB, v3SubgraphProvider }: ParamsWithFallback) =>
       getCommonTokenPricesBySubgraph({ currencyA, currencyB, provider: v3SubgraphProvider }),

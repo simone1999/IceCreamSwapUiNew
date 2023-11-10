@@ -1,9 +1,8 @@
 import { trpcClient } from '@icecreamswap/backend'
-import { Address, useWalletClient } from "wagmi";
-import useAccountActiveChain from "hooks/useAccountActiveChain";
-import { WalletClient } from "viem/dist/types/clients/createWalletClient";
+import { Address } from "wagmi";
+import { WalletClient } from "wagmi";
 
-export const useOnLogin = (address: string, walletClient: WalletClient, account: Address) => async () => {
+export const useOnLogin = (address: Address, walletClient: WalletClient, account: Address) => async () => {
   if (!address) return
   // @ts-ignore
   const { nonce } = await trpcClient.session.nonce.query()

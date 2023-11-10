@@ -146,7 +146,7 @@ export function BuyCryptoForm({
             value=""
           />
         </Box>
-        {[ChainId.BASE, ChainId.LINEA, ChainId.ARBITRUM_ONE].includes(chainId) ? (
+        {[].includes(chainId) ? (
           <Message variant="warning" padding="16px">
             <Text fontSize="15px" color="#D67E0B">
               {getChainCurrencyWarningMessages(t, chainId)[chainId]}

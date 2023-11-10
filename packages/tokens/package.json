@@ -16,7 +16,8 @@
   "dependencies": {
     "@pancakeswap/chains": "workspace:*",
     "@pancakeswap/sdk": "workspace:*",
-    "@pancakeswap/token-lists": "workspace:*"
+    "@pancakeswap/token-lists": "workspace:*",
+    "@icecreamswap/constants": "workspace:*"
   },
   "devDependencies": {
     "@pancakeswap/utils": "workspace:*",

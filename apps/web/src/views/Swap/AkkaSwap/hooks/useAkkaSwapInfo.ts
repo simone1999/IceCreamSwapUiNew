@@ -1,7 +1,6 @@
 import { useWeb3React } from '@pancakeswap/wagmi'
 import { Currency, CurrencyAmount } from '@pancakeswap/sdk'
 import { useTranslation } from '@pancakeswap/localization'
-import { isAddress } from 'utils'
 
 import tryParseAmount from '@pancakeswap/utils/tryParseAmount'
 import { Field } from 'state/swap/actions'
@@ -9,6 +8,7 @@ import { useCurrencyBalances } from 'state/wallet/hooks'
 import { AkkaRouterTrade } from './types'
 import { useAkkaRouterRouteWithArgs } from './useAkkaRouterApi'
 import { keysToCamel } from 'utils/snakeToCamel'
+import { safeGetAddress } from "utils";
 
 // from the current swap inputs, compute the best trade and return it.
 export function useAkkaSwapInfo(
@@ -64,7 +64,7 @@ export function useAkkaSwapInfo(
     inputError = inputError ?? t('Select a token')
   }
 
-  const formattedTo = isAddress(to)
+  const formattedTo = safeGetAddress(to)
   if (!to || !formattedTo) {
     inputError = inputError ?? t('Enter a recipient')
   }
