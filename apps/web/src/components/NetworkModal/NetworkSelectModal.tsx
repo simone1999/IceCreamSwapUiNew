@@ -105,7 +105,7 @@ const NetworkSelect = ({ switchNetwork, chainId, onCloseModal, filters }) => {
                contents.map((chain) => (
                <UserMenuItem
                key={chain.id}
-               style={{ justifyContent: 'flex-start' }}
+               style={{ justifyContent: 'flex-start', minWidth:"350px", overflow:"hidden" }}
                onClick={() => {
                 if(chain.id === chainId) return;
                 switchNetwork(chain.id);
@@ -137,7 +137,7 @@ export function NetworkSelectModal({onCloseModal}) {
   }
   
   return (
-    <Modal title={"Select Network"} onDismiss={()=> onCloseModal(false)} style={{minWidth:"400px"}}>
+    <Modal title={"Select Network"} onDismiss={()=> onCloseModal(false)} style={{minWidth:"100px"}}>
       <Box style={{display:'flex', marginBottom: '8px'}}>
           <Input
             id="search-network"
@@ -148,7 +148,7 @@ export function NetworkSelectModal({onCloseModal}) {
             onChange={handleQuery}
           />
       </Box> <br />
-      <Box style={{ gap: '16px', overflowY:"scroll", paddingBottom:"10px"}} maxHeight="300px">
+      <Box style={{ gap: '16px', overflowY:"scroll", overflowX:"hidden", paddingBottom:"10px"}} maxHeight="300px">
             <NetworkSelect switchNetwork={switchNetworkAsync} chainId={chainId} onCloseModal={onCloseModal} filters={query}/>
       </Box>
       {/* <Button onClick={()=> onCloseModal(false)}>Close</Button> */}

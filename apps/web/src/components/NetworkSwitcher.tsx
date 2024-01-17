@@ -68,7 +68,7 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
     <Box  {...props} ref={cannotChangeNetwork ? targetRef : null} height="100%" style={{display:"flex", alignItems:"center"}}>
       {cannotChangeNetwork && tooltipVisible && tooltip}
       <Button
-        variant="tertiary"
+        variant="divider"
         style={{padding:'0px 0px', marginRight:"8px", height:'32px'}}
         onClick={()=>onToggleModal(true)}
       >
