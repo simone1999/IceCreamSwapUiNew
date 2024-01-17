@@ -65,9 +65,13 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
   }
 
   return (
-    <Box {...props} ref={cannotChangeNetwork ? targetRef : null} height="100%" style={{display:"flex", alignItems:"center"}}>
+    <Box  {...props} ref={cannotChangeNetwork ? targetRef : null} height="100%" style={{display:"flex", alignItems:"center"}}>
       {cannotChangeNetwork && tooltipVisible && tooltip}
-      <Button style={{padding:'0px 0px', marginRight:"8px", height:'32px', backgroundColor:'#eff4f5', color:'#280d5f'}} onClick={()=>onToggleModal(true)}>
+      <Button
+        variant="tertiary"
+        style={{padding:'0px 0px', marginRight:"8px", height:'32px'}}
+        onClick={()=>onToggleModal(true)}
+      >
         <img src = {`/images/chains/${chainId}.png`} width="32px"/> &nbsp;
         <>
           <Box display={['none', null, null, null, null, 'block']}>{chainName[foundChain.id]}</Box>
