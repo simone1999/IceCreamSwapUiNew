@@ -13,7 +13,8 @@ import {
   UserMenuDivider,
   UserMenuItem,
   useTooltip,
-  ModalV2
+  ModalV2,
+  IconButton
 } from '@pancakeswap/uikit'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import { useNetwork } from 'wagmi'
@@ -66,7 +67,7 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
   return (
     <Box {...props} ref={cannotChangeNetwork ? targetRef : null} height="100%" style={{display:"flex", alignItems:"center"}}>
       {cannotChangeNetwork && tooltipVisible && tooltip}
-      <Button style={{padding:'0px 8px', height:'32px'}} onClick={()=>onToggleModal(true)}>
+      <Button style={{padding:'0px 0px', marginRight:"8px", height:'32px', backgroundColor:'#eff4f5', color:'#280d5f'}} onClick={()=>onToggleModal(true)}>
         <img src = {`/images/chains/${chainId}.png`} width="32px"/> &nbsp;
         <>
           <Box display={['none', null, null, null, null, 'block']}>{chainName[foundChain.id]}</Box>
@@ -76,9 +77,10 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
       </Button>
       {/* <UserMenu
         width="100%"
+        height="55px"
         pr="8px"
         onClick={()=>onToggleModal(true)}
-        placement="left"
+        placement="right"
         variant={isLoading ? 'pending' : isWrongNetwork ? 'danger' : 'default'}
         avatarSrc={`/images/chains/${chainId}.png`}
         disabled={cannotChangeNetwork}
