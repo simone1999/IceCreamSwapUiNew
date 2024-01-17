@@ -13,6 +13,7 @@ import {
   UserMenuDivider,
   UserMenuItem,
   useTooltip,
+  ModalV2
 } from '@pancakeswap/uikit'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import { useNetwork } from 'wagmi'
@@ -21,99 +22,21 @@ import { useNetworkConnectorUpdater } from 'hooks/useActiveWeb3React'
 import { useHover } from 'hooks/useHover'
 import { useSessionChainId } from 'hooks/useSessionChainId'
 import { useSwitchNetwork } from 'hooks/useSwitchNetwork'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { chains } from 'utils/wagmi'
 
 import { ChainLogo } from './Logo/ChainLogo'
 import chainName from '../config/constants/chainName'
 import { useSupportedChains } from '../hooks/useSupportedChains'
+import dynamic from 'next/dynamic'
 
-const NetworkSelect = ({ switchNetwork, chainId }) => {
-  const { t } = useTranslation()
-  const supportedChains = useSupportedChains()
-
-  return (
-    <>
-      <Box px="16px" py="8px">
-        <Text color="textSubtle">{t('Select a Network')}</Text>
-      </Box>
-      <UserMenuDivider />
-      {chains
-        .filter((chain) => !chain.testnet || chain.id === chainId)
-        .filter((chain) => supportedChains.includes(chain.id))
-        .map((chain) => (
-          <UserMenuItem
-            key={chain.id}
-            style={{ justifyContent: 'flex-start' }}
-            onClick={() => chain.id !== chainId && switchNetwork(chain.id)}
-          >
-            <ChainLogo chainId={chain.id} />
-            <Text color={chain.id === chainId ? 'secondary' : 'text'} bold={chain.id === chainId} pl="12px">
-              {chainName[chain.id]}
-            </Text>
-          </UserMenuItem>
-        ))}
-    </>
-  )
-}
-
-const WrongNetworkSelect = ({ switchNetwork, chainId }) => {
-  const { t } = useTranslation()
-  const { targetRef, tooltip, tooltipVisible } = useTooltip(
-    t(
-      'The URL you are accessing (Chain id: %chainId%) belongs to %network%; mismatching your wallet’s network. Please switch the network to continue.',
-      {
-        chainId,
-        network: chains.find((c) => c.id === chainId)?.name ?? 'Unknown network',
-      },
-    ),
-    {
-      placement: 'auto-start',
-      hideTimeout: 0,
-    },
-  )
-  const { chain } = useNetwork()
-  const localChainId = useLocalNetworkChain() || ChainId.CORE
-  const [, setSessionChainId] = useSessionChainId()
-
-  const localChainName = chains.find((c) => c.id === localChainId)?.name ?? 'BSC'
-
-  const [ref1, isHover] = useHover<HTMLButtonElement>()
-
-  return (
-    <>
-      <Flex ref={targetRef} alignItems="center" px="16px" py="8px">
-        <InfoIcon color="textSubtle" />
-        <Text color="textSubtle" pl="6px">
-          {t('Please switch network')}
-        </Text>
-      </Flex>
-      {tooltipVisible && tooltip}
-      <UserMenuDivider />
-      {chain && (
-        <UserMenuItem ref={ref1} onClick={() => setSessionChainId(chain.id)} style={{ justifyContent: 'flex-start' }}>
-          <ChainLogo chainId={chain.id} />
-          <Text color="secondary" bold pl="12px">
-            {chain.name}
-          </Text>
-        </UserMenuItem>
-      )}
-      <Box px="16px" pt="8px">
-        {isHover ? <ArrowUpIcon color="text" /> : <ArrowDownIcon color="text" />}
-      </Box>
-      <UserMenuItem onClick={() => switchNetwork(localChainId)} style={{ justifyContent: 'flex-start' }}>
-        <ChainLogo chainId={localChainId} />
-        <Text pl="12px">{localChainName}</Text>
-      </UserMenuItem>
-      <Button mx="16px" my="8px" scale="sm" onClick={() => switchNetwork(localChainId)}>
-        {t('Switch network in wallet')}
-      </Button>
-    </>
-  )
-}
+const NetworkSelectModal = dynamic(() => import('./NetworkModal/NetworkSelectModal').then((mod) => mod.NetworkSelectModal), {
+  ssr: false,
+})
 
 export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const { t } = useTranslation()
   const { chainId, isWrongNetwork, isNotMatched } = useActiveChainId()
   const { pendingChainId, isLoading, canSwitch, switchNetworkAsync } = useSwitchNetwork()
@@ -136,12 +59,16 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
     return null
   }
 
+  const onToggleModal = (isOpen: boolean) => {
+    setIsOpenModal(isOpen);
+  }
+
   return (
     <Box {...props} ref={cannotChangeNetwork ? targetRef : null} height="100%">
       {cannotChangeNetwork && tooltipVisible && tooltip}
       <UserMenu
+        onClick={()=>onToggleModal(true)}
         width="100%"
-        pr="8px"
         placement="bottom"
         variant={isLoading ? 'pending' : isWrongNetwork ? 'danger' : 'default'}
         avatarSrc={`/images/chains/${chainId}.png`}
@@ -161,14 +88,10 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
           )
         }
       >
-        {() =>
-          isNotMatched ? (
-            <WrongNetworkSelect switchNetwork={switchNetworkAsync} chainId={chainId} />
-          ) : (
-            <NetworkSelect switchNetwork={switchNetworkAsync} chainId={chainId} />
-          )
-        }
       </UserMenu>
+      <ModalV2 isOpen={isOpenModal} closeOnOverlayClick onDismiss={()=>onToggleModal(false)}>
+        <NetworkSelectModal onCloseModal={onToggleModal}/>
+      </ModalV2>
     </Box>
   )
 }
