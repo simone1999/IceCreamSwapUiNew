@@ -153,7 +153,7 @@ export function NetworkSelectModal({onCloseModal}) {
           </IconButton>
       </Box>
       <Grid style={{ gap: '16px', overflowY:"scroll", paddingBottom:"10px"}} maxHeight="300px">
-            <NetworkSelect switchNetwork={switchNetworkAsync} chainId={chainId} onCloseModal={onCloseModal} filters={filters}/>
+            <NetworkSelect switchNetwork={switchNetworkAsync} chainId={chainId} onCloseModal={onCloseModal} filters={query}/>
       </Grid>
       <Button onClick={()=> onCloseModal(false)}>Close</Button>
     </Modal>

@@ -64,13 +64,21 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
   }
 
   return (
-    <Box {...props} ref={cannotChangeNetwork ? targetRef : null} height="100%">
+    <Box {...props} ref={cannotChangeNetwork ? targetRef : null} height="100%" style={{display:"flex", alignItems:"center"}}>
       {cannotChangeNetwork && tooltipVisible && tooltip}
-      <UserMenu
+      <Button style={{padding:'0px 8px', height:'32px'}} onClick={()=>onToggleModal(true)}>
+        <img src = {`/images/chains/${chainId}.png`} width="32px"/> &nbsp;
+        <>
+          <Box display={['none', null, null, null, null, 'block']}>{chainName[foundChain.id]}</Box>
+          <Box display={['block', null, null, null, null, 'none']}>{symbol}</Box>
+        </>
+        <svg viewBox="0 0 24 24" color="text" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path></svg>
+      </Button>
+      {/* <UserMenu
         width="100%"
         pr="8px"
         onClick={()=>onToggleModal(true)}
-        placement="bottom"
+        placement="left"
         variant={isLoading ? 'pending' : isWrongNetwork ? 'danger' : 'default'}
         avatarSrc={`/images/chains/${chainId}.png`}
         disabled={cannotChangeNetwork}
@@ -92,7 +100,7 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
         {
           () => undefined
         }
-      </UserMenu>
+      </UserMenu> */}
       <ModalV2 isOpen={isOpenModal} closeOnOverlayClick onDismiss={()=>onToggleModal(false)}>
         <NetworkSelectModal onCloseModal={onToggleModal}/>
       </ModalV2>
