@@ -67,8 +67,9 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
     <Box {...props} ref={cannotChangeNetwork ? targetRef : null} height="100%">
       {cannotChangeNetwork && tooltipVisible && tooltip}
       <UserMenu
-        onClick={()=>onToggleModal(true)}
         width="100%"
+        pr="8px"
+        onClick={()=>onToggleModal(true)}
         placement="bottom"
         variant={isLoading ? 'pending' : isWrongNetwork ? 'danger' : 'default'}
         avatarSrc={`/images/chains/${chainId}.png`}
@@ -88,6 +89,9 @@ export const NetworkSwitcher: React.FC<BoxProps> = (props) => {
           )
         }
       >
+        {
+          () => undefined
+        }
       </UserMenu>
       <ModalV2 isOpen={isOpenModal} closeOnOverlayClick onDismiss={()=>onToggleModal(false)}>
         <NetworkSelectModal onCloseModal={onToggleModal}/>

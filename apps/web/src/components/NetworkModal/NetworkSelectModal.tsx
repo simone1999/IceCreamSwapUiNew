@@ -138,8 +138,7 @@ export function NetworkSelectModal({onCloseModal}) {
   }
   
   return (
-    <Modal title={"Select Network"} closeOnOverlayClick onDismiss={()=> onCloseModal(false)} headerBackground="gradientCardHeader"
-     style={{minWidth:"400px"}}>
+    <Modal title={"Select Network"} onDismiss={()=> onCloseModal(false)} style={{minWidth:"400px"}}>
       <Box style={{display:'flex'}}>
           <Input
             id="search-network"
