@@ -1,6 +1,6 @@
 {
   "extends": "@pancakeswap/tsconfig/base",
-  "include": ["./**/*.ts", "withWebSecurityHeaders.ts"],
+  "include": ["./**/*.ts"],
   "exclude": ["**/*.test.ts", "dist"],
   "compilerOptions": {
     "target": "es2020",
