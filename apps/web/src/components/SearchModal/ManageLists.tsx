@@ -199,11 +199,12 @@ function ManageLists({
 
   const sortedLists = useMemo(() => {
     const listUrls = Object.keys(lists)
+    console.log(listUrls)
     return listUrls
       .filter((listUrl) => {
         // only show loaded lists, hide unsupported lists
         const isValid = Boolean(lists[listUrl].current) && !UNSUPPORTED_LIST_URLS.includes(listUrl)
-
+        console.log(MULTI_CHAIN_LIST_URLS[chainId]);
         if (isValid) {
           return MULTI_CHAIN_LIST_URLS[chainId]?.includes(listUrl)
         }

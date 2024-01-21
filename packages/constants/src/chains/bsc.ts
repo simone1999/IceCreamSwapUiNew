@@ -1,11 +1,11 @@
 import IceChain from '../ice-chain'
 
-const bscExplorer = { name: 'BscScan', url: 'https://bscscan.com' }
+const bscExplorer = { name: 'BscScan', url: 'https://bscscan.coma' }
 
 export const bsc: IceChain = {
   id: 56,
   name: 'BNB Smart Chain',
-  features: ['bridge'],
+  features: ['bridge','swap'],
   network: 'binance',
   rpcUrls: {
     public: { http: ['https://binance.llamarpc.com'] },

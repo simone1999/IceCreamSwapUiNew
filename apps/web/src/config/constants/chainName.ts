@@ -1,6 +1,7 @@
 import { ChainId } from '@pancakeswap/sdk'
 
 const chainName: Record<ChainId, string> = {
+  [ChainId.ETHEREUM]: 'Ethereum',
   [ChainId.BITGERT]: 'Bitgert',
   [ChainId.SHIMMER]: 'Shimmer EVM',
   [ChainId.DOGE]: 'Doge',
