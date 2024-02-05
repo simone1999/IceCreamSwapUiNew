@@ -7,8 +7,8 @@ export const telos: IceChain = {
   features: ['swap', 'bridge', 'farms', 'info', 'kyc'],
   network: 'telos',
   rpcUrls: {
-    public: { http: ['http://141.193.240.12:7003/evm'] },
-    default: { http: ['http://141.193.240.12:7003/evm'] },
+    public: { http: ['https://mainnet15testing.telos.net/evm'] },
+    default: { http: ['https://mainnet15testing.telos.net/evm'] },
   },
   blockExplorers: {
     default: { name: 'Telos Explorer', url: 'https://www.teloscan.io' },
