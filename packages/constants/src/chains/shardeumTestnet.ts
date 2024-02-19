@@ -1,4 +1,4 @@
-import { FACTORY_ADDRESS, INIT_CODE_HASH, ROUTER_ADDRESS } from "../common/swap";
+import { FACTORY_ADDRESS, INIT_CODE_HASH } from "../common/swap";
 import IceChain from '../ice-chain'
 
 export const shardeumTestnet: IceChain = {
@@ -7,11 +7,11 @@ export const shardeumTestnet: IceChain = {
   features: ['swap'],
   network: 'shardeumTestnet',
   rpcUrls: {
-    public: { http: ['https://sphinx.shardeum.org'] },
-    default: { http: ['https://sphinx.shardeum.org'] },
+    public: { http: ['https://dev110.shardeum.org'] },
+    default: { http: ['https://dev110.shardeum.org'] },
   },
   blockExplorers: {
-    default: { name: 'Shardeum(Testnet) Explorer', url: 'https://explorer-sphinx.shardeum.org' },
+    default: { name: 'Shardeum(Testnet) Explorer', url: 'http://35.91.64.8:6001' },
   },
   nativeCurrency: {
     name: 'Shardeum',
@@ -20,7 +20,7 @@ export const shardeumTestnet: IceChain = {
   },
   contracts: {
     multicall3: {
-      address: '0x7074ce83cb6b889a0ac896f3fc5636db732968e8',
+      address: '0xBD2e577dEa54602C7c367fa144981c8ACA6FD570',
       blockCreated: 57501,
     },
   },
@@ -34,6 +34,6 @@ export const shardeumTestnet: IceChain = {
   swap: {
     factoryAddress: FACTORY_ADDRESS,
     initCodeHash: INIT_CODE_HASH,
-    routerAddress: ROUTER_ADDRESS,
+    routerAddress: "0xf3a3dAf360161B2f10c645EF039C709A3Fd4Ea62",
   },
 }
