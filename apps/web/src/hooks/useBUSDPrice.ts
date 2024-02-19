@@ -48,6 +48,10 @@ export function useStablecoinPrice(
         .then(
           (res) => res?.[`${address}`],
         )
+        .catch(reason => {
+          console.warn("Error while getting token price", reason)
+          return null
+        })
     },
     {
       dedupingInterval: 30_000,

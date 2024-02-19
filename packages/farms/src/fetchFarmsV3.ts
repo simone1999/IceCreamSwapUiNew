@@ -463,7 +463,12 @@ export const fetchTokenUSDValues = async (currencies: Currency[] = []): Promise<
       .join(',')
     const result: { [key: string]: string } = await fetch(
       `https://pricing.icecreamswap.com/${currencies[0].chainId}?token=${list}`,
-    ).then((res) => res.json())
+    )
+      .then((res) => res.json())
+      .catch(reason => {
+        console.warn("Error while getting token price", reason)
+        return {}
+      })
 
     Object.entries(result || {}).forEach(([key, value]) => {
       const address = key

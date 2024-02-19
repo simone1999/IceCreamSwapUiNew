@@ -11,7 +11,12 @@ export const fetchTokenUSDValue = async (chainId: number, tokenAddresses: string
 
   const result: { [key: string]: string } = await fetch(
     `https://pricing.icecreamswap.com/${chainId}?token=${list}`,
-  ).then((res) => res.json())
+  )
+    .then((res) => res.json())
+    .catch(reason => {
+      console.warn("Error while getting token price", reason)
+      return {}
+    })
 
   const commonTokenUSDValue = new Map<string, string>()
 
