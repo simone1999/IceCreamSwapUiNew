@@ -136,7 +136,26 @@ class NaboxConnector extends InjectedConnector {
   }
 }
 
+class PlenaConnector extends InjectedConnector {
+  provider?: Window['ethereum']
+
+  public id = 'plena'
+
+  async getProvider() {
+    if (!(window as any).PlenaWallet) throw new Error('Plena not found')
+    this.provider = (window as any).ethereum
+    return this.provider
+  }
+}
+
 export const naboxConnector = new NaboxConnector({
+  chains,
+  options: {
+    shimDisconnect: false,
+  },
+})
+
+export const plenaConnector = new PlenaConnector({
   chains,
   options: {
     shimDisconnect: false,
@@ -183,6 +202,7 @@ export const wagmiConfig = createConfig({
     bscConnector,
     bitKeepConnector,
     naboxConnector,
+    plenaConnector,
     okxConnector,
     // @ts-ignore FIXME: wagmi
     bloctoConnector,

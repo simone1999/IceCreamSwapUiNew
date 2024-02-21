@@ -16,6 +16,7 @@ export enum ConnectorNames {
   WalletLink = 'coinbaseWallet',
   BitKeep = 'bitKeep',
   Nabox = 'nabox',
+  Plena = 'plena',
   Okx = 'okx',
   Ledger = 'ledger',
   TrustWallet = 'trustWallet',
@@ -212,6 +213,15 @@ const walletsConfig = ({
       downloadLink: {
         desktop: 'https://chrome.google.com/webstore/detail/nabox-wallet/nknhiehlklippafakaeklbeglecifhad',
       },
+      qrCode,
+    },
+    {
+      id: 'plena',
+      title: 'Plena',
+      icon: '/images/wallets/plena.jpeg',
+      connectorId: ConnectorNames.Plena,
+      installed: typeof window !== 'undefined' && Boolean(window.PlenaWallet),
+      downloadLink: 'https://www.plena.finance/#Download-Plena-App',
       qrCode,
     },
     {

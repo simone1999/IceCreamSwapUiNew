@@ -14,6 +14,7 @@ declare global {
     coin98?: true
     bitkeep?: true
     NaboxWallet?: true
+    PlenaWallet?: true
     okxwallet?: true
     mercuryoWidget?: any
     ethereum?: ExtendEthereum
