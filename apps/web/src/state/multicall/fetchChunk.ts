@@ -5,7 +5,9 @@ import { getMulticallAddress } from 'utils/addressHelpers'
 import { Call } from './actions'
 import { RetryableError } from './retry'
 
+// these chains return the L1 (Ethereum) block number rather than their L2 number when called in solidity
 const l2DifferentBlockNumberChains = [
+  ChainId.ARBITRUM,
 ]
 
 export type FetchChunkResult = ReturnType<typeof fetchChunk>
