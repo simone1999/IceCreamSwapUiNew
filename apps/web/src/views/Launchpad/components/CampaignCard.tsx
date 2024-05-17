@@ -1,18 +1,17 @@
 import { Box, Button, Card, Flex, Link, Progress, Text, useModal, useTooltip } from '@pancakeswap/uikit'
 import styled, { useTheme } from 'styled-components'
 import { useToken } from 'hooks/Tokens'
-import { CampaignData, useCampaign, useCanBuy, useFlags, useGivenAmount } from '../hooks'
+import { CampaignData, useCampaign, useCanBuy, useGivenAmount } from '../hooks'
 import CampaignCardHeader from './CampaignCardHeader'
 import BuyModal from './BuyModal'
 import { renderDate } from 'utils/renderDate'
 import { useAccount } from 'wagmi'
-import { utils } from 'ethers'
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import useNativeCurrency from 'hooks/useNativeCurrency'
 import { formatAmount } from 'views/Bridge/formatter'
 import { useState } from 'react'
 import { formatDuration, intervalToDuration } from 'date-fns'
 import { useTranslation } from '@pancakeswap/localization'
+import { formatUnits } from "viem";
 
 const StyledCard = styled(Card)`
   align-self: baseline;
@@ -51,10 +50,9 @@ const CampaignCard: React.FC<LaunchpadCardProps> = (props) => {
   const { t } = useTranslation()
   const { campaign } = props
   const token = useToken(campaign?.tokenAddress)
-  const native = useNativeCurrency()
   const [onPresentBuyModal] = useModal(<BuyModal campaign={campaign} />, true, true, `buyModal-${campaign.id}`)
-  const started = new Date(campaign.start_date.toNumber() * 1000) < new Date()
-  const ended = new Date(campaign.end_date.toNumber() * 1000) < new Date()
+  const started = new Date(Number(campaign.start_date * 1000n)) < new Date()
+  const ended = new Date(Number(campaign.end_date * 1000n)) < new Date()
   const hardCapReached = campaign.hardCapProgress >= 1
   const { address, status } = useAccount()
   const c = useCampaign(campaign.address as `0x${string}`)
@@ -88,7 +86,7 @@ const CampaignCard: React.FC<LaunchpadCardProps> = (props) => {
         <CampaignCardHeader campaign={campaign} />
         <Flex justifyContent="space-between" alignItems="center">
           <Text fontSize="16px" color="secondary" fontWeight="bold">
-            {formatAmount(utils.formatUnits(campaign.rate, token?.decimals))} {token?.symbol} {t('per ICE')}
+            {formatAmount(formatUnits(campaign.rate, token?.decimals))} {token?.symbol} {t('per ICE')}
           </Text>
         </Flex>
         <Flex ref={tooltip.targetRef} flexDirection="column" gap="0.5em">
@@ -121,13 +119,13 @@ const CampaignCard: React.FC<LaunchpadCardProps> = (props) => {
         {contributed.data && (
           <Flex justifyContent="space-between" alignItems="center">
             <Text fontSize="16px">{t('Contributed')}</Text>
-            <Text fontSize="16px">{formatAmount(utils.formatUnits(contributed.data, 18))} ICE</Text>
+            <Text fontSize="16px">{formatAmount(formatUnits(contributed.data, 18))} ICE</Text>
           </Flex>
         )}
         {started && !ended && (
           <Flex justifyContent="space-between" alignItems="center">
             <Text fontSize="16px">{t('Ending at')}</Text>
-            <Text fontSize="16px">{renderDate(campaign.end_date.mul(1000).toNumber())}</Text>
+            <Text fontSize="16px">{renderDate(Number(campaign.end_date * 1000n))}</Text>
           </Flex>
         )}
         {started ? (
@@ -141,7 +139,7 @@ const CampaignCard: React.FC<LaunchpadCardProps> = (props) => {
                   {formatDuration(
                     intervalToDuration({
                       start: new Date(),
-                      end: new Date(campaign.start_date.mul(1000).toNumber() + 7200000),
+                      end: new Date(Number(campaign.start_date * 1000n + 7200000n)),
                     }),
                   )}
                 </Button>
@@ -150,7 +148,7 @@ const CampaignCard: React.FC<LaunchpadCardProps> = (props) => {
               <ConnectWalletButton />
             )
           ) : contributed.data > 0 && !campaign.isLive ? (
-            campaign.collected.gt(campaign.softCap) ? (
+            campaign.collected > campaign.softCap ? (
               <Button
                 disabled={claiming}
                 onClick={() => {
@@ -186,7 +184,7 @@ const CampaignCard: React.FC<LaunchpadCardProps> = (props) => {
             {formatDuration(
               intervalToDuration({
                 start: new Date(),
-                end: new Date(campaign.start_date.mul(1000).toNumber()),
+                end: new Date(Number(campaign.start_date * 1000n)),
               }),
             )}
           </Button>

@@ -59,22 +59,22 @@ export interface CampaignData {
   address: string
   banner?: string
   chainId: number
-  collected: BigInt
+  collected: bigint
   description: string
   discord?: string
-  end_date: BigInt
+  end_date: bigint
   github?: string
-  hardCap: BigInt
+  hardCap: bigint
   id: number
-  liquidity_rate: BigInt
-  lock_duration: BigInt
-  max_allowed: BigInt
-  min_allowed: BigInt
-  pool_rate: BigInt
-  rate: BigInt
+  liquidity_rate: bigint
+  lock_duration: bigint
+  max_allowed: bigint
+  min_allowed: bigint
+  pool_rate: bigint
+  rate: bigint
   reddit?: string
-  softCap: BigInt
-  start_date: BigInt
+  softCap: bigint
+  start_date: bigint
   telegram?: string
   tokenAddress: string
   raisedToken: string
