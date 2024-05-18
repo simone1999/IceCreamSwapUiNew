@@ -648,12 +648,13 @@ export abstract class SwapRouter {
       totalAmountIn,
       minimumAmountOut: minAmountOut,
     } = SwapRouter.encodeSwaps(trades, options)
-
+    console.log("norouterMustCustody",routerMustCustody);
+    
     // unwrap or sweep
     if (routerMustCustody) {
       if (outputIsNative) {
         calldatas.push(PaymentsExtended.encodeUnwrapWETH9(minAmountOut.quotient, options.recipient, options.fee))
-      } else {
+      } else {     
         calldatas.push(
           PaymentsExtended.encodeSweepToken(
             sampleTrade.outputAmount.currency.wrapped,
