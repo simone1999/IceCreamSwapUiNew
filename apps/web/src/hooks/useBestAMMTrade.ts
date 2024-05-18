@@ -7,7 +7,7 @@ import {
   SmartRouterTrade,
   BATCH_MULTICALL_CONFIGS,
 } from '@pancakeswap/smart-router/evm'
-import {ChainId, CurrencyAmount, TradeType, Currency, ZERO} from '@pancakeswap/sdk'
+import { ChainId, CurrencyAmount, TradeType, Currency, ZERO } from '@pancakeswap/sdk'
 import { useDebounce, usePropsChanged } from '@pancakeswap/hooks'
 
 import { useIsWrapping } from 'hooks/useWrapCallback'
@@ -26,6 +26,7 @@ import {
   CommonPoolsParams,
 } from './useCommonPools'
 import { useMulticallGasLimit } from './useMulticallGasLimit'
+import { useRouter } from 'next/router'
 
 interface FactoryOptions {
   // use to identify hook
@@ -59,6 +60,8 @@ interface useBestAMMTradeOptions extends Options {
 export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeOptions) {
   const { amount, baseCurrency, currency, autoRevalidate, enabled = true } = params
   const isWrapping = useIsWrapping(baseCurrency, currency, amount?.toExact())
+  const router = useRouter()
+  const { query } = router
 
   const isQuoterEnabled = useMemo(
     () => Boolean(!isWrapping && (type === 'quoter' || type === 'auto')),
@@ -67,8 +70,10 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
 
   const isQuoterAPIEnabled = useMemo(() => Boolean(!isWrapping && type === 'api'), [isWrapping, type])
   const isIceQuoterAPIEnabled = useMemo(() => Boolean(!isWrapping && type === 'auto'), [isWrapping, type])
+  const isAkkaQuoterAPIEnabled = useMemo(() => Boolean(!isWrapping && type === 'auto'), [isWrapping, type])
 
-  const apiAutoRevalidate = typeof autoRevalidate === 'boolean' ? autoRevalidate : isQuoterAPIEnabled || isIceQuoterAPIEnabled
+  const apiAutoRevalidate =
+    typeof autoRevalidate === 'boolean' ? autoRevalidate : isQuoterAPIEnabled || isIceQuoterAPIEnabled
 
   // switch to api when it's stable
   let bestTradeFromIceQuoterApi = useBestAMMTradeFromQuoterApi({
@@ -76,23 +81,91 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
     enabled: Boolean(enabled && isIceQuoterAPIEnabled),
     autoRevalidate: apiAutoRevalidate,
   })
+  console.log('bestTradeFromIceQuoterApi', bestTradeFromIceQuoterApi)
+
+  const bestTradeFromAkkaQuoterApi = useBestAMMTradeFromAkkaQuoterApi({
+    ...params,
+    enabled: Boolean(enabled && isAkkaQuoterAPIEnabled),
+    autoRevalidate: apiAutoRevalidate,
+  })
+  console.log('bestTradeFromAkkaQuoterApi', bestTradeFromAkkaQuoterApi)
+
   const bestTradeFromQuoterApi = useBestAMMTradeFromQuoterWorker2({
     ...params,
     enabled: Boolean(enabled && (isQuoterAPIEnabled || isIceQuoterAPIEnabled)),
     autoRevalidate: apiAutoRevalidate,
   })
+  console.log('bestTradeFromQuoterApi', bestTradeFromQuoterApi)
+
   let quoterBetterThanAPI = false
-  if (enabled && isIceQuoterAPIEnabled) {
-    if (!bestTradeFromQuoterApi.isLoading && bestTradeFromQuoterApi.trade?.routes) {
-      if (!bestTradeFromIceQuoterApi || !bestTradeFromIceQuoterApi.trade?.routes) {
-        quoterBetterThanAPI = true
-      } else if(bestTradeFromQuoterApi.trade.outputAmount.greaterThan(bestTradeFromIceQuoterApi.trade.outputAmount)) {
-        quoterBetterThanAPI = true
+  let iceBetterThanakka = false
+  if (enabled && (isIceQuoterAPIEnabled || isAkkaQuoterAPIEnabled)) {
+    if (query.referrer === 'AKKA') {
+      quoterBetterThanAPI = false
+      iceBetterThanakka = false
+    } else {
+      if (!bestTradeFromQuoterApi.isLoading && bestTradeFromQuoterApi.trade?.routes) {
+        if (
+          !bestTradeFromIceQuoterApi &&
+          !bestTradeFromIceQuoterApi.trade?.routes &&
+          !bestTradeFromAkkaQuoterApi &&
+          !bestTradeFromAkkaQuoterApi.trade?.routes
+        ) {
+          quoterBetterThanAPI = true
+        } else {
+          if (
+            (!bestTradeFromAkkaQuoterApi || !bestTradeFromAkkaQuoterApi.trade?.routes) &&
+            bestTradeFromIceQuoterApi &&
+            bestTradeFromIceQuoterApi.trade?.routes
+          ) {
+            if (bestTradeFromQuoterApi.trade.outputAmount.greaterThan(bestTradeFromIceQuoterApi.trade.outputAmount)) {
+              quoterBetterThanAPI = true
+            }
+          } else if (
+            (!bestTradeFromIceQuoterApi || !bestTradeFromIceQuoterApi.trade?.routes) &&
+            bestTradeFromAkkaQuoterApi &&
+            bestTradeFromAkkaQuoterApi.trade?.routes
+          ) {
+            if (bestTradeFromQuoterApi.trade.outputAmount.greaterThan(bestTradeFromAkkaQuoterApi.trade.outputAmount)) {
+              quoterBetterThanAPI = true
+            }
+          } else if (
+            bestTradeFromIceQuoterApi &&
+            bestTradeFromIceQuoterApi.trade?.routes &&
+            bestTradeFromAkkaQuoterApi &&
+            bestTradeFromAkkaQuoterApi.trade?.routes
+          ) {
+            if (
+              bestTradeFromQuoterApi.trade.outputAmount.greaterThan(bestTradeFromIceQuoterApi.trade.outputAmount) &&
+              bestTradeFromQuoterApi.trade.outputAmount.greaterThan(bestTradeFromAkkaQuoterApi.trade.outputAmount)
+            ) {
+              quoterBetterThanAPI = true
+            } else if (
+              bestTradeFromAkkaQuoterApi.trade.outputAmount.greaterThan(bestTradeFromIceQuoterApi.trade.outputAmount) &&
+              bestTradeFromAkkaQuoterApi.trade.outputAmount.greaterThan(bestTradeFromQuoterApi.trade.outputAmount)
+            ) {
+              quoterBetterThanAPI = false
+              iceBetterThanakka = false
+            } else if (
+              bestTradeFromIceQuoterApi.trade.outputAmount.greaterThan(bestTradeFromAkkaQuoterApi.trade.outputAmount) &&
+              bestTradeFromIceQuoterApi.trade.outputAmount.greaterThan(bestTradeFromQuoterApi.trade.outputAmount)
+            ) {
+              quoterBetterThanAPI = false
+              iceBetterThanakka = true
+            }
+          }
+        }
       }
     }
   }
   if (quoterBetterThanAPI) {
     bestTradeFromIceQuoterApi = bestTradeFromQuoterApi
+    console.log('Quoter')
+  } else if (!iceBetterThanakka) {
+    bestTradeFromIceQuoterApi = bestTradeFromAkkaQuoterApi
+    console.log('AKKA')
+  } else {
+    console.log('Icecream')
   }
 
   const quoterAutoRevalidate = typeof autoRevalidate === 'boolean' ? autoRevalidate : isQuoterEnabled
@@ -104,8 +177,19 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
   })
 
   return useMemo(
-    () => (isIceQuoterAPIEnabled? bestTradeFromIceQuoterApi : isQuoterAPIEnabled ? bestTradeFromQuoterApi : bestTradeFromQuoterWorker),
-    [bestTradeFromIceQuoterApi, bestTradeFromQuoterApi, bestTradeFromQuoterWorker, isIceQuoterAPIEnabled, isQuoterAPIEnabled],
+    () =>
+      isIceQuoterAPIEnabled
+        ? bestTradeFromIceQuoterApi
+        : isQuoterAPIEnabled
+        ? bestTradeFromQuoterApi
+        : bestTradeFromQuoterWorker,
+    [
+      bestTradeFromIceQuoterApi,
+      bestTradeFromQuoterApi,
+      bestTradeFromQuoterWorker,
+      isIceQuoterAPIEnabled,
+      isQuoterAPIEnabled,
+    ],
   )
 }
 
@@ -316,6 +400,66 @@ export const useBestAMMTradeFromQuoterApi = bestTradeHookFactory({
       }),
     })
     const serializedRes = await serverRes.json()
+    console.log('serializedRes', serializedRes)
+
+    const trade = SmartRouter.Transformer.parseTrade(currency.chainId, serializedRes)
+    if (!trade || trade.outputAmount.equalTo(ZERO)) {
+      throw new Error('Cannot find a valid swap route')
+    }
+    return trade
+  },
+  // Since quotes are fetched on chain, which relies on network IO, not calculated offchain, we don't need to further optimize
+  quoterOptimization: false,
+})
+
+export const useBestAMMTradeFromAkkaQuoterApi = bestTradeHookFactory({
+  key: 'useBestAMMTradeFromAkkaQuoterApi',
+  useCommonPools: useCommonPoolsLite,
+  useQuoteProvider,
+  getBestTrade: async (
+    amount,
+    currency,
+    tradeType,
+    { maxHops, maxSplits, gasPriceWei, allowedPoolTypes, poolProvider },
+  ) => {
+    /*
+    const candidatePools = await poolProvider.getCandidatePools({
+      currencyA: amount.currency,
+      currencyB: currency,
+      protocols: allowedPoolTypes,
+    })
+    */
+
+    const serverRes = await fetch(
+      `https://devrouter.akka.finance/v2/${currency.chainId}/pks-quote?src=${
+        SmartRouter.Transformer.serializeCurrency(amount.currency).address
+      }&dst=${
+        SmartRouter.Transformer.serializeCurrency(currency).address
+      }&amount=${amount.quotient.toString()}&integrator=icecream`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // body: JSON.stringify({
+        //   chainId: currency.chainId,
+        //   currency: SmartRouter.Transformer.serializeCurrency(currency),
+        //   tradeType,
+        //   amount: {
+        //     currency: SmartRouter.Transformer.serializeCurrency(amount.currency),
+        //     value: amount.quotient.toString(),
+        //   },
+        //   gasPriceWei: typeof gasPriceWei !== 'function' ? gasPriceWei?.toString() : undefined,
+        //   maxHops,
+        //   maxSplits,
+        //   poolTypes: allowedPoolTypes,
+        //   candidatePools: candidatePools.map(SmartRouter.Transformer.serializePool),
+        // }),
+      },
+    )
+    const serializedRes = await serverRes.json()
+    console.log('serializedRes', serializedRes)
+
     const trade = SmartRouter.Transformer.parseTrade(currency.chainId, serializedRes)
     if (!trade || trade.outputAmount.equalTo(ZERO)) {
       throw new Error('Cannot find a valid swap route')
