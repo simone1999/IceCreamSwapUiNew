@@ -97,16 +97,28 @@ export const SwapCommitButton = memo(function SwapCommitButton({
   const swapInputError = useSwapInputError(trade, currencyBalances)
   const parsedAmounts = useParsedAmounts(trade, currencyBalances, showWrap)
   const parsedIndepentFieldAmount = parsedAmounts[independentField]
-
+  const countDecimals = function (value: number) {
+    if (Math.floor(value) === value) return 0
+    return value.toString().split('.')[1].length || 0
+  }
+  const convertToFraction = (value: number) => {
+    return {
+      numerator: Number(value.toString().replace(/^(0\.)?0*/, '')),
+      denominator: 10 ** countDecimals(value),
+    }
+  }
   // the callback to execute the swap
   const deadline = useTransactionDeadline()
   const { callback: swapCallback, error: swapCallbackError } = useSwapCallback({
     trade,
     deadline,
-    feeOptions: {
-      fee: new Percent(1, 100),
-      recipient: '0x5EFd0a2C8f19c7ef724678667a3F6204F8E8Ae39',
-    },
+    ...(trade?.fee &&
+      trade?.treasury_address && {
+        feeOptions: {
+          fee: new Percent(convertToFraction(trade.fee).numerator, convertToFraction(trade.fee).denominator),
+          recipient: trade.treasury_address,
+        },
+      }),
   })
 
   const [{ tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
