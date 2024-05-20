@@ -648,8 +648,7 @@ export abstract class SwapRouter {
       totalAmountIn,
       minimumAmountOut: minAmountOut,
     } = SwapRouter.encodeSwaps(trades, options)
-    console.log("norouterMustCustody",routerMustCustody);
-    
+
     // unwrap or sweep
     if (routerMustCustody) {
       if (outputIsNative) {

@@ -25,6 +25,10 @@ const ZKSYNC_URLS = [PANCAKE_ZKSYNC_DEFAULT, 'https://tokens.coingecko.com/zksyn
 const OP_SUPER_CHAIN_URL =
   'https://raw.githubusercontent.com/ethereum-optimism/ethereum-optimism.github.io/master/optimism.tokenlist.json'
 const BASE_URLS = [PANCAKE_BASE_DEFAULT, OP_SUPER_CHAIN_URL, 'https://tokens.coingecko.com/base/all.json']
+const CORE_URLS = [
+  `https://devrouter.akka.finance/v2/1116/pks-tokens/akkafinance-extended.json`,
+  'https://tokens.coingecko.com/core/all.json',
+]
 
 // List of official tokens list
 export const OFFICIAL_LISTS = [PANCAKE_EXTENDED, PANCAKE_ETH_DEFAULT]
@@ -44,6 +48,7 @@ export const DEFAULT_LIST_OF_LISTS: string[] = [
   OP_SUPER_CHAIN_URL,
   ...UNSUPPORTED_LIST_URLS, // need to load unsupported tokens as well
   ...WARNING_LIST_URLS,
+  ...CORE_URLS,
 ]
 
 // default lists to be 'active' aka searched across
@@ -59,8 +64,10 @@ export const DEFAULT_ACTIVE_LIST_URLS: string[] = [
   PANCAKE_LINEA_DEFAULT,
   PANCAKE_BASE_DEFAULT,
   OP_SUPER_CHAIN_URL,
+  'https://devrouter.akka.finance/v2/1116/pks-tokens/akkafinance-extended.json',
 ]
 
 export const MULTI_CHAIN_LIST_URLS: { [chainId: number]: string[] } = {
   [ChainId.BSC]: BSC_URLS,
+  [ChainId.CORE]: CORE_URLS,
 }
