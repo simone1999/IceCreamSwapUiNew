@@ -10,16 +10,13 @@ export const MULTI_CHAIN_LIST_URLS: { [chainId: number]: string[] } = {
   [ChainId.CORE]: [
     'https://token-list.sushi.com',
     'https://raw.githubusercontent.com/SVerseLab/tokens/master/tokenlist.json',
+    'https://devrouter.akka.finance/v2/1116/pks-tokens/akkafinance-extended.json',
   ],
-  [ChainId.BSC]: [
-    PANCAKE_EXTENDED,
-    'https://tokens.pancakeswap.finance/coingecko.json',
-    PANCAKE_BSC_MM
-  ],
+  [ChainId.BSC]: [PANCAKE_EXTENDED, 'https://tokens.pancakeswap.finance/coingecko.json', PANCAKE_BSC_MM],
   [ChainId.BASE]: [
     'https://tokens.pancakeswap.finance/pancakeswap-base-default.json',
     'https://static.optimism.io/optimism.tokenlist.json',
-    'https://tokens.coingecko.com/base/all.json'
+    'https://tokens.coingecko.com/base/all.json',
   ],
 }
 
@@ -34,4 +31,6 @@ export const DEFAULT_LIST_OF_LISTS: string[] = [
 ]
 
 // default lists to be 'active' aka searched across
-export const DEFAULT_ACTIVE_LIST_URLS: string[] = []
+export const DEFAULT_ACTIVE_LIST_URLS: string[] = [
+  'https://devrouter.akka.finance/v2/1116/pks-tokens/akkafinance-extended.json',
+]
