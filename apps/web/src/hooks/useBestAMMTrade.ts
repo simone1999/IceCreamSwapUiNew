@@ -16,7 +16,7 @@ import { useCurrentBlock } from 'state/block/hooks'
 import { useFeeDataWithGasPrice } from 'state/user/hooks'
 import { getViemClients } from 'utils/viem'
 import { QUOTING_API } from 'config/constants/endpoints'
-import { POOLS_NORMAL_REVALIDATE } from 'config/pools'
+import { POOLS_SLOW_REVALIDATE } from 'config/pools'
 import { worker, worker2 } from 'utils/worker'
 
 import {
@@ -372,8 +372,8 @@ function bestTradeHookFactory({
       refetchOnWindowFocus: false,
       keepPreviousData: keepPreviousDataRef.current,
       retry: false,
-      staleTime: autoRevalidate ? POOLS_NORMAL_REVALIDATE[amount?.currency?.chainId] : 0,
-      refetchInterval: autoRevalidate && POOLS_NORMAL_REVALIDATE[amount?.currency?.chainId],
+      staleTime: autoRevalidate ? POOLS_SLOW_REVALIDATE[amount?.currency?.chainId] : 0,
+      refetchInterval: autoRevalidate && POOLS_SLOW_REVALIDATE[amount?.currency?.chainId],
     })
 
     useEffect(() => {
@@ -388,7 +388,7 @@ function bestTradeHookFactory({
     return {
       refresh,
       trade,
-      isLoading: isLoading || loading || isFetching,
+      isLoading: isLoading || loading,
       isStale: trade?.blockNumber !== blockNumber,
       error,
       syncing:
