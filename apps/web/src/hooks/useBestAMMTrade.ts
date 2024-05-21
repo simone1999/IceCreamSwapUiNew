@@ -375,7 +375,7 @@ function bestTradeHookFactory({
       staleTime: autoRevalidate ? POOLS_SLOW_REVALIDATE[amount?.currency?.chainId] : 0,
       refetchInterval: autoRevalidate && POOLS_SLOW_REVALIDATE[amount?.currency?.chainId],
     })
-
+    
     useEffect(() => {
       if (!keepPreviousDataRef.current && trade) {
         keepPreviousDataRef.current = true
@@ -388,7 +388,7 @@ function bestTradeHookFactory({
     return {
       refresh,
       trade,
-      isLoading: isLoading || loading,
+      isLoading: isFetching,
       isStale: trade?.blockNumber !== blockNumber,
       error,
       syncing:
