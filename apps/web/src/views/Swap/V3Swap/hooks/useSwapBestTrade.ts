@@ -39,7 +39,7 @@ export function useSwapBestTrade({ maxHops }: Options = {}) {
   const [v3Swap] = useUserV3SwapEnable()
   const [stableSwap] = useUserStableSwapEnable()
 
-  const { isLoading, trade, refresh, syncing, isStale, error } = useBestAMMTrade({
+  const { isLoading, trade, refresh, syncing, isStale, error, routeProvider } = useBestAMMTrade({
     amount,
     currency: dependentCurrency,
     baseCurrency: independentCurrency,
@@ -59,5 +59,6 @@ export function useSwapBestTrade({ maxHops }: Options = {}) {
     error,
     isLoading: useDeferredValue(isLoading || (typedValue && !trade && !error)),
     trade: typedValue ? trade : null,
+    routeProvider,
   }
 }

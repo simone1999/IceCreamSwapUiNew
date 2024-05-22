@@ -21,7 +21,7 @@ import { MMCommitButton } from './containers/MMCommitButton'
 import { useSwapBestTrade } from './hooks'
 
 export function V3SwapForm() {
-  const { isLoading, trade, refresh, syncing, isStale, error } = useSwapBestTrade()
+  const { isLoading, trade, refresh, syncing, isStale, error, routeProvider } = useSwapBestTrade()
   const mm = useDerivedBestTradeWithMM(trade)
   const throttledHandleRefresh = useMemo(
     () =>
@@ -60,7 +60,7 @@ export function V3SwapForm() {
       {mm.isMMBetter ? (
         <MMTradeDetail loaded={!mm.mmOrderBookTrade.isLoading} mmTrade={mm.mmTradeInfo} />
       ) : (
-        <TradeDetails loaded={tradeLoaded} trade={trade} />
+        <TradeDetails loaded={tradeLoaded} trade={trade} routeProvider={routeProvider} />
       )}
       {(shouldShowMMLiquidityError(mm?.mmOrderBookTrade?.inputError) || mm?.mmRFQTrade?.error) && !trade && (
         <Box mt="5px">

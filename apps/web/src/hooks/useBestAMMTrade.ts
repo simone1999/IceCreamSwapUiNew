@@ -27,10 +27,7 @@ import {
 } from './useCommonPools'
 import { useMulticallGasLimit } from './useMulticallGasLimit'
 import { useRouter } from 'next/router'
-import { useAppDispatch } from 'state'
-import { setAKKAStatus } from 'state/akka/actions'
 import { useAtom } from 'jotai'
-import { akkaReducerAtom } from 'state/akka/reducer'
 
 interface FactoryOptions {
   // use to identify hook
@@ -64,7 +61,6 @@ interface useBestAMMTradeOptions extends Options {
 export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeOptions) {
   const { amount, baseCurrency, currency, autoRevalidate, enabled = true } = params
   const isWrapping = useIsWrapping(baseCurrency, currency, amount?.toExact())
-  const [, dispatch] = useAtom(akkaReducerAtom)
   const router = useRouter()
   const { query } = router
 
@@ -100,55 +96,55 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
   })
 
   type Result = 'AKKA' | 'ICE' | 'Quoter'
-  let betterResult: Result
+  let betterResult: Result = 'AKKA'
 
   if (enabled && (isIceQuoterAPIEnabled || isAkkaQuoterAPIEnabled)) {
-    if (query.referrer === 'AKKA') {
-      console.log("state0");
+    if (query.referrer === 'akka') {
+      console.log('state0')
       betterResult = 'AKKA'
     } else {
-      console.log("state00");
+      console.log('state00')
       if (
         !bestTradeFromQuoterApi.isLoading &&
         !bestTradeFromAkkaQuoterApi.isLoading &&
         !bestTradeFromIceQuoterApi.isLoading
       ) {
-        console.log("state01");
+        console.log('state01')
         if (!bestTradeFromQuoterApi.trade && !bestTradeFromAkkaQuoterApi.trade && !bestTradeFromIceQuoterApi.trade) {
-          console.log("state1");
+          console.log('state1')
           betterResult = 'Quoter'
         } else if (
           bestTradeFromQuoterApi.trade &&
           !bestTradeFromAkkaQuoterApi.trade &&
           !bestTradeFromIceQuoterApi.trade
         ) {
-          console.log("state2");
+          console.log('state2')
           betterResult = 'Quoter'
         } else if (
           !bestTradeFromQuoterApi.trade &&
           bestTradeFromAkkaQuoterApi.trade &&
           !bestTradeFromIceQuoterApi.trade
         ) {
-          console.log("state3");
+          console.log('state3')
           betterResult = 'AKKA'
         } else if (
           !bestTradeFromQuoterApi.trade &&
           !bestTradeFromAkkaQuoterApi.trade &&
           bestTradeFromIceQuoterApi.trade
         ) {
-          console.log("state4");
+          console.log('state4')
           betterResult = 'ICE'
         } else if (
           !bestTradeFromQuoterApi.trade &&
           bestTradeFromAkkaQuoterApi.trade &&
           bestTradeFromIceQuoterApi.trade
         ) {
-          console.log("state008");
+          console.log('state008')
           if (bestTradeFromAkkaQuoterApi.trade.outputAmount.greaterThan(bestTradeFromIceQuoterApi.trade.outputAmount)) {
-            console.log("state5");
+            console.log('state5')
             betterResult = 'AKKA'
           } else {
-            console.log("state6");
+            console.log('state6')
             betterResult = 'ICE'
           }
         } else if (
@@ -156,12 +152,12 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
           !bestTradeFromAkkaQuoterApi.trade &&
           bestTradeFromIceQuoterApi.trade
         ) {
-          console.log("state007");
+          console.log('state007')
           if (bestTradeFromQuoterApi.trade.outputAmount.greaterThan(bestTradeFromIceQuoterApi.trade.outputAmount)) {
-            console.log("state7");
+            console.log('state7')
             betterResult = 'Quoter'
           } else {
-            console.log("state8");
+            console.log('state8')
             betterResult = 'ICE'
           }
         } else if (
@@ -169,12 +165,12 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
           bestTradeFromAkkaQuoterApi.trade &&
           !bestTradeFromIceQuoterApi.trade
         ) {
-          console.log("state00");
+          console.log('state00')
           if (bestTradeFromQuoterApi.trade.outputAmount.greaterThan(bestTradeFromAkkaQuoterApi.trade.outputAmount)) {
-            console.log("state9");
+            console.log('state9')
             betterResult = 'Quoter'
           } else {
-            console.log("state10");
+            console.log('state10')
             betterResult = 'AKKA'
           }
         } else if (
@@ -182,25 +178,25 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
           bestTradeFromAkkaQuoterApi.trade &&
           bestTradeFromIceQuoterApi.trade
         ) {
-          console.log("state005");
-          
+          console.log('state005')
+
           if (
             bestTradeFromQuoterApi.trade.outputAmount.greaterThan(bestTradeFromAkkaQuoterApi.trade.outputAmount) &&
             bestTradeFromQuoterApi.trade.outputAmount.greaterThan(bestTradeFromIceQuoterApi.trade.outputAmount)
           ) {
-            console.log("state11");
+            console.log('state11')
             betterResult = 'Quoter'
           } else if (
             bestTradeFromAkkaQuoterApi.trade.outputAmount.greaterThan(bestTradeFromQuoterApi.trade.outputAmount) &&
             bestTradeFromAkkaQuoterApi.trade.outputAmount.greaterThan(bestTradeFromIceQuoterApi.trade.outputAmount)
           ) {
-            console.log("state12");
+            console.log('state12')
             betterResult = 'AKKA'
           } else if (
             bestTradeFromIceQuoterApi.trade.outputAmount.greaterThan(bestTradeFromAkkaQuoterApi.trade.outputAmount) &&
             bestTradeFromIceQuoterApi.trade.outputAmount.greaterThan(bestTradeFromQuoterApi.trade.outputAmount)
           ) {
-            console.log("state13");
+            console.log('state13')
             betterResult = 'ICE'
           }
         }
@@ -216,27 +212,19 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
     autoRevalidate: quoterAutoRevalidate,
   })
 
-  useEffect(() => {
-    if (betterResult === 'AKKA') {
-      dispatch(setAKKAStatus({ isAKKA: true }))
-    } else {
-      dispatch(setAKKAStatus({ isAKKA: false }))
-    }
-  }, [betterResult])
-
   return useMemo(() => {
     if (!isAkkaQuoterAPIEnabled && !isIceQuoterAPIEnabled && !isQuoterAPIEnabled) {
       return bestTradeFromQuoterWorker
     } else {
       switch (betterResult) {
         case 'AKKA':
-          console.log("state0001");
+          console.log('state0001')
           return bestTradeFromAkkaQuoterApi
         case 'ICE':
-          console.log("state0002");
+          console.log('state0002')
           return bestTradeFromIceQuoterApi
         default:
-          console.log("state0003");
+          console.log('state0003')
           return bestTradeFromQuoterApi
       }
     }
@@ -316,7 +304,6 @@ function bestTradeHookFactory({
       fetchStatus,
       isPreviousData,
       error,
-      isFetching,
     } = useQuery<SmartRouterTrade<TradeType>, Error>({
       queryKey: [
         key,
@@ -375,7 +362,7 @@ function bestTradeHookFactory({
       staleTime: autoRevalidate ? POOLS_SLOW_REVALIDATE[amount?.currency?.chainId] : 0,
       refetchInterval: autoRevalidate && POOLS_SLOW_REVALIDATE[amount?.currency?.chainId],
     })
-    
+
     useEffect(() => {
       if (!keepPreviousDataRef.current && trade) {
         keepPreviousDataRef.current = true
@@ -385,14 +372,23 @@ function bestTradeHookFactory({
     const isValidating = fetchStatus === 'fetching'
     const isLoading = status === 'loading' || isPreviousData
 
+    const keyToProvider = (key: string) => {
+      if (key === 'useBestAMMTradeFromAkkaQuoterApi') {
+        return 'AKKA'
+      } else {
+        return 'IceCreamSwap'
+      }
+    }
+    
     return {
       refresh,
       trade,
-      isLoading: isFetching,
+      isLoading: isLoading || loading,
       isStale: trade?.blockNumber !== blockNumber,
       error,
       syncing:
         syncing || isValidating || (amount?.quotient?.toString() !== deferQuotient && deferQuotient !== undefined),
+      routeProvider: keyToProvider(key),
     }
   }
 }

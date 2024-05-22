@@ -10,13 +10,14 @@ import { RouteDisplayModal } from './RouteDisplayModal'
 
 interface Props {
   routes?: Route[]
+  routeProvider: string
 }
 
 const RouteInfoContainer = styled(RowBetween)`
   padding: 4px 24px 0;
 `
 
-export const RoutesBreakdown = memo(function RoutesBreakdown({ routes = [] }: Props) {
+export const RoutesBreakdown = memo(function RoutesBreakdown({ routes = [], routeProvider }: Props) {
   const { t } = useTranslation()
   const routeDisplayModal = useModalV2()
 
@@ -53,7 +54,7 @@ export const RoutesBreakdown = memo(function RoutesBreakdown({ routes = [] }: Pr
             </IconButton>
           </span>
         </Box>
-        <RouteDisplayModal {...routeDisplayModal} routes={routes} />
+        <RouteDisplayModal {...routeDisplayModal} routes={routes} routeProvider={routeProvider} />
       </RouteInfoContainer>
     </>
   )

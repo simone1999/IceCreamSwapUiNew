@@ -10,11 +10,12 @@ import { AdvancedDetailsFooter } from 'views/Swap/components/AdvancedSwapDetails
 import { MMTradeInfo } from 'views/Swap/MMLinkPools/hooks'
 import { RoutesBreakdown } from '../components'
 import { useSlippageAdjustedAmounts, useIsWrapping } from '../hooks'
-import {useTradePriceBreakdown} from "hooks/useTradePriceBreakdown";
+import { useTradePriceBreakdown } from 'hooks/useTradePriceBreakdown'
 
 interface Props {
   loaded: boolean
   trade?: SmartRouterTrade<TradeType> | null
+  routeProvider?: string
 }
 
 export function MMTradeDetail({ loaded, mmTrade }: { loaded: boolean; mmTrade?: MMTradeInfo }) {
@@ -41,7 +42,7 @@ export function MMTradeDetail({ loaded, mmTrade }: { loaded: boolean; mmTrade?: 
   )
 }
 
-export const TradeDetails = memo(function TradeDetails({ loaded, trade }: Props) {
+export const TradeDetails = memo(function TradeDetails({ loaded, trade, routeProvider }: Props) {
   const slippageAdjustedAmounts = useSlippageAdjustedAmounts(trade)
   const isWrapping = useIsWrapping()
   const { priceImpactWithoutFee, lpFeeAmount } = useTradePriceBreakdown(trade)
@@ -68,7 +69,7 @@ export const TradeDetails = memo(function TradeDetails({ loaded, trade }: Props)
           realizedLPFee={lpFeeAmount}
           hasStablePair={hasStablePool}
         />
-        <RoutesBreakdown routes={routes} />
+        <RoutesBreakdown routes={routes} routeProvider={routeProvider} />
       </AutoColumn>
     </AdvancedDetailsFooter>
   )
