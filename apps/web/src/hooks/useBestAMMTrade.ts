@@ -464,7 +464,7 @@ export const useBestAMMTradeFromAkkaQuoterApi = bestTradeHookFactory({
         SmartRouter.Transformer.serializeCurrency(amount.currency).address
       }&dst=${
         SmartRouter.Transformer.serializeCurrency(currency).address
-      }&amount=${amount.quotient.toString()}&integrator=icecream`,
+      }&amount=${amount.quotient.toString()}&integrator=icecream&source=icecream`,
       {
         method: 'GET',
         headers: {
