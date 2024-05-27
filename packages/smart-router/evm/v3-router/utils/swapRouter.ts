@@ -6,7 +6,8 @@ import {
   TradeType,
   validateAndParseAddress,
   WNATIVE,
-  ChainId, Pair,
+  ChainId,
+  Pair,
 } from '@pancakeswap/sdk'
 import { FeeOptions, MethodParameters, Payments, PermitOptions, Position, SelfPermit, toHex } from '@pancakeswap/v3-sdk'
 import invariant from 'tiny-invariant'
@@ -106,7 +107,9 @@ export abstract class SwapRouter {
       : validateAndParseAddress(options.recipient)
 
     if (trade.tradeType === TradeType.EXACT_INPUT) {
-      const pools = route.pools.map((pool) => pool.address? pool.address: Pair.getAddress(pool.reserve0.currency.wrapped, pool.reserve1.currency.wrapped))
+      const pools = route.pools.map((pool) =>
+        pool.address ? pool.address : Pair.getAddress(pool.reserve0.currency.wrapped, pool.reserve1.currency.wrapped),
+      )
       const exactInputParams = [
         amountIn, // amountIn
         performAggregatedSlippageCheck ? 0n : amountOut, // amountOutMin
@@ -451,7 +454,11 @@ export abstract class SwapRouter {
             }
           } else if (mixedRouteIsAllV2(newRoute)) {
             if (isExactIn) {
-              const pools = newRoute.pools.map((pool) => pool.address? pool.address: Pair.getAddress(pool.reserve0.currency.wrapped, pool.reserve1.currency.wrapped))
+              const pools = newRoute.pools.map((pool) =>
+                pool.address
+                  ? pool.address
+                  : Pair.getAddress(pool.reserve0.currency.wrapped, pool.reserve1.currency.wrapped),
+              )
 
               const exactInputParams = [
                 inAmount, // amountIn
@@ -648,12 +655,13 @@ export abstract class SwapRouter {
       totalAmountIn,
       minimumAmountOut: minAmountOut,
     } = SwapRouter.encodeSwaps(trades, options)
+    console.log('calldatas', calldatas)
 
     // unwrap or sweep
     if (routerMustCustody) {
       if (outputIsNative) {
         calldatas.push(PaymentsExtended.encodeUnwrapWETH9(minAmountOut.quotient, options.recipient, options.fee))
-      } else {     
+      } else {
         calldatas.push(
           PaymentsExtended.encodeSweepToken(
             sampleTrade.outputAmount.currency.wrapped,
