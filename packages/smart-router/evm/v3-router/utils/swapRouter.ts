@@ -118,7 +118,6 @@ export abstract class SwapRouter {
         route.outputAmount.currency.wrapped.address, // tokenOut
         recipient, // to
       ] as const
-      console.log('exactInputParams:', exactInputParams)
 
       return encodeFunctionData({
         abi: SwapRouter.ABI,
@@ -127,7 +126,6 @@ export abstract class SwapRouter {
       })
     }
     const exactOutputParams = [amountOut, amountIn, path, recipient] as const
-    console.log('exactOutputParams', exactOutputParams)
 
     return encodeFunctionData({
       abi: SwapRouter.ABI,
@@ -231,7 +229,6 @@ export abstract class SwapRouter {
             amountOutMinimum: performAggregatedSlippageCheck ? 0n : amountOut,
             sqrtPriceLimitX96: 0n,
           }
-          console.log('exactInputSingleParams:', [exactInputSingleParams])
 
           calldatas.push(
             encodeFunctionData({
@@ -250,7 +247,6 @@ export abstract class SwapRouter {
             amountInMaximum: amountIn,
             sqrtPriceLimitX96: 0n,
           }
-          console.log('exactOutputSingleParams:', [exactOutputSingleParams])
 
           calldatas.push(
             encodeFunctionData({
@@ -273,7 +269,6 @@ export abstract class SwapRouter {
             amountIn,
             amountOutMinimum: performAggregatedSlippageCheck ? 0n : amountOut,
           }
-          console.log('exactInputParams:', [exactInputParams])
 
           calldatas.push(
             encodeFunctionData({
@@ -289,8 +284,7 @@ export abstract class SwapRouter {
             amountOut,
             amountInMaximum: amountIn,
           }
-          console.log('exactOutputParams:', [exactOutputParams])
-
+          
           calldatas.push(
             encodeFunctionData({
               abi: SwapRouter.ABI,
@@ -347,25 +341,11 @@ export abstract class SwapRouter {
       const mixedRouteIsAllStable = (r: Omit<BaseRoute, 'input' | 'output'>) => {
         return r.pools.every(isStablePool)
       }
-      console.log('MixedRoute Route:', route)
       if (singleHop) {
         /// For single hop, since it isn't really a mixedRoute, we'll just mimic behavior of V3 or V2
         /// We don't use encodeV3Swap() or encodeV2Swap() because casting the trade to a V3Trade or V2Trade is overcomplex
 
         if (mixedRouteIsAllV3(route)) {
-          console.log(
-            'all v3:',
-            {
-              ...trade,
-              routes: [route],
-              inputAmount,
-              outputAmount,
-            },
-            options,
-            routerMustCustody,
-            performAggregatedSlippageCheck,
-          )
-
           calldatas = [
             ...calldatas,
             ...SwapRouter.encodeV3Swap(
@@ -381,19 +361,6 @@ export abstract class SwapRouter {
             ),
           ]
         } else if (mixedRouteIsAllV2(route)) {
-          console.log(
-            'all v2:',
-            {
-              ...trade,
-              routes: [route],
-              inputAmount,
-              outputAmount,
-            },
-            options,
-            routerMustCustody,
-            performAggregatedSlippageCheck,
-          )
-
           calldatas = [
             ...calldatas,
             SwapRouter.encodeV2Swap(
@@ -409,7 +376,6 @@ export abstract class SwapRouter {
             ),
           ]
         } else if (mixedRouteIsAllStable(route)) {
-          console.log('here1')
           calldatas = [
             ...calldatas,
             SwapRouter.encodeStableSwap(
@@ -425,12 +391,9 @@ export abstract class SwapRouter {
             ),
           ]
         } else {
-          console.log('here2')
           throw new Error('Unsupported route to encode')
         }
       } else {
-        console.log('here3')
-
         const sections = partitionMixedRouteByProtocol(route)
 
         const isLastSectionInRoute = (i: number) => {
@@ -466,7 +429,6 @@ export abstract class SwapRouter {
                 amountIn: inAmount,
                 amountOutMinimum: outAmount,
               }
-              console.log('all v3 mixed exactInputParams:', [exactInputParams])
 
               calldatas.push(
                 encodeFunctionData({
@@ -482,7 +444,6 @@ export abstract class SwapRouter {
                 amountOut: outAmount,
                 amountInMaximum: inAmount,
               }
-              console.log('all v3 mixed exactOutputParams:', [exactOutputParams])
 
               calldatas.push(
                 encodeFunctionData({
@@ -508,7 +469,7 @@ export abstract class SwapRouter {
                 newRoute.output.wrapped.address, // tokenOut
                 recipientAddress, // to
               ] as const
-              console.log('all v2 mixed exactInputParams:', exactInputParams)
+
               calldatas.push(
                 encodeFunctionData({
                   abi: SwapRouter.ABI,
@@ -519,7 +480,7 @@ export abstract class SwapRouter {
             } else {
               const path = newRoute.path.map((token) => token.wrapped.address)
               const exactOutputParams = [outAmount, inAmount, path, recipientAddress] as const
-              console.log('all v2 mixed exactOutputParams:', exactOutputParams)
+
               calldatas.push(
                 encodeFunctionData({
                   abi: SwapRouter.ABI,
@@ -695,7 +656,6 @@ export abstract class SwapRouter {
       totalAmountIn,
       minimumAmountOut: minAmountOut,
     } = SwapRouter.encodeSwaps(trades, options)
-    console.log('calldatas', calldatas)
 
     // unwrap or sweep
     if (routerMustCustody) {
