@@ -99,7 +99,7 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
   let betterResult: Result = 'AKKA'
 
   if (enabled && (isIceQuoterAPIEnabled || isAkkaQuoterAPIEnabled)) {
-    if (query.referrer === 'akka') {
+    if (query.referrer === 'akka' && bestTradeFromAkkaQuoterApi.trade) {
       betterResult = 'AKKA'
     } else {
       if (
