@@ -171,6 +171,13 @@ const farms: SerializedFarmConfig[] = [
         quoteToken: coreTokens.wcore_old,
     },
     {
+        pid: 23,
+        lpSymbol: 'PIPI-CORE LP',
+        lpAddress: '0xa5da4314d0729626ed7c92a240105ba80acf54ab',
+        token: coreTokens.pipi,
+        quoteToken: coreTokens.wcore_old,
+    },
+    {
         pid: 22,
         lpSymbol: 'CTS-CORE LP',
         lpAddress: '0xe06f2645fbddd88e98c5a5d01722ff1499bf51b1',
