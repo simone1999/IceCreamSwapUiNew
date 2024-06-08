@@ -20,6 +20,7 @@ import { degen } from "./degen"
 import { rari } from "./rari"
 import { bob } from "./bob"
 import { lightlink } from "./lightlink"
+import { mint } from "./mint"
 
 export const chainMap = {
   core,
@@ -44,6 +45,7 @@ export const chainMap = {
   dokenchain,
   shardeumTestnet,
   // shimmerTestnet,
+  mint,
 }
 export const chains = Object.values(chainMap)
 
@@ -74,6 +76,7 @@ export enum ChainId {
   BOB = bob.id,
   BOBA = boba.id,
   LIGHTLINK = lightlink.id,
+  MINT = mint.id,
 }
 
 export const defaultChainId = ChainId.CORE
