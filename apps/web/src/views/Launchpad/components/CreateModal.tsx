@@ -21,7 +21,7 @@ const CreateModal: React.FC<DepositModalProps> = (props) => {
   const [step, setStep] = useState<Steps>('preview')
   const { onDismiss } = useModalContext()
   const { chainId } = useActiveChainId()
-  const token = useToken(formValues.tokenAddress)
+  const token = useToken(formValues?.tokenAddress)
   const raisedToken = ICE[chainId]
   const { status } = useAccount()
   const campaignFactory = useCampaignFactory()

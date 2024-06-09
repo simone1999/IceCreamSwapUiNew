@@ -67,7 +67,7 @@ export const CreateCampaign: React.FC = () => {
   }, [user, kyced])
 
   return (
-    <AppWrapper title={t('Create Campaign')} subtitle={t('Create your own campaign in seconds')}>
+    <AppWrapper title={t('Create Campaign')} subtitle={t('Launch your own Token!')}>
       {loading && (
         <Flex justifyContent="center" marginY="28px">
           <Spinner />
@@ -112,37 +112,37 @@ export const CreateCampaign: React.FC = () => {
                   </Flex>
                   <Flex flexDirection="column">
                     <Text marginBottom="7px">{t('Soft Cap')}</Text>
-                    <Input type="number" placeholder={t('Soft Cap')} {...register('softCap')} />
+                    <Input placeholder={t('Soft Cap')} {...register('softCap')} />
                     {errors.softCap && <FormError>{errors.softCap.message}</FormError>}
                   </Flex>
                   <Flex flexDirection="column">
                     <Text marginBottom="7px">{t('Hard Cap')}</Text>
-                    <Input type="number" placeholder={t('Hard Cap')} {...register('hardCap')} />
+                    <Input placeholder={t('Hard Cap')} {...register('hardCap')} />
                     {errors.hardCap && <FormError>{errors.hardCap.message}</FormError>}
                   </Flex>
                   <Flex flexDirection="column">
                     <Text marginBottom="7px">{t('Minimum Allowed')}</Text>
-                    <Input type="number" placeholder={t('Minimum Allowed')} {...register('minAllowed')} />
+                    <Input placeholder={t('Minimum Allowed')} {...register('minAllowed')} />
                     {errors.minAllowed && <FormError>{errors.minAllowed.message}</FormError>}
                   </Flex>
                   <Flex flexDirection="column">
                     <Text marginBottom="7px">{t('Maximum Allowed')}</Text>
-                    <Input type="number" placeholder={t('Maximum Allowed')} {...register('maxAllowed')} />
+                    <Input placeholder={t('Maximum Allowed')} {...register('maxAllowed')} />
                     {errors.maxAllowed && <FormError>{errors.maxAllowed.message}</FormError>}
                   </Flex>
                   <Flex flexDirection="column">
                     <Text marginBottom="7px">{t('Presale Rate')}</Text>
-                    <Input type="number" placeholder={t('Presale Rate')} {...register('rate')} />
+                    <Input placeholder={t('Presale Rate')} {...register('rate')} />
                     {errors.rate && <FormError>{errors.rate.message}</FormError>}
                   </Flex>
                   <Flex flexDirection="column">
                     <Text marginBottom="7px">{t('Listing Rate')}</Text>
-                    <Input type="number" placeholder={t('Listing Rate')} {...register('poolRate')} />
+                    <Input placeholder={t('Listing Rate')} {...register('poolRate')} />
                     {errors.poolRate && <FormError>{errors.poolRate.message}</FormError>}
                   </Flex>
                   <Flex flexDirection="column">
                     <Text marginBottom="7px">{t('Liquidity %')}</Text>
-                    <Input type="number" placeholder={t('Liquidity %')} {...register('liquidityRate')} />
+                    <Input placeholder={t('Liquidity %')} {...register('liquidityRate')} />
                     {errors.liquidityRate && <FormError>{errors.liquidityRate.message}</FormError>}
                   </Flex>
                   <Flex flexDirection="column">
@@ -152,7 +152,7 @@ export const CreateCampaign: React.FC = () => {
                   </Flex>
                   <Flex flexDirection="column">
                     <Text marginBottom="7px">{t('Vesting %')}</Text>
-                    <Input type="number" placeholder={t('%')} {...register('vestingPercentage')} />
+                    <Input placeholder={t('%')} {...register('vestingPercentage')} />
                     {errors.vestingPercentage && <FormError>{errors.vestingPercentage.message}</FormError>}
                   </Flex>
                   <Flex flexDirection="column">

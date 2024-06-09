@@ -39,32 +39,32 @@ export const useSchema = () => {
           .string()
           .transform(Number)
           .refine((value) => value >= 0, t('Must be positive')),
-        poolRate: z
-          .string()
-          .transform(Number)
-          .refine((value) => value > 0, t('Must be greater than 0'))
-          .refine((value) => value <= 100, t('Must be less than or equal to 100')),
         rate: z
           .string()
           .transform(Number)
           .refine((value) => value > 0, t('Must be greater than 0')),
-        liquidityRate: z
+        poolRate: z
           .string()
           .transform(Number)
           .refine((value) => value > 0, t('Must be greater than 0')),
         startDate: z
-          .date()
-          .refine(value => value > new Date, t('Must be in future')),
+          .coerce.date()
+          .refine(value => value >= new Date((new Date).getTime() + 1000*60*60*24*3), t('Must be at least 3 days in the future, do marketing!')),
         endDate: z
-          .date()
+          .coerce.date()
           .refine(value => value > new Date, t('Must be in future')),
-        liquidityUnlockDate: z.date(),
+        liquidityRate: z
+          .string()
+          .transform(Number)
+          .refine((value) => value > 0, t('Must be greater than 0'))
+          .refine((value) => value <= 100, t('Must be less than or equal to 100')),
+        liquidityUnlockDate: z.coerce.date(),
         vestingPercentage: z
           .string()
           .transform(Number)
           .refine((value) => 0 <= value && value <= 100, t('Must be between 0 and 100')),
         vestingEndDate: z
-          .date()
+          .coerce.date()
           .refine(value => value > new Date, t('Must be in future')),
         banner: z
           .any()
@@ -85,7 +85,7 @@ export const useSchema = () => {
           path: ["vestingEndDate"]
         })
         .refine(value => value.liquidityUnlockDate > new Date(value.endDate.getTime() + 1000*60*60*24*29*3), {
-          message: "liquidity needs to be locked for at least 3 months",
+          message: "liquidity needs to be locked for at least 3 months after campaign ends",
           path: ["liquidityUnlockDate"]
         })
         .refine(value => value.softCap <= value.hardCap, {
@@ -96,7 +96,7 @@ export const useSchema = () => {
           message: "soft cap needs to be at least 50% of hard cap",
           path: ["softCap"]
         })
-        .refine(value => value.minAllowed <= value.maxAllowed, {
+        .refine(value => value.maxAllowed == 0 || value.minAllowed <= value.maxAllowed, {
           message: "min contribution can not be bigger than max contribution",
           path: ["minAllowed"]
         })
@@ -104,9 +104,9 @@ export const useSchema = () => {
           message: "min contribution can not be more than 10% of hard cap",
           path: ["minAllowed"]
         })
-        .refine(value => value.rate >= value.liquidityRate, {
+        .refine(value => value.rate >= value.poolRate, {
           message: "listing rate needs to be same or lower than presale rate",
-          path: ["liquidityRate"]
+          path: ["poolRate"]
         })
     , [t],
   )
