@@ -105,7 +105,7 @@ export const useSchema = () => {
           path: ["minAllowed"]
         })
         .refine(value => value.rate >= value.poolRate, {
-          message: "listing rate needs to be same or lower than presale rate",
+          message: "Token can not be more expensive at presale than afterwards",
           path: ["poolRate"]
         })
     , [t],
