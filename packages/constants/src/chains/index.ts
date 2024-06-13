@@ -20,6 +20,7 @@ import { degen } from "./degen"
 import { rari } from "./rari"
 import { bob } from "./bob"
 import { lightlink } from "./lightlink"
+import { stratovmTestnet } from "./stratovmTestnet"
 
 export const chainMap = {
   core,
@@ -44,6 +45,7 @@ export const chainMap = {
   dokenchain,
   shardeumTestnet,
   // shimmerTestnet,
+  stratovmTestnet,
 }
 export const chains = Object.values(chainMap)
 
@@ -74,6 +76,7 @@ export enum ChainId {
   BOB = bob.id,
   BOBA = boba.id,
   LIGHTLINK = lightlink.id,
+  STRATOM_TEST = stratovmTestnet.id,
 }
 
 export const defaultChainId = ChainId.CORE
