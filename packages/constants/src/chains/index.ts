@@ -3,7 +3,6 @@ import { boba } from "./boba"
 import { bsc } from './bsc'
 import { core } from './core'
 import { dogechain } from './dogechain'
-import { dokenchain } from './dokenchain'
 import { fuse } from './fuse'
 import { xdc } from './xdc'
 import { xodex } from "./xodex";
@@ -42,7 +41,6 @@ export const chainMap = {
   dogechain,
   fuse,
   xodex,
-  dokenchain,
   shardeumTestnet,
   // shimmerTestnet,
   stratovmTestnet,
@@ -67,7 +65,6 @@ export enum ChainId {
   DOGE = dogechain.id,
   FUSE = fuse.id,
   XODEX = xodex.id,
-  DOKEN = dokenchain.id,
   SHARDEUM_TEST = shardeumTestnet.id,
   SHIMMER_TEST = shimmerTestnet.id,
   QITMEER = qitmeer.id,
