@@ -1,6 +1,6 @@
-import { Button, Card, Flex, Link, Progress, Text, useModal } from '@pancakeswap/uikit'
+import { Button, Card, Flex, Progress, Text } from '@pancakeswap/uikit'
 import styled from 'styled-components'
-import { CampaignData, useCampaign, useFlags, useGivenAmount } from '../hooks'
+import { CampaignData } from '../hooks'
 import { renderDate } from 'utils/renderDate'
 import CampaignCardDummyHeader from './CampaignCardDummyHeader'
 
@@ -21,20 +21,8 @@ const LaunchpadCardInnerContainer = styled(Flex)`
   gap: 0.75em;
 `
 
-const ExpandingWrapper = styled(Flex)`
-  padding: 24px;
-  border-top: 2px solid ${({ theme }) => theme.colors.cardBorder};
-  overflow: hidden;
-  justify-content: center;
-`
 interface LaunchpadCardProps {
   campaign: CampaignData
-}
-
-const roundString = (str: string) => {
-  const [whole, decimal] = str.split('.')
-  if (!decimal) return whole
-  return `${whole}.${decimal.slice(0, 2)}`
 }
 
 const CampaignCardDummy: React.FC<LaunchpadCardProps> = (props) => {

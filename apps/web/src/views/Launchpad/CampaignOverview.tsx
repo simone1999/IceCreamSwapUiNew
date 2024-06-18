@@ -1,18 +1,16 @@
-import { Button, Flex, Heading, Link, Table, Td, Text, useMatchBreakpoints } from '@pancakeswap/uikit'
-import { PropsWithChildren, useMemo, useCallback, useEffect } from 'react'
+import { Flex, Heading, Link, Table, Td, Text, useMatchBreakpoints } from '@pancakeswap/uikit'
+import { PropsWithChildren, useEffect } from 'react'
 import { FetchStatus } from 'config/constants/types'
-import { BigNumber, utils } from 'ethers'
+import { formatEther, formatUnits } from 'viem'
 import styled from 'styled-components'
 import { useActiveChain } from 'hooks/useActiveChain'
 import { useToken } from 'hooks/Tokens'
 import { formatAmount } from 'views/Bridge/formatter'
-import { useAccount } from 'wagmi'
 import AppWrapper from 'components/AppWrapper'
 import { useCampaigns, useFlags } from './hooks'
 import TokenName from 'views/Locks/components/TokenName'
 import { renderDate } from 'utils/renderDate'
 import InfoTooltip from '@pancakeswap/uikit/components/Timeline/InfoTooltip'
-import useNativeCurrency from 'hooks/useNativeCurrency'
 import { useTranslation } from '@pancakeswap/localization'
 
 const RowStyled = styled.tr`
@@ -71,7 +69,7 @@ export const CampaignOverview: React.FC<{ id: number }> = ({ id }) => {
     if (!campaign) return
     console.log(
       'Total Contributed: ',
-      utils.formatEther(campaign?.softCap.mul(Math.floor(campaign.progress * 10000)).div(10000)),
+      formatEther(campaign && campaign.softCap * BigInt(Math.floor(campaign.progress * 1_000_000)) / 1_000_000n),
     )
   }, [campaign?.progress, campaign?.softCap])
 
@@ -127,7 +125,7 @@ export const CampaignOverview: React.FC<{ id: number }> = ({ id }) => {
                         </StyledFlex>
                       </Td1>
                       <Td2>
-                        {formatAmount(utils.formatUnits(campaign.softCap, 18))} {native?.symbol}
+                        {formatAmount(formatUnits(campaign.softCap, 18))} {native?.symbol}
                       </Td2>
                     </RowStyled>
                     {!isIceSale ? (
@@ -139,28 +137,30 @@ export const CampaignOverview: React.FC<{ id: number }> = ({ id }) => {
                           </StyledFlex>
                         </Td1>
                         <Td2>
-                          {formatAmount(utils.formatUnits(campaign.hardCap, 18))} {native?.symbol}
+                          {formatAmount(formatUnits(campaign.hardCap, 18))} {native?.symbol}
                         </Td2>
                       </RowStyled>
                     ) : undefined}
-                    {!campaign.min_allowed.isZero() ? (
+                    {campaign.min_allowed !== 0n &&
                       <RowStyled>
                         <Td1>{t('Minimum Contribution')}</Td1>
                         <Td2>
-                          {formatAmount(utils.formatUnits(campaign.min_allowed, 18))} {native?.symbol}
+                          {formatAmount(formatUnits(campaign.min_allowed, 18))} {native?.symbol}
                         </Td2>
                       </RowStyled>
-                    ) : undefined}
-                    <RowStyled>
-                      <Td1>{t('Maximum Contribution')}</Td1>
-                      <Td2>
-                        {formatAmount(utils.formatUnits(campaign.max_allowed, 18))} {native?.symbol}
-                      </Td2>
-                    </RowStyled>
+                    }
+                    {campaign.max_allowed !== 0n &&
+                        <RowStyled>
+                            <Td1>{t('Maximum Contribution')}</Td1>
+                            <Td2>
+                              {formatAmount(formatUnits(campaign.max_allowed, 18))} {native?.symbol}
+                            </Td2>
+                        </RowStyled>
+                    }
                     <RowStyled>
                       <Td1>{t('Rate')}</Td1>
                       <Td2>
-                        {formatAmount(utils.formatUnits(campaign.rate, token?.decimals))} {token?.symbol} {t('per')}{' '}
+                        {formatAmount(formatUnits(campaign.rate, token?.decimals))} {token?.symbol} {t('per')}{' '}
                         {native?.symbol}
                       </Td2>
                     </RowStyled>
@@ -191,7 +191,7 @@ export const CampaignOverview: React.FC<{ id: number }> = ({ id }) => {
                             </StyledFlex>
                           </Td1>
                           <Td2>
-                            {formatAmount(utils.formatUnits(campaign.pool_rate, token?.decimals))} {token?.symbol} per{' '}
+                            {formatAmount(formatUnits(campaign.pool_rate, token?.decimals))} {token?.symbol} per{' '}
                             {native?.symbol}
                           </Td2>
                         </RowStyled>
@@ -202,17 +202,17 @@ export const CampaignOverview: React.FC<{ id: number }> = ({ id }) => {
                               <InfoTooltip text="That percentage of the total raised amount that will be added as liquidity." />
                             </StyledFlex>
                           </Td1>
-                          <Td2>{campaign.liquidity_rate.toNumber() / 100}%</Td2>
+                          <Td2>{Number(campaign.liquidity_rate) / 100}%</Td2>
                         </RowStyled>
                       </>
                     )}
                     <RowStyled>
                       <Td1>{t('Starting at')}</Td1>
-                      <Td2>{renderDate(campaign.start_date.mul(1000).toNumber())}</Td2>
+                      <Td2>{renderDate(Number(campaign.start_date * 1000n))}</Td2>
                     </RowStyled>
                     <RowStyled>
                       <Td1>{t('Ending at')}</Td1>
-                      <Td2>{renderDate(campaign.end_date.mul(1000).toNumber())}</Td2>
+                      <Td2>{renderDate(Number(campaign.end_date * 1000n))}</Td2>
                     </RowStyled>
                   </tbody>
                 </Table>

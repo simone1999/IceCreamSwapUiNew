@@ -4,7 +4,6 @@ import { useContract } from 'hooks/useContract'
 import { campaignABI } from 'config/abi/campaign'
 import { campaignFactoryABI } from 'config/abi/campaignFactory'
 import useSWR from 'swr'
-import { BigNumber } from 'ethers'
 import { Address } from "wagmi";
 import { publicClient } from "utils/wagmi";
 
@@ -36,8 +35,7 @@ export const useCanBuy = (contractAddress: Address, address: Address) => {
     campaign && address ? ['canBuy', contractAddress, address] : null,
     async () => {
       if (!(await campaign.read.whitelistEnabled())) return true
-      const canBuy = await campaign.read.whitelisted([address])
-      return canBuy
+      return await campaign.read.whitelisted([address])
     },
     {
       refreshInterval: 3000,
@@ -49,8 +47,7 @@ export const useFlags = () => {
   return useSWR<Record<string, string>>(
     '/api/get-flags',
     async () => {
-      const flags = await fetch('/api/get-flags').then((res) => res.json())
-      return flags
+      return await fetch('/api/get-flags').then((res) => res.json())
     },
     {
       refreshInterval: 60000,
@@ -62,22 +59,22 @@ export interface CampaignData {
   address: string
   banner?: string
   chainId: number
-  collected: BigNumber
+  collected: bigint
   description: string
   discord?: string
-  end_date: BigNumber
+  end_date: bigint
   github?: string
-  hardCap: BigNumber
+  hardCap: bigint
   id: number
-  liquidity_rate: BigNumber
-  lock_duration: BigNumber
-  max_allowed: BigNumber
-  min_allowed: BigNumber
-  pool_rate: BigNumber
-  rate: BigNumber
+  liquidity_rate: bigint
+  lock_duration: bigint
+  max_allowed: bigint
+  min_allowed: bigint
+  pool_rate: bigint
+  rate: bigint
   reddit?: string
-  softCap: BigNumber
-  start_date: BigNumber
+  softCap: bigint
+  start_date: bigint
   telegram?: string
   tokenAddress: string
   raisedToken: string
