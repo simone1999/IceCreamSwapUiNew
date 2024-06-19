@@ -5,7 +5,7 @@ import { PageMeta } from './types'
 export const DEFAULT_META: PageMeta = {
   title: 'IceCreamSwap Multi-chain DeFi ecosystem, Swap, Bridge, LaunchPad',
   description:
-    'Multi-chain DeFi ecosystem with Swap, Bridge and Launchpad. Trade, Bridge, Earn and Launch on Bitgert (Brise), Binance smart chain (BSC), XDC, XoDex, Dogechain, Doken, Fuse and CORE blockchain',
+    'Multi-chain DeFi ecosystem with Swap, Bridge and Launchpad. Trade, Bridge, Earn and Launch on Bitgert (Brise), Binance smart chain (BSC), XDC, XoDex, Dogechain, Fuse and CORE blockchain',
   image: 'https://icecreamswap.com/images/hero.png',
 }
 

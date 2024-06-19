@@ -3,7 +3,6 @@ import { boba } from "./boba"
 import { bsc } from './bsc'
 import { core } from './core'
 import { dogechain } from './dogechain'
-import { dokenchain } from './dokenchain'
 import { fuse } from './fuse'
 import { xdc } from './xdc'
 import { xodex } from "./xodex";
@@ -21,6 +20,7 @@ import { rari } from "./rari"
 import { bob } from "./bob"
 import { lightlink } from "./lightlink"
 import { mint } from "./mint"
+import { stratovmTestnet } from "./stratovmTestnet"
 
 export const chainMap = {
   core,
@@ -42,10 +42,10 @@ export const chainMap = {
   dogechain,
   fuse,
   xodex,
-  dokenchain,
   shardeumTestnet,
   // shimmerTestnet,
   mint,
+  stratovmTestnet,
 }
 export const chains = Object.values(chainMap)
 
@@ -67,7 +67,6 @@ export enum ChainId {
   DOGE = dogechain.id,
   FUSE = fuse.id,
   XODEX = xodex.id,
-  DOKEN = dokenchain.id,
   SHARDEUM_TEST = shardeumTestnet.id,
   SHIMMER_TEST = shimmerTestnet.id,
   QITMEER = qitmeer.id,
@@ -77,6 +76,7 @@ export enum ChainId {
   BOBA = boba.id,
   LIGHTLINK = lightlink.id,
   MINT = mint.id,
+  STRATOM_TEST = stratovmTestnet.id,
 }
 
 export const defaultChainId = ChainId.CORE
