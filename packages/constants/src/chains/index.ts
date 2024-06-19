@@ -19,6 +19,7 @@ import { degen } from "./degen"
 import { rari } from "./rari"
 import { bob } from "./bob"
 import { lightlink } from "./lightlink"
+import { mint } from "./mint"
 import { stratovmTestnet } from "./stratovmTestnet"
 
 export const chainMap = {
@@ -43,6 +44,7 @@ export const chainMap = {
   xodex,
   shardeumTestnet,
   // shimmerTestnet,
+  mint,
   stratovmTestnet,
 }
 export const chains = Object.values(chainMap)
@@ -73,6 +75,7 @@ export enum ChainId {
   BOB = bob.id,
   BOBA = boba.id,
   LIGHTLINK = lightlink.id,
+  MINT = mint.id,
   STRATOM_TEST = stratovmTestnet.id,
 }
 
