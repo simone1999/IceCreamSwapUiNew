@@ -21,6 +21,7 @@ import { bob } from "./bob"
 import { lightlink } from "./lightlink"
 import { mint } from "./mint"
 import { stratovmTestnet } from "./stratovmTestnet"
+import { saita } from "./saita"
 
 export const chainMap = {
   core,
@@ -39,6 +40,7 @@ export const chainMap = {
   shimmer,
   scroll,
   xdc,
+  saita,
   dogechain,
   fuse,
   xodex,
@@ -77,6 +79,7 @@ export enum ChainId {
   LIGHTLINK = lightlink.id,
   MINT = mint.id,
   STRATOM_TEST = stratovmTestnet.id,
+  SAITA = saita.id,
 }
 
 export const defaultChainId = ChainId.CORE
