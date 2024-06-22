@@ -21,6 +21,7 @@ import { bob } from "./bob"
 import { lightlink } from "./lightlink"
 import { mint } from "./mint"
 import { stratovmTestnet } from "./stratovmTestnet"
+import { oneWorld } from "./oneworld"
 
 export const chainMap = {
   core,
@@ -38,6 +39,7 @@ export const chainMap = {
   telos,
   shimmer,
   scroll,
+  oneWorld,
   xdc,
   dogechain,
   fuse,
@@ -77,6 +79,7 @@ export enum ChainId {
   LIGHTLINK = lightlink.id,
   MINT = mint.id,
   STRATOM_TEST = stratovmTestnet.id,
+  ONE_WORLD = oneWorld.id,
 }
 
 export const defaultChainId = ChainId.CORE
