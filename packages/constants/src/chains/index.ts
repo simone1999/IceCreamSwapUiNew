@@ -21,6 +21,7 @@ import { bob } from "./bob"
 import { lightlink } from "./lightlink"
 import { mint } from "./mint"
 import { stratovmTestnet } from "./stratovmTestnet"
+import { bearchainTestnet } from "./bearchainTestnet"
 
 export const chainMap = {
   core,
@@ -46,6 +47,7 @@ export const chainMap = {
   // shimmerTestnet,
   mint,
   stratovmTestnet,
+  bearchainTestnet,
 }
 export const chains = Object.values(chainMap)
 
@@ -77,6 +79,7 @@ export enum ChainId {
   LIGHTLINK = lightlink.id,
   MINT = mint.id,
   STRATOM_TEST = stratovmTestnet.id,
+  BEARCHAIN_TEST = bearchainTestnet.id,
 }
 
 export const defaultChainId = ChainId.CORE
