@@ -1,16 +1,16 @@
 import IceChain from '../ice-chain'
 
-export const bearchainTestnet: IceChain = {
+export const berachainTestnet: IceChain = {
   id: 80084,
-  name: 'Bear Chain Testnet',
+  name: 'Bera Chain Testnet',
   features: ['swap'],
-  network: 'bearchaintest',
+  network: 'berachaintest',
   rpcUrls: {
     public: { http: ['https://bartio.rpc.berachain.com/'] },
     default: { http: ['https://bartio.rpc.berachain.com/'] },
   },
   blockExplorers: {
-    default: { name: 'Bear Chain Testnet Explorer', url: 'https://bartio.beratrail.io' },
+    default: { name: 'Bera Chain Testnet Explorer', url: 'https://bartio.beratrail.io' },
   },
   nativeCurrency: {
     name: 'BERA',
@@ -27,7 +27,7 @@ export const bearchainTestnet: IceChain = {
   wrappedNative: {
     address: '0x7507c1dc16935B82698e4C63f2746A2fCf994dF8',
     decimals: 18,
-    symbol: 'wBERA',
+    symbol: 'WBERA',
     name: 'Wrapped BERA',
   },
   swap: {
