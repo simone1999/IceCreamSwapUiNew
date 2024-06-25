@@ -7,8 +7,8 @@ export const xdc: IceChain = {
   features: ['swap', 'bridge', 'farms', 'staking', 'locks', 'info', 'kyc'],
   network: 'xdc',
   rpcUrls: {
-    public: { http: ['https://erpc.xinfin.network'] },
-    default: { http: ['https://erpc.xinfin.network'] },
+    public: { http: ['https://rpc.ankr.com/xdc'] },
+    default: { http: ['https://rpc.ankr.com/xdc'] },
   },
   blockExplorers: {
     default: { name: 'XDC Explorer', url: 'https://xdcscan.io' },
