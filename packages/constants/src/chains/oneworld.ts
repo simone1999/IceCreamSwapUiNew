@@ -1,7 +1,7 @@
 import IceChain from '../ice-chain'
 
-export const saita: IceChain = {
-  id: 1209,
+export const oneWorld: IceChain = {
+  id: 309075,
   name: 'One World Chain Mainnet',
   features: ['swap'],
   network: 'oneworldmainnet',
