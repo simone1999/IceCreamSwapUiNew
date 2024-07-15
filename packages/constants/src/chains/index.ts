@@ -82,7 +82,7 @@ export enum ChainId {
   MINT = mint.id,
   STRATOM_TEST = stratovmTestnet.id,
   ONE_WORLD = oneWorld.id,
-  GRAVITY_TESTNET = gravityalpha.id,
+  GRAVITY_ALPHA = gravityalpha.id,
 }
 
 export const defaultChainId = ChainId.CORE
