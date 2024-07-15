@@ -22,6 +22,7 @@ import { lightlink } from "./lightlink"
 import { mint } from "./mint"
 import { stratovmTestnet } from "./stratovmTestnet"
 import { oneWorld } from "./oneworld"
+import { gravityalpha } from "./gravityalpha"
 
 export const chainMap = {
   core,
@@ -44,6 +45,7 @@ export const chainMap = {
   dogechain,
   fuse,
   xodex,
+  gravityalpha,
   shardeumTestnet,
   // shimmerTestnet,
   mint,
@@ -80,6 +82,7 @@ export enum ChainId {
   MINT = mint.id,
   STRATOM_TEST = stratovmTestnet.id,
   ONE_WORLD = oneWorld.id,
+  GRAVITY_TESTNET = gravityalpha.id,
 }
 
 export const defaultChainId = ChainId.CORE
