@@ -2,7 +2,7 @@ import IceChain from '../ice-chain'
 
 export const stratovmTestnet: IceChain = {
   id: 93747,
-  name: 'StratoVM Testnet',
+  name: 'StratoVM Sepolia Testnet',
   features: ['swap'],
   network: 'stratovmTestnet',
   rpcUrls: {
