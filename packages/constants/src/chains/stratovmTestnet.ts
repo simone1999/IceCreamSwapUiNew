@@ -6,8 +6,8 @@ export const stratovmTestnet: IceChain = {
   features: ['swap'],
   network: 'stratovmTestnet',
   rpcUrls: {
-    public: { http: ['https://rpc-stratovm-bjabr7rqni.t.conduit.xyz/'] },
-    default: { http: ['https://rpc-stratovm-bjabr7rqni.t.conduit.xyz/'] },
+    public: { http: ['https://rpc.stratovm.io'] },
+    default: { http: ['https://rpc.stratovm.io'] },
   },
   blockExplorers: {
     default: { name: 'StratoVM Testnet Explorer', url: 'https://explorer.stratovm.io' },
