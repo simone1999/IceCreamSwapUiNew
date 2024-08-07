@@ -13,8 +13,8 @@ export const ternoatestnet: IceChain = {
     default: { name: 'Ternoa Testnet Explorer', url: 'https://explorer.zkevm.ternoa.network/' },
   },
   nativeCurrency: {
-    name: 'CAP',
-    symbol: 'CAP',
+    name: 'CAPS',
+    symbol: 'CAPS',
     decimals: 18,
   },
   contracts: {
