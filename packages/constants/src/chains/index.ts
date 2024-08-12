@@ -25,6 +25,7 @@ import { oneWorld } from "./oneworld"
 import { swanmainnet } from "./swanmainnet"
 import { bitfinitytestnet } from "./bitfinitytestnet"
 import { ternoatestnet } from "./ternoatestnet"
+import { taikomainnet } from "./taikomainnet"
 
 export const chainMap = {
   core,
@@ -54,6 +55,7 @@ export const chainMap = {
   swanmainnet,
   bitfinitytestnet,
   ternoatestnet,
+  taikomainnet,
 }
 export const chains = Object.values(chainMap)
 
@@ -75,8 +77,6 @@ export enum ChainId {
   DOGE = dogechain.id,
   FUSE = fuse.id,
   XODEX = xodex.id,
-  SHARDEUM_TEST = shardeumTestnet.id,
-  SHIMMER_TEST = shimmerTestnet.id,
   QITMEER = qitmeer.id,
   DEGEN = degen.id,
   RARI = rari.id,
@@ -84,9 +84,12 @@ export enum ChainId {
   BOBA = boba.id,
   LIGHTLINK = lightlink.id,
   MINT = mint.id,
-  STRATOM_TEST = stratovmTestnet.id,
   ONE_WORLD = oneWorld.id,
   SWAN = swanmainnet.id,
+  TAIKO = taikomainnet.id,
+  SHARDEUM_TEST = shardeumTestnet.id,
+  SHIMMER_TEST = shimmerTestnet.id,
+  STRATOM_TEST = stratovmTestnet.id,
   BITFINITY_TEST = bitfinitytestnet.id,
   TERNOA_TEST = ternoatestnet.id,
 }
