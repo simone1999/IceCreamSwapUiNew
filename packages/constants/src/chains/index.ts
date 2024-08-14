@@ -26,6 +26,7 @@ import { swanmainnet } from "./swanmainnet"
 import { bitfinitytestnet } from "./bitfinitytestnet"
 import { ternoatestnet } from "./ternoatestnet"
 import { taikomainnet } from "./taikomainnet"
+import { gravityalpha } from "./gravityalpha"
 
 export const chainMap = {
   core,
@@ -48,6 +49,7 @@ export const chainMap = {
   dogechain,
   fuse,
   xodex,
+  gravityalpha,
   shardeumTestnet,
   // shimmerTestnet,
   mint,
@@ -92,6 +94,7 @@ export enum ChainId {
   STRATOM_TEST = stratovmTestnet.id,
   BITFINITY_TEST = bitfinitytestnet.id,
   TERNOA_TEST = ternoatestnet.id,
+  GRAVITY_ALPHA = gravityalpha.id,
 }
 
 export const defaultChainId = ChainId.CORE
