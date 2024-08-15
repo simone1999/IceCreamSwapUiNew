@@ -27,6 +27,7 @@ import { bitfinitytestnet } from "./bitfinitytestnet"
 import { ternoatestnet } from "./ternoatestnet"
 import { taikomainnet } from "./taikomainnet"
 import { gravityalpha } from "./gravityalpha"
+import { fireChain } from "./5irechain"
 
 export const chainMap = {
   core,
@@ -34,6 +35,7 @@ export const chainMap = {
   bob,
   boba,
   base,
+  fireChain,
   qitmeer,
   lightlink,
   neon,
@@ -95,6 +97,7 @@ export enum ChainId {
   BITFINITY_TEST = bitfinitytestnet.id,
   TERNOA_TEST = ternoatestnet.id,
   GRAVITY_ALPHA = gravityalpha.id,
+  FIRE = fireChain.id,
 }
 
 export const defaultChainId = ChainId.CORE
