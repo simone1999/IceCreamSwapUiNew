@@ -1,6 +1,6 @@
 import { bitgertTokens } from '@pancakeswap/tokens'
 import { getAddress } from "viem";
-import { SerializedFarmConfig } from "../src";
+import { SerializedFarmConfig } from '..'
 
 const farms: SerializedFarmConfig[] = [
   {

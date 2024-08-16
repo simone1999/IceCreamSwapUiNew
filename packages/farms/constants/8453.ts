@@ -1,5 +1,6 @@
-import { SerializedFarmConfig } from '@pancakeswap/farms'
+import { SerializedFarmConfig } from '..'
 import { baseTokens } from "@pancakeswap/tokens";
+import {getAddress} from "viem";
 
 const farms: SerializedFarmConfig[] = [
   {
@@ -16,6 +17,6 @@ const farms: SerializedFarmConfig[] = [
     token: baseTokens.ice,
     quoteToken: baseTokens.usdt,
   },
-].map((p) => ({ ...p, token: p.token.serialize, quoteToken: p.quoteToken.serialize }))
+].map((p) => ({ ...p, token: p.token.serialize, quoteToken: p.quoteToken.serialize, lpAddress: getAddress(p.lpAddress), }))
 
 export default farms

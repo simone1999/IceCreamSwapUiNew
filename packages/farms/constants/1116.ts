@@ -7,6 +7,61 @@ import {FeeAmount} from "@pancakeswap/v3-sdk";
 export const farmsV3 = defineFarmV3Configs([
     // make sure token0 as int is smaller than token1
     {
+        pid: 2,
+        token0: coreTokens.wcore,
+        token1: coreTokens.ice,
+        lpAddress: '0xBe49470bdbb3c5b05Ad5555205DD0a505f8DCcA7',
+        feeAmount: FeeAmount.LOW,
+    },
+    {
+        pid: 5,
+        token0: coreTokens.usdtl0,
+        token1: coreTokens.wcore,
+        lpAddress: '0x6063D72aB87A879ba25c68AD09af3937F55A99a8',
+        feeAmount: FeeAmount.LOWEST,
+    },
+    {
+        pid: 11,
+        token0: coreTokens.wcore,
+        token1: coreTokens.stCore,
+        lpAddress: '0xb3B315c10C9183224Ec6a49839B80A7799F70727',
+        feeAmount: FeeAmount.LOWEST,
+    },
+    {
+        pid: 7,
+        token0: coreTokens.usdtl0,
+        token1: coreTokens.usdcl0,
+        lpAddress: '0x86a9a9368DC9a55D2A92c372AbEF83350d4D5fEb',
+        feeAmount: FeeAmount.LOWEST,
+    },
+    {
+        pid: 6,
+        token0: coreTokens.usdt,
+        token1: coreTokens.usdtl0,
+        lpAddress: '0x53433de7e902d0CA281d823a40f036A2FE8266ef',
+        feeAmount: FeeAmount.LOWEST,
+    },
+    /*
+    {
+        pid: ,
+        token0: coreTokens.solvBtcb,
+        token1: coreTokens.solvBtcm,
+        lpAddress: '0xfcA579dcA9791327eE8c6876881913d2bE89347f',
+        feeAmount: FeeAmount.LOWEST,
+    },
+    {
+        pid: ,
+        token0: coreTokens.solvBtcb,
+        token1: coreTokens.coreBTC,
+        lpAddress: '0x8ec0D046deB1d9e1C7837647B4147B9A7b61299c',
+        feeAmount: FeeAmount.LOWEST,
+    },
+    */
+
+
+
+
+    {
         pid: 1,
         token0: coreTokens.usdt,
         token1: coreTokens.ice,
@@ -18,13 +73,6 @@ export const farmsV3 = defineFarmV3Configs([
         token0: coreTokens.usdtl0,
         token1: coreTokens.ice,
         lpAddress: '0xE2407c758c31358A01970fDd44FB6bE850E2117F',
-        feeAmount: FeeAmount.LOW,
-    },
-    {
-        pid: 2,
-        token0: coreTokens.wcore,
-        token1: coreTokens.ice,
-        lpAddress: '0xBe49470bdbb3c5b05Ad5555205DD0a505f8DCcA7',
         feeAmount: FeeAmount.LOW,
     },
     {
@@ -54,27 +102,6 @@ export const farmsV3 = defineFarmV3Configs([
         token1: coreTokens.wcore,
         lpAddress: '0xaB9D068F9A4e7C5eD89acE8b70C7Edf15D831466',
         feeAmount: FeeAmount.LOW,
-    },
-    {
-        pid: 5,
-        token0: coreTokens.usdtl0,
-        token1: coreTokens.wcore,
-        lpAddress: '0x6063D72aB87A879ba25c68AD09af3937F55A99a8',
-        feeAmount: FeeAmount.LOWEST,
-    },
-    {
-        pid: 6,
-        token0: coreTokens.usdt,
-        token1: coreTokens.usdtl0,
-        lpAddress: '0x53433de7e902d0CA281d823a40f036A2FE8266ef',
-        feeAmount: FeeAmount.LOWEST,
-    },
-    {
-        pid: 7,
-        token0: coreTokens.usdtl0,
-        token1: coreTokens.usdcl0,
-        lpAddress: '0x86a9a9368DC9a55D2A92c372AbEF83350d4D5fEb',
-        feeAmount: FeeAmount.LOWEST,
     },
 ])
 
