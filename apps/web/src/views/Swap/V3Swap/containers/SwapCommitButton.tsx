@@ -1,5 +1,5 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { TradeType } from '@pancakeswap/sdk'
+import { Percent, TradeType } from '@pancakeswap/sdk'
 import {
   Button,
   Text,
@@ -42,7 +42,7 @@ import { useRoutingSettingChanged } from 'state/user/smartRouter'
 import { useAccount } from 'wagmi'
 import { useSlippageAdjustedAmounts, useSwapInputError, useParsedAmounts, useSwapCallback } from '../hooks'
 import { ConfirmSwapModal } from './ConfirmSwapModal'
-import { useTradePriceBreakdown } from "hooks/useTradePriceBreakdown";
+import { useTradePriceBreakdown } from 'hooks/useTradePriceBreakdown'
 
 const SettingsModalWithCustomDismiss = withCustomOnDismiss(SettingsModal)
 
@@ -97,10 +97,29 @@ export const SwapCommitButton = memo(function SwapCommitButton({
   const swapInputError = useSwapInputError(trade, currencyBalances)
   const parsedAmounts = useParsedAmounts(trade, currencyBalances, showWrap)
   const parsedIndepentFieldAmount = parsedAmounts[independentField]
-
+  const countDecimals = function (value: number) {
+    if (Math.floor(value) === value) return 0
+    return value.toString().split('.')[1].length || 0
+  }
+  const convertToFraction = (value: number) => {
+    return {
+      numerator: Number(value.toString().replace(/^(0\.)?0*/, '')),
+      denominator: 10 ** countDecimals(value),
+    }
+  }
   // the callback to execute the swap
   const deadline = useTransactionDeadline()
-  const { callback: swapCallback, error: swapCallbackError } = useSwapCallback({ trade, deadline })
+  const { callback: swapCallback, error: swapCallbackError } = useSwapCallback({
+    trade,
+    deadline,
+    ...(trade?.fee &&
+      trade?.treasury_address && {
+        feeOptions: {
+          fee: new Percent(convertToFraction(trade.fee).numerator, convertToFraction(trade.fee).denominator),
+          recipient: trade.treasury_address,
+        },
+      }),
+  })
 
   const [{ tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
     tradeToConfirm: SmartRouterTrade<TradeType> | undefined
@@ -317,8 +336,8 @@ export const SwapCommitButton = memo(function SwapCommitButton({
           (priceImpactSeverity > 3 && !isExpertMode
             ? t('Price Impact Too High')
             : priceImpactSeverity > 2
-              ? t('Swap Anyway')
-              : t('Swap'))}
+            ? t('Swap Anyway')
+            : t('Swap'))}
       </CommitButton>
     </Box>
   )

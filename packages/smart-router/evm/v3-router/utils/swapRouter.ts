@@ -6,7 +6,8 @@ import {
   TradeType,
   validateAndParseAddress,
   WNATIVE,
-  ChainId, Pair,
+  ChainId,
+  Pair,
 } from '@pancakeswap/sdk'
 import { FeeOptions, MethodParameters, Payments, PermitOptions, Position, SelfPermit, toHex } from '@pancakeswap/v3-sdk'
 import invariant from 'tiny-invariant'
@@ -106,7 +107,9 @@ export abstract class SwapRouter {
       : validateAndParseAddress(options.recipient)
 
     if (trade.tradeType === TradeType.EXACT_INPUT) {
-      const pools = route.pools.map((pool) => pool.address? pool.address: Pair.getAddress(pool.reserve0.currency.wrapped, pool.reserve1.currency.wrapped))
+      const pools = route.pools.map((pool) =>
+        pool.address ? pool.address : Pair.getAddress(pool.reserve0.currency.wrapped, pool.reserve1.currency.wrapped),
+      )
       const exactInputParams = [
         amountIn, // amountIn
         performAggregatedSlippageCheck ? 0n : amountOut, // amountOutMin
@@ -281,7 +284,7 @@ export abstract class SwapRouter {
             amountOut,
             amountInMaximum: amountIn,
           }
-
+          
           calldatas.push(
             encodeFunctionData({
               abi: SwapRouter.ABI,
@@ -338,10 +341,10 @@ export abstract class SwapRouter {
       const mixedRouteIsAllStable = (r: Omit<BaseRoute, 'input' | 'output'>) => {
         return r.pools.every(isStablePool)
       }
-
       if (singleHop) {
         /// For single hop, since it isn't really a mixedRoute, we'll just mimic behavior of V3 or V2
         /// We don't use encodeV3Swap() or encodeV2Swap() because casting the trade to a V3Trade or V2Trade is overcomplex
+
         if (mixedRouteIsAllV3(route)) {
           calldatas = [
             ...calldatas,
@@ -426,6 +429,7 @@ export abstract class SwapRouter {
                 amountIn: inAmount,
                 amountOutMinimum: outAmount,
               }
+
               calldatas.push(
                 encodeFunctionData({
                   abi: SwapRouter.ABI,
@@ -451,7 +455,11 @@ export abstract class SwapRouter {
             }
           } else if (mixedRouteIsAllV2(newRoute)) {
             if (isExactIn) {
-              const pools = newRoute.pools.map((pool) => pool.address? pool.address: Pair.getAddress(pool.reserve0.currency.wrapped, pool.reserve1.currency.wrapped))
+              const pools = newRoute.pools.map((pool) =>
+                pool.address
+                  ? pool.address
+                  : Pair.getAddress(pool.reserve0.currency.wrapped, pool.reserve1.currency.wrapped),
+              )
 
               const exactInputParams = [
                 inAmount, // amountIn

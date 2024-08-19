@@ -23,10 +23,12 @@ type Pair = [Currency, Currency]
 
 interface Props extends UseModalV2Props {
   routes: Route[]
+  routeProvider: string
 }
 
-export const RouteDisplayModal = memo(function RouteDisplayModal({ isOpen, onDismiss, routes }: Props) {
+export const RouteDisplayModal = memo(function RouteDisplayModal({ isOpen, onDismiss, routes, routeProvider }: Props) {
   const { t } = useTranslation()
+
   return (
     <ModalV2 closeOnOverlayClick isOpen={isOpen} onDismiss={onDismiss} minHeight="0">
       <Modal
@@ -38,6 +40,7 @@ export const RouteDisplayModal = memo(function RouteDisplayModal({ isOpen, onDis
               ml="4px"
               placement="top-start"
             />
+            <Text ml="10px">(Powered By {routeProvider})</Text>
           </Flex>
         }
         style={{ minHeight: '0' }}

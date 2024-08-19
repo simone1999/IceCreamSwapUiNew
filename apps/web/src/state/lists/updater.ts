@@ -36,7 +36,7 @@ export default function Updater(): null {
   }, [dispatch, isReady])
 
   const fetchList = useFetchListCallback(dispatch)
-
+  
   // whenever a list is not loaded and not loading, try again to load it
   useSWRImmutable(isReady && ['first-fetch-token-list', lists], () => {
     Object.keys(lists).forEach((listUrl) => {
