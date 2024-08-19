@@ -30,6 +30,12 @@ export const gravityalpha: IceChain = {
     symbol: 'wG',
     name: 'Wrapped G',
   },
+  stableToken: {
+    address: '0xFbDa5F676cB37624f28265A144A48B0d6e87d3b6',
+    decimals: 6,
+    symbol: 'USDC.e',
+    name: 'Bridged USDC',
+  },
   swap: {
     factoryAddress: '0xC87De04e2EC1F4282dFF2933A2D58199f688fC3d',
     routerAddress: '0xE578184bC88EB48485Bba23a37B5509578d2aE38',
