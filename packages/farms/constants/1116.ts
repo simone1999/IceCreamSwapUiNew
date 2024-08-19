@@ -41,22 +41,20 @@ export const farmsV3 = defineFarmV3Configs([
         lpAddress: '0x53433de7e902d0CA281d823a40f036A2FE8266ef',
         feeAmount: FeeAmount.LOWEST,
     },
-    /*
     {
-        pid: ,
+        pid: 12,
         token0: coreTokens.solvBtcb,
         token1: coreTokens.solvBtcm,
         lpAddress: '0xfcA579dcA9791327eE8c6876881913d2bE89347f',
         feeAmount: FeeAmount.LOWEST,
     },
     {
-        pid: ,
+        pid: 13,
         token0: coreTokens.solvBtcb,
         token1: coreTokens.coreBTC,
         lpAddress: '0x8ec0D046deB1d9e1C7837647B4147B9A7b61299c',
         feeAmount: FeeAmount.LOWEST,
     },
-    */
 
 
 
