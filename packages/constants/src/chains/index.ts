@@ -28,6 +28,7 @@ import { ternoatestnet } from "./ternoatestnet"
 import { taikomainnet } from "./taikomainnet"
 import { gravityalpha } from "./gravityalpha"
 import { fireChain } from "./5irechain"
+import { rootstock } from "./rootstock"
 
 export const chainMap = {
   core,
@@ -55,8 +56,9 @@ export const chainMap = {
   shardeumTestnet,
   // shimmerTestnet,
   mint,
-  stratovmTestnet,
+  rootstock,
   swanmainnet,
+  stratovmTestnet,
   bitfinitytestnet,
   ternoatestnet,
   taikomainnet,
@@ -98,6 +100,7 @@ export enum ChainId {
   TERNOA_TEST = ternoatestnet.id,
   GRAVITY_ALPHA = gravityalpha.id,
   FIRE = fireChain.id,
+  ROOTSTOCK = rootstock.id,
 }
 
 export const defaultChainId = ChainId.CORE
