@@ -25,7 +25,7 @@ export const rootstock: IceChain = {
   },
   blockInterval: 10,
   wrappedNative: {
-    address: '0x542fda317318ebf1d3deaf76e0b632741a7e677d',
+    address: '0x542fDA317318eBF1d3DEAf76E0b632741A7e677d',
     decimals: 18,
     symbol: 'WRBTC',
     name: 'Wrapped BTC',
