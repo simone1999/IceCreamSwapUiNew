@@ -33,7 +33,7 @@ export function SentryErrorBoundary({ children }) {
             </Flex>
             {process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview' && (
               <pre>
-                <code>{error?.message}</code>
+                <code>{error instanceof Error ? error.message : String(error)}</code>
                 <code>{componentStack}</code>
               </pre>
             )}
