@@ -4,8 +4,7 @@
 /* eslint-disable import/no-unresolved */
 import { render as rtlRender } from '@testing-library/react'
 import noop from 'lodash/noop'
-import { RouterContext } from 'next/dist/shared/lib/router-context'
-import { NextRouter } from 'next/router'
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime'
 import Provider from 'Providers'
 import { Provider as JotaiProvider } from 'jotai'
 import { initializeStore, makeStore } from 'state'

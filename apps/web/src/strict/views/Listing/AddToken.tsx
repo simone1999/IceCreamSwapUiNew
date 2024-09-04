@@ -1,4 +1,4 @@
-import { Button, Checkbox, Flex, Heading, Input, Text, useModal, useToast } from '@pancakeswap/uikit'
+import { Button, Flex, Input, Text, useToast } from '@pancakeswap/uikit'
 import AppWrapper from 'components/AppWrapper'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
