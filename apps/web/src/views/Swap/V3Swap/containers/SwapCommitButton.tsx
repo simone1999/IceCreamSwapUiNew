@@ -1,5 +1,5 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { TradeType } from '@pancakeswap/sdk'
+import { Percent, TradeType } from '@pancakeswap/sdk'
 import {
   Button,
   Text,
@@ -100,7 +100,17 @@ export const SwapCommitButton = memo(function SwapCommitButton({
 
   // the callback to execute the swap
   const deadline = useTransactionDeadline()
-  const { callback: swapCallback, error: swapCallbackError } = useSwapCallback({ trade, deadline })
+  const { callback: swapCallback, error: swapCallbackError } = useSwapCallback({
+    trade,
+    deadline,
+    ...(trade?.fee &&
+      trade?.treasury_address && {
+        feeOptions: {
+          fee: new Percent(Math.round(trade.fee * 10_000), 10_000),
+          recipient: trade.treasury_address
+        },
+      }),
+  })
 
   const [{ tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
     tradeToConfirm: SmartRouterTrade<TradeType> | undefined

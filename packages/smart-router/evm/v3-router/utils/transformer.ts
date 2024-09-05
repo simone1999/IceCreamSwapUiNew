@@ -187,5 +187,7 @@ export function parseTrade(chainId: ChainId, trade: SerializedTrade): SmartRoute
     routes: trade.routes.map((r) => parseRoute(chainId, r)),
     gasEstimate: BigInt(trade.gasEstimate),
     gasEstimateInUSD: parseCurrencyAmount(chainId, trade.gasEstimateInUSD),
+    fee: trade.fee,
+    treasury_address: trade.treasury_address,
   }
 }

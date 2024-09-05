@@ -565,13 +565,13 @@ export abstract class SwapRouter {
     //   1. when there are >2 exact input trades. this is only a heuristic,
     //      as it's still more gas-expensive even in this case, but has benefits
     //      in that the reversion probability is lower
-    const performAggregatedSlippageCheck = sampleTrade.tradeType === TradeType.EXACT_INPUT && numberOfTrades > 2
+    const performAggregatedSlippageCheck = sampleTrade.tradeType === TradeType.EXACT_INPUT // && numberOfTrades > 2
     // flag for whether funds should be send first to the router
     //   1. when receiving ETH (which much be unwrapped from WETH)
     //   2. when a fee on the output is being taken
     //   3. when performing swap and add
     //   4. when performing an aggregated slippage check
-    const routerMustCustody = outputIsNative || !!options.fee || !!isSwapAndAdd || performAggregatedSlippageCheck
+    const routerMustCustody = true // outputIsNative || !!options.fee || !!isSwapAndAdd || performAggregatedSlippageCheck
 
     // encode permit if necessary
     if (options.inputTokenPermit) {

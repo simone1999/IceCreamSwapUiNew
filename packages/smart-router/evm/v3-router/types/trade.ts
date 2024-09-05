@@ -1,5 +1,6 @@
 import { BigintIsh, Currency, CurrencyAmount, TradeType } from '@pancakeswap/sdk'
 
+import { Address } from 'viem'
 import { Route } from './route'
 import { PoolProvider, QuoteProvider } from './providers'
 import { PoolType } from './pool'
@@ -11,6 +12,8 @@ export interface SmartRouterTrade<TTradeType extends TradeType> {
 
   // From routes we know how many splits and what percentage does each split take
   routes: Route[]
+  fee?: number
+  treasury_address?: Address
 
   gasEstimate: bigint
   gasEstimateInUSD: CurrencyAmount<Currency>
