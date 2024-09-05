@@ -3,7 +3,6 @@ import { useUnsNameForAddress } from 'hooks/useUns'
 import { useMemo } from 'react'
 import { useEnsAvatar, useEnsName, Address } from 'wagmi'
 import { useActiveChainId } from 'hooks/useActiveChainId'
-import { useSpaceIdNameForAddress } from "hooks/useSpaceIdName";
 
 export const useDomainNameForAddress = (address: `0x${string}` | string, fetchData = true) => {
   const { chainId } = useActiveChainId()
@@ -11,10 +10,6 @@ export const useDomainNameForAddress = (address: `0x${string}` | string, fetchDa
   const { unsName, isLoading: isUnsLoading } = useUnsNameForAddress(
     address as Address,
     fetchData && !sidName && !isSidLoading,
-  )
-  const spaceIdName = useSpaceIdNameForAddress(
-    address as Address,
-    fetchData && !sidName && !isSidLoading && !unsName && !isUnsLoading,
   )
 
   const { data: ensName, isLoading: isEnsLoading } = useEnsName({
@@ -30,9 +25,9 @@ export const useDomainNameForAddress = (address: `0x${string}` | string, fetchDa
 
   return useMemo(() => {
     return {
-      domainName: ensName || sidName || unsName || spaceIdName,
+      domainName: ensName || sidName || unsName,
       avatar: ensAvatar ?? undefined,
       isLoading: isEnsLoading || isEnsAvatarLoading || (!ensName && isSidLoading) || (!sidName && isUnsLoading),
     }
-  }, [sidName, unsName, isSidLoading, isUnsLoading, spaceIdName, ensName, isEnsLoading, ensAvatar, isEnsAvatarLoading])
+  }, [sidName, unsName, isSidLoading, isUnsLoading, ensName, isEnsLoading, ensAvatar, isEnsAvatarLoading])
 }
