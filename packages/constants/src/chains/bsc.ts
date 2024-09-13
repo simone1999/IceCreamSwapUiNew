@@ -5,7 +5,7 @@ const bscExplorer = { name: 'BscScan', url: 'https://bscscan.com' }
 export const bsc: IceChain = {
   id: 56,
   name: 'BNB Smart Chain Mainnet',
-  features: ['bridge'],  // 'swap'
+  features: ['swap', 'bridge'],
   network: 'binance',
   rpcUrls: {
     public: { http: ['https://rpc.ankr.com/bsc'] },

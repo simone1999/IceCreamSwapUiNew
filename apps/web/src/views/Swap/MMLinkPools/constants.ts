@@ -1,13 +1,9 @@
-import { ChainId } from '@pancakeswap/sdk'
 import contract from 'config/constants/contracts'
 import { getAddress } from 'viem'
 
 export const NATIVE_CURRENCY_ADDRESS = getAddress('0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE')
 
 export const MM_SUPPORT_CHAIN = {
-  1: true,
-  5: true,
-  56: true,
 }
 
 export const MM_SWAP_CONTRACT_ADDRESS = contract.mmLinkedPool
