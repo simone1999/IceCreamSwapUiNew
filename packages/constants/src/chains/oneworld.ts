@@ -6,11 +6,11 @@ export const oneWorld: IceChain = {
   features: ['swap'],
   network: 'oneworldmainnet',
   rpcUrls: {
-    public: { http: ['https://mainnet-rpc.oneworldchai.org/'] },
-    default: { http: ['https://mainnet-rpc.oneworldchai.org/'] },
+    public: { http: ['https://mainnet-rpc.oneworldchain.org'] },
+    default: { http: ['https://mainnet-rpc.oneworldchain.org'] },
   },
   blockExplorers: {
-    default: { name: 'One World Chain Explorer', url: 'https://mainnet.oneworldchain.org/' },
+    default: { name: 'One World Chain Explorer', url: 'https://mainnet.oneworldchain.org' },
   },
   nativeCurrency: {
     name: 'OWCT',
