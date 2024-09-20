@@ -124,6 +124,8 @@ function MobileModal<T>({
   const [selected] = useSelectedWallet()
   const [error] = useAtom(errorAtom)
 
+  const walletsToShow: WalletConfigV2<T>[] = wallets
+  /*
   const installedWallets: WalletConfigV2<T>[] = wallets.filter((w) => w.installed)
   const walletsToShow: WalletConfigV2<T>[] = wallets.filter((w) => {
     if (installedWallets.length) {
@@ -131,6 +133,7 @@ function MobileModal<T>({
     }
     return w.installed !== false || w.deepLink
   })
+  */
 
   return (
     <AtomBox width="100%">
@@ -291,9 +294,12 @@ function DesktopModal<T>({
 }: Pick<WalletModalV2Props<T>, 'wallets' | 'docLink' | 'docText'> & {
   connectWallet: (wallet: WalletConfigV2<T>) => void
 }) {
+  const wallets: WalletConfigV2<T>[] = wallets_
+  /*
   const wallets: WalletConfigV2<T>[] = wallets_.filter((w) => {
     return w.installed !== false || (!w.installed && (w.guide || w.downloadLink || w.qrCode))
   })
+  */
 
   const [selected] = useSelectedWallet<T>()
   const [error] = useAtom(errorAtom)
