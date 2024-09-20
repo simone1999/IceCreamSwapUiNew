@@ -120,27 +120,52 @@ const config = ({ t }: FAQsType) => [
     reached: '02-2024',
   },
   {
-    title: t('Implement AI DEX aggregator as API for external project use. Expand to Qitmeer chain'),
-    icon: '👨‍💻',
+    title: t('Expand to Qitmeer chain'),
+    icon: '⛓️',
     description: [
-      t('Make our AI DEX aggregator available for projects like wallets providing in wallet swaps.'),
       t('Expand to Qitmmer Blockchain'),
-    ],
-    reached: '03-2024',
-  },
-  {
-    title: t('Make processes super robust to enable rapid mass expansion'),
-    icon: '👨‍💻',
-    description: [
-      t('Fully automate everything that\'s possible. We will be the first project deploying on hundreds of chains!'),
     ],
     reached: '04-2024',
   },
   {
+    title: t('Implement API for AI DEX aggregator'),
+    icon: '🔌',
+    description: [
+      t('Make our AI DEX aggregator available for projects like wallets providing in wallet swaps'),
+    ],
+    reached: '05-2024',
+  },
+  {
+    title: t('Utilize Machine learning to let AI DEX aggregator learn from every trade'),
+    icon: '🤖',
+    description: [
+      t('Self improving AI in DEX aggregator, learning from every swap')
+    ],
+    reached: '07-2024',
+  },
+  {
+    title: t('Make processes super robust to enable mass expansion'),
+    icon: '👨‍💻',
+    description: [
+      t('Fully automate everything that\'s possible. We will be the first project deploying on hundreds of chains!'),
+    ],
+    reached: '09-2024',
+  },
+  {
+    title: t('RPC aggregator'),
+    icon: '📡',
+    description: [
+      t('Aggregates all public RPCs'),
+      t('Drastically reduces our own downtime and manual work'),
+      t('Huge need from all other Web3 projects'),
+    ],
+  },
+  {
     title: t('Mass expansion'),
     icon: '🚀🚀',
-    description: [t('Expand to a lot of blockchains, making IceCreamSwap the single place traders need to visit on all the chains.')],
-    reached: '05-2024',
+    description: [
+      t('Expand to a lot of blockchains, making IceCreamSwap the single place traders need to visit on all the chains.')
+    ]
   },
 ]
 export default config

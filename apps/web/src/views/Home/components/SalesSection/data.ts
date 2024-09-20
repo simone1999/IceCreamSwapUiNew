@@ -9,9 +9,8 @@ import earnIce from '../../../../../public/images/home/earn/ice.png'
 export const swapSectionData = (t: TranslateFunction): SalesSectionProps => ({
   headingText: t('Trade any token at the best rate'),
   bodyText: t(
-    'Seamless trading on many chains with the best rates thanks to our AI DEX aggregator. ' +
-    'Our AI DEX aggregator scans the entire blockchain for liquidity pools to route your trade, achieving the best possible output. ' +
-    'Stop wasting money from inefficient trades now.'
+    'Our AI DEX aggregator scans the entire blockchain, finding the best way to execute your trade. ' +
+    'Stop wasting money from inefficient trades!'
   ),
   reverse: false,
   primaryButton: {
@@ -34,11 +33,11 @@ export const swapSectionData = (t: TranslateFunction): SalesSectionProps => ({
 })
 
 export const bridgeSectionData = (t: TranslateFunction): SalesSectionProps => ({
-  headingText: t('Bridge securely between many chains'),
+  headingText: t('Bridge with built-in Faucet'),
   bodyText: t(
     'IceCreamSwap allows direct bridging between many chains with ' +
       'its audited and battle tested smart contracts. ' +
-      'The unique built-in faucet automatically drops you native tokens when you bridge to a new chain.'
+      'The unique built-in faucet automatically drops you native tokens so you never have to worry about gas fees again.'
   ),
   reverse: true,
   primaryButton: {
@@ -61,8 +60,8 @@ export const bridgeSectionData = (t: TranslateFunction): SalesSectionProps => ({
 })
 
 export const earnSectionData = (t: TranslateFunction): SalesSectionProps => ({
-  headingText: t('Earn, receive ICE tokens when providing liquidity'),
-  bodyText: t('With liquidity farms, you can boost your passive income APY for liquidity provision.'),
+  headingText: t('Earn. Provide liquidity and earn ICE tokens'),
+  bodyText: t('You not only earn trading fees by providing liquidity. With Liquidity Farms, you even earn ICE tokens on top.'),
   reverse: false,
   primaryButton: {
     to: '/farms',
