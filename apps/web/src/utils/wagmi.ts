@@ -143,6 +143,25 @@ export const naboxConnector = new NaboxConnector({
   },
 })
 
+class CCWalletConnector extends InjectedConnector {
+  provider?: Window['ethereum']
+
+  public id = 'ccwallet'
+
+  async getProvider() {
+    if (!(window as any).ccwallet) throw new Error('CC Wallet not found')
+    this.provider = (window as any).ethereum
+    return this.provider
+  }
+}
+
+export const ccWalletConnector = new CCWalletConnector({
+  chains,
+  options: {
+    shimDisconnect: false,
+  },
+})
+
 class OkxConnector extends InjectedConnector {
   provider?: Window['ethereum']
 
@@ -183,6 +202,7 @@ export const wagmiConfig = createConfig({
     bscConnector,
     bitKeepConnector,
     naboxConnector,
+    ccWalletConnector,
     okxConnector,
     // @ts-ignore FIXME: wagmi
     bloctoConnector,

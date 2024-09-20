@@ -16,6 +16,7 @@ export enum ConnectorNames {
   WalletLink = 'coinbaseWallet',
   BitKeep = 'bitKeep',
   Nabox = 'nabox',
+  CCWallet = 'ccwallet',
   Okx = 'okx',
   Ledger = 'ledger',
   TrustWallet = 'trustWallet',
@@ -212,6 +213,15 @@ const walletsConfig = ({
       downloadLink: {
         desktop: 'https://chrome.google.com/webstore/detail/nabox-wallet/nknhiehlklippafakaeklbeglecifhad',
       },
+      qrCode,
+    },
+    {
+      id: 'ccwallet',
+      title: 'CC Wallet',
+      icon: '/images/wallets/ccwallet.png',
+      connectorId: ConnectorNames.CCWallet,
+      installed: typeof window !== 'undefined' && Boolean(window.ccwallet),
+      downloadLink: {},
       qrCode,
     },
     {

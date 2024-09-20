@@ -6,11 +6,11 @@ export interface ExtendEthereum extends WindowProvider {
   isBlocto?: true
   isMathWallet?: true
   isTrustWallet?: true
-  isBlocto?: true
 }
 
 declare global {
   interface Window {
+    ccwallet?: true
     coin98?: true
     bitkeep?: true
     NaboxWallet?: true
