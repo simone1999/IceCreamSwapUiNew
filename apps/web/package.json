@@ -29,7 +29,7 @@
     ]
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": "18.x"
   },
   "dependencies": {
     "@chainsafe/chainbridge-contracts": "simone1999/chainbridge-solidity#f10aa953ccdfe2046c33c9ad5dc318a64cd55675",

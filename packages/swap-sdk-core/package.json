@@ -43,7 +43,7 @@
     "tsup": "^5.10.1"
   },
   "engines": {
-    "node": ">=10"
+    "node": "18.x"
   },
   "prettier": {
     "printWidth": 120,
