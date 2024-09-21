@@ -7,8 +7,8 @@ export const bitgert: IceChain = {
   features: ['swap', 'akkaRouter', 'info', 'farms', 'staking', 'locks', 'kyc'],
   network: 'bitgert',
   rpcUrls: {
-    public: 'https://rpc.icecreamswap.com',
-    default: 'https://rpc.icecreamswap.com',
+    public: 'https://rpc-bitgert.icecreamswap.com',
+    default: 'https://rpc-bitgert.icecreamswap.com',
   },
   blockExplorers: {
     default: { name: 'Brisescan', url: 'https://brisescan.com' },
