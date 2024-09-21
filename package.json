@@ -25,7 +25,7 @@
     "release-packages": "turbo run build --filter=packages/* && changeset version && changeset publish"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": "18.x"
   },
   "devDependencies": {
     "@changesets/cli": "^2.25.0",
