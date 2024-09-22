@@ -132,6 +132,11 @@ const config = {
         permanent: true,
       },
       {
+        source: '/twitter',
+        destination: 'https://twitter.com/icecream_swap',
+        permanent: false,
+      },
+      {
         source: '/discord',
         destination: 'https://discord.gg/rx6WGBPTty',
         permanent: false,

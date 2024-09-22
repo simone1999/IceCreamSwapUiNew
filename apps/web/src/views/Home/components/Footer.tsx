@@ -1,11 +1,9 @@
 import { styled } from 'styled-components'
-import { Flex, Heading, Text, Link, useMatchBreakpoints, Button, TwitterIcon, TelegramIcon } from '@pancakeswap/uikit'
+import { Flex, Heading, Text, useMatchBreakpoints, Button, TwitterIcon, TelegramIcon, DiscordIcon } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
-import ConnectWalletButton from 'components/ConnectWalletButton'
 import Container from 'components/Layout/Container'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import SunburstSvg from './SunburstSvg'
-import CompositeImage from './CompositeImage'
 
 const BgWrapper = styled.div`
   overflow: hidden;
@@ -114,7 +112,8 @@ const Footer = () => {
           <Button
             as="a"
             title={t('IceCreamSwap Twitter')}
-            href="https://twitter.com/icecream_swap"
+            href="/twitter"
+            target="_blank"
             variant="primary"
             scale="md"
             mr="8px"
@@ -124,12 +123,24 @@ const Footer = () => {
           <Button
             as="a"
             title={t('IceCreamSwap Telegram')}
-            href="https://t.me/Icecreamswap_com"
+            href="/telegram"
+            target="_blank"
             variant="primary"
             scale="md"
             mr="8px"
           >
             <TelegramIcon color="currentColor" mr="8px" /> {t('Telegram')}
+          </Button>
+          <Button
+            as="a"
+            title={t('IceCreamSwap Discord')}
+            href="/discord"
+            target="_blank"
+            variant="primary"
+            scale="md"
+            mr="8px"
+          >
+            <DiscordIcon color="currentColor" mr="8px" /> {t('Discord')}
           </Button>
         </Flex>
       </Wrapper>
