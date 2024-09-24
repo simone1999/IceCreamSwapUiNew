@@ -9,8 +9,8 @@ import earnIce from '../../../../../public/images/home/earn/ice.png'
 export const swapSectionData = (t: TranslateFunction): SalesSectionProps => ({
   headingText: t('Trade any token at the best rate'),
   bodyText: t(
-    'Our AI DEX aggregator scans the entire blockchain, finding the best way to execute your trade. ' +
-    'Stop wasting money from inefficient trades!'
+    'Our AI-powered DEX aggregator scans the entire blockchain to find the most efficient way to execute your trade. ' +
+    'Stop wasting money on inefficient trades!'
   ),
   reverse: false,
   primaryButton: {
@@ -61,7 +61,7 @@ export const bridgeSectionData = (t: TranslateFunction): SalesSectionProps => ({
 
 export const earnSectionData = (t: TranslateFunction): SalesSectionProps => ({
   headingText: t('Earn. Provide liquidity and earn ICE tokens'),
-  bodyText: t('You not only earn trading fees by providing liquidity. With Liquidity Farms, you even earn ICE tokens on top.'),
+  bodyText: t('Not only do you earn trading fees by providing liquidity, but with Liquidity Farms, you can also earn ICE tokens on top.'),
   reverse: false,
   primaryButton: {
     to: '/farms',

@@ -49,22 +49,20 @@ const config = ({ t }: FAQsType) => [
   {
     title: t('How does IceCreamSwap extract arbitrage for me?'),
     description: [
-      t('On every trade, our AI DEX aggregator not only finds you the best way to execute that trade, but even scans for Arbitrage opportunities. ' +
-        'These opportunities are extracted directly in your trade. ' +
-        'As most Arbitrage is generated from inefficient trades, IceCreamSwap users not only don\'t loose value to Arbitrage, they even directly profit from users that still use less sophisticated DEXes.'),
+      t('With every trade, our AI DEX aggregator not only finds the best way to execute that trade but also scans for arbitrage opportunities. These opportunities are extracted directly in your trade. As most Arbitrage is generated from inefficient trades, IceCreamSwap users not only avoid losing value to arbitrage but also profit directly from users who still rely on traditional DEXes.'),
     ],
   },
   {
     title: t('How to list a token on IceCreamSwap?'),
     description: [
-      t('Simply contact us on our Telegram.'),
+      t('Simply contact us on Telegram.'),
     ],
   },
   {
     title: t('How much reward will I get for providing liquidity?'),
     description: [
       t(
-        'most of the trading fees are distributed directly to our liquidity providers. Also there are Farming pools to receive additional ICE tokens and some tokens like SCORE even generate rewards through securing the Blockchain.',
+        'Most of the trading fees are distributed directly to our liquidity providers. Additionally, there are farming pools where you can receive extra ICE tokens, and some tokens, like SCORE, even generate rewards by securing the blockchain.',
       ),
     ],
   }

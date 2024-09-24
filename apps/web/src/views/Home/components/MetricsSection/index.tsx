@@ -40,7 +40,7 @@ const Stats = () => {
         {t('Self improving AI DEX aggregator')}
       </Heading>
       <Text textAlign="center" color="textSubtle">
-        {t('The AI powered DEX aggregator improves with every swap. The more you trade, the better the aggregator will become.')}<br/>
+        {t('The AI powered DEX aggregator improves with every swap. The more you trade, the smarter and more efficient the aggregator becomes.')}<br/>
       </Text>
       {/*
       <Flex flexWrap="wrap">

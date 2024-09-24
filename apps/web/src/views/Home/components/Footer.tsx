@@ -105,7 +105,7 @@ const Footer = () => {
           {t('Join us on social media')}
         </Heading>
         <Text textAlign="center" color="white" mb="24px">
-          {t("Don't miss out on the latest news and updates")}
+          {t("Don't miss out on the latest news and updates!")}
         </Text>
 
         <Flex mb="24px" style={{ gap: '12px' }}>
