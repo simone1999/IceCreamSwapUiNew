@@ -29,6 +29,7 @@ import { taikomainnet } from "./taikomainnet"
 import { gravityalpha } from "./gravityalpha"
 import { fireChain } from "./5irechain"
 import { rootstock } from "./rootstock"
+import { linea } from "./linea"
 
 export const chainMap = {
   core,
@@ -36,6 +37,7 @@ export const chainMap = {
   bob,
   boba,
   base,
+  linea,
   fireChain,
   qitmeer,
   lightlink,
@@ -101,6 +103,7 @@ export enum ChainId {
   GRAVITY_ALPHA = gravityalpha.id,
   FIRE = fireChain.id,
   ROOTSTOCK = rootstock.id,
+  LINEA = linea.id,
 }
 
 export const defaultChainId = ChainId.CORE
