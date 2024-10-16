@@ -122,6 +122,15 @@ const config = {
           },
         ],
       },
+      {
+        source: "/api/list-tokens",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*"
+          },
+        ]
+      }
     ]
   },
   async redirects() {
