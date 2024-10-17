@@ -4,7 +4,7 @@ import IceChain from '../ice-chain'
 export const telos: IceChain = {
   id: 40,
   name: 'Telos EVM Mainnet',
-  features: ['swap', 'bridge', 'farms', 'info', 'kyc'],
+  features: ['swap', 'bridge', 'farms', 'kyc'],
   network: 'telos',
   rpcUrls: {
     public: { http: ['https://mainnet.telos.net/evm'] },
