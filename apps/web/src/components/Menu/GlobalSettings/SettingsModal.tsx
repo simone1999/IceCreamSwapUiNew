@@ -264,13 +264,13 @@ function RoutingSettings() {
           <PreTitle mb="24px">{t('Liquidity source')}</PreTitle>
           <Flex justifyContent="space-between" alignItems="center" mb="24px">
             <Flex alignItems="center">
-              <Text>IceCreamSwap V3</Text>
+              <Text>V3 + V4 DEXes</Text>
               <QuestionHelper
                 text={
                   <Flex>
                     <Text mr="5px">
                       {t(
-                        'V3 offers concentrated liquidity to provide deeper liquidity for traders with the same amount of capital, offering lower slippage and more flexible trading fee tiers.',
+                        'V3 and V4 based DEXes offer concentrated liquidity to provide deeper liquidity for traders with the same amount of capital, offering lower slippage and more flexible trading fee tiers.',
                       )}
                     </Text>
                   </Flex>
@@ -288,12 +288,12 @@ function RoutingSettings() {
           </Flex>
           <Flex justifyContent="space-between" alignItems="center" mb="24px">
             <Flex alignItems="center">
-              <Text>IceCreamSwap V2</Text>
+              <Text>V2 DEXes</Text>
               <QuestionHelper
                 text={
                   <Flex flexDirection="column">
                     <Text mr="5px">
-                      {t('The previous V2 exchange is where a number of iconic, popular assets are traded.')}
+                      {t('The previous V2 based DEXes is where a number of iconic, popular assets are traded.')}
                     </Text>
                     <Text mr="5px" mt="1em">
                       {t('Recommend leaving this on to ensure backward compatibility.')}
