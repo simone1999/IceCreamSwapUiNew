@@ -30,6 +30,7 @@ import { gravityalpha } from "./gravityalpha"
 import { fireChain } from "./5irechain"
 import { rootstock } from "./rootstock"
 import { linea } from "./linea"
+import { berachainTestnet } from "./berachainTestnet"
 
 export const chainMap = {
   core,
@@ -64,6 +65,7 @@ export const chainMap = {
   bitfinitytestnet,
   ternoatestnet,
   taikomainnet,
+  berachainTestnet,
 }
 export const chains = Object.values(chainMap)
 
@@ -104,6 +106,7 @@ export enum ChainId {
   FIRE = fireChain.id,
   ROOTSTOCK = rootstock.id,
   LINEA = linea.id,
+  BERACHAIN_TEST = berachainTestnet.id,
 }
 
 export const defaultChainId = ChainId.CORE
