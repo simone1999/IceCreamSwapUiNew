@@ -170,20 +170,20 @@ const chains = [
     networkId: 2415,
     name: 'XoDex',
     decimals: 18,
-    bridgeAddress: '0x40375C92d9FAf44d2f9db9Bd9ba41a3317a2404f',
+    bridgeAddress: '0x40375C92d9FAf44d2f9db9Bd9ba41a3317a2404f' as Address,
     rpcUrl: 'https://xo-dex.io',
     type: 'Ethereum',
     nativeTokenSymbol: 'XODEX',
     tokens: [
       {
-        address: '0x81bCEa03678D1CEF4830942227720D542Aa15817',
+        address: '0x81bCEa03678D1CEF4830942227720D542Aa15817' as Address,
         name: 'IceCream',
         symbol: 'ICE',
         imageUri: 'https://raw.githubusercontent.com/simone1999/trustwallet-assets/master/blockchains/bitgert/assets/0xB999Ea90607a826A3E6E6646B404c3C7d11fa39D/logo.png',
         resourceId: '0x0000000000000000000000B999Ea90607a826A3E6E6646B404c3C7d11fa39D02',
       },
       {
-        address: '0x867f08A3ab824b42e8058a1B48e32E1dF205b092',
+        address: '0x867f08A3ab824b42e8058a1B48e32E1dF205b092' as Address,
         name: 'BNB',
         symbol: 'BNB',
         imageUri:
@@ -191,7 +191,7 @@ const chains = [
         resourceId: '0x0000000000000000000000bb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c01',
       },
       {
-        address: '0x12AA82525DEfF84777fa78578A68ceB854A85f43',
+        address: '0x12AA82525DEfF84777fa78578A68ceB854A85f43' as Address,
         name: 'Ether',
         symbol: 'ETH',
         imageUri:
@@ -199,7 +199,7 @@ const chains = [
         resourceId: '0x00000000000000000000002170Ed0880ac9A755fd29B2688956BD959F933F801',
       },
       {
-        address: '0x54051D9DbE99687867090d95fe15C3D3E35512Ba',
+        address: '0x54051D9DbE99687867090d95fe15C3D3E35512Ba' as Address,
         name: 'Tether USD',
         symbol: 'USDT',
         imageUri:
