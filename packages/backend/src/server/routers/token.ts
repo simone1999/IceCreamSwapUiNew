@@ -70,66 +70,73 @@ export const tokenRouter = router({
       })
     }),
 
-  defaultList: publicProcedure.query(async () => {
-    let tokens: (Token & { tags?: string[] })[] = []
-
-    try{
-      tokens = await prisma.token.findMany({
-        where: {
-          listed: Listed.DEFAULT_LIST,
-        },
+  defaultList: publicProcedure
+    .input(
+      z.object({
+        chainId: z.number().optional(), // Define chainId as an optional parameter
       })
-    } catch (e) {
-      console.error('failed to load tokens to generate token list', e)
-    }
+    )
+    .query(async ({ input }) => {
+      let tokens: (Token & { tags?: string[] })[] = [];
 
-    try{
-      const kycs = await prisma.delegation.findMany({
-        where: {
-          target: {
-            in: tokens.map((token) => token.address),
-            mode: 'insensitive',
+      try {
+        tokens = await prisma.token.findMany({
+          where: {
+            listed: Listed.DEFAULT_LIST,
+            ...(input.chainId !== undefined && { chainId: input.chainId }), // Include chainId if provided
           },
-          status: 'MINTED',
+        })
+      } catch (e) {
+      console.error('failed to load tokens to generate token list', e)
+      }
+
+      try {
+        const kycs = await prisma.delegation.findMany({
+          where: {
+            target: {
+              in: tokens.map((token) => token.address),
+              mode: 'insensitive',
+            },
+            status: 'MINTED',
+          },
+        })
+        kycs.forEach((kyc) => {
+          const token = tokens.find((t) => t.address.toLowerCase() === kyc.target.toLowerCase())
+          if (token) {
+            token.tags = token.tags || []
+            token.tags.push('KYCed')
+          }
+        })
+      } catch (e) {
+        console.error('Failed to load KYC delegations to generate token list', e)
+      }
+
+      const kycedTokens = tokens.filter(token => token.tags?.includes('KYCed'))
+      const nonKycedTokens = tokens.filter(token => !(token.tags?.includes('KYCed')))
+      const tokensSorted = kycedTokens.concat(nonKycedTokens)
+
+      return {
+        name: 'IceCreamSwap Default',
+        timestamp: new Date().toISOString(),
+        version: {
+          major: 1,
+          minor: 0,
+          patch: 0,
         },
-      })
-      kycs.forEach((kyc) => {
-        const token = tokens.find((t) => t.address.toLowerCase() === kyc.target.toLowerCase())
-        if (token) {
-          token.tags = token.tags || []
-          token.tags.push('KYCed')
-        }
-      })
-    } catch (e) {
-      console.error('Failed to load KYC delegations to generate token list', e)
-    }
-
-    const kycedTokens = tokens.filter(token => token.tags?.includes('KYCed'))
-    const nonKycedTokens = tokens.filter(token => !(token.tags?.includes('KYCed')))
-    const tokensSorted = kycedTokens.concat(nonKycedTokens)
-
-    return {
-      name: 'IceCreamSwap Default',
-      timestamp: new Date().toISOString(),
-      version: {
-        major: 1,
-        minor: 0,
-        patch: 0,
-      },
-      tags: {},
-      logoURI: 'https://icecreamswap.com/logo.png',
-      keywords: ['icecreamswap', 'default'],
-      tokens: tokensSorted.map((token) => ({
-        name: token.name,
-        symbol: token.symbol,
-        address: token.address,
-        chainId: token.chainId,
-        decimals: token.decimals,
-        logoURI: `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/token/${token.chainId}/${token.address}.png`,
-        tags: token.tags || [],
-      })),
-    }
-  }),
+        tags: {},
+        logoURI: 'https://icecreamswap.com/logo.png',
+        keywords: ['icecreamswap', 'default'],
+        tokens: tokensSorted.map((token) => ({
+          name: token.name,
+          symbol: token.symbol,
+          address: token.address,
+          chainId: token.chainId,
+          decimals: token.decimals,
+          logoURI: `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/token/${token.chainId}/${token.address}.png`,
+          tags: token.tags || [],
+        })),
+      }
+    }),
 })
 
 const checkListed = async (tokenAddress: string, chainId: number) => {

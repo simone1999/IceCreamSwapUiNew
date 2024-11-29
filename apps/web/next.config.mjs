@@ -123,7 +123,7 @@ const config = {
         ],
       },
       {
-        source: "/api/list-tokens/:chainId*",
+        source: "/api/list-tokens",
         headers: [
           {
             key: "Access-Control-Allow-Origin",
