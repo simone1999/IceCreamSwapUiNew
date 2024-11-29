@@ -74,7 +74,7 @@ export const tokenRouter = router({
     .input(
       z.object({
         chainId: z.number().optional(), // Define chainId as an optional parameter
-      })
+      }).optional()
     )
     .query(async ({ input }) => {
       let tokens: (Token & { tags?: string[] })[] = [];
@@ -83,7 +83,7 @@ export const tokenRouter = router({
         tokens = await prisma.token.findMany({
           where: {
             listed: Listed.DEFAULT_LIST,
-            ...(input.chainId !== undefined && { chainId: input.chainId }), // Include chainId if provided
+            ...(input?.chainId !== undefined && { chainId: input.chainId }), // Include chainId if provided
           },
         })
       } catch (e) {
