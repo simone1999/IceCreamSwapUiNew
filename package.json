@@ -36,7 +36,7 @@
     "prepare": "husky install"
   },
   "engines": {
-    "node": "21.x"
+    "node": "20.x"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.8",
