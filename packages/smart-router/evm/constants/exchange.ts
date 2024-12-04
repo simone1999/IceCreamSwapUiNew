@@ -28,7 +28,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     USD[chain.id] && tokens.push(USD[chain.id])
     return {...acc, [chain.id]: tokens}
   }, {}),
-  [ChainId.CORE]: [coreTokens.wcore, coreTokens.wcore_old, coreTokens.ice, coreTokens.usdt, coreTokens.usdtl0],
+  [ChainId.CORE]: [coreTokens.wcore, coreTokens.wcore_old, coreTokens.usdtl0],
 }
 
 /**

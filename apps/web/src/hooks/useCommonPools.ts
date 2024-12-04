@@ -48,6 +48,7 @@ function commonPoolsHookCreator({ useV3Pools }: FactoryOptions) {
       blockNumber: v2BlockNumber,
       refresh: v2Refresh,
     } = useV2CandidatePools(currencyA, currencyB, { blockNumber, enabled })
+    /*
     const {
       pools: stablePools,
       loading: stableLoading,
@@ -55,34 +56,33 @@ function commonPoolsHookCreator({ useV3Pools }: FactoryOptions) {
       blockNumber: stableBlockNumber,
       refresh: stableRefresh,
     } = useStableCandidatePools(currencyA, currencyB, { blockNumber, enabled })
+    */
 
     const consistentBlockNumber = useMemo(
       () =>
         v2BlockNumber &&
-        stableBlockNumber &&
         v3BlockNumber &&
-        v2BlockNumber === stableBlockNumber &&
-        stableBlockNumber === v3BlockNumber
+        v3BlockNumber === v2BlockNumber
           ? v2BlockNumber
           : null,
-      [v2BlockNumber, v3BlockNumber, stableBlockNumber],
+      [v2BlockNumber, v3BlockNumber],
     )
     // FIXME: allow inconsistent block not working as expected
     const pools = useMemo(
       () =>
         (!v2Loading || v2Pools) &&
         (!v3Loading || v3Pools) &&
-        (!stableLoading || stablePools) &&
+        // (!stableLoading || stablePools) &&
         (allowInconsistentBlock || !!consistentBlockNumber)
-          ? [...(v2Pools || []), ...(v3Pools || []), ...(stablePools || [])]
+          ? [...(v2Pools || []), ...(v3Pools || [])/*, ...(stablePools || [])*/]
           : undefined,
       [
         v2Loading,
         v2Pools,
         v3Loading,
         v3Pools,
-        stableLoading,
-        stablePools,
+        // stableLoading,
+        // stablePools,
         allowInconsistentBlock,
         consistentBlockNumber,
       ],
@@ -91,11 +91,10 @@ function commonPoolsHookCreator({ useV3Pools }: FactoryOptions) {
     const refresh = useCallback(() => {
       v3Refresh()
       v2Refresh()
-      stableRefresh()
-    }, [v3Refresh, v2Refresh, stableRefresh])
+    }, [v3Refresh, v2Refresh])
 
-    const loading = v2Loading || v3Loading || stableLoading
-    const syncing = v2Syncing || v3Syncing || stableSyncing
+    const loading = v2Loading || v3Loading // || stableLoading
+    const syncing = v2Syncing || v3Syncing // || stableSyncing
     return {
       refresh,
       pools,

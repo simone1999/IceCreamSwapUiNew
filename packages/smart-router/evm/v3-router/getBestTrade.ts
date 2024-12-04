@@ -48,7 +48,7 @@ async function getBestRoutes(
   const {
     maxHops = 3,
     maxSplits = 4,
-    distributionPercent = 5,
+    distributionPercent = 20,
     poolProvider,
     quoteProvider,
     blockNumber,
