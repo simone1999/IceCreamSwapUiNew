@@ -64,6 +64,8 @@ export function useStablecoinPrice(
     [stableCoin],
   )
 
+  const trade = undefined
+  /*
   const { trade } = useBestAMMTrade({
     amount: amountOut,
     currency,
@@ -74,6 +76,7 @@ export function useStablecoinPrice(
     autoRevalidate: false,
     type: 'api',
   })
+  */
 
   const price = useMemo(() => {
     if (!currency || !enabled) {
