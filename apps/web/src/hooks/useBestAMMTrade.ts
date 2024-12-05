@@ -7,7 +7,7 @@ import {
   SmartRouterTrade,
   BATCH_MULTICALL_CONFIGS,
 } from '@pancakeswap/smart-router/evm'
-import {ChainId, CurrencyAmount, TradeType, Currency, ZERO} from '@pancakeswap/sdk'
+import {ChainId, CurrencyAmount, TradeType, Currency, ZERO, Fraction} from '@pancakeswap/sdk'
 import { useDebounce, usePropsChanged } from '@pancakeswap/hooks'
 
 import { useIsWrapping } from 'hooks/useWrapCallback'
@@ -75,7 +75,9 @@ export function useBestAMMTrade({ type = 'quoter', ...params }: useBestAMMTradeO
     autoRevalidate: apiAutoRevalidate,
   })
 
-  return (bestTradeFromIceQuoterApi?.trade?.outputAmount || 0) > (bestTradeFromQuoter?.trade?.outputAmount || 0)? bestTradeFromIceQuoterApi : bestTradeFromQuoter
+  return (bestTradeFromIceQuoterApi?.trade?.outputAmount || new Fraction(0)).greaterThan(
+    bestTradeFromQuoter?.trade?.outputAmount || new Fraction(0))
+    ? bestTradeFromIceQuoterApi : bestTradeFromQuoter
 }
 
 function bestTradeHookFactory({
