@@ -31,6 +31,9 @@ import { fireChain } from "./5irechain"
 import { rootstock } from "./rootstock"
 import { linea } from "./linea"
 import { berachainTestnet } from "./berachainTestnet"
+import { bitfinitymainnet } from "./bitfinitymainnet"
+import { kaiamainnet } from "./kaiamainnet"
+import { sonicmainnet } from "./sonicmainnet"
 
 export const chainMap = {
   core,
@@ -38,6 +41,8 @@ export const chainMap = {
   bob,
   boba,
   base,
+  bitfinitymainnet,
+  sonicmainnet,
   linea,
   fireChain,
   qitmeer,
@@ -61,11 +66,12 @@ export const chainMap = {
   mint,
   rootstock,
   swanmainnet,
+  kaiamainnet,
+  taikomainnet,
   stratovmTestnet,
   bitfinitytestnet,
   ternoatestnet,
-  taikomainnet,
-  berachainTestnet,
+  berachainTestnet
 }
 export const chains = Object.values(chainMap)
 
