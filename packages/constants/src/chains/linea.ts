@@ -6,8 +6,8 @@ export const linea: IceChain = {
   features: ['swap'],
   network: 'linea',
   rpcUrls: {
-    public: { http: ['https://linea-mainnet.infura.io/v3/',] },
-    default: { http: ['https://linea-mainnet.infura.io/v3/',] },
+    public: { http: ['https://rpc.linea.build',] },
+    default: { http: ['https://rpc.linea.build',] },
   },
   blockExplorers: {
     default: { name: 'Linea Mainnet Explorer', url: 'https://lineascan.build' },
