@@ -35,6 +35,7 @@ import { useActiveChainId } from "hooks/useActiveChainId"
 import { ChainLogo } from "components/Logo/ChainLogo";
 import chainName from "config/constants/chainName";
 import { useSwitchNetwork } from "hooks/useSwitchNetwork";
+import {ChainId} from "@pancakeswap/sdk";
 
 const EasterEgg = dynamic(() => import('../components/EasterEgg'), { ssr: false })
 
@@ -103,7 +104,7 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
           // @ts-ignore
           <Component.Meta {...pageProps} />
         )}
-        <SupportedChainsProvider supportedChains={(props as AppPropsWithLayout).Component.chains || CHAIN_IDS}>
+        <SupportedChainsProvider supportedChains={[ChainId.KAIA]}>
           <Blocklist>
             {(Component as NextPageWithLayout).mp ? <MPGlobalHooks /> : <GlobalHooks />}
             <ResetCSS />
