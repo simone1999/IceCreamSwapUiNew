@@ -3,9 +3,9 @@ import { ChainId, Currency } from '@pancakeswap/sdk'
 import memoize from 'lodash/memoize'
 import { TokenAddressMap } from '@pancakeswap/token-lists'
 import { chains } from './wagmi'
-import { chainMap } from '@icecreamswap/constants'
+import { defaultChainId, getChain } from '@icecreamswap/constants'
 
-const { bsc } = chainMap
+const defaultChain = getChain(defaultChainId)
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export const isAddress = memoize((value: any): `0x${string}` | false => {
@@ -26,7 +26,7 @@ export function getBlockExploreLink(
   chainId: number,
 ): string {
   const chain = chains.find((c) => c.id === chainId)
-  if (!chain) return bsc.blockExplorers.default.url
+  if (!chain) return defaultChain.blockExplorers.default.url
   switch (type) {
     case 'transaction': {
       return `${chain.blockExplorers.default.url}/tx/${data}`
@@ -50,11 +50,11 @@ export function getBlockExploreName(chainIdOverride?: number) {
   const chainId = chainIdOverride || ChainId.BITGERT
   const chain = chains.find((c) => c.id === chainId)
 
-  return chain?.blockExplorers?.default.name || bsc.blockExplorers.default.name
+  return chain?.blockExplorers?.default.name || defaultChain.blockExplorers.default.name
 }
 
 export function getBscScanLinkForNft(collectionAddress: string, tokenId: string): string {
-  return `${bsc.blockExplorers.default.url}/token/${collectionAddress}?a=${tokenId}`
+  return `${defaultChain.blockExplorers.default.url}/token/${collectionAddress}?a=${tokenId}`
 }
 
 // add 10%
