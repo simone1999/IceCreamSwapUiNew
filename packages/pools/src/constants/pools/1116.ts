@@ -7,7 +7,7 @@ export const livePools: SerializedPool[] = [// souceId can be any positive numbe
   {
     sousId: 35,
     stakingToken: coreTokens.core,
-    earningToken: coreTokens.core,
+    earningToken: coreTokens.core_unstaking_warning,
     contractAddress: '0xFd072F40E17070f975890D1772d6fdC7Cb44a63b',
     poolCategory: PoolCategory.BINANCE_AUTO,
     fixedApr: '26.0',
