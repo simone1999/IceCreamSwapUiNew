@@ -2,12 +2,12 @@ import IceChain from '../ice-chain'
 
 export const kaiamainnet: IceChain = {
   id: 8217,
-  name: 'Kaia Chain Mainnet',
+  name: 'Kaia Mainnet',
   features: ['swap'],
   network: 'kaiamainnet',
   rpcUrls: {
-    public: { http: ['https://rpc.ankr.com/klaytn'] },
-    default: { http: ['https://rpc.ankr.com/klaytn'] },
+    public: { http: ['https://public-en.node.kaia.io'] },
+    default: { http: ['https://public-en.node.kaia.io'] },
   },
   blockExplorers: {
     default: { name: 'Kaia Chain Mainnet Explorer', url: 'https://kaiascope.com' },
