@@ -7,7 +7,7 @@ import { configureChains, createConfig, createStorage } from 'wagmi'
 import { mainnet } from 'wagmi/chains'
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
 import { InjectedConnector } from 'wagmi/connectors/injected'
-import { LedgerConnector } from 'wagmi/connectors/ledger'
+// import { LedgerConnector } from 'wagmi/connectors/ledger'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
@@ -28,8 +28,8 @@ export const { publicClient, chains } = configureChains(
           const rpcs = chain.rpcUrls.default.http
           return rpcs[i]
             ? {
-              http: rpcs[i],
-            }
+                http: rpcs[i],
+              }
             : null
         },
       })
@@ -89,12 +89,12 @@ const bloctoConnector = new BloctoConnector({
   },
 })
 
-const ledgerConnector = new LedgerConnector({
-  chains,
-  options: {
-    projectId: 'c33f5b4a87af478e80a3b8b807e52895',
-  },
-})
+// const ledgerConnector = new LedgerConnector({
+//   chains,
+//   options: {
+//     projectId: 'c33f5b4a87af478e80a3b8b807e52895',
+//   },
+// })
 
 export const bscConnector = new BinanceWalletConnector({ chains })
 
@@ -186,7 +186,7 @@ export const wagmiConfig = createConfig({
     okxConnector,
     // @ts-ignore FIXME: wagmi
     bloctoConnector,
-    ledgerConnector,
+    // ledgerConnector,
     trustWalletConnector,
   ],
 })
