@@ -4,7 +4,8 @@ import { SalesSectionProps } from '.'
 // import iceConeB from '../../../../../public/images/home/trade/iceconeb.png'
 import bridgeA from '../../../../../public/images/home/bridge/bridge_a.png'
 import bridgeB from '../../../../../public/images/home/bridge/bridge_b.png'
-import earnIce from '../../../../../public/images/home/earn/ice.png'
+// import earnIce from '../../../../../public/images/home/earn/ice.png'
+import earnTri from '../../../../../public/images/home/mermaidswap/mermaid-spearfishing-earn.png'
 import trident from '../../../../../public/images/home/mermaidswap/trident-trading.png'
 
 export const swapSectionData = (t: TranslateFunction): SalesSectionProps => ({
@@ -61,9 +62,9 @@ export const bridgeSectionData = (t: TranslateFunction): SalesSectionProps => ({
 })
 
 export const earnSectionData = (t: TranslateFunction): SalesSectionProps => ({
-  headingText: t('Earn. Provide liquidity and earn ICE tokens'),
+  headingText: t('Earn. Provide liquidity and earn TRI tokens'),
   bodyText: t(
-    'Not only do you earn trading fees by providing liquidity, but with Liquidity Farms, you can also earn ICE tokens on top.',
+    'Not only do you earn trading fees by providing liquidity, but with Liquidity Farms, you can also earn TRI tokens on top.',
   ),
   reverse: false,
   primaryButton: {
@@ -78,6 +79,6 @@ export const earnSectionData = (t: TranslateFunction): SalesSectionProps => ({
   },
   images: {
     path: '/images/home/ice/',
-    attributes: [{ src: earnIce, alt: '' }],
+    attributes: [{ src: earnTri, alt: 'Earn TRI' }],
   },
 })
