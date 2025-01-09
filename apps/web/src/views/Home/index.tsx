@@ -7,7 +7,7 @@ import { useTranslation } from '@pancakeswap/localization'
 import FaqSection from 'views/PancakeSquad/components/FaqSection'
 import RoadmapSection from 'views/PancakeSquad/components/RoadmapSection'
 import Hero from './components/Hero'
-import { swapSectionData, earnSectionData, bridgeSectionData } from './components/SalesSection/data'
+import { swapSectionData, earnSectionData } from './components/SalesSection/data'
 import MetricsSection from './components/MetricsSection'
 import SalesSection from './components/SalesSection'
 import Footer from './components/Footer'
@@ -111,7 +111,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         </OuterWedgeWrapper>
         <SalesSection {...swapSectionData(t)} />
       </PageSection>
-      <PageSection
+      {/* <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
         background={theme.colors.backgroundAlt}
         index={2}
@@ -123,7 +123,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
           </InnerWedgeWrapper>
         </OuterWedgeWrapper>
         <SalesSection {...bridgeSectionData(t)} />
-      </PageSection>
+      </PageSection> */}
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
         background={theme.colors.gradientCardHeader}
