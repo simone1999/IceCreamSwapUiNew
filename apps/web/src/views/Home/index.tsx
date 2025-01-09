@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import { PageSection } from '@pancakeswap/uikit'
 import useTheme from 'hooks/useTheme'
-import Container from 'components/Layout/Container'
+// import Container from 'components/Layout/Container'
 import { PageMeta } from 'components/Layout/Page'
 import { useTranslation } from '@pancakeswap/localization'
 import FaqSection from 'views/PancakeSquad/components/FaqSection'
@@ -21,21 +21,21 @@ const StyledHeroSection = styled(PageSection)`
   }
 `
 
-const UserBannerWrapper = styled(Container)`
-  z-index: 1;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  padding-left: 0px;
-  padding-right: 0px;
+// const UserBannerWrapper = styled(Container)`
+//   z-index: 1;
+//   position: absolute;
+//   width: 100%;
+//   top: 0;
+//   left: 50%;
+//   transform: translate(-50%, 0);
+//   padding-left: 0px;
+//   padding-right: 0px;
 
-  ${({ theme }) => theme.mediaQueries.lg} {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-`
+//   ${({ theme }) => theme.mediaQueries.lg} {
+//     padding-left: 24px;
+//     padding-right: 24px;
+//   }
+// `
 
 const Home: React.FC<React.PropsWithChildren> = () => {
   const { theme } = useTheme()
