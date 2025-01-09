@@ -5,12 +5,13 @@ import iceConeB from '../../../../../public/images/home/trade/iceconeb.png'
 import bridgeA from '../../../../../public/images/home/bridge/bridge_a.png'
 import bridgeB from '../../../../../public/images/home/bridge/bridge_b.png'
 import earnIce from '../../../../../public/images/home/earn/ice.png'
+import trident from '../../../../../public/images/home/mermaidswap/trident-trading.png'
 
 export const swapSectionData = (t: TranslateFunction): SalesSectionProps => ({
   headingText: t('Trade any token at the best rate'),
   bodyText: t(
     'Our AI-powered DEX aggregator scans the entire blockchain to find the most efficient way to execute your trade. ' +
-    'Stop wasting money on inefficient trades!'
+      'Stop wasting money on inefficient trades!',
   ),
   reverse: false,
   primaryButton: {
@@ -26,8 +27,8 @@ export const swapSectionData = (t: TranslateFunction): SalesSectionProps => ({
   images: {
     path: '/images/home/trade/',
     attributes: [
-      { src: iceConeA, alt: '' },
-      { src: iceConeB, alt: '' },
+      { src: trident, alt: 'MermaidSwap Trident Trading' },
+      // { src: iceConeB, alt: '' },
     ],
   },
 })
@@ -37,7 +38,7 @@ export const bridgeSectionData = (t: TranslateFunction): SalesSectionProps => ({
   bodyText: t(
     'IceCreamSwap allows direct bridging between many chains with ' +
       'its audited and battle tested smart contracts. ' +
-      'The unique built-in faucet automatically drops you native tokens so you never have to worry about gas fees again.'
+      'The unique built-in faucet automatically drops you native tokens so you never have to worry about gas fees again.',
   ),
   reverse: true,
   primaryButton: {
@@ -61,7 +62,9 @@ export const bridgeSectionData = (t: TranslateFunction): SalesSectionProps => ({
 
 export const earnSectionData = (t: TranslateFunction): SalesSectionProps => ({
   headingText: t('Earn. Provide liquidity and earn ICE tokens'),
-  bodyText: t('Not only do you earn trading fees by providing liquidity, but with Liquidity Farms, you can also earn ICE tokens on top.'),
+  bodyText: t(
+    'Not only do you earn trading fees by providing liquidity, but with Liquidity Farms, you can also earn ICE tokens on top.',
+  ),
   reverse: false,
   primaryButton: {
     to: '/farms',
