@@ -7,6 +7,7 @@ import bridgeB from '../../../../../public/images/home/bridge/bridge_b.png'
 // import earnIce from '../../../../../public/images/home/earn/ice.png'
 import earnTri from '../../../../../public/images/home/mermaidswap/mermaid-spearfishing-earn.png'
 import trident from '../../../../../public/images/home/mermaidswap/trident-trading.png'
+import mermaidSwapLogo from '../../../../../public/images/home/mermaidswap/mermaidswap-logo.png'
 
 export const swapSectionData = (t: TranslateFunction): SalesSectionProps => ({
   headingText: t('Trade any token at the best rate'),
@@ -80,5 +81,27 @@ export const earnSectionData = (t: TranslateFunction): SalesSectionProps => ({
   images: {
     path: '/images/home/ice/',
     attributes: [{ src: earnTri, alt: 'Earn TRI' }],
+  },
+})
+
+export const stakeSectionData = (t: TranslateFunction): SalesSectionProps => ({
+  headingText: t('Stake. Earn Profit Sharing from MermaidSwap Games'),
+  bodyText: t(
+    'Not only do you earn trading fees by providing liquidity, but with Liquidity Farms, you can also earn TRI tokens on top.',
+  ),
+  reverse: false,
+  primaryButton: {
+    to: '/pools',
+    text: t('Stake'),
+    external: false,
+  },
+  secondaryButton: {
+    to: 'https://wiki.icecreamswap.com/dex/staking',
+    text: t('Learn'),
+    external: true,
+  },
+  images: {
+    path: '/images/home/ice/',
+    attributes: [{ src: mermaidSwapLogo, alt: 'Stake TRI' }],
   },
 })
