@@ -1,12 +1,8 @@
-import { Button, Flex, Heading, Link, NextLinkFromReactRouter } from '@pancakeswap/uikit'
-import { useAccount } from 'wagmi'
-import ConnectWalletButton from 'components/ConnectWalletButton'
+import { Button, Flex, Heading, NextLinkFromReactRouter } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import Image from 'next/image'
-import { ChainId } from '@pancakeswap/sdk'
-import { useActiveChainId } from 'hooks/useActiveChainId'
 import { styled, keyframes } from 'styled-components'
-import hero from '../../../../public/images/home/hero-home.png'
+import hero from '../../../../public/images/home/mermaidswap/mermaidswap-castle.png'
 import CompositeImage, { CompositeImageProps } from './CompositeImage'
 import { SlideSvgDark, SlideSvgLight } from './SlideSvg'
 import starL from '../../../../public/images/home/lunar-bunny/star-l.png'
@@ -95,12 +91,10 @@ const starsImage: CompositeImageProps = {
 
 const Hero = () => {
   const { t } = useTranslation()
-  const { address: account } = useAccount()
-  const { chainId } = useActiveChainId()
 
   return (
     <>
-      <style jsx global>
+      <style>
         {`
           .slide-svg-dark {
             display: none;
@@ -132,14 +126,16 @@ const Hero = () => {
       >
         <Flex flex="1" flexDirection="column">
           <Heading as="h1" scale="xxl" color="secondary" mb="24px">
-            {t('Welcome to AI enhanced DeFi')}
+            {t('Welcome to MermaidSwap')}
           </Heading>
           <Heading as="p" scale="md" mb="24px">
-            {t('The booking.com of DEXes. Trade any token at the best rates.')}
+            {t(
+              'Revolutionizing DeFi with a unique blend of gaming, decentralized trading, and profit-sharing on $KAIA Chain',
+            )}
           </Heading>
           <Flex>
             <NextLinkFromReactRouter to="/swap">
-              <Button variant={'secondary'}>{t('Trade Now')}</Button>
+              <Button variant="secondary">{t('Trade Now')}</Button>
             </NextLinkFromReactRouter>
           </Flex>
         </Flex>
@@ -157,7 +153,7 @@ const Hero = () => {
               priority
               objectFit="fill"
               placeholder="blur"
-              alt={t('IceCream Store')}
+              alt={t('MermaidSwap Castle')}
             />
           </BunnyWrapper>
           <StarsWrapper>
