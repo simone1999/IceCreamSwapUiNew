@@ -3,9 +3,9 @@ import { ContextApi } from '@pancakeswap/localization'
 import { PageMeta } from './types'
 
 export const DEFAULT_META: PageMeta = {
-  title: 'IceCreamSwap Multi-chain DeFi ecosystem, Swap, Bridge, LaunchPad',
+  title: 'IceCreamSwap, Booking.com of DEXes, AI DEX aggregator',
   description:
-    'Multi-chain DeFi ecosystem with Swap, Bridge and Launchpad. Trade, Bridge, Earn and Launch on Bitgert (Brise), Binance smart chain (BSC), XDC, XoDex, Dogechain, Fuse and CORE blockchain',
+    'Get the trading tools you deserve and never waste money on inefficient swaps again!',
   image: 'https://icecreamswap.com/images/hero.png',
 }
 
