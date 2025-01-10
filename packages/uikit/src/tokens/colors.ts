@@ -2,7 +2,7 @@ export const baseColors = {
   white: "white",
   failure: "#ED4B9E",
   failure33: "#ED4B9E33",
-  primary: "#F8567F",
+  primary: "#15EEDD",
   primary0f: "#1FC7D40f",
   primary3D: "#1FC7D43D",
   primaryBright: "#53DEE9",
@@ -12,6 +12,7 @@ export const baseColors = {
   warning: "#FFB237",
   warning2D: "#ED4B9E2D",
   warning33: "#ED4B9E33",
+  darkBlueMermaidSwap: "#063466",
 };
 export const additionalColors = {
   binance: "#F0B90B",
@@ -23,7 +24,7 @@ export const additionalColors = {
 export const lightColors = {
   ...baseColors,
   ...additionalColors,
-  secondary: "#FFA814",
+  secondary: "#F8567F",
   secondary80: "#7645D980",
   background: "#FAF9FA",
   backgroundDisabled: "#E9EAEB",
@@ -54,7 +55,7 @@ export const lightColors = {
 export const darkColors = {
   ...baseColors,
   ...additionalColors,
-  secondary: "#FFC700",
+  secondary: "#F8567F",
   secondary80: "#9A6AFF80",
   background: "#08060B",
   backgroundDisabled: "#3c3742",

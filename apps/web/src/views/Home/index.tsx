@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { PageSection } from '@pancakeswap/uikit'
-import useTheme from 'hooks/useTheme'
+// import useTheme from 'hooks/useTheme'
 // import Container from 'components/Layout/Container'
 import { PageMeta } from 'components/Layout/Page'
 import { useTranslation } from '@pancakeswap/localization'
@@ -11,7 +11,7 @@ import { swapSectionData, earnSectionData, stakeSectionData } from './components
 import MetricsSection from './components/MetricsSection'
 import SalesSection from './components/SalesSection'
 import Footer from './components/Footer'
-import { WedgeTopLeft, InnerWedgeWrapper, OuterWedgeWrapper, WedgeTopRight } from './components/WedgeSvgs'
+import { OuterWedgeWrapper, WedgeTopRight } from './components/WedgeSvgs'
 
 const StyledHeroSection = styled(PageSection)`
   padding-top: 16px;
@@ -20,7 +20,11 @@ const StyledHeroSection = styled(PageSection)`
     padding-top: 48px;
   }
 `
-
+const SeaBackground = styled.div`
+  background: linear-gradient(to bottom, #004080, #003366, #001f54, #000428);
+  background-attachment: fixed;
+  width: 100%;
+`
 // const UserBannerWrapper = styled(Container)`
 //   z-index: 1;
 //   position: absolute;
@@ -38,7 +42,7 @@ const StyledHeroSection = styled(PageSection)`
 // `
 
 const Home: React.FC<React.PropsWithChildren> = () => {
-  const { theme } = useTheme()
+  // const { theme } = useTheme()
   // const { account } = useWeb3React()
   // const { chainId } = useActiveChainId()
 
@@ -49,7 +53,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
   return (
     <>
       <PageMeta />
-      <style>{`
+      {/* <style>{`
         #home-1 .page-bg {
           background: linear-gradient(139.73deg, #e6fdff 0%, #f3efff 100%);
         }
@@ -74,44 +78,45 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         [data-theme='dark'] #home-4 .inner-wedge svg {
           fill: #201335;
         }
-      `}</style>
-      <StyledHeroSection
-        innerProps={{ style: { margin: '0', width: '100%' } }}
-        containerProps={{
-          id: 'home-1',
-        }}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <Hero />
-      </StyledHeroSection>
-      <PageSection
-        innerProps={{ style: { margin: '0', width: '100%' } }}
-        containerProps={{
-          id: 'home-2',
-        }}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <MetricsSection />
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.background}
-        containerProps={{
-          id: 'home-4',
-        }}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <InnerWedgeWrapper top>
-            <WedgeTopLeft />
-          </InnerWedgeWrapper>
-        </OuterWedgeWrapper>
-        <SalesSection {...swapSectionData(t)} />
-      </PageSection>
-      {/* <PageSection
+      `}</style> */}
+      <SeaBackground>
+        <StyledHeroSection
+          innerProps={{ style: { margin: '0', width: '100%' } }}
+          containerProps={{
+            id: 'home-1',
+          }}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <Hero />
+        </StyledHeroSection>
+        <PageSection
+          innerProps={{ style: { margin: '0', width: '100%' } }}
+          containerProps={{
+            id: 'home-2',
+          }}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <MetricsSection />
+        </PageSection>
+        <PageSection
+          innerProps={{ style: HomeSectionContainerStyles }}
+          // background={theme.colors.background}
+          containerProps={{
+            id: 'home-4',
+          }}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          {/* <OuterWedgeWrapper>
+            <InnerWedgeWrapper top>
+              <WedgeTopLeft />
+            </InnerWedgeWrapper>
+          </OuterWedgeWrapper> */}
+          <SalesSection {...swapSectionData(t)} />
+        </PageSection>
+        {/* <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
         background={theme.colors.backgroundAlt}
         index={2}
@@ -124,45 +129,46 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         </OuterWedgeWrapper>
         <SalesSection {...bridgeSectionData(t)} />
       </PageSection> */}
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.gradientCardHeader}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <WedgeTopRight />
-        </OuterWedgeWrapper>
-        <SalesSection {...earnSectionData(t)} />
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.gradientCardHeader}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <WedgeTopRight />
-        </OuterWedgeWrapper>
-        <SalesSection {...stakeSectionData(t)} />
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.background}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <RoadmapSection />
-        <FaqSection />
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background="linear-gradient(180deg, #7645D9 0%, #5121B1 100%)"
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <Footer />
-      </PageSection>
+        <PageSection
+          innerProps={{ style: HomeSectionContainerStyles }}
+          // background={theme.colors.gradientCardHeader}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <OuterWedgeWrapper>
+            <WedgeTopRight />
+          </OuterWedgeWrapper>
+          <SalesSection {...earnSectionData(t)} />
+        </PageSection>
+        <PageSection
+          innerProps={{ style: HomeSectionContainerStyles }}
+          // background={theme.colors.gradientCardHeader}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <OuterWedgeWrapper>
+            <WedgeTopRight />
+          </OuterWedgeWrapper>
+          <SalesSection {...stakeSectionData(t)} />
+        </PageSection>
+        <PageSection
+          innerProps={{ style: HomeSectionContainerStyles }}
+          // background={theme.colors.background}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <RoadmapSection />
+          <FaqSection />
+        </PageSection>
+        <PageSection
+          innerProps={{ style: HomeSectionContainerStyles }}
+          background="linear-gradient(180deg, #7645D9 0%, #5121B1 100%)"
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <Footer />
+        </PageSection>
+      </SeaBackground>
     </>
   )
 }
