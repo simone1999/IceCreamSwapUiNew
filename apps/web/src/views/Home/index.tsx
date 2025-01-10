@@ -8,7 +8,7 @@ import FaqSection from 'views/PancakeSquad/components/FaqSection'
 import RoadmapSection from 'views/PancakeSquad/components/RoadmapSection'
 import Hero from './components/Hero'
 import { swapSectionData, earnSectionData, stakeSectionData } from './components/SalesSection/data'
-import MetricsSection from './components/MetricsSection'
+// import MetricsSection from './components/MetricsSection'
 import SalesSection from './components/SalesSection'
 import Footer from './components/Footer'
 import { OuterWedgeWrapper, WedgeTopRight } from './components/WedgeSvgs'
@@ -90,7 +90,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         >
           <Hero />
         </StyledHeroSection>
-        <PageSection
+        {/* <PageSection
           innerProps={{ style: { margin: '0', width: '100%' } }}
           containerProps={{
             id: 'home-2',
@@ -99,7 +99,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
           hasCurvedDivider={false}
         >
           <MetricsSection />
-        </PageSection>
+        </PageSection> */}
         <PageSection
           innerProps={{ style: HomeSectionContainerStyles }}
           // background={theme.colors.background}
