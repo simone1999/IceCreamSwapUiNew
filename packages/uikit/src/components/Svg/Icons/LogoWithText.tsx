@@ -7,7 +7,7 @@ const Logo: React.FC<React.PropsWithChildren<SvgProps>> = (props) => {
   return (
     <div {...props} style={{ alignItems: "center", ...props.style }}>
       <img src="/images/icecream.png" alt="IceCream" width="32px" style={{ verticalAlign: "middle" }} />
-      <span style={{ verticalAlign: "middle", fontSize: "1.2rem", fontWeight: "bold" }}>IceCreamSwap</span>
+      <span style={{ verticalAlign: "middle", fontSize: "1.2rem", fontWeight: "bold" }}>MermaidSwap</span>
     </div>
   );
 
