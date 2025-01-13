@@ -2,7 +2,7 @@ import { Button, Flex, Heading, NextLinkFromReactRouter } from '@pancakeswap/uik
 import { useTranslation } from '@pancakeswap/localization'
 import Image from 'next/image'
 import { styled, keyframes } from 'styled-components'
-import hero from '../../../../public/images/home/mermaidswap/mermaidswap-castle.png'
+import hero from '../../../../public/images/home/hero-home.png'
 import CompositeImage, { CompositeImageProps } from './CompositeImage'
 // import { SlideSvgDark, SlideSvgLight } from './SlideSvg'
 import starL from '../../../../public/images/home/lunar-bunny/star-l.png'

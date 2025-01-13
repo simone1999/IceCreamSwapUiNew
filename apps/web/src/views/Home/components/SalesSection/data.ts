@@ -1,13 +1,11 @@
 import { TranslateFunction } from '@pancakeswap/localization'
 import { SalesSectionProps } from '.'
-// import iceConeA from '../../../../../public/images/home/trade/iceconea.png'
-// import iceConeB from '../../../../../public/images/home/trade/iceconeb.png'
+import iceConeA from '../../../../../public/images/home/trade/iceconea.png'
+import iceConeB from '../../../../../public/images/home/trade/iceconeb.png'
 import bridgeA from '../../../../../public/images/home/bridge/bridge_a.png'
 import bridgeB from '../../../../../public/images/home/bridge/bridge_b.png'
-// import earnIce from '../../../../../public/images/home/earn/ice.png'
-import earnTri from '../../../../../public/images/home/mermaidswap/mermaid-spearfishing-earn.png'
-import trident from '../../../../../public/images/home/mermaidswap/trident-trading.png'
-import mermaidSwapLogo from '../../../../../public/images/home/mermaidswap/mermaidswap-logo.png'
+import earnIce from '../../../../../public/images/home/earn/ice.png'
+import mermaidSwapLogo from '../../../../../public/images/icecream.png'
 
 export const swapSectionData = (t: TranslateFunction): SalesSectionProps => ({
   headingText: t('Trade any token at the best rate'),
@@ -29,7 +27,7 @@ export const swapSectionData = (t: TranslateFunction): SalesSectionProps => ({
   images: {
     path: '/images/home/trade/',
     attributes: [
-      { src: trident, alt: 'MermaidSwap Trident Trading' },
+      { src: iceConeA, alt: '' },
       // { src: iceConeB, alt: '' },
     ],
   },
@@ -80,7 +78,7 @@ export const earnSectionData = (t: TranslateFunction): SalesSectionProps => ({
   },
   images: {
     path: '/images/home/ice/',
-    attributes: [{ src: earnTri, alt: 'Earn TRI' }],
+    attributes: [{ src: earnIce, alt: 'Earn TRI' }],
   },
 })
 
