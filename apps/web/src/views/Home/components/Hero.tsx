@@ -8,6 +8,7 @@ import CompositeImage, { CompositeImageProps } from './CompositeImage'
 import starL from '../../../../public/images/home/lunar-bunny/star-l.png'
 import starR from '../../../../public/images/home/lunar-bunny/star-r.png'
 import starTopR from '../../../../public/images/home/lunar-bunny/star-top-r.png'
+import { SlideSvgDark, SlideSvgLight } from './SlideSvg'
 
 const flyingAnim = () => keyframes`
   from {
@@ -33,21 +34,21 @@ const fading = () => keyframes`
   }
 `
 
-// const BgWrapper = styled.div`
-//   z-index: -1;
-//   overflow: hidden;
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   bottom: 0px;
-//   left: 0px;
-// `
+const BgWrapper = styled.div`
+  z-index: -1;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0px;
+  left: 0px;
+`
 
-// const InnerWrapper = styled.div`
-//   position: absolute;
-//   width: 100%;
-//   bottom: -3px;
-// `
+const InnerWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  bottom: -3px;
+`
 
 const BunnyWrapper = styled.div`
   width: 100%;
@@ -110,12 +111,12 @@ const Hero = () => {
           }
         `}
       </style>
-      {/* <BgWrapper>
+      <BgWrapper>
         <InnerWrapper>
           <SlideSvgDark className="slide-svg-dark" width="100%" />
           <SlideSvgLight className="slide-svg-light" width="100%" />
         </InnerWrapper>
-      </BgWrapper> */}
+      </BgWrapper>
       <Flex
         position="relative"
         flexDirection={['column-reverse', null, null, 'row']}
