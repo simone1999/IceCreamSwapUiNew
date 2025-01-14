@@ -36,7 +36,7 @@ const getPathList = (t: ContextApi['t']): PathList => {
           'Transfer tokens between multiple Chains including Core, Bitgert, Binance, XDC, Fuse and may more on IceCreamSwap DEX.',
       },
     },
-    defaultTitleSuffix: t('IceCreamSwap'),
+    defaultTitleSuffix: t('MermaidSwap'),
   }
 }
 
