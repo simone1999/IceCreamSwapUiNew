@@ -57,7 +57,7 @@ export const darkColors = {
   ...additionalColors,
   secondary: "#F8567F",
   secondary80: "#9A6AFF80",
-  background: "#08060B",
+  background: "linear-gradient(to bottom, #004080, #003366, #001f54, #000428)",
   backgroundDisabled: "#3c3742",
   backgroundAlt: "#27262c",
   backgroundAlt2: "rgba(39, 38, 44, 0.7)",
