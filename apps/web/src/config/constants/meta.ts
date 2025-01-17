@@ -3,10 +3,11 @@ import { ContextApi } from '@pancakeswap/localization'
 import { PageMeta } from './types'
 
 export const DEFAULT_META: PageMeta = {
-  title: 'IceCreamSwap, Booking.com of DEXes, AI DEX aggregator',
+
+  title: 'MermaidSwap - Gaming and Rewards DeFi',
   description:
-    'Get the trading tools you deserve and never waste money on inefficient swaps again!',
-  image: 'https://icecreamswap.com/images/hero.png',
+    'MermaidSwap combines a decentralized exchange(DEX), fun games, and profit-sharing to revolutionize DeFi on KAIA.',
+  image: '/images/icecreamswap.png',
 }
 
 interface PathList {
@@ -36,7 +37,7 @@ const getPathList = (t: ContextApi['t']): PathList => {
           'Transfer tokens between multiple Chains including Core, Bitgert, Binance, XDC, Fuse and may more on IceCreamSwap DEX.',
       },
     },
-    defaultTitleSuffix: t('IceCreamSwap'),
+    defaultTitleSuffix: t('MermaidSwap'),
   }
 }
 
