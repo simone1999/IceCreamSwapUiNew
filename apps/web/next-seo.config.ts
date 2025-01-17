@@ -14,6 +14,6 @@ export const SEO: DefaultSeoProps = {
     title: 'MermaidSwap - Gaming and Rewards DeFi',
     description:
       'MermaidSwap combines a decentralized exchange(DEX), fun games, and profit-sharing to revolutionize DeFi on KAIA.',
-    images: [{ url: '/images/icecreamswap.png' }],
+    images: [{ url: 'https://mermaidswap.com/images/mermaidswap.png' }],
   },
 }

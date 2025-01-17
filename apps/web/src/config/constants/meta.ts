@@ -3,7 +3,6 @@ import { ContextApi } from '@pancakeswap/localization'
 import { PageMeta } from './types'
 
 export const DEFAULT_META: PageMeta = {
-
   title: 'MermaidSwap - Gaming and Rewards DeFi',
   description:
     'MermaidSwap combines a decentralized exchange(DEX), fun games, and profit-sharing to revolutionize DeFi on KAIA.',
