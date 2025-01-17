@@ -89,10 +89,10 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
         <meta name="theme-color" content="#F8567F" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="https://icecreamswap.com/images/hero.png" />
-        <meta name="twitter:title" content="🍦 IceCreamSwap - Multi-chain DeFi ecosystem" />
+        <meta name="twitter:title" content="🍦 IceCreamSwap - Booking.com of DEXes - AI DEX aggregator" />
         <meta
           name="twitter:description"
-          content="DEX, DEX Aggregator, RPC, Block Explorer, KYC, Launchpad and Bridge on Base, Core DAO, Telos, Bitgert, XDC, Shardeum, Shimmer, BSC, Xodex, Dogechain and Fuse."
+          content="Get the trading tools you deserve and never waste money on inefficient swaps again!"
         />
         <title>IceCreamSwap</title>
       </Head>
