@@ -1,3 +1,4 @@
+import { Text, Link } from '@pancakeswap/uikit'
 import { ContextApi } from '@pancakeswap/localization'
 
 type FAQsType = {
@@ -6,41 +7,64 @@ type FAQsType = {
 
 const config = ({ t }: FAQsType) => [
   {
-    title: t('What is MermaidSwap 🧜‍♀️ different from other DEX on #KAIA?'),
+    title: t('What is IceCreamSwap building?'),
     description: [
-      t(
-        'MermaidSwap 🧜‍♀️ is not just a DEX while DEX is just our base where MermaidSwap 🧜‍♀️ connecting people around the globe whether users are from blockchain itself or non cryptocurrency users through our entire ecosystem from DeFi to Gaming Apps.',
-      ),
+      t('A one stop DeFi solution with AI DEX aggregator and an intuitive UI to access efficient DeFi on all chains.')
     ],
   },
   {
-    title: t('Where will be MermaidSwap 🧜‍♀️ launching?'),
+    title: t('Are the Swap contracts audited?'),
     description: [
-      t(
-        '#KAIA chain of course, low gas fees, lightning fast transactions⚡️, blockchain full of gaming development opportunities and future blockchain for gamers. 🎮',
-      ),
+      <Text as="p" color="textSubtle" fontSize="16px">
+        {t('Yes, IceCreamSwap has multiple audits including an Audit, Bug Bounty and KYC by CertiK: ',)}
+        <Link
+          display="inline-flex"
+          color="text"
+          title="CertiK Audit"
+          href="https://skynet.certik.com/projects/icecreamswap"
+        >
+          {t('CertiK Audit')}
+        </Link>
+        {t('.')}
+      </Text>,
     ],
   },
   {
-    title: t('When will MermaidSwap 🧜‍♀️ launching?'),
-    description: [t('January 2025, very soon we will be setting up our appearance on #KAIA chain. 🔜🔜🔜')],
-  },
-  {
-    title: t('Why should we invest in MermaidSwap 🧜‍♀️?'),
+    title: t('How does IceCreamSwap combine AI with Blockchains?'),
     description: [
-      t(
-        "When you invest in $TRI, MermaidSwap 🧜‍♀️ token. You are not just a token holder, a yield farmer, a trader, a gamer 🎮 but also a shareholder of MermaidSwap's Games 🎮 Revenue Sharing System.",
-      ),
+      t('The Blockchain is an amazing tool for security and trust minimization. But as it\'s still in It\'s early stage, ' +
+        'inefficiencies occur which result in an unwanted value transfer from users to MEV/Arbitrage bots. ' +
+        'Our AI DEX aggregator detects these inefficiencies and automatically extracts them for our users, resulting in more efficient trades and less value lost.'),
     ],
   },
   {
-    title: t('How many games MermaidSwap 🧜‍♀️ will have and how are they benefits 💸 to holders/investors?'),
+    title: t('What is the IceCreamSwap AI DEX aggregator?'),
     description: [
-      t(
-        'MermaidSwap 🧜‍♀️ will have at least 2 games 🎮🎮 where one will be on global mobile Appstore and another "Mermaid Survivor Game" is going to be Global PC Games Platform. Both games able to generate revenues and then profit sharing with MermaidSwap 🧜‍♀️ Holders through our Staking System later on. 📈',
-      ),
+      t('It\'s a sophisticated system that scans the entire blockchain to find the optimal way to execute your swap. ' +
+        'It allows you to trade any token at the best rate, not only taking into account the IceCreamSwap liquidity, but also the liquidity of other DEXes. ' +
+        'Simplified you can think about it as the booking.com of DEXes, finding you the best offer to execute your trade. ' +
+        'It even extracts Arbitrage opportunities for you, so your trades sometimes end with more value than they began with.'),
     ],
   },
+  {
+    title: t('How does IceCreamSwap extract arbitrage for me?'),
+    description: [
+      t('With every trade, our AI DEX aggregator not only finds the best way to execute that trade but also scans for arbitrage opportunities. These opportunities are extracted directly in your trade. As most Arbitrage is generated from inefficient trades, IceCreamSwap users not only avoid losing value to arbitrage but also profit directly from users who still rely on traditional DEXes.'),
+    ],
+  },
+  {
+    title: t('How to list a token on IceCreamSwap?'),
+    description: [
+      t('Simply contact us on Telegram.'),
+    ],
+  },
+  {
+    title: t('How much reward will I get for providing liquidity?'),
+    description: [
+      t(
+        'Most of the trading fees are distributed directly to our liquidity providers. Additionally, there are farming pools where you can receive extra ICE tokens, and some tokens, like SCORE, even generate rewards by securing the blockchain.',
+      ),
+    ],
+  }
 ]
-
 export default config

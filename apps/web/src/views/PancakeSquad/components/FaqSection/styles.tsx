@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 
 export const StyledFaqSection = styled(Flex)`
   position: relative;
-  // background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.background};
 `
 
 export const StyledDetailsWrapper = styled.div`

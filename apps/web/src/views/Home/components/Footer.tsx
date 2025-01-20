@@ -1,14 +1,5 @@
 import { styled } from 'styled-components'
-import {
-  Flex,
-  Heading,
-  Text,
-  useMatchBreakpoints,
-  Button,
-  TwitterIcon,
-  TelegramIcon,
-  DiscordIcon,
-} from '@pancakeswap/uikit'
+import { Flex, Heading, Text, useMatchBreakpoints, Button, TwitterIcon, TelegramIcon, DiscordIcon } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import Container from 'components/Layout/Container'
 import { useWeb3React } from '@pancakeswap/wagmi'
@@ -121,7 +112,7 @@ const Footer = () => {
           <Button
             as="a"
             title={t('IceCreamSwap Twitter')}
-            href="https://x.com/mermaidswap_xyz"
+            href="/twitter"
             target="_blank"
             variant="primary"
             scale="md"
@@ -132,7 +123,7 @@ const Footer = () => {
           <Button
             as="a"
             title={t('IceCreamSwap Telegram')}
-            href="https://t.me/mermaidswapofficial"
+            href="/telegram"
             target="_blank"
             variant="primary"
             scale="md"
@@ -140,7 +131,7 @@ const Footer = () => {
           >
             <TelegramIcon color="currentColor" mr="8px" /> {t('Telegram')}
           </Button>
-          {/* <Button
+          <Button
             as="a"
             title={t('IceCreamSwap Discord')}
             href="/discord"
@@ -150,7 +141,7 @@ const Footer = () => {
             mr="8px"
           >
             <DiscordIcon color="currentColor" mr="8px" /> {t('Discord')}
-          </Button> */}
+          </Button>
         </Flex>
       </Wrapper>
     </>
