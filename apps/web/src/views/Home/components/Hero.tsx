@@ -132,12 +132,10 @@ const Hero = () => {
       >
         <Flex flex="1" flexDirection="column">
           <Heading as="h1" scale="xxl" color="secondary" mb="24px">
-            {t('Welcome to MermaidSwap')}
+            {t('Welcome to AI enhanced DeFi')}
           </Heading>
           <Heading as="p" scale="md" mb="24px">
-            {t(
-              'Revolutionizing DeFi with a unique blend of gaming, decentralized trading, and profit-sharing on $KAIA Chain',
-            )}
+            {t('The booking.com of DEXes. Trade any token at the best rates.')}
           </Heading>
           <Flex>
             <NextLinkFromReactRouter to="/swap">

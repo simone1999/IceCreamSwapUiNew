@@ -113,7 +113,6 @@ export enum ChainId {
   ROOTSTOCK = rootstock.id,
   LINEA = linea.id,
   BERACHAIN_TEST = berachainTestnet.id,
-  KAIA = kaiamainnet.id,
 }
 
-export const defaultChainId = ChainId.KAIA
+export const defaultChainId = ChainId.CORE

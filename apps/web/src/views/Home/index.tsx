@@ -7,7 +7,7 @@ import { useTranslation } from '@pancakeswap/localization'
 import FaqSection from 'views/PancakeSquad/components/FaqSection'
 import RoadmapSection from 'views/PancakeSquad/components/RoadmapSection'
 import Hero from './components/Hero'
-import { swapSectionData, earnSectionData, bridgeSectionData, stakeSectionData } from './components/SalesSection/data'
+import { swapSectionData, earnSectionData, bridgeSectionData } from './components/SalesSection/data'
 import MetricsSection from './components/MetricsSection'
 import SalesSection from './components/SalesSection'
 import Footer from './components/Footer'
@@ -54,13 +54,13 @@ const Home: React.FC<React.PropsWithChildren> = () => {
           background: linear-gradient(139.73deg, #e6fdff 0%, #f3efff 100%);
         }
         [data-theme='dark'] #home-1 .page-bg {
-          background: linear-gradient(to bottom, #004080, #003366, #001f54, #000428);
+          background: radial-gradient(103.12% 50% at 50% 50%, #21193a 0%, #191326 100%);
         }
         #home-2 .page-bg {
           background: linear-gradient(180deg, #ffffff 22%, #d7caec 100%);
         }
         [data-theme='dark'] #home-2 .page-bg {
-          background: linear-gradient(to bottom, #004080, #003366, #001f54, #000428);
+          background: linear-gradient(180deg, #09070c 22%, #201335 100%);
         }
         #home-3 .page-bg {
           background: linear-gradient(180deg, #6fb6f1 0%, #eaf2f6 100%);
@@ -69,10 +69,10 @@ const Home: React.FC<React.PropsWithChildren> = () => {
           background: linear-gradient(180deg, #0b4576 0%, #091115 100%);
         }
         #home-4 .inner-wedge svg {
-          fill: #ffffff;
+          fill: #d8cbed;
         }
         [data-theme='dark'] #home-4 .inner-wedge svg {
-          fill: #000428;
+          fill: #201335;
         }
       `}</style>
       <StyledHeroSection
@@ -85,7 +85,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
       >
         <Hero />
       </StyledHeroSection>
-      {/* <PageSection
+      <PageSection
         innerProps={{ style: { margin: '0', width: '100%' } }}
         containerProps={{
           id: 'home-2',
@@ -94,7 +94,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         hasCurvedDivider={false}
       >
         <MetricsSection />
-      </PageSection> */}
+      </PageSection>
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
         background={theme.colors.background}
@@ -111,7 +111,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         </OuterWedgeWrapper>
         <SalesSection {...swapSectionData(t)} />
       </PageSection>
-      {/* <PageSection
+      <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
         background={theme.colors.backgroundAlt}
         index={2}
@@ -123,17 +123,6 @@ const Home: React.FC<React.PropsWithChildren> = () => {
           </InnerWedgeWrapper>
         </OuterWedgeWrapper>
         <SalesSection {...bridgeSectionData(t)} />
-      </PageSection> */}
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.gradientCardHeader}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <WedgeTopRight />
-        </OuterWedgeWrapper>
-        <SalesSection {...earnSectionData(t)} reverse />
       </PageSection>
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
@@ -144,7 +133,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         <OuterWedgeWrapper>
           <WedgeTopRight />
         </OuterWedgeWrapper>
-        <SalesSection {...stakeSectionData(t)} />
+        <SalesSection {...earnSectionData(t)} />
       </PageSection>
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
