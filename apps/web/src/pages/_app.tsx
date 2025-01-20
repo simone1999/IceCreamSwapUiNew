@@ -1,4 +1,4 @@
-import {Flex, Message, ResetCSS, ScrollToTopButtonV2, Select, Spinner, ToastListener} from "@pancakeswap/uikit";
+import { Flex, Message, ResetCSS, ScrollToTopButtonV2, Select, Spinner, ToastListener } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import GlobalCheckClaimStatus from '../components/GlobalCheckClaimStatus'
 import { NetworkModal } from '../components/NetworkModal'
@@ -31,10 +31,11 @@ import { SupportedChainsProvider, useSupportedChains } from '../hooks/useSupport
 import { CHAIN_IDS } from '../utils/wagmi'
 import { poppins } from '../style/font'
 import { trpc } from '@icecreamswap/backend'
-import { useActiveChainId } from "hooks/useActiveChainId"
-import { ChainLogo } from "components/Logo/ChainLogo";
-import chainName from "config/constants/chainName";
-import { useSwitchNetwork } from "hooks/useSwitchNetwork";
+import { useActiveChainId } from 'hooks/useActiveChainId'
+import { ChainLogo } from 'components/Logo/ChainLogo'
+import chainName from 'config/constants/chainName'
+import { useSwitchNetwork } from 'hooks/useSwitchNetwork'
+import { ChainId } from '@pancakeswap/sdk'
 
 const EasterEgg = dynamic(() => import('../components/EasterEgg'), { ssr: false })
 
@@ -83,17 +84,17 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
         />
         <meta
           name="description"
-          content="DEX, DEX Aggregator, RPC, Block Explorer, KYC, Launchpad and Bridge on Base, Core DAO, Telos, Bitgert, XDC, Shardeum, Shimmer, BSC, Xodex, Dogechain and Fuse."
+          content="MermaidSwap combines a Decentralized Exchange(DEX), fun games, and profit-sharing to revolutionize DeFi on KAIA."
         />
-        <meta name="theme-color" content="#F8567F" />
+        <meta name="theme-color" content="#15EEDD" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://icecreamswap.com/images/hero.png" />
-        <meta name="twitter:title" content="🍦 IceCreamSwap - Multi-chain DeFi ecosystem" />
+        <meta name="twitter:image" content="https://mermaidswap.com/images/mermaidswap.png" />
+        <meta name="twitter:title" content="MermaidSwap - Gaming and Rewards DeFi" />
         <meta
           name="twitter:description"
-          content="DEX, DEX Aggregator, RPC, Block Explorer, KYC, Launchpad and Bridge on Base, Core DAO, Telos, Bitgert, XDC, Shardeum, Shimmer, BSC, Xodex, Dogechain and Fuse."
+          content="MermaidSwap combines a decentralized exchange(DEX), fun games, and profit-sharing to revolutionize DeFi on KAIA."
         />
-        <title>IceCreamSwap</title>
+        <title>MermaidSwap</title>
       </Head>
       <DefaultSeo {...SEO} />
 
@@ -103,7 +104,7 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
           // @ts-ignore
           <Component.Meta {...pageProps} />
         )}
-        <SupportedChainsProvider supportedChains={(props as AppPropsWithLayout).Component.chains || CHAIN_IDS}>
+        <SupportedChainsProvider supportedChains={[ChainId.KAIA]}>
           <Blocklist>
             {(Component as NextPageWithLayout).mp ? <MPGlobalHooks /> : <GlobalHooks />}
             <ResetCSS />
@@ -232,6 +233,5 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     </ProductionErrorBoundary>
   )
 }
-
 
 export default trpc.withTRPC(MyApp)
