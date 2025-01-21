@@ -1,12 +1,12 @@
-# 🍦 IceCreamSwap Frontend
+# 🍦 MermaidSwap Frontend
 
 <p align="center">
   <a href="https://icecreamswap.com">
-      <img src="https://icecreamswap.com/logo.png" height="128">
+      <img src="https://mermaidswapxyz.com/logo.png" height="128">
   </a>
 </p>
 
-This project contains the main features of the IceCreamSwap website.
+This project contains the main features of the MermaidSwap website.
 
 If you want to contribute, please refer to the [contributing guidelines](./CONTRIBUTING.md) of this project.
 
