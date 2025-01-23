@@ -88,7 +88,7 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
         />
         <meta name="theme-color" content="#15EEDD" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://mermaidswap.com/images/mermaidswap.png" />
+        <meta name="twitter:image" content="https://mermaidswapxyz.com/logo.png" />
         <meta name="twitter:title" content="MermaidSwap - Gaming and Rewards DeFi" />
         <meta
           name="twitter:description"

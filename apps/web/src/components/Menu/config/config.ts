@@ -9,7 +9,7 @@ import {
   DropdownMenuItemType,
   RocketIcon,
   InfoIcon,
-  MoreHorizontalIcon
+  MoreHorizontalIcon,
 } from '@pancakeswap/uikit'
 import { ContextApi } from '@pancakeswap/localization'
 import {
@@ -23,8 +23,8 @@ import {
   SUPPORT_LAUNCHPAD,
   SUPPORT_TOKEN_DEPLOYER,
   SUPPORT_KYC,
-  SUPPORT_KYC_DELEGATION
-} from "config/constants/supportChains";
+  SUPPORT_KYC_DELEGATION,
+} from 'config/constants/supportChains'
 
 export type ConfigMenuDropDownItemsType = DropdownMenuItems & {
   hideSubNav?: boolean
@@ -70,14 +70,14 @@ const config: (
           label: t('Liquidity'),
           href: '/liquidity',
         },
-        /* {
+        /*{
           label: t('Buy Crypto'),
           href: '/buy-crypto',
           supportChainIds: SUPPORT_BUY_CRYPTO,
         }, */
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
-    {
+    /*{
       label: t('Earn'),
       href: '/farms',
       icon: EarnIcon,
@@ -107,7 +107,7 @@ const config: (
       showItemsOnMobile: false,
       items: [],
     },
-    /*{
+    {
       label: t('Launchpad'),
       href: '/launchpad',
       icon: RocketIcon,
@@ -115,7 +115,7 @@ const config: (
       showItemsOnMobile: false,
       supportChainIds: SUPPORT_LAUNCHPAD,
       items: [],
-    },*/
+    },
     {
       label: t('Info'),
       href: '/info',
