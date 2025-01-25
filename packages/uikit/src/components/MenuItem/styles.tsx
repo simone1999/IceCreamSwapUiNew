@@ -22,9 +22,8 @@ export const StyledMenuItemContainer = styled.div<StyledMenuItemProps>`
 
 const StyledMenuItem = styled.a<StyledMenuItemProps>`
   position: relative;
-  display: flex;
+  display: ${({ $isDisabled }) => ($isDisabled ? "none" : "flex")};
   align-items: center;
-
   color: ${({ theme, $isActive }) => ($isActive ? theme.colors.secondary : theme.colors.textSubtle)};
   font-size: 16px;
   font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};

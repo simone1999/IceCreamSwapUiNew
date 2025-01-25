@@ -77,12 +77,13 @@ const config: (
         }, */
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
-    /*{
+    {
       label: t('Earn'),
       href: '/farms',
       icon: EarnIcon,
       fillIcon: EarnFillIcon,
       image: '/images/decorations/pe2.png',
+      showOnMobile: false,
       showItemsOnMobile: false,
       supportChainIds: [...SUPPORT_FARMS, ...SUPPORT_STAKING],
       items: [
@@ -104,6 +105,7 @@ const config: (
       hideSubNav: true,
       icon: BridgeIcon,
       supportChainIds: SUPPORT_BRIDGE,
+      showOnMobile: false,
       showItemsOnMobile: false,
       items: [],
     },
@@ -112,6 +114,7 @@ const config: (
       href: '/launchpad',
       icon: RocketIcon,
       hideSubNav: true,
+      showOnMobile: false,
       showItemsOnMobile: false,
       supportChainIds: SUPPORT_LAUNCHPAD,
       items: [],
@@ -121,6 +124,7 @@ const config: (
       href: '/info',
       icon: InfoIcon,
       hideSubNav: true,
+      showOnMobile: false,
       showItemsOnMobile: false,
       supportChainIds: SUPPORT_INFO,
       items: [],
@@ -128,6 +132,8 @@ const config: (
     {
       label: t('More'),
       icon: MoreHorizontalIcon,
+      disabled: true,
+      showOnMobile: false,
       showItemsOnMobile: true,
       hideSubNav: true,
       // supportChainIds: [...SUPPORT_INFO, ...SUPPORT_LOCKS, ...SUPPORT_KYC],
@@ -179,8 +185,7 @@ const config: (
         // },
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
-    /*
-    {
+    /*{
       label: '',
       href: '/info',
       icon: MoreIcon,
@@ -229,8 +234,7 @@ const config: (
           type: DropdownMenuItemType.EXTERNAL_LINK,
         },
       ].map((item) => addMenuItemSupported(item, chainId)),
-    },
-       */
+    }, */
   ].map((item) => addMenuItemSupported(item, chainId))
 
 export default config
