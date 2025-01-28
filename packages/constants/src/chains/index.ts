@@ -34,6 +34,7 @@ import { berachainTestnet } from "./berachainTestnet"
 import { bitfinitymainnet } from "./bitfinitymainnet"
 import { kaiamainnet } from "./kaiamainnet"
 import { sonicmainnet } from "./sonicmainnet"
+import { assetmainnet } from "./assetMainnet"
 
 export const chainMap = {
   core,
@@ -71,7 +72,8 @@ export const chainMap = {
   stratovmTestnet,
   bitfinitytestnet,
   ternoatestnet,
-  berachainTestnet
+  berachainTestnet,
+  assetmainnet
 }
 export const chains = Object.values(chainMap)
 
