@@ -25,7 +25,7 @@ export const kaiamainnet: IceChain = {
   },
   blockInterval: 1,
   wrappedNative: {
-    address: '0x19aac5f612f524b754ca7e7c41cbfa2e981a4432',
+    address: '0x19Aac5f612f524B754CA7e7c41cbFa2E981A4432',
     decimals: 18,
     symbol: 'WKLAY',
     name: 'Wrapped Kaia',
