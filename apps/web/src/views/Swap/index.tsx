@@ -11,7 +11,7 @@ import { currencyId } from 'utils/currencyId'
 import { useSwapHotTokenDisplay } from 'hooks/useSwapHotTokenDisplay'
 import { useCurrency } from 'hooks/Tokens'
 import { Field } from 'state/swap/actions'
-import { useDefaultsFromURLSearch, useSingleTokenSwapInfo, useSwapState } from 'state/swap/hooks'
+import { useDefaultsFromURLSearch, useSwapState } from 'state/swap/hooks'
 import Page from '../Page'
 import PriceChartContainer from './components/Chart/PriceChartContainer'
 import HotTokenList from './components/HotTokenList'
@@ -19,9 +19,7 @@ import useWarningImport from './hooks/useWarningImport'
 import { V3SwapForm } from './V3Swap'
 import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
 import { SwapFeaturesContext } from './SwapFeaturesContext'
-import chainName from "config/constants/chainName";
 import { useWeb3React } from "@pancakeswap/wagmi";
-import { useBalance } from "wagmi";
 import { coreTokens } from "@pancakeswap/tokens";
 
 export default function Swap() {
@@ -63,10 +61,8 @@ export default function Swap() {
     [Field.OUTPUT]: outputCurrency ?? undefined,
   }
 
-  const { chainId: walletChainId, isConnected, account } = useWeb3React()
-  const balance = useBalance({ address: account })
+  const { chainId: walletChainId } = useWeb3React()
 
-  const isConnectedAndHasNoBalance = !!(isConnected && balance.data?.value === 0n)
   const isOldWcore = walletChainId === ChainId.CORE && (
       inputCurrencyId === coreTokens.wcore_old.address ||
       outputCurrencyId === coreTokens.wcore_old.address
@@ -94,17 +90,6 @@ export default function Swap() {
 
   return (
     <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
-      {isConnectedAndHasNoBalance && (
-        <Message variant="info" mb="16px">
-          <span>
-            {t("It looks like you don't have any %chain% tokens. Simply", {chain: chainName[walletChainId]})}{' '}
-            <Link href="/bridge" display="inline-flex">
-              {t('bridge')}
-            </Link>{' '}
-            {t('any token to %chain% and recieve a free gasdrop.', {chain: chainName[walletChainId]})}
-          </span>
-        </Message>
-      )}
       {isOldWcore && (
         <Message variant="warning" mb="16px">
           <span>
