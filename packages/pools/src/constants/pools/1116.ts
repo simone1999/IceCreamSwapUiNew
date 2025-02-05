@@ -194,6 +194,16 @@ export const livePools: SerializedPool[] = [// souceId can be any positive numbe
     tokenPerBlock: '0.000868',
     version: 2,
   },
+  {
+    sousId: 69,
+    stakingToken: coreTokens.HAY,
+    earningToken: coreTokens.HAY,
+    contractAddress: '0x44882628CaBf547890f3304ED77D9b5dcec7fD75',
+    poolCategory: PoolCategory.CORE,
+    tokenPerBlock: '0.000000135102872151',
+    version: 2,
+  },
+
 ].map((p: any) => ({
   ...p,
   stakingToken: p.stakingToken.serialize,

@@ -67,4 +67,5 @@ export const coreTokens = {
   solvBtcm: new ERC20Token(ChainId.CORE, '0xe04d21d999FaEDf1e72AdE6629e20A11a1ed14FA', 18, 'SolvBTC.m', 'Free Bridged SolvBTC.m'),
   solvBtcb: new ERC20Token(ChainId.CORE, '0x5B1Fb849f1F76217246B8AAAC053b5C7b15b7dc3', 18, 'SolvBTC.b', 'Free Bridged SolvBTC.b'),
   stCore: new ERC20Token(ChainId.CORE, '0xb3A8F0f0da9ffC65318aA39E55079796093029AD', 18, 'stCORE', 'Liquid staked CORE'),
+  HAY: new ERC20Token(ChainId.CORE, '0xd698320cD0b571b62e57826d470C2B8D2FF1d04E', 18, 'HAY', 'HAY'),
 }
