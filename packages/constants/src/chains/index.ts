@@ -35,6 +35,7 @@ import { bitfinitymainnet } from "./bitfinitymainnet"
 import { kaiamainnet } from "./kaiamainnet"
 import { sonicmainnet } from "./sonicmainnet"
 import { assetmainnet } from "./assetMainnet"
+import { berachainMainnet } from "./berachainMainnet"
 
 export const chainMap = {
   core,
@@ -73,7 +74,8 @@ export const chainMap = {
   bitfinitytestnet,
   ternoatestnet,
   berachainTestnet,
-  assetmainnet
+  assetmainnet,
+  berachainMainnet,
 }
 export const chains = Object.values(chainMap)
 
@@ -117,7 +119,8 @@ export enum ChainId {
   BERACHAIN_TEST = berachainTestnet.id,
   BITFINITY = bitfinitymainnet.id,
   SONIC = sonicmainnet.id,
-  KAIA = kaiamainnet.id
+  KAIA = kaiamainnet.id,
+  BERACHAIN_MAIN = berachainMainnet.id,
 }
 
 
